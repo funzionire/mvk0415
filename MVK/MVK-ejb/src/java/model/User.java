@@ -5,16 +5,35 @@
  */
 package model;
 
-import java.util.Collection;
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * 
  * @author Steffen
  */
-public class User {
-    private static int id=0;
-    private int haushalte;
+
+@Entity
+@NamedQueries(
+{
+    @NamedQuery(name = "User.findById", query = "SELECT user FROM User user WHERE user.id = :id"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT user FROM User user WHERE user.email = :email"),
+    @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM User user WHERE user.email = :email AND user.password = :password")
+})
+public class User implements Serializable{
+        
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    
     private String uId;
+    private static int id=0;
+    private int households;
     private String name;
     private String email;
     private String password;
@@ -26,11 +45,11 @@ public class User {
         this.email=email;
         this.password=password;
         uId = formatZ(id++);
-        haushalte = 0;
+        households = 0;
     }
     
     public void createHousehold(String hhName, String uId){
-        new Household(hhName, uId, haushalte++);
+        new Household(hhName, uId, households++);
     }
     
     public void addHousehold(int id){
