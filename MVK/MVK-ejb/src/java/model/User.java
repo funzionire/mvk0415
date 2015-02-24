@@ -17,7 +17,6 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private Collection<Household> households;
     
     
     public User (String name,String email, String password){
@@ -78,14 +77,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Collection<Household> getHouseholds() {
-        return households;
-    }
-
-    public void setHouseholds(Collection<Household> households) {
-        this.households = households;
-    }
-    
-    
+   
 }
