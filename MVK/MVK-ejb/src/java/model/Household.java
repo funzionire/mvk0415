@@ -37,11 +37,11 @@ public class Household {
         this.name = name;
     }
 
-    public <any> getPlaces() {
+    public Collection<Place> getPlaces() {
         return places;
     }
 
-    public void setPlaces(<any> places) {
+    public void setPlaces(Collection<Place> places) {
         this.places = places;
     }
 
