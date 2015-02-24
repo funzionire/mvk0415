@@ -59,10 +59,10 @@ public class StocksArticle implements Serializable {
     }
     
     public Collection<StocksUnit> getPlaces() {
-        return StocksUnit;
+        return stocksUnit;
     }
 
     public void setPlaces(Collection<StocksUnit> StocksUnit) {
-        this.StocksUnit = StocksUnit;
+        this.stocksUnit = StocksUnit;
     }
 }
