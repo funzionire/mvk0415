@@ -3,3 +3,7 @@
 /MVK/nbproject/private/
 /MVK/MVK-war/nbproject/private/
 /MVK/MVK-ejb/nbproject/private/
+/MVK/MVK-war/build/
+/MVK/MVK-ejb/dist/
+/MVK/MVK-ejb/build/
+/MVK/MVK-war/dist/
