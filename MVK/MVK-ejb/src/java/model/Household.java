@@ -39,9 +39,8 @@ public class Household {
         this.name = name;
     }
     
-    public void addPlace(String name){
-        Place place = new Place(name);
-        places.add(place);
+    public Place addPlace(String name){
+        return new Place(name, id);
     }
     
     public Collection<Place> getPlaces() {
