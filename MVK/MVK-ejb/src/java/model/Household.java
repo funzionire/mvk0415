@@ -13,21 +13,21 @@ import java.util.Collection;
  * @author baader
  */
 public class Household {
-    private static int id = 0;
+    private String hhId;
     private String name;
     
 
-    public Household(String name) {
+    public Household(String name, String uId, int haushalte) {
         this.name = name;
-        id = id++;
+        hhId = uId+haushalte;
     }
 
-    public static int getId() {
-        return id;
+    public String getHhId() {
+        return hhId;
     }
 
-    public static void setId(int id) {
-        Household.id = id;
+    public void setHhId(String hhId) {
+        this.hhId = hhId;
     }
 
     public String getName() {
@@ -37,9 +37,9 @@ public class Household {
     public void setName(String name) {
         this.name = name;
     }
-    
+    /*
     public Place addPlace(String name){
-        return new Place(name, id);
+        return new Place(name, hhId);
     }    
-    
+    */
 }

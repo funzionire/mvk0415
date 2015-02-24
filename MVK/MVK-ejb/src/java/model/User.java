@@ -5,50 +5,32 @@
  */
 package model;
 
-import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 
 /**
  * 
  * @author Steffen
  */
-
-@Entity
-@NamedQueries(
-{
-    @NamedQuery(name = "User.findById", query = "SELECT user FROM User user WHERE user.id = :id"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT user FROM User user WHERE user.email = :email"),
-    @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM User user WHERE user.email = :email AND user.password = :password")
-})
-public class User implements Serializable{
-    
-    
-    private static int id=1000000;
-    
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int uid;
+public class User {
+    private static int id=0;
+    private int haushalte;
+    private String uId;
     private String name;
     private String email;
     private String password;
     
     
-    public User (String name,String email, String password){
+    
+    public User (String name, String email, String password){
         this.name=name;
         this.email=email;
         this.password=password;
-        uid= id++;
+        uId = formatZ(id++);
+        haushalte = 0;
     }
     
-    public void createHousehold(){
-        //TODO
+    public void createHousehold(String hhName, String uId){
+        new Household(hhName, uId, haushalte++);
     }
     
     public void addHousehold(int id){
@@ -63,16 +45,8 @@ public class User implements Serializable{
         return id;
     }
 
-    public static void setId(int id) {
-        User.id = id;
-    }
-
-    public int getUid() {
-        return uid;
-    }
-
-    public void setUid(int uid) {
-        this.uid = uid;
+    public String getUId() {
+        return uId;
     }
 
     public String getName() {
@@ -99,4 +73,9 @@ public class User implements Serializable{
         this.password = password;
     }
    
+        public String formatZ(int value) { 
+        String result = String.valueOf(value); 
+        return result+"z"; 
+    }
+    
 }
