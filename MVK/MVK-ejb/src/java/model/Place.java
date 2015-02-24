@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -14,11 +15,12 @@ import java.util.Collection;
 public class Place {
     private static int id = 0;
     private String name;
-    private Collection<StocksUnit> stocksUnits;
+    private int householdReferenceId;
 
-    public Place(int id, String name) {
+    public Place(String name, int householdReferenceId) {
         id = id++;
         this.name = name;
+        this.householdReferenceId = householdReferenceId;
     }
 
     public int getId() {
@@ -37,12 +39,16 @@ public class Place {
         this.name = name;
     }
 
-    public Collection<StocksUnit> getStocksUnits() {
-        return stocksUnits;
+    public StocksArticle addStockUnit(){
+        return new StocksArticle();
+    }
+    
+    public int gethouseholdReferenceId() {
+        return householdReferenceId;
     }
 
-    public void setStocksUnits(Collection<StocksUnit> stocksUnits) {
-        this.stocksUnits = stocksUnits;
+    public void sethouseholdReferenceId(int householdReferenceId) {
+        this.householdReferenceId = householdReferenceId;
     }
     
     
