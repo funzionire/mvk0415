@@ -49,6 +49,21 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         }
         return query.getSingleResult();
     }
+    
+    @Override
+    public User deleteUser(Long uid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public User changeUser(Long uid, String name, String email, String password) {
+        em.setFlushMode(FlushModeType.AUTO);
+        User user = getUser(uid);
+        em.persist(user);
+        user = em.merge(user);
+        em.flush();
+        return user;
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
