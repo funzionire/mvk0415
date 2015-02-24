@@ -1,6 +1,8 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -11,6 +13,9 @@ public class StocksArticle implements Serializable {
     private Long idArt;
     private String nameArt;
     private String commentArt;
+    private Collection<StocksUnit> stocksUnit;
+    
+    private String defaultComment = "";
 
     public StocksArticle() {
 
@@ -20,6 +25,13 @@ public class StocksArticle implements Serializable {
         this.idArt = idArt;
         this.nameArt = nameArt;
         this.commentArt = commentArt;
+        stocksUnit = new ArrayList<StocksUnit>();
+    }
+    
+    public StocksArticle(Long idArt, String nameArt) {
+        this.idArt = idArt;
+        this.nameArt = nameArt;
+        this.commentArt = defaultComment;
     }
 
     public Long getId() {
@@ -46,5 +58,11 @@ public class StocksArticle implements Serializable {
         this.commentArt = commentArt;
     }
     
-    
+    public Collection<StocksUnit> getPlaces() {
+        return stocksUnit;
+    }
+
+    public void setPlaces(Collection<StocksUnit> StocksUnit) {
+        this.stocksUnit = StocksUnit;
+    }
 }
