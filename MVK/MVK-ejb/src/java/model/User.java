@@ -6,11 +6,23 @@
 package model;
 
 import java.util.Collection;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * unser User
  * @author Steffen
  */
+
+@Entity
+@NamedQueries(
+{
+    @NamedQuery(name = "User.findById", query = "SELECT user FROM User user WHERE user.id = :id"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT user FROM User user WHERE user.email = :email"),
+    @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM User user WHERE user.email = :email AND user.password = :password")
+})
+
 public class User {
     private static int id=1000000;
     private int uid;
