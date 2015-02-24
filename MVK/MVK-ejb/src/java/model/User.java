@@ -8,7 +8,7 @@ package model;
 import java.util.Collection;
 
 /**
- *
+ * unser User
  * @author Steffen
  */
 public class User {
