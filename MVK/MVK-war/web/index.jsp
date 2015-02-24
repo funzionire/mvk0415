@@ -1,3 +1,10 @@
+<%-- 
+    Document   : index
+    Created on : 24.02.2015, 13:31:16
+    Author     : ANABEL
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,16 +54,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">Anmelden</a>
+                        <a href="#">Registrieren</a>
                     </li>
                     <li>
-                        <a href="#">About</a>
+                        <a href="#">Über uns</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="#">Abmelden</a>
                     </li>
                 </ul>
             </div>
@@ -69,8 +73,26 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Logo Nav by Start Bootstrap</h1>
-                <p>Note: You may need to adjust some CSS based on the size of your logo. The default logo size is 150x50 pixels.</p>
+                <h1>Willkommen</h1>
+                <p>Hier entsteht deine Vorratskammer</p>
+                </br>
+            </div>
+        </div>
+        <div class ="row">
+            <div class="col-lg-12">
+                <form method ="post">
+                    <p>Email-Adresse: <input type ="text" name="Email-Adresse"/></p>
+                    <p>Passwort: <input type="password" name="Passwort"/></p>
+                    <input type="submit" value ="Anmelden"/>
+                </form>
+                </br>
+            </div>
+        </div>
+        <div class ="row">
+            <div class="col-lg-12">
+                </br>
+                <p>Neu hier? Dann registriere dich jetzt!</p>
+                <input type ="submit" value="Registrieren"/>
             </div>
         </div>
     </div>
@@ -85,3 +107,4 @@
 </body>
 
 </html>
+
