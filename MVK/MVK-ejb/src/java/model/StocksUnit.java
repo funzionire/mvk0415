@@ -15,18 +15,29 @@ public class StocksUnit implements Serializable{
     private Long idForeignArtID;
     private String commentSUnit;
     
+    private String defaultComment = "";
+    
 
     public StocksUnit() {
 
     }
 
-    public StocksUnit(Long idSUnit, String commentSUnit, int menge, Date mdd, Long idForeignArtID) {
+    public StocksUnit(Long idSUnit, int menge, Date mdd, Long idForeignArtID, String commentSUnit) {
         this.idSUnit = idSUnit;
         this.menge = menge;
         this.mdd = mdd;
         this.idForeignArtID = idForeignArtID;
         this.commentSUnit = commentSUnit;
     }
+    
+    public StocksUnit(Long idSUnit, int menge, Date mdd, Long idForeignArtID) {
+        this.idSUnit = idSUnit;
+        this.menge = menge;
+        this.mdd = mdd;
+        this.idForeignArtID = idForeignArtID;
+        this.commentSUnit = defaultComment;
+    }
+    
 
     public Long getIdSUnit() {
         return idSUnit;

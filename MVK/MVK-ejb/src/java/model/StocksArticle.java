@@ -11,6 +11,8 @@ public class StocksArticle implements Serializable {
     private Long idArt;
     private String nameArt;
     private String commentArt;
+    
+    private String defaultComment = "";
 
     public StocksArticle() {
 
@@ -20,6 +22,12 @@ public class StocksArticle implements Serializable {
         this.idArt = idArt;
         this.nameArt = nameArt;
         this.commentArt = commentArt;
+    }
+    
+    public StocksArticle(Long idArt, String nameArt) {
+        this.idArt = idArt;
+        this.nameArt = nameArt;
+        this.commentArt = defaultComment;
     }
 
     public Long getId() {
