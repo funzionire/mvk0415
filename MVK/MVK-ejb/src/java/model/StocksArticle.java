@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -12,7 +13,7 @@ public class StocksArticle implements Serializable {
     private Long idArt;
     private String nameArt;
     private String commentArt;
-    private Collection<StocksUnit> StocksUnit;
+    private Collection<StocksUnit> stocksUnit;
     
     private String defaultComment = "";
 
@@ -24,6 +25,7 @@ public class StocksArticle implements Serializable {
         this.idArt = idArt;
         this.nameArt = nameArt;
         this.commentArt = commentArt;
+        stocksUnit = new ArrayList<StocksUnit>();
     }
     
     public StocksArticle(Long idArt, String nameArt) {
