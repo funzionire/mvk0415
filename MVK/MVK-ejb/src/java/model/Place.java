@@ -15,12 +15,12 @@ import java.util.Collection;
 public class Place {
     private static int id = 0;
     private String name;
-    private Collection<StocksArticle> stocksArticles;
+    private int householdReferenceId;
 
-    public Place(String name) {
+    public Place(String name, int householdReferenceId) {
         id = id++;
         this.name = name;
-        stocksArticles = new ArrayList<StocksArticle>();
+        this.householdReferenceId = householdReferenceId;
     }
 
     public int getId() {
@@ -39,17 +39,16 @@ public class Place {
         this.name = name;
     }
 
-    public void addStockUnit(){
-        StocksArticle stocksArticle = new StocksArticle();
-        stocksArticles.add(stocksArticle);
+    public StocksArticle addStockUnit(){
+        return new StocksArticle();
     }
     
-    public Collection<StocksArticle> getStocksArticles() {
-        return stocksArticles;
+    public int gethouseholdReferenceId() {
+        return householdReferenceId;
     }
 
-    public void setStocksArticles(Collection<StocksArticle> stocksArticles) {
-        this.stocksArticles = stocksArticles;
+    public void sethouseholdReferenceId(int householdReferenceId) {
+        this.householdReferenceId = householdReferenceId;
     }
     
     

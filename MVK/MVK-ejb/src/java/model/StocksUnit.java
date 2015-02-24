@@ -14,6 +14,7 @@ public class StocksUnit implements Serializable{
     private Date mdd;
     private Long idForeignArtID;
     private String commentSUnit;
+    private int StocksArticleReferenceId;
     
     private String defaultComment = "";
     
@@ -22,7 +23,7 @@ public class StocksUnit implements Serializable{
 
     }
 
-    public StocksUnit(Long idSUnit, int menge, Date mdd, Long idForeignArtID, String commentSUnit) {
+    public StocksUnit(Long idSUnit, int menge, Date mdd, Long idForeignArtID, String commentSUnit, int StocksArticleReferenceId) {
         this.idSUnit = idSUnit;
         this.menge = menge;
         this.mdd = mdd;
@@ -30,7 +31,7 @@ public class StocksUnit implements Serializable{
         this.commentSUnit = commentSUnit;
     }
     
-    public StocksUnit(Long idSUnit, int menge, Date mdd, Long idForeignArtID) {
+    public StocksUnit(Long idSUnit, int menge, Date mdd, Long idForeignArtID, int StocksArticleReferenceId) {
         this.idSUnit = idSUnit;
         this.menge = menge;
         this.mdd = mdd;
@@ -78,4 +79,14 @@ public class StocksUnit implements Serializable{
     public void setCommentSUnit(String commentSUnit) {
         this.commentSUnit = commentSUnit;
     }
+
+    public int getStocksArticleReferenceId() {
+        return StocksArticleReferenceId;
+    }
+
+    public void setStocksArticleReferenceId(int StocksArticleReferenceId) {
+        this.StocksArticleReferenceId = StocksArticleReferenceId;
+    }
+    
+    
 }

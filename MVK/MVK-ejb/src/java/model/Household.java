@@ -15,12 +15,11 @@ import java.util.Collection;
 public class Household {
     private static int id = 0;
     private String name;
-    private Collection<Place> places;
+    
 
     public Household(String name) {
         this.name = name;
         id = id++;
-        places = new ArrayList<Place>();
     }
 
     public static int getId() {
@@ -39,19 +38,8 @@ public class Household {
         this.name = name;
     }
     
-    public void addPlace(String name){
-        Place place = new Place(name);
-        places.add(place);
-    }
-    
-    public Collection<Place> getPlaces() {
-        return places;
-    }
-
-    public void setPlaces(Collection<Place> places) {
-        this.places = places;
-    }
-
-    
+    public Place addPlace(String name){
+        return new Place(name, id);
+    }    
     
 }

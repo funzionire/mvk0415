@@ -13,7 +13,7 @@ public class StocksArticle implements Serializable {
     private Long idArt;
     private String nameArt;
     private String commentArt;
-    private Collection<StocksUnit> stocksUnit;
+    private int PlacesReferenceId;
     
     private String defaultComment = "";
 
@@ -21,17 +21,18 @@ public class StocksArticle implements Serializable {
 
     }
 
-    public StocksArticle(Long idArt, String nameArt, String commentArt) {
+    public StocksArticle(Long idArt, String nameArt, String commentArt, int PlacesReferenceId) {
         this.idArt = idArt;
         this.nameArt = nameArt;
         this.commentArt = commentArt;
-        stocksUnit = new ArrayList<StocksUnit>();
+        this.PlacesReferenceId = PlacesReferenceId;
     }
     
-    public StocksArticle(Long idArt, String nameArt) {
+    public StocksArticle(Long idArt, String nameArt, int PlacesReferenceId) {
         this.idArt = idArt;
         this.nameArt = nameArt;
         this.commentArt = defaultComment;
+        this.PlacesReferenceId = PlacesReferenceId;
     }
 
     public Long getId() {
@@ -58,11 +59,11 @@ public class StocksArticle implements Serializable {
         this.commentArt = commentArt;
     }
     
-    public Collection<StocksUnit> getPlaces() {
-        return stocksUnit;
+    public int getPlacesReferenceId() {
+        return PlacesReferenceId;
     }
 
-    public void setPlaces(Collection<StocksUnit> StocksUnit) {
-        this.stocksUnit = StocksUnit;
+    public void setPlacesReferenceId(int PlacesReferenceId) {
+        this.PlacesReferenceId = PlacesReferenceId;
     }
 }
