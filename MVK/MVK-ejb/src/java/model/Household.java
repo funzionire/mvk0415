@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -19,6 +20,7 @@ public class Household {
     public Household(String name) {
         this.name = name;
         id = id++;
+        places = new ArrayList<Place>();
     }
 
     public static int getId() {
@@ -36,7 +38,12 @@ public class Household {
     public void setName(String name) {
         this.name = name;
     }
-
+    
+    public void addPlace(String name){
+        Place place = new Place(name);
+        places.add(place);
+    }
+    
     public Collection<Place> getPlaces() {
         return places;
     }
