@@ -6,6 +6,7 @@
 package controller;
 
 import javax.ejb.Local;
+import model.User;
 
 /**
  *
@@ -14,4 +15,8 @@ import javax.ejb.Local;
 @Local
 public interface SessionBeanUserLocal {
     
+    public User createPerson(String name,String email, String password);
+    
+    public User login(String email, String password);
+
 }

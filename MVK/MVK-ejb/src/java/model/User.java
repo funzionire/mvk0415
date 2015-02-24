@@ -5,14 +5,35 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * unser User
  * @author Steffen
  */
-public class User {
+
+@Entity
+@NamedQueries(
+{
+    @NamedQuery(name = "User.findById", query = "SELECT user FROM User user WHERE user.id = :id"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT user FROM User user WHERE user.email = :email"),
+    @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM User user WHERE user.email = :email AND user.password = :password")
+})
+public class User implements Serializable{
+    
+    
     private static int id=1000000;
+    
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int uid;
     private String name;
     private String email;

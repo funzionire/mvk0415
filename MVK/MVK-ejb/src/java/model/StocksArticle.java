@@ -13,7 +13,7 @@ public class StocksArticle implements Serializable {
     private Long idArt;
     private String nameArt;
     private String commentArt;
-    private int PlacesReferenceId;
+    private int placesReferenceId;
     
     private String defaultComment = "";
 
@@ -21,18 +21,18 @@ public class StocksArticle implements Serializable {
 
     }
 
-    public StocksArticle(Long idArt, String nameArt, String commentArt, int PlacesReferenceId) {
+    public StocksArticle(Long idArt, String nameArt, String commentArt, int placesReferenceId) {
         this.idArt = idArt;
         this.nameArt = nameArt;
         this.commentArt = commentArt;
-        this.PlacesReferenceId = PlacesReferenceId;
+        this.placesReferenceId = placesReferenceId;
     }
     
-    public StocksArticle(Long idArt, String nameArt, int PlacesReferenceId) {
+    public StocksArticle(Long idArt, String nameArt, int placesReferenceId) {
         this.idArt = idArt;
         this.nameArt = nameArt;
         this.commentArt = defaultComment;
-        this.PlacesReferenceId = PlacesReferenceId;
+        this.placesReferenceId = placesReferenceId;
     }
 
     public Long getId() {
@@ -60,10 +60,10 @@ public class StocksArticle implements Serializable {
     }
     
     public int getPlacesReferenceId() {
-        return PlacesReferenceId;
+        return placesReferenceId;
     }
 
-    public void setPlacesReferenceId(int PlacesReferenceId) {
-        this.PlacesReferenceId = PlacesReferenceId;
+    public void setPlacesReferenceId(int placesReferenceId) {
+        this.placesReferenceId = placesReferenceId;
     }
 }
