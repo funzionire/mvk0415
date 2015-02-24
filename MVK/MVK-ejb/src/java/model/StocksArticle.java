@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  *
@@ -11,6 +12,7 @@ public class StocksArticle implements Serializable {
     private Long idArt;
     private String nameArt;
     private String commentArt;
+    private Collection<StocksUnit> StocksUnit;
     
     private String defaultComment = "";
 
@@ -54,5 +56,11 @@ public class StocksArticle implements Serializable {
         this.commentArt = commentArt;
     }
     
-    
+    public Collection<StocksUnit> getPlaces() {
+        return StocksUnit;
+    }
+
+    public void setPlaces(Collection<StocksUnit> StocksUnit) {
+        this.StocksUnit = StocksUnit;
+    }
 }
