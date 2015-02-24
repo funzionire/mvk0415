@@ -11,22 +11,22 @@ import java.util.Collection;
  *
  * @author baader
  */
-public class Place {
+public class Household {
     private static int id = 0;
     private String name;
-    private Collection<StocksUnit> stocksUnits;
+    private Collection<Place> places;
 
-    public Place(int id, String name) {
-        id = id++;
+    public Household(String name) {
         this.name = name;
+        id = id++;
     }
 
-    public int getId() {
+    public static int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public static void setId(int id) {
+        Household.id = id;
     }
 
     public String getName() {
@@ -37,13 +37,14 @@ public class Place {
         this.name = name;
     }
 
-    public Collection<StocksUnit> getStocksUnits() {
-        return stocksUnits;
+    public <any> getPlaces() {
+        return places;
     }
 
-    public void setStocksUnits(Collection<StocksUnit> stocksUnits) {
-        this.stocksUnits = stocksUnits;
+    public void setPlaces(<any> places) {
+        this.places = places;
     }
+
     
     
 }
