@@ -62,7 +62,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     @Override
     public User changeUser(Long uid, String name, String email, String password) {
         em.setFlushMode(FlushModeType.AUTO);
-        User user = getUser(uid);s
+        User user = getUser(uid);
         em.persist(user);
         user = em.merge(user);
         em.flush();
