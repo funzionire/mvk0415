@@ -47,7 +47,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img src="img/logo_halb.png" alt=""/>
+                        <img src="img/text3344.png" alt=""/>
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -73,7 +73,7 @@
         
         <!-- page content -->
         <!-- EINBINDEN DER RICHTIGEN JSP -->
-        <jsp:include page="register.jsp"></jsp:include>
+        <jsp:include page="homepage.jsp"></jsp:include>
 
 
         <!-- /.container -->
