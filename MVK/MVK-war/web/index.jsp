@@ -73,7 +73,7 @@
         
         <!-- page content -->
         <!-- EINBINDEN DER RICHTIGEN JSP -->
-        <jsp:include page="register.jsp"></jsp:include>
+        <jsp:include page="homepage.jsp"></jsp:include>
 
 
         <!-- /.container -->

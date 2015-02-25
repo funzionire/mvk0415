@@ -9,14 +9,14 @@
 <!-- Page Content -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-6">
             <h1>Willkommen</h1>
             <p>Hier entsteht deine Vorratskammer</p>
             </br>
         </div>
     </div>
     <div class ="row">
-        <div class="col-lg-12">
+        <div class="col-md-6">
             <form method ="post">
                 <p>Email-Adresse: <input type ="email" name="Email-Adresse"/></p>
                 <p>Passwort: <input type="password" name="Passwort"/></p>
@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class ="row">
-        <div class="col-lg-12">
+        <div class="col-md-6">
             </br>
             <p>Neu hier? Dann registriere dich jetzt!</p>
             <input type ="submit" value="Registrieren"/>
