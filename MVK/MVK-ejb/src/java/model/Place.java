@@ -5,9 +5,6 @@
  */
 package model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 /**
  *
  * @author baader
@@ -23,7 +20,11 @@ public class Place {
         placeID = householdID+places+"p";
     }
 
-    public String getId() {
+    /**
+     *
+     * @return
+     */
+    public String getPlaceID() {
         return placeID;
     }
 
