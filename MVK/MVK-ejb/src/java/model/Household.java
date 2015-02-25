@@ -5,29 +5,27 @@
  */
 package model;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 /**
  *
  * @author baader
  */
 public class Household {
-    private String hhId;
+    private String householdID;
     private String name;
+    private int places = 0;
     
 
-    public Household(String name, String uId, int haushalte) {
+    public Household(String name, String userID, int haushalte) {
         this.name = name;
-        hhId = uId+haushalte;
+        householdID = userID+haushalte+"h";
     }
 
-    public String getHhId() {
-        return hhId;
+    public String getHouseholdID() {
+        return householdID;
     }
 
-    public void setHhId(String hhId) {
-        this.hhId = hhId;
+    public void setHouseholdID(String householdID) {
+        this.householdID = householdID;
     }
 
     public String getName() {
@@ -37,9 +35,9 @@ public class Household {
     public void setName(String name) {
         this.name = name;
     }
-    /*
-    public Place addPlace(String name){
-        return new Place(name, hhId);
+    
+    public Place addPlace(String name, String HouseholdID){
+        return new Place(name, householdID, places++);
     }    
-    */
+    
 }

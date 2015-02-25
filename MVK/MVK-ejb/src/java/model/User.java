@@ -31,7 +31,7 @@ public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     
-    private String uId;
+    private final String userID;
     private static int id=0;
     private int households;
     private String name;
@@ -44,28 +44,33 @@ public class User implements Serializable{
         this.name=name;
         this.email=email;
         this.password=password;
-        uId = formatZ(id++);
+        userID = formatU(id++);
         households = 0;
     }
     
-    public void createHousehold(String hhName, String uId){
-        new Household(hhName, uId, households++);
+    public Household createHousehold(String hhName, String userID){
+        return new Household(hhName, userID, households++);
     }
     
-    public void addHousehold(int id){
+    public Household addHousehold(String id){
         //TODO
+        //Ein bestehender Haushalt soll dem Benutzer zugeordnet werden
+        return null;
     }
     
-    public void deleteHousehold (int id){
+    public Household deleteHousehold (String id){
         //TODO
+        //Ein zugeordneter Haushalt soll gelöscht werden wenn der Benutzer Besitzer des Haushaltes ist
+        //die zuordnung soll gelöscht werden, wenn der Benutzer nicht Besitzer des haushaltes ist
+        return null;
     }
 
     public static int getId() {
         return id;
     }
 
-    public String getUId() {
-        return uId;
+    public String getUserID() {
+        return userID;
     }
 
     public String getName() {
@@ -92,9 +97,8 @@ public class User implements Serializable{
         this.password = password;
     }
    
-        public String formatZ(int value) { 
-        String result = String.valueOf(value); 
-        return result+"z"; 
+    public String formatU(int id) { 
+        return String.valueOf(id)+"u"; 
     }
     
 }

@@ -13,22 +13,18 @@ import java.util.Collection;
  * @author baader
  */
 public class Place {
-    private static int id = 0;
     private String name;
-    private int householdReferenceId;
+    private String householdReferenceID;
+    private String placeID;
 
-    public Place(String name, int householdReferenceId) {
-        id = id++;
+    public Place(String name, String householdID, int places) {
         this.name = name;
-        this.householdReferenceId = householdReferenceId;
+        this.householdReferenceID = householdID;
+        placeID = householdID+"p"+places;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public String getId() {
+        return placeID;
     }
 
     public String getName() {
@@ -43,13 +39,8 @@ public class Place {
         return new StocksArticle();
     }
     
-    public int gethouseholdReferenceId() {
-        return householdReferenceId;
+    public String gethouseholdReferenceID() {
+        return householdReferenceID;
     }
 
-    public void sethouseholdReferenceId(int householdReferenceId) {
-        this.householdReferenceId = householdReferenceId;
-    }
-    
-    
 }
