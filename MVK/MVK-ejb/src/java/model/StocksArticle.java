@@ -15,29 +15,33 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class StocksArticle implements Serializable {
+
     @Id
     @GeneratedValue
-    private long idArt;
+    private long idArt = 0;
     @OneToOne
     private String nameArt;
     private String commentArt;
-    private static final String defaultComment = "";
+    //hier kam eine Fehlermeldung ohne @OneToOne
+    @OneToOne
     private Place place;
+    private static final String defaultComment = "";
+
     @OneToMany
     private List<StocksUnit> stocksUnits;
-    
-    
-    
-    public StocksArticle(Place place, String nameArt, String commentArt) {
+
+    //ID brauchen wir nicht im Konstruktor mitgeben aber erzeugen schon oder?
+    public StocksArticle(String nameArt, String commentArt, Place place) {
         this.nameArt = nameArt;
         this.commentArt = commentArt;
-        this.place=place;
+        this.place = place;
+        this.idArt = idArt++;
     }
-    
-    public StocksArticle(Place place, String nameArt) {
+
+    public StocksArticle(String nameArt, Place place) {
         this.nameArt = nameArt;
         this.commentArt = defaultComment;
-        this.place=place;
+        this.place = place;
     }
 
     public Long getId() {
@@ -55,7 +59,7 @@ public class StocksArticle implements Serializable {
     public void setName(String nameArt) {
         this.nameArt = nameArt;
     }
-    
+
     public String getComment() {
         return commentArt;
     }
@@ -63,9 +67,17 @@ public class StocksArticle implements Serializable {
     public void setComment(String commentArt) {
         this.commentArt = commentArt;
     }
-    
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
     //TODO
-    public boolean createStocksUnit(int quantity, Date mdd, String commentSUnit){
+    public boolean createStocksUnit(int quantity, Date mdd, String commentSUnit) {
         return stocksUnits.add(new StocksUnit(quantity, mdd, commentSUnit));
     }
 

@@ -6,6 +6,7 @@
 package controller;
 
 import javax.ejb.Local;
+import model.Place;
 import model.StocksArticle;
 
 /**
@@ -15,15 +16,15 @@ import model.StocksArticle;
 @Local
 public interface SessionBeanStocksArticleLocal {
     
-    public StocksArticle createArticle1(Long idArt, String nameArt, String commentArt, int placesReferenceId);
+    public StocksArticle createArticle1(String nameArt, String commentArt, Place newPlace);
     
-    public StocksArticle createArticle2 (Long idArt, String nameArt, int placesReferenceId);
+    public StocksArticle createArticle2 (String nameArt, Place newPlace);
     
     public StocksArticle deleteArticle (Long idArt);
     
     public StocksArticle changeArticle (Long idArt, String nameArt, String commentArt);
     
-    public StocksArticle moveArticle (Long idArt, int newPlacesReferenceId);
+    public StocksArticle moveArticle (Long idArt, Place newPlace);
     
     
 }   
