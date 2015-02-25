@@ -43,16 +43,17 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public StocksArticle deleteArticle(Long idArt) {
+    public StocksArticle deleteArticle(long idArt) {
         em.setFlushMode(FlushModeType.AUTO);
         StocksArticle stocksArticle = getArticle(idArt);
         em.remove(stocksArticle);
         em.flush();
         return stocksArticle;
     }
-
+    
+    //??? soll hier auch Place verändert werden können? --> move gibt es ja bereits schon!
     @Override
-    public StocksArticle changeArticle(Long idArt, String nameArt, String commentArt) {
+    public StocksArticle changeArticle(long idArt, String nameArt, String commentArt) {
         em.setFlushMode(FlushModeType.AUTO);
         StocksArticle stocksArticle = getArticle(idArt);
         if (nameArt != null) {
@@ -66,9 +67,9 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         em.flush();
         return stocksArticle;
     }
-
+    
     @Override
-    public StocksArticle moveArticle(Long idArt, Place newPlace) {
+    public StocksArticle moveArticle(long idArt, Place newPlace) {
         em.setFlushMode(FlushModeType.AUTO);
         StocksArticle stocksArticle = getArticle(idArt);
         stocksArticle.setPlace(newPlace);
@@ -79,7 +80,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     // TODO:
-    private StocksArticle getArticle(Long idArt) {
+    private StocksArticle getArticle(long idArt) {
         return null;
     }
     // Add business logic below. (Right-click in editor and choose
