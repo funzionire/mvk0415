@@ -7,21 +7,21 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="container">
     <div class="row">
-        <div class="col-lg-2">
+        <div class="col-md-2">
             <h1>Hallo ... </h1>
             <p>Hier werden deine dir zugeordneten Haushalte angezeigt</p>
             </br>
-        </div
-        <div class ="col-lg-2">
+        </div>
+        <div class ="col-md-2">
             <p> 2.Spalte</p>
         </div>
-        <div class="col-lg-2">
+        <div class="col-md-2">
             <p>3.Spalte</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-2">
-            <p>2.Zeile</p>
+        <div class="col-md-2">
+            <h1>2.Zeile</h1>
         </div>
     </div>
 </div>
