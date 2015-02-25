@@ -52,13 +52,17 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     
     @Override
     public User deleteUser(Long uid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.setFlushMode (FlushModeType.AUTO);
+        User user = getUser(uid);
+        em.remove(user);
+        em.flush();
+        return user;
     }
 
     @Override
     public User changeUser(Long uid, String name, String email, String password) {
         em.setFlushMode(FlushModeType.AUTO);
-        User user = getUser(uid);
+        User user = getUser(uid);s
         em.persist(user);
         user = em.merge(user);
         em.flush();
