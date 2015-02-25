@@ -4,6 +4,7 @@
     Author     : ANABEL
 --%>
 
+<jsp:include page="index.jsp"></jsp:include>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- Page Content -->
@@ -17,10 +18,10 @@
     </div>
     <div class ="row">
         <div class="col-md-6">
-            <form method ="post">
+            <form method ="post" action="/MVK-war/ControllerServlet?step=login">
                 <p>Email-Adresse: <input type ="email" name="email"/></p>
                 <p>Passwort: <input type="password" name="password"/></p>
-                <input type="submit" href="/MVK-war/ControllerServlet?step=login" value ="Anmelden"/>
+                <input type="submit" value ="Anmelden"/>
             </form>
             </br>
         </div>
@@ -29,7 +30,7 @@
         <div class="col-md-6">
             </br>
             <p>Neu hier? Dann registriere dich jetzt!</p>
-            <input type ="submit" href="/MVK-war/register.jsp" value="Registrieren"/>
+            <input type ="submit" onClick="" value="Registrieren"/>
         </div>
     </div>
 </div>

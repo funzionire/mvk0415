@@ -4,6 +4,8 @@
     Author     : ANABEL
 --%>
 
+
+<jsp:include page="index.jsp"></jsp:include>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="container">

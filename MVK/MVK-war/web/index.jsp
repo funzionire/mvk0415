@@ -54,7 +54,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="#">Registrieren</a>
+                            <a href="/MVK-war/register.jsp">Registrieren</a>
                         </li>
                         <li>
                             <a href="#">Über uns</a>
@@ -73,8 +73,8 @@
         
         <!-- page content -->
         <!-- EINBINDEN DER RICHTIGEN JSP -->
-        <jsp:include page="homepage.jsp"></jsp:include>
-
+        
+        <!--jsp:include page="homepage.jsp">< /jsp:include>
 
         <!-- /.container -->
 
