@@ -20,7 +20,7 @@ public class Place {
     public Place(String name, String householdID, int places) {
         this.name = name;
         this.householdReferenceID = householdID;
-        placeID = householdID+"p"+places;
+        placeID = householdID+places+"p";
     }
 
     public String getId() {
