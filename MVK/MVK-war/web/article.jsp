@@ -5,7 +5,7 @@
 --%>
 
 
-<jsp:include page="index.jsp"></jsp:include>
+<jsp:include page="template.jsp"></jsp:include>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="container">

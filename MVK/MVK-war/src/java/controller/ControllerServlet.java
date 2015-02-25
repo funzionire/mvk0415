@@ -46,8 +46,11 @@ public class ControllerServlet extends HttpServlet {
             }
             else
             {
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
+        }
+        else if(currentStep.equals("toRegister")){
+            request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
         else if(currentStep.equals("register")){
             User user = sessionBeanUser.createUser(request.getParameter("name"),
@@ -60,7 +63,7 @@ public class ControllerServlet extends HttpServlet {
             }
             else
             {
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
             }
         }
     }
