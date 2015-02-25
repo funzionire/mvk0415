@@ -51,18 +51,27 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
     
     @Override
-    public User deleteUser(Long uid) {
+    public User deleteUser(Long userID) {
         em.setFlushMode (FlushModeType.AUTO);
-        User user = getUser(uid);
+        User user = getUser(userID);
         em.remove(user);
         em.flush();
         return user;
     }
 
     @Override
-    public User changeUser(Long uid, String name, String email, String password) {
+    public User changeUser(Long userID, String name, String email, String password) {
         em.setFlushMode(FlushModeType.AUTO);
-        User user = getUser(uid);
+        User user = getUser(userID);
+        if (name != null) {
+        user.setName(name);
+        }
+        if (email != null) {
+        user.setEmail(email);
+        }
+        if (password != null) {
+        user.setPassword(password);
+        }
         em.persist(user);
         user = em.merge(user);
         em.flush();
@@ -70,7 +79,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
 
     // TODO:
-    public User getUser(Long uid){
+    public User getUser(Long userID){
         return null;
     }
     // Add business logic below. (Right-click in editor and choose
