@@ -17,11 +17,11 @@
     </div>
     <div class ="row">
         <div class="col-lg-12">
-            <form method ="post">
+            <form method ="post" action="/MVK-war/ControllerServlet?step=register">
                 <p>Email-Adresse: <input type ="email" name="email"/></p>
                 <p>Name: <input type="text" name="name"/> </p>
                 <p>Passwort: <input type="password" name="password"/></p>
-                <input type="submit" href="/MVK-war/ControllerServlet?step=register" value ="Registrieren"/>
+                <input type="submit" value ="Registrieren"/>
             </form>
             </br>
         </div>
