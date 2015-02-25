@@ -18,9 +18,9 @@
     <div class ="row">
         <div class="col-md-6">
             <form method ="post">
-                <p>Email-Adresse: <input type ="email" name="Email-Adresse"/></p>
-                <p>Passwort: <input type="password" name="Passwort"/></p>
-                <input type="submit" value ="Anmelden"/>
+                <p>Email-Adresse: <input type ="email" name="email"/></p>
+                <p>Passwort: <input type="password" name="password"/></p>
+                <input type="submit" href="/MVK-war/ControllerServlet?step=login" value ="Anmelden"/>
             </form>
             </br>
         </div>
@@ -29,7 +29,7 @@
         <div class="col-md-6">
             </br>
             <p>Neu hier? Dann registriere dich jetzt!</p>
-            <input type ="submit" value="Registrieren"/>
+            <input type ="submit" href="/MVK-war/register.jsp" value="Registrieren"/>
         </div>
     </div>
 </div>

@@ -15,7 +15,7 @@ import model.User;
 @Local
 public interface SessionBeanUserLocal {
     
-    public User createPerson(String name,String email, String password);
+    public User createUser(String name,String email, String password);
     
     public User login(String email, String password);
     

@@ -24,7 +24,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     private EntityManager em;
     
     @Override
-    public User createPerson(String name, String email, String password) {
+    public User createUser(String name, String email, String password) {
         em.setFlushMode(FlushModeType.AUTO);
         User user = new User(name, email, password);
         em.persist(user);
