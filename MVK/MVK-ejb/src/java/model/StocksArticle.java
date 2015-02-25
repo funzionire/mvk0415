@@ -1,38 +1,43 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Felix
  */
+@Entity
 public class StocksArticle implements Serializable {
-
-    private Long idArt;
+    @Id
+    @GeneratedValue
+    private long idArt;
+    @OneToOne
     private String nameArt;
     private String commentArt;
-    private int placesReferenceId;
+    private static final String defaultComment = "";
+    private Place place;
+    @OneToMany
+    private List<StocksUnit> stocksUnits;
     
-    private String defaultComment = "";
-
-    public StocksArticle() {
-
-    }
-
-    public StocksArticle(Long idArt, String nameArt, String commentArt, int placesReferenceId) {
-        this.idArt = idArt;
+    
+    
+    public StocksArticle(Place place, String nameArt, String commentArt) {
         this.nameArt = nameArt;
         this.commentArt = commentArt;
-        this.placesReferenceId = placesReferenceId;
+        this.place=place;
     }
     
-    public StocksArticle(Long idArt, String nameArt, int placesReferenceId) {
-        this.idArt = idArt;
+    public StocksArticle(Place place, String nameArt) {
         this.nameArt = nameArt;
         this.commentArt = defaultComment;
-        this.placesReferenceId = placesReferenceId;
+        this.place=place;
     }
 
     public Long getId() {
@@ -59,11 +64,9 @@ public class StocksArticle implements Serializable {
         this.commentArt = commentArt;
     }
     
-    public int getPlacesReferenceId() {
-        return placesReferenceId;
+    //TODO
+    public boolean createStocksUnit(int quantity, Date mdd, String commentSUnit){
+        return stocksUnits.add(new StocksUnit(quantity, mdd, commentSUnit));
     }
 
-    public void setPlacesReferenceId(int placesReferenceId) {
-        this.placesReferenceId = placesReferenceId;
-    }
 }

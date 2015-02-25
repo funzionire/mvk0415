@@ -5,26 +5,32 @@
  */
 package model;
 
+import java.util.List;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 /**
  *
  * @author baader
  */
 public class Place {
+    @Id
+    @GeneratedValue   
+    private long placeID;
+    @OneToOne
     private String name;
-    private String householdReferenceID;
-    private String placeID;
+    private Household household;
+    @OneToMany
+    private List<StocksArticle> stocksArticles;
 
-    public Place(String name, String householdID, int places) {
+    public Place(String name, Household household) {
         this.name = name;
-        this.householdReferenceID = householdID;
-        placeID = householdID+places+"p";
+        this.household=household;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getPlaceID() {
+    public long getPlaceID() {
         return placeID;
     }
 
@@ -36,12 +42,9 @@ public class Place {
         this.name = name;
     }
 
-    public StocksArticle addStockUnit(){
-        return new StocksArticle();
+    /*TODO
+    public boolean createStockArticle(StocksArticle stocksArticle){
+        return stocksArticles.add(new StocksArticle(stocksArticle));
     }
-    
-    public String gethouseholdReferenceID() {
-        return householdReferenceID;
-    }
-
+    */
 }

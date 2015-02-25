@@ -5,26 +5,42 @@
  */
 package model;
 
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 /**
  *
  * @author baader
  */
-public class Household {
-    private String householdID;
-    private String name;
-    private int places = 0;
-    
+@Entity
 
-    public Household(String name, String userID, int haushalte) {
+public class Household {
+
+    @Id
+    @GeneratedValue
+    private long householdID;
+    @OneToOne
+    private String name;
+    @OneToMany
+    private List<Place> places;
+    @ManyToMany
+    private List<User> users;
+
+    public Household(String name, User user) {
+        users.add(user);
         this.name = name;
-        householdID = userID+haushalte+"h";
     }
 
-    public String getHouseholdID() {
+    public long getHouseholdID() {
         return householdID;
     }
 
-    public void setHouseholdID(String householdID) {
+    public void setHouseholdID(long householdID) {
         this.householdID = householdID;
     }
 
@@ -36,8 +52,16 @@ public class Household {
         this.name = name;
     }
     
-    public Place addPlace(String name, String HouseholdID){
-        return new Place(name, householdID, places++);
-    }    
+    public boolean addUser(User user){
+        return users.add(user);
+    }
     
+    public boolean removeUser(User user){
+        return users.remove(user);
+    }
+    
+     public boolean createPlace(String name, Household household){
+     return places.add(new Place(name, household));
+     }    
+     //TODO removePlace
 }

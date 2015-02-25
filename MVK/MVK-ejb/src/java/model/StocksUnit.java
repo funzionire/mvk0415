@@ -2,40 +2,40 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Felix
  */
+@Entity
 public class StocksUnit implements Serializable{
-    
-    private Long idSUnit;
-    private int menge;
+    @Id
+    @GeneratedValue
+    private long idSUnit;
+    @OneToOne
+    private int quantity;
     private Date mdd;
-    private Long idForeignArtID;
     private String commentSUnit;
-    private int StocksArticleReferenceId;
+    private static final String defaultComment = "";
+    private static final int defaultQuantity = 1;
+    private static final Date defaultDate = null;
+    private StocksArticle stocksArticle;
     
-    private String defaultComment = "";
+    //TODO Konstrutoren für keine Menge (=1) und keine Menge + kein Datum und kein Datum
     
-
-    public StocksUnit() {
-
-    }
-
-    public StocksUnit(Long idSUnit, int menge, Date mdd, Long idForeignArtID, String commentSUnit, int StocksArticleReferenceId) {
-        this.idSUnit = idSUnit;
-        this.menge = menge;
+    public StocksUnit(int quantity, Date mdd, String commentSUnit) {
+        this.quantity = quantity;
         this.mdd = mdd;
-        this.idForeignArtID = idForeignArtID;
         this.commentSUnit = commentSUnit;
     }
     
-    public StocksUnit(Long idSUnit, int menge, Date mdd, Long idForeignArtID, int StocksArticleReferenceId) {
-        this.idSUnit = idSUnit;
-        this.menge = menge;
+    public StocksUnit(int quantity, Date mdd) {
+        this.quantity = quantity;
         this.mdd = mdd;
-        this.idForeignArtID = idForeignArtID;
         this.commentSUnit = defaultComment;
     }
     
@@ -44,14 +44,22 @@ public class StocksUnit implements Serializable{
         return idSUnit;
     }
 
-    public int getMenge() {
-        return menge;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setMenge(int menge) {
-        this.menge = menge;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    public int quantityPlusOne(){
+        return ++quantity;
     }
 
+     public int quantityMinnusOne(){
+        return --quantity;
+    }
+     
     public Date getMdd() {
         return mdd;
     }
@@ -60,18 +68,6 @@ public class StocksUnit implements Serializable{
         this.mdd = mdd;
     }
 
-    public Long getIdForeignArtID() {
-        return idForeignArtID;
-    }
-
-    public void setIdForeignArtID(Long idForeignArtID) {
-        this.idForeignArtID = idForeignArtID;
-    }
-
-    public void setIdSUnit(Long idSUnit) {
-        this.idSUnit = idSUnit;
-    }
-    
     public String getCommentSUnit() {
         return commentSUnit;
     }
@@ -79,14 +75,5 @@ public class StocksUnit implements Serializable{
     public void setCommentSUnit(String commentSUnit) {
         this.commentSUnit = commentSUnit;
     }
-
-    public int getStocksArticleReferenceId() {
-        return StocksArticleReferenceId;
-    }
-
-    public void setStocksArticleReferenceId(int StocksArticleReferenceId) {
-        this.StocksArticleReferenceId = StocksArticleReferenceId;
-    }
-    
     
 }
