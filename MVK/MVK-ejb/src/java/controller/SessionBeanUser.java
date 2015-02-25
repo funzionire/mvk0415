@@ -65,6 +65,10 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         return user;
     }
 
+    // TODO:
+    public User getUser(Long uid){
+        return null;
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }
