@@ -47,7 +47,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="#">
-                        <img src="img/logo_halb.png" alt=""/>
+                        <img src="img/MVK_pur.png" alt=""/>
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
