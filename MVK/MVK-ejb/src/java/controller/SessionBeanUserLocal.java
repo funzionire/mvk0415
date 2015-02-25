@@ -19,8 +19,8 @@ public interface SessionBeanUserLocal {
     
     public User login(String email, String password);
     
-    public User deleteUser (Long uid);
+    public User deleteUser (Long userID);
     
-    public User changeUser (Long uid, String name, String email, String password);
+    public User changeUser (Long userID, String name, String email, String password);
 
 }

@@ -6,40 +6,81 @@
 package controller;
 
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.FlushModeType;
+import javax.persistence.PersistenceContext;
 import model.StocksArticle;
 
 /**
  *
  * @author Felix
  */
-@Stateless
+@Stateless(name = "SessionBeanArticle")
 public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
+
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public StocksArticle createArticle1(Long idArt, String nameArt, String commentArt, int placesReferenceId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.setFlushMode(FlushModeType.AUTO);
+        StocksArticle stocksArticle = new StocksArticle(idArt, nameArt, commentArt, placesReferenceId);
+        em.persist(stocksArticle);
+        stocksArticle = em.merge(stocksArticle);
+        em.flush();
+        return stocksArticle;
     }
 
     @Override
     public StocksArticle createArticle2(Long idArt, String nameArt, int placesReferenceId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.setFlushMode(FlushModeType.AUTO);
+        StocksArticle stocksArticle = new StocksArticle(idArt, nameArt, placesReferenceId);
+        em.persist(stocksArticle);
+        stocksArticle = em.merge(stocksArticle);
+        em.flush();
+        return stocksArticle;
     }
 
     @Override
     public StocksArticle deleteArticle(Long idArt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.setFlushMode(FlushModeType.AUTO);
+        StocksArticle stocksArticle = getArticle(idArt);
+        em.remove(stocksArticle);
+        em.flush();
+        return stocksArticle;
     }
 
     @Override
     public StocksArticle changeArticle(Long idArt, String nameArt, String commentArt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.setFlushMode(FlushModeType.AUTO);
+        StocksArticle stocksArticle = getArticle(idArt);
+        if (nameArt != null) {
+            stocksArticle.setName(nameArt);
+        }
+        if (commentArt != null) {
+            stocksArticle.setComment(commentArt);
+        }
+        em.persist(stocksArticle);
+        stocksArticle = em.merge(stocksArticle);
+        em.flush();
+        return stocksArticle;
     }
 
     @Override
     public StocksArticle moveArticle(Long idArt, int newPlacesReferenceId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.setFlushMode(FlushModeType.AUTO);
+        StocksArticle stocksArticle = getArticle(idArt);
+        stocksArticle.setPlacesReferenceId(newPlacesReferenceId);
+        em.persist(stocksArticle);
+        stocksArticle = em.merge(stocksArticle);
+        em.flush();
+        return stocksArticle;
     }
 
+    // TODO:
+    private StocksArticle getArticle(Long idArt) {
+        return null;
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }
