@@ -44,9 +44,11 @@ public class Place {
         this.name = name;
     }
 
-    /*TODO
-    public boolean createStockArticle(StocksArticle stocksArticle){
-        return stocksArticles.add(new StocksArticle(stocksArticle));
+    public boolean createStocksArticle(String nameArt, Place place){
+        return stocksArticles.add(new StocksArticle(nameArt, place));
     }
-    */
+    
+        public boolean createStocksArticle(String nameArt, Place place, String commentArt){
+        return stocksArticles.add(new StocksArticle(nameArt, place, commentArt));
+    }
 }

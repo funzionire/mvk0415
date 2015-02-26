@@ -25,7 +25,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     @Override
     public StocksArticle createArticle1(String nameArt, String commentArt, Place newPlace) {
         em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = new StocksArticle(nameArt, commentArt, newPlace);
+        StocksArticle stocksArticle = new StocksArticle(nameArt, newPlace, commentArt);
         em.persist(stocksArticle);
         stocksArticle = em.merge(stocksArticle);
         em.flush();

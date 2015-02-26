@@ -29,12 +29,10 @@ public class StocksArticle implements Serializable {
     @OneToMany
     private List<StocksUnit> stocksUnits;
 
-    //ID brauchen wir nicht im Konstruktor mitgeben aber erzeugen schon oder?
-    public StocksArticle(String nameArt, String commentArt, Place place) {
+    public StocksArticle(String nameArt, Place place, String commentArt) {
         this.nameArt = nameArt;
         this.commentArt = commentArt;
         this.place = place;
-        this.stocksArticleID = stocksArticleID++;
     }
 
     public StocksArticle(String nameArt, Place place) {
@@ -75,9 +73,38 @@ public class StocksArticle implements Serializable {
         this.place = place;
     }
 
-    //TODO
+    //M D C
     public boolean createStocksUnit(int quantity, Date mdd, String commentSUnit) {
         return stocksUnits.add(new StocksUnit(quantity, mdd, commentSUnit));
     }
 
+    //D C
+    public boolean createStocksUnit(Date mdd, String commentSUnit) {
+        return stocksUnits.add(new StocksUnit(mdd, commentSUnit));
+    }
+
+    //C
+    public boolean createStocksUnit(String commentSUnit) {
+        return stocksUnits.add(new StocksUnit(commentSUnit));
+    }
+
+    //D
+    public boolean createStocksUnit(Date mdd) {
+        return stocksUnits.add(new StocksUnit(mdd));
+    }
+
+    //M
+    public boolean createStocksUnit(int quantity) {
+        return stocksUnits.add(new StocksUnit(quantity));
+    }
+
+    //M C
+    public boolean createStocksUnit(int quantity, String commentSUnit) {
+        return stocksUnits.add(new StocksUnit(quantity, commentSUnit));
+    }
+
+    //M D
+    public boolean createStocksUnit(int quantity, Date mdd) {
+        return stocksUnits.add(new StocksUnit(quantity, mdd));
+    }
 }
