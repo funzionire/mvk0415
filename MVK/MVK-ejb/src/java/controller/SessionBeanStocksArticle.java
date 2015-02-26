@@ -78,7 +78,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         em.flush();
         return stocksArticle;
     }
-
+    
     /*unnötig
      private StocksArticle getArticle(long stocksArticleID) {
      return null;
