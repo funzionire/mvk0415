@@ -18,11 +18,10 @@ public class StocksArticle implements Serializable {
 
     @Id
     @GeneratedValue
-    private long idArt = 0;
+    private long stocksArticleID = 0;
     @OneToOne
     private String nameArt;
     private String commentArt;
-    //hier kam eine Fehlermeldung ohne @OneToOne
     @OneToOne
     private Place place;
     private static final String defaultComment = "";
@@ -35,7 +34,7 @@ public class StocksArticle implements Serializable {
         this.nameArt = nameArt;
         this.commentArt = commentArt;
         this.place = place;
-        this.idArt = idArt++;
+        this.stocksArticleID = stocksArticleID++;
     }
 
     public StocksArticle(String nameArt, Place place) {
@@ -44,12 +43,12 @@ public class StocksArticle implements Serializable {
         this.place = place;
     }
 
-    public Long getId() {
-        return idArt;
+    public Long getStocksArticleID() {
+        return stocksArticleID;
     }
 
-    public void setId(Long idArt) {
-        this.idArt = idArt;
+    public void setStocksArticleID(Long stocksArticleID) {
+        this.stocksArticleID = stocksArticleID;
     }
 
     public String getName() {

@@ -43,9 +43,9 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public StocksArticle deleteArticle(long idArt) {
+    public StocksArticle deleteArticle(long stocksArticleID) {
         em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = getArticle(idArt);
+        StocksArticle stocksArticle = getArticle(stocksArticleID);
         em.remove(stocksArticle);
         em.flush();
         return stocksArticle;
@@ -53,9 +53,9 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     
     //??? soll hier auch Place verändert werden können? --> move gibt es ja bereits schon!
     @Override
-    public StocksArticle changeArticle(long idArt, String nameArt, String commentArt) {
+    public StocksArticle changeArticle(long stocksArticleID, String nameArt, String commentArt) {
         em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = getArticle(idArt);
+        StocksArticle stocksArticle = getArticle(stocksArticleID);
         if (nameArt != null) {
             stocksArticle.setName(nameArt);
         }
@@ -69,9 +69,9 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
     
     @Override
-    public StocksArticle moveArticle(long idArt, Place newPlace) {
+    public StocksArticle moveArticle(long stocksArticleID, Place newPlace) {
         em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = getArticle(idArt);
+        StocksArticle stocksArticle = getArticle(stocksArticleID);
         stocksArticle.setPlace(newPlace);
         em.persist(stocksArticle);
         stocksArticle = em.merge(stocksArticle);
@@ -80,7 +80,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     // TODO:
-    private StocksArticle getArticle(long idArt) {
+    private StocksArticle getArticle(long stocksArticleID) {
         return null;
     }
     // Add business logic below. (Right-click in editor and choose

@@ -20,11 +20,11 @@ public interface SessionBeanStocksArticleLocal {
     
     public StocksArticle createArticle2 (String nameArt, Place newPlace);
     
-    public StocksArticle deleteArticle (long idArt);
+    public StocksArticle deleteArticle (long stocksArticleID);
     
-    public StocksArticle changeArticle (long idArt, String nameArt, String commentArt);
+    public StocksArticle changeArticle (long stocksArticleID, String nameArt, String commentArt);
     
-    public StocksArticle moveArticle (long idArt, Place newPlace);
+    public StocksArticle moveArticle (long stocksArticleID, Place newPlace);
     
     
 }   
