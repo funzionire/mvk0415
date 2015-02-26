@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -19,6 +21,7 @@ public class StocksUnit implements Serializable {
     private long StocksUnitID;
     @OneToOne
     private int quantity;
+    @Temporal(TemporalType.DATE)
     private Date mdd;
     private String commentSUnit;
     private static final String defaultComment = "";
