@@ -79,6 +79,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         em.flush();
         return stocksArticle;
     }
+<<<<<<< HEAD
 
     @Override
     public StocksArticle changeArticleComment(StocksArticle stocksArticle, String commentArt) {
@@ -106,6 +107,13 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
       // Add business logic below. (Right-click in editor and choose
+=======
+    
+     private StocksArticle getArticle(long stocksArticleID) {
+     return null;
+     }
+     // Add business logic below. (Right-click in editor and choose
+>>>>>>> origin/master
      // "Insert Code > Add Business Method")
      
 }
