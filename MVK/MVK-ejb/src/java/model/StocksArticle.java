@@ -3,11 +3,8 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+
 
 /**
  *
@@ -15,17 +12,14 @@ import javax.persistence.OneToOne;
  */
 @Entity
 public class StocksArticle implements Serializable {
-
-    @Id
-    @GeneratedValue
-    private long stocksArticleID = 0;
-    @OneToOne
     private String nameArt;
     private String commentArt;
-    @OneToOne
-    private Place place;
     private static final String defaultComment = "";
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long stocksArticleID;
+    @ManyToOne
+    private Place place;
     @OneToMany
     private List<StocksUnit> stocksUnits;
 

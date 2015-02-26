@@ -2,12 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 /**
  *
@@ -15,18 +10,17 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class StocksUnit implements Serializable {
-
-    @Id
-    @GeneratedValue
-    private long StocksUnitID;
-    @OneToOne
     private int quantity;
-    @Temporal(TemporalType.DATE)
-    private Date mdd;
     private String commentSUnit;
     private static final String defaultComment = "";
     private static final int defaultQuantity = 1;
     private static final Date defaultDate = null;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long StocksUnitID;
+    @Temporal(TemporalType.DATE)
+    private Date mdd;
+    @ManyToOne
     private StocksArticle stocksArticle;
 
     //Konstruktoren in Reihenfolge quantity, mdd, commentSUnit

@@ -53,18 +53,21 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
     
     @Override
-    public User deleteUser(long userID) {
+    public boolean deleteUser(User user) {
+        try{
         em.setFlushMode (FlushModeType.AUTO);
-        User user = em.find(User.class, userID);
         em.remove(user);
         em.flush();
-        return user;
+        return true;
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
     @Override
-    public User changeUser(long userID, String name, String email, String password) {
+    public User changeUser(User user, String name, String email, String password) {
         em.setFlushMode(FlushModeType.AUTO);
-        User user = em.find(User.class, userID);
         if (name != null) {
         user.setName(name);
         }
@@ -80,11 +83,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         return user;
     }
         
-    /* brauchen wir nicht !?
-    public User getUser(long userID){
-        User user = em.find(User.class, userID);
-        return user;
-    }*/
+
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

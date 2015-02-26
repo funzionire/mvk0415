@@ -23,7 +23,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     private EntityManager em;
 
     @Override
-    public StocksArticle createArticle1(String nameArt, String commentArt, Place newPlace) {
+    public StocksArticle createArticle(String nameArt, Place newPlace, String commentArt) {
         em.setFlushMode(FlushModeType.AUTO);
         StocksArticle stocksArticle = new StocksArticle(nameArt, newPlace, commentArt);
         em.persist(stocksArticle);
@@ -33,7 +33,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public StocksArticle createArticle2(String nameArt, Place newPlace) {
+    public StocksArticle createArticle(String nameArt, Place newPlace) {
         em.setFlushMode(FlushModeType.AUTO);
         StocksArticle stocksArticle = new StocksArticle(nameArt, newPlace);
         em.persist(stocksArticle);
@@ -43,19 +43,21 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public StocksArticle deleteArticle(long stocksArticleID) {
-        em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = em.find(StocksArticle.class, stocksArticleID);
-        em.remove(stocksArticle);
-        em.flush();
-        return stocksArticle;
+    public boolean deleteArticle(StocksArticle stocksArticle) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            em.remove(stocksArticle);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     //??? soll hier auch Place verändert werden können? --> move gibt es ja bereits schon!
     @Override
-    public StocksArticle changeArticle(long stocksArticleID, String nameArt, String commentArt) {
+    public StocksArticle changeArticle(StocksArticle stocksArticle, String nameArt, String commentArt) {
         em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = em.find(StocksArticle.class, stocksArticleID);
         if (nameArt != null) {
             stocksArticle.setName(nameArt);
         }
@@ -69,21 +71,41 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public StocksArticle moveArticle(long stocksArticleID, Place newPlace) {
+    public StocksArticle changeArticle(StocksArticle stocksArticle, String nameArt) {
         em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = em.find(StocksArticle.class, stocksArticleID);
-        stocksArticle.setPlace(newPlace);
+        stocksArticle.setName(nameArt);
         em.persist(stocksArticle);
         stocksArticle = em.merge(stocksArticle);
         em.flush();
         return stocksArticle;
     }
 
-    /*unnötig
-     private StocksArticle getArticle(long stocksArticleID) {
-     return null;
-     }
-     // Add business logic below. (Right-click in editor and choose
+    @Override
+    public StocksArticle changeArticleComment(StocksArticle stocksArticle, String commentArt) {
+        em.setFlushMode(FlushModeType.AUTO);
+        stocksArticle.setComment(commentArt);
+        em.persist(stocksArticle);
+        stocksArticle = em.merge(stocksArticle);
+        em.flush();
+        return stocksArticle;
+    }
+
+    @Override
+    public boolean moveArticle(StocksArticle stocksArticle, Place newPlace) {
+        try{
+        em.setFlushMode(FlushModeType.AUTO);
+        stocksArticle.setPlace(newPlace);
+        em.persist(stocksArticle);
+        stocksArticle = em.merge(stocksArticle);
+        em.flush();
+        return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+      // Add business logic below. (Right-click in editor and choose
      // "Insert Code > Add Business Method")
-     */
+     
 }

@@ -7,13 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  *
@@ -27,16 +21,13 @@ import javax.persistence.OneToOne;
             @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM User user WHERE user.email = :email AND user.password = :password")
         })
 public class User implements Serializable {
-
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue//(strategy = GenerationType.AUTO)
-
-    private long userID;
-    @OneToOne
     private String name;
     private String email;
     private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long userID;
     @ManyToMany
     private List<Household> households;
 
