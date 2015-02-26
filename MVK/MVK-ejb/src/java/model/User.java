@@ -16,23 +16,22 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 /**
- * 
+ *
  * @author Steffen
  */
-
 @Entity
 @NamedQueries(
-{
-    @NamedQuery(name = "User.findById", query = "SELECT user FROM User user WHERE user.id = :id"),
-    @NamedQuery(name = "User.findByEmail", query = "SELECT user FROM User user WHERE user.email = :email"),
-    @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM User user WHERE user.email = :email AND user.password = :password")
-})
-public class User implements Serializable{
-        
+        {
+            @NamedQuery(name = "User.findById", query = "SELECT user FROM User user WHERE user.id = :id"),
+            @NamedQuery(name = "User.findByEmail", query = "SELECT user FROM User user WHERE user.email = :email"),
+            @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM User user WHERE user.email = :email AND user.password = :password")
+        })
+public class User implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue//(strategy = GenerationType.AUTO)
-    
+
     private long userID;
     @OneToOne
     private String name;
@@ -40,29 +39,26 @@ public class User implements Serializable{
     private String password;
     @ManyToMany
     private List<Household> households;
-    
-    
-    
-    public User (String name, String email, String password){
-        this.name=name;
-        this.email=email;
-        this.password=password;
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
-    
-    public Household createHousehold(String hhName, User user){
+
+    public Household createHousehold(String hhName, User user) {
         Household x = new Household(hhName, user);
         households.add(x);
         return x;
     }
-    
-    public boolean addHousehold(Household household){
+
+    public boolean addHousehold(Household household) {
         return households.add(household);
     }
-    
-    public boolean removeHousehold (Household household){
+
+    public boolean removeHousehold(Household household) {
         return households.remove(household);
     }
-
 
     public long getUserID() {
         return userID;
@@ -91,5 +87,5 @@ public class User implements Serializable{
     public void setPassword(String password) {
         this.password = password;
     }
-   
+
 }
