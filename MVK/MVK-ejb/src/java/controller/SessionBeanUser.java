@@ -5,7 +5,7 @@
  */
 package controller;
 
-import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
@@ -19,13 +19,15 @@ import model.User;
  */
 @Stateless(name = "SessionBeanUser")
 public class SessionBeanUser implements SessionBeanUserLocal {
-
+    private static final Logger LOG = Logger.getLogger(SessionBeanUser.class.getName());
+    
     @PersistenceContext
     private EntityManager em;
     
     @Override
     public User createUser(String name, String email, String password) {
-        em.setFlushMode(FlushModeType.AUTO);
+        LOG.info("CustomInfo: SessionBean aufgerufe: User anlegen");
+        em.setFlushMode(FlushModeType.COMMIT);
         User user = new User(name, email, password);
         em.persist(user);
         user = em.merge(user);

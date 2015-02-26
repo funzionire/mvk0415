@@ -7,6 +7,7 @@ package controller;
 
 import static controller.BeanFactory.getSessionBeanUser;
 import java.io.IOException;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +21,7 @@ import model.User;
  */
 @WebServlet(name = "ControllerServlet", urlPatterns = {"/ControllerServlet"})
 public class ControllerServlet extends HttpServlet {
-
+    private static final Logger LOG = Logger.getLogger(ControllerServlet.class.getName());
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,8 +35,10 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        LOG.info("CustomInfo: SessionBean initialisieren");
         SessionBeanUserLocal   sessionBeanUser = getSessionBeanUser();
         String currentStep = request.getParameter("step");
+        LOG.info("CustomInfo: Aktueller Schritt:" + currentStep);
         if(currentStep == null || currentStep.equals("login")){
             User user = sessionBeanUser.login(request.getParameter("email"),
                                     request.getParameter("password"));
@@ -53,6 +56,7 @@ public class ControllerServlet extends HttpServlet {
             request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
         else if(currentStep.equals("register")){
+            LOG.info("CustomInfo: Registrieren");
             User user = sessionBeanUser.createUser(request.getParameter("name"),
                                                     request.getParameter("email"),
                                                     request.getParameter("password"));

@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.util.logging.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
@@ -13,6 +14,7 @@ import javax.naming.NamingException;
  * @author Felix
  */
 public class BeanFactory {
+    private static final Logger LOG = Logger.getLogger(BeanFactory.class.getName());
     public static SessionBeanHouseholdLocal getSessionBeanHousehold()
     {
         SessionBeanHouseholdLocal bean = null;
@@ -45,11 +47,12 @@ public class BeanFactory {
     
     public static SessionBeanUserLocal getSessionBeanUser()
     {
+        LOG.info("CustomInfo: BeanFactory: getSessionBeanUser ausgeführt");
         SessionBeanUserLocal bean = null;
         try
         {
             InitialContext ctx = new InitialContext();
-            bean = (SessionBeanUserLocal) ctx.lookup("java:global/EnterpriseApplication/EnterpriseApplication-ejb/SessionBean!controller.SessionBeanUserLocal");
+            bean = (SessionBeanUserLocal) ctx.lookup("java:global/MVK/MVK-ejb/SessionBeanUser!controller.SessionBeanUserLocal");
         }
         catch (NamingException ex)
         {
@@ -57,4 +60,5 @@ public class BeanFactory {
         }
         return bean;
     }
+    
 }
