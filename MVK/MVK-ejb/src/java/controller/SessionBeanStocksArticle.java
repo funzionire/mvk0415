@@ -45,17 +45,17 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     @Override
     public StocksArticle deleteArticle(long stocksArticleID) {
         em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = getArticle(stocksArticleID);
+        StocksArticle stocksArticle = em.find(StocksArticle.class, stocksArticleID);
         em.remove(stocksArticle);
         em.flush();
         return stocksArticle;
     }
-    
+
     //??? soll hier auch Place verändert werden können? --> move gibt es ja bereits schon!
     @Override
     public StocksArticle changeArticle(long stocksArticleID, String nameArt, String commentArt) {
         em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = getArticle(stocksArticleID);
+        StocksArticle stocksArticle = em.find(StocksArticle.class, stocksArticleID);
         if (nameArt != null) {
             stocksArticle.setName(nameArt);
         }
@@ -67,11 +67,11 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         em.flush();
         return stocksArticle;
     }
-    
+
     @Override
     public StocksArticle moveArticle(long stocksArticleID, Place newPlace) {
         em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = getArticle(stocksArticleID);
+        StocksArticle stocksArticle = em.find(StocksArticle.class, stocksArticleID);
         stocksArticle.setPlace(newPlace);
         em.persist(stocksArticle);
         stocksArticle = em.merge(stocksArticle);
@@ -79,10 +79,11 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         return stocksArticle;
     }
 
-    // TODO:
-    private StocksArticle getArticle(long stocksArticleID) {
-        return null;
-    }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    /*unnötig
+     private StocksArticle getArticle(long stocksArticleID) {
+     return null;
+     }
+     // Add business logic below. (Right-click in editor and choose
+     // "Insert Code > Add Business Method")
+     */
 }

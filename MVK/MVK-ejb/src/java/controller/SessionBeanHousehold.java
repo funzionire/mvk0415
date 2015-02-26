@@ -35,7 +35,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     @Override
     public Household changeHousehold(long householdID, String name) {
         em.setFlushMode(FlushModeType.AUTO);
-        Household household = getHousehold(householdID);
+        Household household = em.find(Household.class, householdID);
         if (name != null) {
             household.setName(name);
         }
@@ -44,11 +44,11 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         em.flush();
         return household;
     }
-    
+
     @Override
     public Household addUserToHousehold(long householdID, User user) {
         em.setFlushMode(FlushModeType.AUTO);
-        Household household = getHousehold(householdID);
+        Household household = em.find(Household.class, householdID);
         //???weitere Prüfung notwendig
         if (user != null) {
             household.addUser(user);
@@ -62,7 +62,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     @Override
     public Household removeUserFromHousehold(long householdID, User user) {
         em.setFlushMode(FlushModeType.AUTO);
-        Household household = getHousehold(householdID);
+        Household household = em.find(Household.class, householdID);
         //???weitere Prüfung notwendig
         if (user != null) {
             household.removeUser(user);
@@ -76,7 +76,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     @Override
     public Household deleteHousehold(long householdID) {
         em.setFlushMode(FlushModeType.AUTO);
-        Household household = getHousehold(householdID);
+        Household household = em.find(Household.class, householdID);
         em.remove(household);
         em.flush();
         return household;
@@ -85,8 +85,10 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 
-    //TODO
-    private Household getHousehold(long householdID) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    /*unnötig
+     private Household getHousehold(long householdID) {
+     return em.find(Household.class, householdID);
+     //throw new UnsupportedOperationException("Not supported yet."); 
+     //To change body of generated methods, choose Tools | Templates.
+     }*/
 }
