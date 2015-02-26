@@ -63,5 +63,10 @@ public class Household {
      public boolean createPlace(String name, Household household){
      return places.add(new Place(name, household));
      }    
-     //TODO removePlace
+     
+     public boolean removePlace(String name){
+         //gemockt
+         //müsste eigentlich removeArticles aufrufen und removeArticles müsste removeUnits machen
+         return true;
+     }
 }

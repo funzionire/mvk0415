@@ -33,9 +33,8 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public Household changeHousehold(long householdID, String name) {
+    public Household changeHousehold(Household household, String name) {
         em.setFlushMode(FlushModeType.AUTO);
-        Household household = em.find(Household.class, householdID);
         if (name != null) {
             household.setName(name);
         }
@@ -46,40 +45,52 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public Household addUserToHousehold(long householdID, User user) {
-        em.setFlushMode(FlushModeType.AUTO);
-        Household household = em.find(Household.class, householdID);
-        //???weitere Prüfung notwendig
-        if (user != null) {
-            household.addUser(user);
+    public boolean addUserToHousehold(Household household, User user) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            //???weitere Prüfung notwendig
+            if (user != null) {
+                household.addUser(user);
+            }
+            em.persist(household);
+            household = em.merge(household);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        em.persist(household);
-        household = em.merge(household);
-        em.flush();
-        return household;
     }
 
     @Override
-    public Household removeUserFromHousehold(long householdID, User user) {
-        em.setFlushMode(FlushModeType.AUTO);
-        Household household = em.find(Household.class, householdID);
-        //???weitere Prüfung notwendig
-        if (user != null) {
-            household.removeUser(user);
+    public boolean removeUserFromHousehold(Household household, User user) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            if (user != null) {
+                household.removeUser(user);
+            }
+            em.persist(household);
+            household = em.merge(household);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        em.persist(household);
-        household = em.merge(household);
-        em.flush();
-        return household;
     }
 
     @Override
-    public Household deleteHousehold(long householdID) {
-        em.setFlushMode(FlushModeType.AUTO);
-        Household household = em.find(Household.class, householdID);
-        em.remove(household);
-        em.flush();
-        return household;
+    public boolean deleteHousehold(Household household) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            //gemockt--------------------
+            String mockup = "mockup";
+            household.removePlace(mockup);
+            //----------------------------
+            em.remove(household);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     // Add business logic below. (Right-click in editor and choose
