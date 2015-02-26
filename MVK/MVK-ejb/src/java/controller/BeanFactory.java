@@ -21,7 +21,7 @@ public class BeanFactory {
         try
         {
             InitialContext ctx = new InitialContext();
-            bean = (SessionBeanHouseholdLocal) ctx.lookup("java:global/EnterpriseApplication/EnterpriseApplication-ejb/SessionBean!controller.SessionBeanHouseholdLocal");
+            bean = (SessionBeanHouseholdLocal) ctx.lookup("java:global/MVK/MVK-ejb/SessionBeanHousehold!controller.SessionBeanHouseholdLocal");
         }
         catch (NamingException ex)
         {
@@ -36,7 +36,7 @@ public class BeanFactory {
         try
         {
             InitialContext ctx = new InitialContext();
-            bean = (SessionBeanStocksArticleLocal) ctx.lookup("java:global/EnterpriseApplication/EnterpriseApplication-ejb/SessionBean!controller.SessionBeanStocksArticleLocal");
+            bean = (SessionBeanStocksArticleLocal) ctx.lookup("java:global/MVK/MVK-ejb/SessionBeanArticle!controller.SessionBeanStocksArticleLocal");
         }
         catch (NamingException ex)
         {

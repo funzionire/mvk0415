@@ -27,7 +27,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     @Override
     public User createUser(String name, String email, String password) {
         LOG.info("CustomInfo: SessionBean aufgerufe: User anlegen");
-        em.setFlushMode(FlushModeType.COMMIT);
+        em.setFlushMode(FlushModeType.AUTO);
         User user = new User(name, email, password);
         em.persist(user);
         user = em.merge(user);
