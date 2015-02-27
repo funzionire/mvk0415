@@ -19,11 +19,12 @@ import model.User;
  */
 @Stateless(name = "SessionBeanUser")
 public class SessionBeanUser implements SessionBeanUserLocal {
+
     private static final Logger LOG = Logger.getLogger(SessionBeanUser.class.getName());
-    
+
     @PersistenceContext
     private EntityManager em;
-    
+
     @Override
     public User createUser(String name, String email, String password) {
         LOG.info("CustomInfo: SessionBean aufgerufe: User anlegen");
@@ -33,34 +34,31 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         user = em.merge(user);
         em.flush();
         return user;
-        
+
     }
 
     @Override
     public User login(String email, String password) {
-        if (email == null || password == null || email.isEmpty() || password.isEmpty())
-        {
+        if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
             return null;
         }
         TypedQuery<User> query = em.createNamedQuery("User.findByLoginPasswort", User.class)
-            .setParameter("email", email)
-            .setParameter("password", password);
-        if (query.getResultList().isEmpty())
-        {
+                .setParameter("email", email)
+                .setParameter("password", password);
+        if (query.getResultList().isEmpty()) {
             return null;
         }
         return query.getSingleResult();
     }
-    
+
     @Override
     public boolean deleteUser(User user) {
-        try{
-        em.setFlushMode (FlushModeType.AUTO);
-        em.remove(user);
-        em.flush();
-        return true;
-        }
-        catch (Exception e){
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            em.remove(user);
+            em.flush();
+            return true;
+        } catch (Exception e) {
             return false;
         }
     }
@@ -69,21 +67,47 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     public User changeUser(User user, String name, String email, String password) {
         em.setFlushMode(FlushModeType.AUTO);
         if (name != null) {
-        user.setName(name);
+            user.setName(name);
         }
         if (email != null) {
-        user.setEmail(email);
+            user.setEmail(email);
         }
         if (password != null) {
-        user.setPassword(password);
+            user.setPassword(password);
         }
         em.persist(user);
         user = em.merge(user);
         em.flush();
         return user;
     }
-        
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @Override
+    public User changeName(User user, String name) {
+        em.setFlushMode(FlushModeType.AUTO);
+        user.setName(name);
+        em.persist(user);
+        user = em.merge(user);
+        em.flush();
+        return user;
+    }
+
+    @Override
+    public User changePassword(User user, String password) {
+        em.setFlushMode(FlushModeType.AUTO);
+        user.setPassword(password);
+        em.persist(user);
+        user = em.merge(user);
+        em.flush();
+        return user;
+    }
+
+    @Override
+    public User changeEmail(User user, String email) {
+        em.setFlushMode(FlushModeType.AUTO);
+        user.setEmail(email);
+        em.persist(user);
+        user = em.merge(user);
+        em.flush();
+        return user;
+    }
 }

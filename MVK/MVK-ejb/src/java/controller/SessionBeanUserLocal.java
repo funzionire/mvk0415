@@ -25,6 +25,13 @@ public interface SessionBeanUserLocal {
     //|->soll ein user-Objekt löschen
     
     public User changeUser (User user, String name, String email, String password);
-//-->
+//-->soll dem Benutzer die Möglichkeit geben, eins oder mehrere seiner Eigenschaften zu ändern
+//-->mehrere Methoden (?): changePassword, changeName, changeEmail
+    
+    public User changeName (User user, String name);
+    
+    public User changePassword (User user, String password);
+    
+    public User changeEmail (User user, String email);
 
 }
