@@ -13,7 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.User;
+import model.AppUser;
 
 /**
  *
@@ -40,7 +40,7 @@ public class ControllerServlet extends HttpServlet {
         String currentStep = request.getParameter("step");
         LOG.info("CustomInfo: Aktueller Schritt:" + currentStep);
         if(currentStep == null || currentStep.equals("login")){
-            User user = sessionBeanUser.login(request.getParameter("email"),
+            AppUser user = sessionBeanUser.login(request.getParameter("email"),
                                     request.getParameter("password"));
             if (user != null)
             {
@@ -57,7 +57,7 @@ public class ControllerServlet extends HttpServlet {
         }
         else if(currentStep.equals("register")){
             LOG.info("CustomInfo: Registrieren");
-            User user = sessionBeanUser.createUser(request.getParameter("name"),
+            AppUser user = sessionBeanUser.createUser(request.getParameter("name"),
                                                     request.getParameter("email"),
                                                     request.getParameter("password"));
             if (user != null)
