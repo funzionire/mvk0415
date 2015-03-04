@@ -21,6 +21,7 @@ import javax.persistence.*;
             @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM User user WHERE user.email = :email AND user.password = :password")
         })
 public class User implements Serializable {
+    //Attribute
     private static final long serialVersionUID = 1L;
     private String name;
     private String email;
@@ -31,12 +32,19 @@ public class User implements Serializable {
     @ManyToMany
     private List<Household> households;
 
+    //Konstruktoren
+    
+    public User() {
+        //TODO
+    }
+
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
     }
 
+    //Weitere Methoden
     public Household createHousehold(String hhName, User user) {
         Household x = new Household(hhName, user);
         households.add(x);
@@ -51,6 +59,7 @@ public class User implements Serializable {
         return households.remove(household);
     }
 
+    //Getter und Setter
     public long getUserID() {
         return userID;
     }

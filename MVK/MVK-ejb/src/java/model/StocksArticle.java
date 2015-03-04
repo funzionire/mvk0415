@@ -12,6 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 public class StocksArticle implements Serializable {
+    //Attribute
     private String nameArt;
     private String commentArt;
     private static final String defaultComment = "";
@@ -22,6 +23,11 @@ public class StocksArticle implements Serializable {
     private Place place;
     @OneToMany
     private List<StocksUnit> stocksUnits;
+    
+    //Konstruktoren
+    public StocksArticle() {
+        //TODO
+    }
 
     public StocksArticle(String nameArt, Place place, String commentArt) {
         this.nameArt = nameArt;
@@ -35,6 +41,7 @@ public class StocksArticle implements Serializable {
         this.place = place;
     }
 
+    //Getter und Setter
     public Long getStocksArticleID() {
         return stocksArticleID;
     }

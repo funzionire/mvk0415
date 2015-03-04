@@ -10,6 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 public class StocksUnit implements Serializable {
+    //Attribute
     private int quantity;
     private String commentSUnit;
     private static final String defaultComment = "";

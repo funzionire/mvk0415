@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
@@ -13,7 +14,8 @@ import javax.persistence.*;
  * @author baader
  */
 @Entity
-public class Place {
+public class Place implements Serializable{
+    //Attribute
     private String name;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,11 +25,18 @@ public class Place {
     @OneToMany
     private List<StocksArticle> stocksArticles;
 
+    //Konstruktoren
+    
+    public Place() {
+        //TODO
+    }
+
     public Place(String name, Household household) {
         this.name = name;
         this.household=household;
     }
 
+    //Getter und Setter
     public long getPlaceID() {
         return placeID;
     }
@@ -40,6 +49,7 @@ public class Place {
         this.name = name;
     }
 
+    //Weitere Methoden
     public boolean createStocksArticle(String nameArt, Place place){
         return stocksArticles.add(new StocksArticle(nameArt, place));
     }
