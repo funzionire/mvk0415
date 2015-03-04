@@ -23,7 +23,7 @@ public class Household implements Serializable{
     @OneToMany
     private List<Place> places;
     @ManyToMany
-    private List<User> users;
+    private List<AppUser> users;
 
     //Konstruktoren
     
@@ -31,7 +31,7 @@ public class Household implements Serializable{
         //TODO
     }
 
-    public Household(String name, User user) {
+    public Household(String name, AppUser user) {
         users.add(user);
         this.name = name;
     }
@@ -54,11 +54,11 @@ public class Household implements Serializable{
     }
     
     //Weitere Methoden
-    public boolean addUser(User user){
+    public boolean addUser(AppUser user){
         return users.add(user);
     }
     
-    public boolean removeUser(User user){
+    public boolean removeUser(AppUser user){
         return users.remove(user);
     }
     

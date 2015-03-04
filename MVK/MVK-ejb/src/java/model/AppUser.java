@@ -16,11 +16,11 @@ import javax.persistence.*;
 @Entity
 @NamedQueries(
         {
-            @NamedQuery(name = "User.findById", query = "SELECT user FROM User user WHERE user.id = :id"),
-            @NamedQuery(name = "User.findByEmail", query = "SELECT user FROM User user WHERE user.email = :email"),
-            @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM User user WHERE user.email = :email AND user.password = :password")
+            @NamedQuery(name = "User.findById", query = "SELECT user FROM AppUser user WHERE user.userID = :userID"),
+            @NamedQuery(name = "User.findByEmail", query = "SELECT user FROM AppUser user WHERE user.email = :email"),
+            @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM AppUser user WHERE user.email = :email AND user.password = :password")
         })
-public class User implements Serializable {
+public class AppUser implements Serializable {
     //Attribute
     private static final long serialVersionUID = 1L;
     private String name;
@@ -34,18 +34,18 @@ public class User implements Serializable {
 
     //Konstruktoren
     
-    public User() {
+    public AppUser() {
         //TODO
     }
 
-    public User(String name, String email, String password) {
+    public AppUser(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
     }
 
     //Weitere Methoden
-    public Household createHousehold(String hhName, User user) {
+    public Household createHousehold(String hhName, AppUser user) {
         Household x = new Household(hhName, user);
         households.add(x);
         return x;

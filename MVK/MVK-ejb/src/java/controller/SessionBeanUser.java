@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import model.User;
+import model.AppUser;
 
 /**
  *
@@ -26,10 +26,10 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     private EntityManager em;
 
     @Override
-    public User createUser(String name, String email, String password) {
+    public AppUser createUser(String name, String email, String password) {
         LOG.info("CustomInfo: SessionBean aufgerufe: User anlegen");
         em.setFlushMode(FlushModeType.AUTO);
-        User user = new User(name, email, password);
+        AppUser user = new AppUser(name, email, password);
         em.persist(user);
         user = em.merge(user);
         em.flush();
@@ -38,11 +38,11 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
 
     @Override
-    public User login(String email, String password) {
+    public AppUser login(String email, String password) {
         if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
             return null;
         }
-        TypedQuery<User> query = em.createNamedQuery("User.findByLoginPasswort", User.class)
+        TypedQuery<AppUser> query = em.createNamedQuery("User.findByLoginPasswort", AppUser.class)
                 .setParameter("email", email)
                 .setParameter("password", password);
         if (query.getResultList().isEmpty()) {
@@ -52,7 +52,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
 
     @Override
-    public boolean deleteUser(User user) {
+    public boolean deleteUser(AppUser user) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             em.remove(user);
@@ -64,7 +64,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
 
     @Override
-    public User changeUser(User user, String name, String email, String password) {
+    public AppUser changeUser(AppUser user, String name, String email, String password) {
         em.setFlushMode(FlushModeType.AUTO);
         if (name != null) {
             user.setName(name);
@@ -82,7 +82,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
 
     @Override
-    public User changeName(User user, String name) {
+    public AppUser changeName(AppUser user, String name) {
         em.setFlushMode(FlushModeType.AUTO);
         user.setName(name);
         em.persist(user);
@@ -92,7 +92,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
 
     @Override
-    public User changePassword(User user, String password) {
+    public AppUser changePassword(AppUser user, String password) {
         em.setFlushMode(FlushModeType.AUTO);
         user.setPassword(password);
         em.persist(user);
@@ -102,7 +102,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
 
     @Override
-    public User changeEmail(User user, String email) {
+    public AppUser changeEmail(AppUser user, String email) {
         em.setFlushMode(FlushModeType.AUTO);
         user.setEmail(email);
         em.persist(user);

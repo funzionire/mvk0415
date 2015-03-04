@@ -6,7 +6,7 @@
 package controller;
 
 import javax.ejb.Local;
-import model.User;
+import model.AppUser;
 
 /**
  *
@@ -15,23 +15,23 @@ import model.User;
 @Local
 public interface SessionBeanUserLocal {
     
-    public User createUser(String name,String email, String password);
+    public AppUser createUser(String name,String email, String password);
     //|->soll einen User mit den Parametern name, email und passward erstellen
     
-    public User login(String email, String password);
+    public AppUser login(String email, String password);
     //|->soll einen User authentifizieren und für den Kontext zur Verfügung stellen
     
-    public boolean deleteUser (User user);
+    public boolean deleteUser (AppUser user);
     //|->soll ein user-Objekt löschen
     
-    public User changeUser (User user, String name, String email, String password);
+    public AppUser changeUser (AppUser user, String name, String email, String password);
 //-->soll dem Benutzer die Möglichkeit geben, eins oder mehrere seiner Eigenschaften zu ändern
 //-->mehrere Methoden (?): changePassword, changeName, changeEmail
     
-    public User changeName (User user, String name);
+    public AppUser changeName (AppUser user, String name);
     
-    public User changePassword (User user, String password);
+    public AppUser changePassword (AppUser user, String password);
     
-    public User changeEmail (User user, String email);
+    public AppUser changeEmail (AppUser user, String email);
 
 }

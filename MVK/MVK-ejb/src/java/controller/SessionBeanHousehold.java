@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
 import model.Household;
-import model.User;
+import model.AppUser;
 
 /**
  *
@@ -23,7 +23,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     private EntityManager em;
 
     @Override
-    public Household createHousehold(String name, User user) {
+    public Household createHousehold(String name, AppUser user) {
         em.setFlushMode(FlushModeType.AUTO);
         Household household = new Household(name, user);
         em.persist(household);
@@ -45,7 +45,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public boolean addUserToHousehold(Household household, User user) {
+    public boolean addUserToHousehold(Household household, AppUser user) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             //???weitere Prüfung notwendig
@@ -62,7 +62,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public boolean removeUserFromHousehold(Household household, User user) {
+    public boolean removeUserFromHousehold(Household household, AppUser user) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (user != null) {
