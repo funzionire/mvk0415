@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
@@ -13,7 +14,8 @@ import javax.persistence.*;
  * @author baader
  */
 @Entity
-public class Household {
+public class Household implements Serializable{
+    //Attribute
     private String name;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,11 +25,18 @@ public class Household {
     @ManyToMany
     private List<User> users;
 
+    //Konstruktoren
+    
+    public Household() {
+        //TODO
+    }
+
     public Household(String name, User user) {
         users.add(user);
         this.name = name;
     }
 
+    //Getter und Setter
     public long getHouseholdID() {
         return householdID;
     }
@@ -44,6 +53,7 @@ public class Household {
         this.name = name;
     }
     
+    //Weitere Methoden
     public boolean addUser(User user){
         return users.add(user);
     }
