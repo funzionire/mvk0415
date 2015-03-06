@@ -6,10 +6,11 @@
 
 <jsp:include page="template.jsp"></jsp:include>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="user" class="model.AppUser" scope="request"/>
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-            <h1>Hallo .... </h1>
+            <h1>Hallo <jsp:getProperty name="user" property="name" /> </h1>
             <p>Hier werden deine dir zugeordneten Haushalte angezeigt</p>
             </br>
         </div>

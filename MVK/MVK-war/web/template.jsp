@@ -76,13 +76,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/MVK-war/register.jsp">Registrieren</a>
+                            <a href="/MVK-war/register.jsp" name="RegistrierenLabel">Registrieren</a>
                         </li>
                         <li>
-                            <a href="#">Über uns</a>
+                            <a href="#" name="UeberUnsLabel">Über uns</a>
                         </li>
                         <li>
-                            <a href="/MVK-war/logout.jsp">Abmelden</a>
+                            <a href="/MVK-war/logout.jsp" name="AbmeldenLabel">Abmelden</a>
                         </li>
                     </ul>
                 </div>
