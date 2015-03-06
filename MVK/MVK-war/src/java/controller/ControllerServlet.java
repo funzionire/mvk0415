@@ -50,7 +50,7 @@ public class ControllerServlet extends HttpServlet {
             }
             else
             {
-                LOG.info("CustomInfo: Email oder Passwort korrekt");
+                LOG.info("CustomInfo: Email oder Passwort falsch");
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
         }
@@ -58,17 +58,18 @@ public class ControllerServlet extends HttpServlet {
             request.getRequestDispatcher("/register.jsp").forward(request, response);
         }
         else if(currentStep.equals("register")){
-            LOG.info("CustomInfo: Registrieren");
             AppUser user = sessionBeanUser.createUser(request.getParameter("name"),
                                                     request.getParameter("email"),
                                                     request.getParameter("password"));
             if (user != null)
             {
+                LOG.info("CustomInfo: Registrierung erfolgreich");
                 request.setAttribute("user", user);
                 request.getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
             else
             {
+                LOG.info("CustomInfo: Registrierung fehlgeschlagen");
                 request.getRequestDispatcher("/register.jsp").forward(request, response);
             }
         }
