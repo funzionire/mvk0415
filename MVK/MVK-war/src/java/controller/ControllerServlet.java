@@ -19,6 +19,12 @@ import model.AppUser;
  *
  * @author baader
  */
+
+
+/*In der Homepage.jsp gibt es einen Button, der zum Erzeugen eines neuen Haushaltes genutzt werden soll
+  Dafür musste ein neuer Step eingefügt werden (kann man auch gern noch umbenennen)
+  bei dem muss dann die Methode createHoushold aufgerufen werden
+*/
 @WebServlet(name = "ControllerServlet", urlPatterns = {"/ControllerServlet"})
 public class ControllerServlet extends HttpServlet {
     private static final Logger LOG = Logger.getLogger(ControllerServlet.class.getName());
