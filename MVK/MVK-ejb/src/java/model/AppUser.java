@@ -16,9 +16,9 @@ import javax.persistence.*;
 @Entity
 @NamedQueries(
         {
-            @NamedQuery(name = "User.findById", query = "SELECT user FROM AppUser user WHERE user.userID = :userID"),
-            @NamedQuery(name = "User.findByEmail", query = "SELECT user FROM AppUser user WHERE user.email = :email"),
-            @NamedQuery(name = "User.findByEmailPassword", query = "SELECT user FROM AppUser user WHERE user.email = :email AND user.password = :password")
+            @NamedQuery(name = "AppUser.findById", query = "SELECT user FROM AppUser user WHERE user.userID = :userID"),
+            @NamedQuery(name = "AppUser.findByEmail", query = "SELECT user FROM AppUser user WHERE user.email = :email"),
+            @NamedQuery(name = "AppUser.findByEmailPassword", query = "SELECT user FROM AppUser user WHERE user.email = :email AND user.password = :password")
         })
 public class AppUser implements Serializable {
     //Attribute

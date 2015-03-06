@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-            <h1>Hallo ... </h1>
+            <h1>Hallo .... </h1>
             <p>Hier werden deine dir zugeordneten Haushalte angezeigt</p>
             </br>
         </div>

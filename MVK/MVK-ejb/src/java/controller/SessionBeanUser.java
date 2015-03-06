@@ -42,7 +42,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
             return null;
         }
-        TypedQuery<AppUser> query = em.createNamedQuery("User.findByLoginPasswort", AppUser.class)
+        TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findByEmailPassword", AppUser.class)
                 .setParameter("email", email)
                 .setParameter("password", password);
         if (query.getResultList().isEmpty()) {

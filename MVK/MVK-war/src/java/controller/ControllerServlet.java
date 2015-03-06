@@ -44,11 +44,13 @@ public class ControllerServlet extends HttpServlet {
                                     request.getParameter("password"));
             if (user != null)
             {
+                LOG.info("CustomInfo: Email und Passwort korrekt");
                 request.setAttribute("user", user);
                 request.getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
             else
             {
+                LOG.info("CustomInfo: Email oder Passwort korrekt");
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
         }
