@@ -5,12 +5,14 @@
  */
 package controller;
 
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
 import model.Place;
 import model.StocksArticle;
+import model.StocksUnit;
 
 /**
  *
@@ -43,7 +45,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public boolean deleteArticle(StocksArticle stocksArticle) {
+    public boolean removeArticle(StocksArticle stocksArticle) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             em.remove(stocksArticle);
@@ -105,6 +107,87 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         }
     }
 
+    @Override
+    public StocksUnit addUnit(int quantity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit addUnit(int quantity, Date mdd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit addUnit(int quantity, String commentSUnit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit addUnit(int quantity, Date mdd, String commentSUnit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit addUnit(Date mdd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit addUnit(Date mdd, String commentSUnit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit addUnit(String commentSUnit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit changeUnit(int quantity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit changeUnit(int quantity, Date mdd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit changeUnit(int quantity, String commentSUnit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit changeUnit(int quantity, Date mdd, String commentSUnit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit changeUnit(Date mdd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit changeUnit(Date mdd, String commentSUnit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit changeUnit(String commentSUnit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit removeUnit(StocksUnit stocksUnit) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public StocksUnit moveUnit(StocksUnit stocksUnit, Place newPlace) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 
      
 }

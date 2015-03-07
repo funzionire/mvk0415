@@ -5,9 +5,11 @@
  */
 package controller;
 
+import java.util.Date;
 import javax.ejb.Local;
 import model.Place;
 import model.StocksArticle;
+import model.StocksUnit;
 
 /**
  *
@@ -22,7 +24,7 @@ public interface SessionBeanStocksArticleLocal {
     public StocksArticle createArticle(String nameArt, Place newPlace);
     //|->soll ein stocksArticle-Objekt erzeugen (ohne Kommentar) und in der Datenbank abspreichern
 
-    public boolean deleteArticle(StocksArticle stocksArticle);
+    public boolean removeArticle(StocksArticle stocksArticle);
     //|->soll ein stocksArticle-Objekt löschen
 
     public StocksArticle changeArticle(StocksArticle stocksArticle, String nameArt, String commentArt);
@@ -37,6 +39,41 @@ public interface SessionBeanStocksArticleLocal {
     public boolean moveArticle(StocksArticle stocksArticle, Place newPlace);
     //|->soll ein article-Objekt einem andere Platz zuordnen (das place-Attribut verändern)
     
-//-->TODO (in dieser bean?) addUnit, removeUnit, changeUnit, moveUnit, 
+//-->TODO (in dieser bean?) addUnit, removeUnit, changeUnit, moveUnit,
+    public StocksUnit addUnit(int quantity);
+    
+    public StocksUnit addUnit(int quantity, Date mdd);
+    
+    public StocksUnit addUnit(int quantity, String commentSUnit);
+    
+    public StocksUnit addUnit(int quantity, Date mdd, String commentSUnit);
+
+    public StocksUnit addUnit(Date mdd);
+    
+    public StocksUnit addUnit(Date mdd, String commentSUnit);
+    
+    public StocksUnit addUnit(String commentSUnit);
+    
+    //fragt sich ob man das so will.../notwendig (Abfrage == null?) -->Ausprobieren
+    
+    public StocksUnit changeUnit(int quantity);
+    
+    public StocksUnit changeUnit(int quantity, Date mdd);
+    
+    public StocksUnit changeUnit(int quantity, String commentSUnit);
+    
+    public StocksUnit changeUnit(int quantity, Date mdd, String commentSUnit);
+
+    public StocksUnit changeUnit(Date mdd);
+    
+    public StocksUnit changeUnit(Date mdd, String commentSUnit);
+    
+    public StocksUnit changeUnit(String commentSUnit);
+    
+    
+    public StocksUnit removeUnit(StocksUnit stocksUnit);
+    
+    public StocksUnit moveUnit(StocksUnit stocksUnit, Place newPlace);   
+    
 
 }

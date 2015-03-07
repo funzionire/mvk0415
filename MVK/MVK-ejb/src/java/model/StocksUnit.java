@@ -18,7 +18,7 @@ public class StocksUnit implements Serializable {
     private static final Date defaultDate = null;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long StocksUnitID;
+    private long stocksUnitID;
     @Temporal(TemporalType.DATE)
     private Date mdd;
     @ManyToOne
@@ -87,7 +87,7 @@ public class StocksUnit implements Serializable {
     }
 
     public Long getStocksUnitID() {
-        return StocksUnitID;
+        return stocksUnitID;
     }
 
     public int getQuantity() {

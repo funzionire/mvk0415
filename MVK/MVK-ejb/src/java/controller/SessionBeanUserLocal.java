@@ -15,7 +15,7 @@ import model.AppUser;
 @Local
 public interface SessionBeanUserLocal {
     
-    public AppUser createUser(String name,String email, String password);
+    public AppUser createUser(String name, String email, String password);
     //|->soll einen User mit den Parametern name, email und passward erstellen
     
     public AppUser login(String email, String password);
