@@ -30,7 +30,7 @@
         <div class="col-md-6">
             </br>
             <p>Neu hier? Dann registriere dich jetzt!</p>
-            <input type ="submit" onClick="" value="Registrieren"/>
+            <input type ="submit" onClick="" value="Registrieren" step="register"/>
         </div>
     </div>
 </div>

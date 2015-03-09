@@ -5,6 +5,7 @@
  */
 package controller;
 
+import static controller.BeanFactory.getSessionBeanHousehold;
 import static controller.BeanFactory.getSessionBeanUser;
 import java.io.IOException;
 import java.util.logging.Logger;
@@ -13,7 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.AppUser;
+import model.Household;
 
 /**
  *
@@ -37,20 +40,28 @@ public class ControllerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
         LOG.info("CustomInfo: SessionBean initialisieren");
         SessionBeanUserLocal   sessionBeanUser = getSessionBeanUser();
+        SessionBeanHouseholdLocal   sessionBeanHousehold = getSessionBeanHousehold();
         String currentStep = request.getParameter("step");
         LOG.info("CustomInfo: Aktueller Schritt:" + currentStep);
+        
+        /*
+        User
+        */
         if(currentStep == null || currentStep.equals("login")){
             AppUser user = sessionBeanUser.login(request.getParameter("email"),
                                     request.getParameter("password"));
             if (user != null)
             {
                 LOG.info("CustomInfo: Email und Passwort korrekt");
+                HttpSession session = request.getSession(true);
+                session.setAttribute("user", user);
                 request.setAttribute("user", user);
                 request.getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
@@ -77,6 +88,25 @@ public class ControllerServlet extends HttpServlet {
             {
                 LOG.info("CustomInfo: Registrierung fehlgeschlagen");
                 request.getRequestDispatcher("/register.jsp").forward(request, response);
+            }
+        }
+        /*
+        Household
+        */
+        else if(currentStep.equals("createHousehold")){
+            HttpSession session = request.getSession(true);
+            Household household = sessionBeanHousehold.createHousehold(request.getParameter("name"),
+                                                                        (AppUser)session.getAttribute("user"));
+            if (household != null)
+            {
+                LOG.info("CustomInfo: Haushalt erfolgreich angelegt");
+                request.setAttribute("household", household);
+                request.getRequestDispatcher("/household.jsp").forward(request, response);
+            }
+            else
+            {
+                LOG.info("CustomInfo: Haushalt anlegen fehlgeschlagen");
+                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
         }
     }

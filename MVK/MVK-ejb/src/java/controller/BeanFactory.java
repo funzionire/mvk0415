@@ -47,7 +47,6 @@ public class BeanFactory {
     
     public static SessionBeanUserLocal getSessionBeanUser()
     {
-        LOG.info("CustomInfo: BeanFactory: getSessionBeanUser ausgeführt");
         SessionBeanUserLocal bean = null;
         try
         {

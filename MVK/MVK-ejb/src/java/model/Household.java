@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -32,6 +33,7 @@ public class Household implements Serializable{
     }
 
     public Household(String name, AppUser user) {
+        users = new ArrayList();
         users.add(user);
         this.name = name;
     }
