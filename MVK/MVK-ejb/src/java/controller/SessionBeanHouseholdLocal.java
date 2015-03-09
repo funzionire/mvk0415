@@ -43,4 +43,5 @@ public interface SessionBeanHouseholdLocal {
     //|->soll den Haushalt und alles was "in Ihm" ist löschen
     //|->siehe auch Household.removePlace
     
+    public List<Household> getHouseholdsForUser(AppUser user);
 }

@@ -5,6 +5,8 @@
  */
 package controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
@@ -93,6 +95,10 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         }
     }
 
+    public List<Household> getHouseholdsForUser(AppUser user)
+    {
+        return null;
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 
