@@ -19,12 +19,13 @@
         </div>
 
     </div>
-    <div class="row">
-        <h1>Deine Haushalte</h1>
+    <form method ="post" action="/MVK-war/ControllerServlet?step=createHousehold">
         <div class="col-md-3">
-            <input type="button" onclick="" action="/MVK-war/ControllerServlet?step=newHoushold"
+            <p>Name: <input type ="text" name="name"/></p>
+            <input type="submit"
                    value ="+ Neuen Haushalt hinzufügen"/>
         </div>
+    </form>
          Hier sollen Haushalte als Buttons angezeigt werden, damit man über diese zur household.jsp kommt 
         <c:forEach var="household" items="${user.returnHouseholds()}">
             <div class ="col-md-3">
