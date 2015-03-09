@@ -19,6 +19,7 @@
         </div>
 
     </div>
+    <h1>Deine Haushalte</h1>
     <form method ="post" action="/MVK-war/ControllerServlet?step=createHousehold">
         <div class="col-md-3">
             <p>Name: <input type ="text" name="name"/></p>
