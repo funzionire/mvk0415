@@ -4,8 +4,28 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
+@import url(http://fonts.googleapis.com/css?family=Bitter:400,700,400italic);
+@import url(http://fonts.googleapis.com/css?family=Lato);
+
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
+    background-color: rgba(0, 128, 0, .4);
+    color: #803300;
+    font-family: Lato;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font: inherit;
+    color: #000;
+}
+
+.navbar-inverse
+.navbar-nav>li>a {
+    background-color: rgba(255, 255, 255, .2);
+    color: #ffffff;
+    border-radius: 8px;
+    margin: 5px;
 }
 
 .navbar{
@@ -17,6 +37,7 @@ body {
 }
 
 .navbar-fixed-top .nav {
+    background-color: #008000;
     padding: 15px 0;
 }
 
@@ -32,5 +53,5 @@ body {
     .navbar-fixed-top .navbar-brand {
         padding: 15px 0;
     }
-    
+
 }
