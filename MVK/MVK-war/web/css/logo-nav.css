@@ -8,6 +8,14 @@ body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
 }
 
+.navbar{
+    background-color: #008000; 
+}
+
+.navbar-inverse{
+    background-color: #008000;
+}
+
 .navbar-fixed-top .nav {
     padding: 15px 0;
 }
@@ -24,4 +32,5 @@ body {
     .navbar-fixed-top .navbar-brand {
         padding: 15px 0;
     }
+    
 }
