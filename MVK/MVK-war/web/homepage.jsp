@@ -25,12 +25,12 @@
             <input type="button" onclick="" action="/MVK-war/ControllerServlet?step=newHoushold"
                    value ="+ Neuen Haushalt hinzufügen"/>
         </div>
-        <!-- Hier sollen Haushalte als Buttons angezeigt werden, damit man über diese zur household.jsp kommt 
-        <c:forEach var="household" items=" ">
+         Hier sollen Haushalte als Buttons angezeigt werden, damit man über diese zur household.jsp kommt 
+        <c:forEach var="household" items="${user.returnHouseholds()}">
             <div class ="col-md-3">
-                <p> <input type="button" name=""</p>
+                <p> <input type="button" name="${household.name}"</p>
             </div>
-        </c:forEach> --!>
+        </c:forEach> 
 
     </div>
 </div>
