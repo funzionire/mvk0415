@@ -28,11 +28,5 @@
         </div>
     </form>
          Hier sollen Haushalte als Buttons angezeigt werden, damit man über diese zur household.jsp kommt 
-        <c:forEach var="household" items="${user.returnHouseholds()}">
-            <div class ="col-md-3">
-                <p> <input type="button" name="${household.name}"</p>
-            </div>
-        </c:forEach> 
-
     </div>
 </div>

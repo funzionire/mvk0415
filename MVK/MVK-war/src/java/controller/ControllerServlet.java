@@ -100,6 +100,7 @@ public class ControllerServlet extends HttpServlet {
             if (household != null)
             {
                 LOG.info("CustomInfo: Haushalt erfolgreich angelegt");
+                request.setAttribute("user", (AppUser)session.getAttribute("user"));
                 request.setAttribute("household", household);
                 request.getRequestDispatcher("/household.jsp").forward(request, response);
             }
@@ -108,6 +109,13 @@ public class ControllerServlet extends HttpServlet {
                 LOG.info("CustomInfo: Haushalt anlegen fehlgeschlagen");
                 request.getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
+        }
+        else if(currentStep.equals("toHousehold")){
+                HttpSession session = request.getSession(true);
+                LOG.info("CustomInfo: Haushalt öffnen");
+                request.setAttribute("user", session.getAttribute("user"));
+                request.setAttribute("household", session.getAttribute("household"));
+                request.getRequestDispatcher("/household.jsp").forward(request, response);
         }
     }
 
