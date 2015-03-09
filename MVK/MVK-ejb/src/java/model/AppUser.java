@@ -58,6 +58,10 @@ public class AppUser implements Serializable {
     public boolean removeHousehold(Household household) {
         return households.remove(household);
     }
+    
+    public List<Household> returnHouseholds(){
+        return households;
+    }
 
     //Getter und Setter
     public long getUserID() {
