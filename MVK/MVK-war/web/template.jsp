@@ -69,8 +69,8 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">
-                        <img src="img/text3344.png" alt=""/>
+                    <a class="navbar-brand" href="index.jsp">
+                       <img src="img/mvk-logo.png" alt=""/>
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -80,7 +80,7 @@
                             <a href="/MVK-war/register.jsp" name="RegistrierenLabel">Registrieren</a>
                         </li>
                         <li>
-                            <a href="#" name="UeberUnsLabel">Über uns</a>
+                            <a href="about.jsp" name="UeberUnsLabel">Über uns</a>
                         </li>
                         <li>
                             <a href="/MVK-war/logout.jsp" name="AbmeldenLabel">Abmelden</a>
