@@ -15,10 +15,6 @@ import javax.persistence.*;
  * @author baader
  */
 @Entity
-@NamedQueries(
-        {
-            @NamedQuery(name = "Household.findByUser", query = "SELECT household FROM AppUser user WHERE user.userID = :userID")
-        })
 public class Household implements Serializable{
     //Attribute
     private String name;

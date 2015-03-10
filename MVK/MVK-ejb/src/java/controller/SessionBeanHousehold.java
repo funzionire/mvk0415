@@ -94,10 +94,11 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             return false;
         }
     }
-
+    
+    @Override
     public List<Household> getHouseholdsForUser(AppUser user)
     {
-        return null;
+        return em.createNamedQuery("Household.findByUser", Household.class).getResultList();
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
