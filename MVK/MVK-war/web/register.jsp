@@ -18,10 +18,20 @@
     <div class ="row">
         <div class="col-lg-12">
             <form method ="post" action="/MVK-war/ControllerServlet?step=register">
-                <p>Email-Adresse: <input type ="email" name="email"/></p>
-                <p>Name: <input type="text" name="name"/> </p>
-                <p>Passwort: <input type="password" name="password"/></p>
-                <input type="submit" value ="Registrieren"/>
+                <table>
+                    <tr>
+                        <td>Email-Adresse: </td><td><input type ="email" name="email"/></td>
+                    </tr>
+                    <tr>
+                        <td>Name: </td><td><input type="text" name="name"/> </td>
+                    </tr>
+                    <tr>
+                        <td>Passwort: </td><td><input type="password" name="password"/></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value ="Registrieren"/></td>
+                    </tr>
+                </table>
             </form>
             </br>
         </div>

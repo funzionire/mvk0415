@@ -42,6 +42,12 @@ button, input, optgroup, select, textarea {
     padding: 0 15px;
 }
 
+td{
+     border: 3px  #000;
+     border-spacing: 10px;
+     padding: 0.5em;
+}
+
 @media(min-width:768px) {
     body {
         padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
