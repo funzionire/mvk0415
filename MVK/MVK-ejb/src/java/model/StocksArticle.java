@@ -46,10 +46,6 @@ public class StocksArticle implements Serializable {
         return stocksArticleID;
     }
 
-    public void setStocksArticleID(Long stocksArticleID) {
-        this.stocksArticleID = stocksArticleID;
-    }
-
     public String getName() {
         return nameArt;
     }
@@ -72,40 +68,5 @@ public class StocksArticle implements Serializable {
 
     public void setPlace(Place place) {
         this.place = place;
-    }
-
-    //M D C
-    public boolean createStocksUnit(int quantity, Date mdd, String commentSUnit) {
-        return stocksUnits.add(new StocksUnit(quantity, mdd, commentSUnit));
-    }
-
-    //D C
-    public boolean createStocksUnit(Date mdd, String commentSUnit) {
-        return stocksUnits.add(new StocksUnit(mdd, commentSUnit));
-    }
-
-    //C
-    public boolean createStocksUnit(String commentSUnit) {
-        return stocksUnits.add(new StocksUnit(commentSUnit));
-    }
-
-    //D
-    public boolean createStocksUnit(Date mdd) {
-        return stocksUnits.add(new StocksUnit(mdd));
-    }
-
-    //M
-    public boolean createStocksUnit(int quantity) {
-        return stocksUnits.add(new StocksUnit(quantity));
-    }
-
-    //M C
-    public boolean createStocksUnit(int quantity, String commentSUnit) {
-        return stocksUnits.add(new StocksUnit(quantity, commentSUnit));
-    }
-
-    //M D
-    public boolean createStocksUnit(int quantity, Date mdd) {
-        return stocksUnits.add(new StocksUnit(quantity, mdd));
     }
 }

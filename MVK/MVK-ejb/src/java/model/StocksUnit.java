@@ -32,57 +32,11 @@ public class StocksUnit implements Serializable {
         this.commentSUnit = defaultComment;
     }
 
-    //Konstruktor M
-    public StocksUnit(int quantity) {
-        this.quantity = quantity;
-        this.mdd = defaultDate;
-        this.commentSUnit = defaultComment;
-    }
-
-    //Konstruktor M D
-    public StocksUnit(int quantity, Date mdd) {
-        this.quantity = quantity;
-        this.mdd = mdd;
-        this.commentSUnit = defaultComment;
-    }
-
-    //Konstruktor M C
-
-    public StocksUnit(int quantity, String commentSUnit) {
-        this.quantity = quantity;
-        this.mdd = defaultDate;
-        this.commentSUnit = commentSUnit;
-    }
-
     //Konstruktor M D C
 
     public StocksUnit(int quantity, Date mdd, String commentSUnit) {
         this.quantity = quantity;
         this.mdd = mdd;
-        this.commentSUnit = commentSUnit;
-    }
-
-    //Konstruktor D
-
-    public StocksUnit(Date mdd) {
-        this.quantity = defaultQuantity;
-        this.mdd = mdd;
-        this.commentSUnit = defaultComment;
-    }
-
-    //Konstruktor D C
-
-    public StocksUnit(Date mdd, String commentSUnit) {
-        this.quantity = defaultQuantity;
-        this.mdd = mdd;
-        this.commentSUnit = commentSUnit;
-    }
-
-    //Konstruktor C
-
-    public StocksUnit(String commentSUnit) {
-        this.quantity = defaultQuantity;
-        this.mdd = defaultDate;
         this.commentSUnit = commentSUnit;
     }
 
@@ -96,14 +50,6 @@ public class StocksUnit implements Serializable {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public int quantityPlusOne() {
-        return ++quantity;
-    }
-
-    public int quantityMinusOne() {
-        return --quantity;
     }
 
     public Date getMdd() {

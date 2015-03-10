@@ -43,21 +43,6 @@ public class AppUser implements Serializable {
         this.email = email;
         this.password = password;
     }
-
-    //Weitere Methoden
-    public Household createHousehold(String hhName, AppUser user) {
-        Household x = new Household(hhName, user);
-        households.add(x);
-        return x;
-    }
-
-    public boolean addHousehold(Household household) {
-        return households.add(household);
-    }
-
-    public boolean removeHousehold(Household household) {
-        return households.remove(household);
-    }
     
     public List<Household> returnHouseholds(){
         return households;

@@ -31,6 +31,7 @@ public class Place implements Serializable{
         //TODO
     }
 
+    //???wird hier Household bebraucht?
     public Place(String name, Household household) {
         this.name = name;
         this.household=household;
@@ -49,12 +50,13 @@ public class Place implements Serializable{
         this.name = name;
     }
 
-    //Weitere Methoden
-    public boolean createStocksArticle(String nameArt, Place place){
-        return stocksArticles.add(new StocksArticle(nameArt, place));
+    public Household getHousehold() {
+        return household;
+    }
+
+    public void setHousehold(Household household) {
+        this.household = household;
     }
     
-        public boolean createStocksArticle(String nameArt, Place place, String commentArt){
-        return stocksArticles.add(new StocksArticle(nameArt, place, commentArt));
-    }
+    
 }

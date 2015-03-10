@@ -32,6 +32,7 @@ public class Household implements Serializable{
         //TODO
     }
 
+    //??? wird hier AppUser gebraucht?
     public Household(String name, AppUser user) {
         users = new ArrayList();
         users.add(user);
@@ -43,10 +44,6 @@ public class Household implements Serializable{
         return householdID;
     }
 
-    public void setHouseholdID(long householdID) {
-        this.householdID = householdID;
-    }
-
     public String getName() {
         return name;
     }
@@ -55,22 +52,5 @@ public class Household implements Serializable{
         this.name = name;
     }
     
-    //Weitere Methoden
-    public boolean addUser(AppUser user){
-        return users.add(user);
-    }
     
-    public boolean removeUser(AppUser user){
-        return users.remove(user);
-    }
-    
-     public boolean createPlace(String name, Household household){
-     return places.add(new Place(name, household));
-     }    
-     
-     public boolean removePlace(String name){
-         //gemockt
-         //müsste eigentlich removeArticles aufrufen und removeArticles müsste removeUnits machen
-         return true;
-     }
 }
