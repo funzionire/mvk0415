@@ -77,6 +77,9 @@
                             <a href="about.jsp" name="UeberUnsLabel">Über uns</a>
                         </li>
                         <li>
+                            <a href="settings.jsp" name="EinstellungenLabel">Einstellungen</a>
+                        </li>
+                        <li>
                             <a href="/MVK-war/logout.jsp" name="AbmeldenLabel">Abmelden</a>
                         </li>
                     </ul>
