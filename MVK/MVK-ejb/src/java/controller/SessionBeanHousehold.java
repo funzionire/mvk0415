@@ -52,7 +52,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             em.setFlushMode(FlushModeType.AUTO);
             //???weitere Prüfung notwendig
             if (user != null) {
-                household.addUser(user);
+                //household.addUser(user);
             }
             em.persist(household);
             household = em.merge(household);
@@ -68,7 +68,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (user != null) {
-                household.removeUser(user);
+                //household.removeUser(user);
             }
             em.persist(household);
             household = em.merge(household);
@@ -85,7 +85,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             em.setFlushMode(FlushModeType.AUTO);
             //gemockt--------------------
             String mockup = "mockup";
-            household.removePlace(mockup);
+            //household.removePlace(mockup);
             //----------------------------
             em.remove(household);
             em.flush();
