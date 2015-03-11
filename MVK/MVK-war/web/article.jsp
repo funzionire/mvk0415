@@ -3,7 +3,7 @@
     Created on : 24.02.2015, 15:47:39
     Author     : ANABEL
 --%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:include page="template.jsp"></jsp:include>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
