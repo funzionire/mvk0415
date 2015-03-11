@@ -58,5 +58,7 @@ public class Place implements Serializable{
         this.household = household;
     }
     
-    
+    public List<StocksArticle> getStocksArticleList(){
+        return stocksArticles;
+    }
 }

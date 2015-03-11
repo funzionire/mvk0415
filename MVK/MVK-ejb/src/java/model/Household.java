@@ -52,5 +52,11 @@ public class Household implements Serializable{
         this.name = name;
     }
     
+    public List<Place> getPlaceList(){
+        return places;
+    }
     
+    public List<AppUser> getAppUserList(){
+        return users;
+    }
 }

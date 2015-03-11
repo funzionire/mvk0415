@@ -69,4 +69,8 @@ public class StocksArticle implements Serializable {
     public void setPlace(Place place) {
         this.place = place;
     }
+    
+    public List<StocksUnit> getStocksUnitList(){
+        return stocksUnits;
+    }
 }

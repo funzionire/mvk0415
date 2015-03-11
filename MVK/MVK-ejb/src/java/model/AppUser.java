@@ -44,7 +44,7 @@ public class AppUser implements Serializable {
         this.password = password;
     }
     
-    public List<Household> returnHouseholds(){
+    public List<Household> getHouseholdList(){
         return households;
     }
 
