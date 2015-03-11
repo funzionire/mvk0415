@@ -27,6 +27,6 @@
                    value ="+ Neuen Haushalt hinzufügen"/>
         </div>
     </form>
-         Hier sollen Haushalte als Buttons angezeigt werden, damit man über diese zur household.jsp kommt 
-    </div>
+    Hier sollen Haushalte als Buttons angezeigt werden, damit man über diese zur household.jsp kommt 
+</div>
 </div>

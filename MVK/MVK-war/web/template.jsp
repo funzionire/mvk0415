@@ -54,9 +54,9 @@
         <meta name="theme-color" content="#008000">
 
     </head>
- 
-    
-    <body id="content">
+
+
+    <body  id="content">
 
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -70,7 +70,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="index.jsp">
-                       <img src="img/mvk-logo.png" alt=""/>
+                        <img src="img/mvk-logo.png" alt=""/>
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -91,9 +91,9 @@
             </div>
             <!-- /.container -->
         </nav>
-        
-        
-        
+
+        <div class="blur"></div>
+
         <!-- page content -->
         <!-- EINBINDEN DER RICHTIGEN JSP -->
 
@@ -104,7 +104,6 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
-
     </body>
 
 </html>

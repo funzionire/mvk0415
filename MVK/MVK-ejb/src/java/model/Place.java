@@ -14,8 +14,10 @@ import javax.persistence.*;
  * @author baader
  */
 @Entity
-public class Place implements Serializable{
+public class Place implements Serializable {
+
     //Attribute
+
     private String name;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +28,6 @@ public class Place implements Serializable{
     private List<StocksArticle> stocksArticles;
 
     //Konstruktoren
-    
     public Place() {
         //TODO
     }
@@ -34,7 +35,7 @@ public class Place implements Serializable{
     //???wird hier Household bebraucht?
     public Place(String name, Household household) {
         this.name = name;
-        this.household=household;
+        this.household = household;
     }
 
     //Getter und Setter
@@ -57,6 +58,5 @@ public class Place implements Serializable{
     public void setHousehold(Household household) {
         this.household = household;
     }
-    
-    
+
 }
