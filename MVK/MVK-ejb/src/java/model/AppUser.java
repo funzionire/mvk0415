@@ -21,7 +21,9 @@ import javax.persistence.*;
             @NamedQuery(name = "AppUser.findByEmailPassword", query = "SELECT user FROM AppUser user WHERE user.email = :email AND user.password = :password")
         })
 public class AppUser implements Serializable {
+
     //Attribute
+
     private static final long serialVersionUID = 1L;
     private String name;
     private String email;
@@ -33,7 +35,6 @@ public class AppUser implements Serializable {
     private List<Household> households;
 
     //Konstruktoren
-    
     public AppUser() {
         //TODO
     }
@@ -43,8 +44,8 @@ public class AppUser implements Serializable {
         this.email = email;
         this.password = password;
     }
-    
-    public List<Household> returnHouseholds(){
+
+    public List<Household> returnHouseholds() {
         return households;
     }
 
@@ -76,5 +77,5 @@ public class AppUser implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
 }

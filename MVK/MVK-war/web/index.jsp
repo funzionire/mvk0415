@@ -20,13 +20,13 @@
         <div class="col-md-6">
             <form method ="post" action="/MVK-war/ControllerServlet?step=login">
                 <table>
-                <tr>
-                    <td>Email-Adresse: </td><td><input type ="email" name="email"/></td>
-                </tr>
-                <tr>
-                    <td>Passwort: </td><td><input type="password" name="password"/></td>
-                </tr>
-                <tr><td><input type="submit" value ="Anmelden"/></td></tr>
+                    <tr>
+                        <td>Email-Adresse: </td><td><input type ="email" name="email"/></td>
+                    </tr>
+                    <tr>
+                        <td>Passwort: </td><td><input type="password" name="password"/></td>
+                    </tr>
+                    <tr><td><input type="submit" value ="Anmelden"/></td></tr>
                 </table>
             </form>
             </br>

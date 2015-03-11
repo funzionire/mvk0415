@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1>Bis Bald!</h1>
-            
+
             </br>
         </div>
     </div>

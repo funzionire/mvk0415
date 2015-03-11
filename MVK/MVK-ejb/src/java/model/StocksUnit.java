@@ -10,7 +10,9 @@ import javax.persistence.*;
  */
 @Entity
 public class StocksUnit implements Serializable {
+
     //Attribute
+
     private int quantity;
     private String commentSUnit;
     private static final String defaultComment = "";
@@ -33,7 +35,6 @@ public class StocksUnit implements Serializable {
     }
 
     //Konstruktor M D C
-
     public StocksUnit(int quantity, Date mdd, String commentSUnit) {
         this.quantity = quantity;
         this.mdd = mdd;

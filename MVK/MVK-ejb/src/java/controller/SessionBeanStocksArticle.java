@@ -94,15 +94,14 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
 
     @Override
     public boolean moveArticle(StocksArticle stocksArticle, Place newPlace) {
-        try{
-        em.setFlushMode(FlushModeType.AUTO);
-        stocksArticle.setPlace(newPlace);
-        em.persist(stocksArticle);
-        stocksArticle = em.merge(stocksArticle);
-        em.flush();
-        return true;
-        }
-        catch (Exception e){
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            stocksArticle.setPlace(newPlace);
+            em.persist(stocksArticle);
+            stocksArticle = em.merge(stocksArticle);
+            em.flush();
+            return true;
+        } catch (Exception e) {
             return false;
         }
     }
@@ -187,7 +186,4 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-
-     
 }
