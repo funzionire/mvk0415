@@ -51,9 +51,9 @@ public class ControllerServlet extends HttpServlet {
         String currentStep = request.getParameter("step");
         LOG.info("CustomInfo: Aktueller Schritt:" + currentStep);
         
-        /*
+        /*-------------------------------------------------------------------------------------------
         User
-        */
+        -------------------------------------------------------------------------------------------*/
         if(currentStep == null || currentStep.equals("login")){
             AppUser user = sessionBeanUser.login(request.getParameter("email"),
                                     request.getParameter("password"));
@@ -71,9 +71,6 @@ public class ControllerServlet extends HttpServlet {
                 request.getRequestDispatcher("/index.jsp").forward(request, response);
             }
         }
-        else if(currentStep.equals("toRegister")){
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
-        }
         else if(currentStep.equals("register")){
             AppUser user = sessionBeanUser.createUser(request.getParameter("name"),
                                                     request.getParameter("email"),
@@ -90,9 +87,39 @@ public class ControllerServlet extends HttpServlet {
                 request.getRequestDispatcher("/register.jsp").forward(request, response);
             }
         }
-        /*
+        else if(currentStep.equals("deleteUser")){
+            HttpSession session = request.getSession(true);
+            Boolean isDeleted = sessionBeanUser.deleteUser((AppUser)session.getAttribute("user"));
+            if(isDeleted == true){
+                LOG.info("CustomInfo: User erfolgreich gelöscht");
+                session.setAttribute("user", null);
+                request.getRequestDispatcher("/index.jsp");
+            }
+            else{
+                LOG.info("CustomInfo: User löschen fehlgeschlagen");
+                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+            } 
+        }
+        else if(currentStep.equals("changeUser")){
+            HttpSession session = request.getSession(true);
+            AppUser changedUser = sessionBeanUser.changeUser((AppUser)session.getAttribute("user"), 
+                                                            (String)request.getAttribute("name"), 
+                                                            (String)request.getAttribute("email"), 
+                                                            (String)request.getAttribute("password"));
+            if(changedUser != null){
+                LOG.info("CustomInfo: User erfolgreich geändert");
+                session.setAttribute("user", changedUser);
+                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+            }
+            else{
+                LOG.info("CustomInfo: User ändern fehlgeschlagen");
+                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+            }
+        }
+        
+        /*-------------------------------------------------------------------------------------------
         Household
-        */
+        -------------------------------------------------------------------------------------------*/
         else if(currentStep.equals("createHousehold")){
             HttpSession session = request.getSession(true);
             Household household = sessionBeanHousehold.createHousehold(request.getParameter("name"),
@@ -110,6 +137,14 @@ public class ControllerServlet extends HttpServlet {
                 request.getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
         }
+        else if(currentStep.equals("changeHousehold")){
+            HttpSession session = request.getSession(true);
+            session.getAttribute("household");
+        }
+        else if(currentStep.equals("deleteHousehold")){
+            HttpSession session = request.getSession(true);
+            session.getAttribute("household");
+        }
         else if(currentStep.equals("toHousehold")){
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: Haushalt öffnen");
@@ -118,6 +153,14 @@ public class ControllerServlet extends HttpServlet {
                 request.getRequestDispatcher("/household.jsp").forward(request, response);
         }
     }
+    /*-------------------------------------------------------------------------------------------
+    Place
+    -------------------------------------------------------------------------------------------*/
+    
+    /*-------------------------------------------------------------------------------------------
+    StocksArticle
+    -------------------------------------------------------------------------------------------*/
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
