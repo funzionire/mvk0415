@@ -32,10 +32,9 @@ public class Household implements Serializable{
         //TODO
     }
 
-    //??? wird hier AppUser gebraucht?
-    public Household(String name, AppUser user) {
+    public Household(String name) {
         users = new ArrayList();
-        users.add(user);
+        //users.add(user);     AppUser user 
         this.name = name;
     }
 

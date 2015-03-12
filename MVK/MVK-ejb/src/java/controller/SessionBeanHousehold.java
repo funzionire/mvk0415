@@ -13,6 +13,8 @@ import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
 import model.Household;
 import model.AppUser;
+import model.Place;
+import model.StocksArticle;
 
 /**
  *
@@ -25,13 +27,29 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     private EntityManager em;
 
     @Override
-    public Household createHousehold(String name, AppUser user) {
+    public Household createHousehold(String name) {
         em.setFlushMode(FlushModeType.AUTO);
-        Household household = new Household(name, user);
+        Household household = new Household(name);
         em.persist(household);
         household = em.merge(household);
         em.flush();
         return household;
+    }
+
+    @Override
+    public boolean deleteHousehold(Household household) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            //gemockt--------------------
+            String mockup = "mockup";
+            //household.removePlace(mockup);
+            //----------------------------
+            em.remove(household);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
@@ -47,12 +65,27 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
+    public Place createPlace(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Place deletePlace(Place place) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Place changePlace(Place place, String newName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
     public boolean addUserToHousehold(Household household, AppUser user) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             //???weitere Prüfung notwendig
             if (user != null) {
-                household.addUser(user);
+                household.getAppUserList().add(user);
             }
             em.persist(household);
             household = em.merge(household);
@@ -68,7 +101,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (user != null) {
-                household.removeUser(user);
+                household.getAppUserList().remove(user);
             }
             em.persist(household);
             household = em.merge(household);
@@ -80,24 +113,76 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public boolean deleteHousehold(Household household) {
+    public boolean addPlaceToHousehold(Household household, Place place) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            //gemockt--------------------
-            String mockup = "mockup";
-            household.removePlace(mockup);
-            //----------------------------
-            em.remove(household);
+            //???weitere Prüfung notwendig
+            if (place != null) {
+                household.getPlaceList().add(place);
+            }
+            em.persist(household);
+            household = em.merge(household);
             em.flush();
             return true;
         } catch (Exception e) {
             return false;
         }
     }
+
+    @Override
+    public boolean removePlaceFromHousehold(Household household, Place place) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            if (place != null) {
+                household.getAppUserList().remove(place);
+            }
+            em.persist(household);
+            household = em.merge(household);
+            em.flush();
+            deletePlace(place);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            //???weitere Prüfung notwendig
+            if (stocksArticle != null) {
+                place.getStocksArticleList().add(stocksArticle);
+            }
+            em.persist(place);
+            place = em.merge(place);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            if (stocksArticle != null) {
+                place.getStocksArticleList().remove(stocksArticle);
+            }
+            em.persist(place);
+            place = em.merge(place);
+            em.flush();
+            deletePlace(place);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     
     @Override
-    public List<Household> getHouseholdsForUser(AppUser user)
-    {
+    public List<Household> getHouseholdsForUser(AppUser user) {
         return em.createNamedQuery("Household.findByUser", Household.class).getResultList();
     }
     // Add business logic below. (Right-click in editor and choose

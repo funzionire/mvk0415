@@ -18,62 +18,57 @@ import model.StocksUnit;
 @Local
 public interface SessionBeanStocksArticleLocal {
 
-    public StocksArticle createArticle(String nameArt, Place newPlace, String commentArt);
-    //|->soll ein stocksArticle-Objekt erzeugen (mit Kommentar) und in der Datenbank abspreichern
-
-    public StocksArticle createArticle(String nameArt, Place newPlace);
-    //|->soll ein stocksArticle-Objekt erzeugen (ohne Kommentar) und in der Datenbank abspreichern
-
-    public boolean removeArticle(StocksArticle stocksArticle);
-    //|->soll ein stocksArticle-Objekt löschen
-
-    public StocksArticle changeArticle(StocksArticle stocksArticle, String nameArt, String commentArt);
-    //|->soll die Name und KOmmentar eines article-Objekts verändern
-
-    public StocksArticle changeArticle(StocksArticle stocksArticle, String nameArt);
-    //|->soll Name eines article-Objekts verändern
+    //StocksArticle
+    public StocksArticle createStocksArticle(String nameArt, Place place, String commentArt);
     
-    public StocksArticle changeArticleComment(StocksArticle stocksArticle, String commentArt);
-    //|->soll Kommentar eines article-Objekts verändern
-
-    public boolean moveArticle(StocksArticle stocksArticle, Place newPlace);
-    //|->soll ein article-Objekt einem andere Platz zuordnen (das place-Attribut verändern)
+    public boolean removeStocksArticle(StocksArticle stocksArticle);
+    
+    public StocksArticle changeStocksArticle(StocksArticle stocksArticle, String nameArt, String commentArt);
+    
+    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace);
     
 //-->TODO (in dieser bean?) addUnit, removeUnit, changeUnit, moveUnit,
+    
+    //StocksUnit
+    public StocksUnit createStocksUnit(int quantity, Date mdd, String commentSUnit);
+    
+    /*--> kann entfernt werden wenn geklärt!
     public StocksUnit addUnit(int quantity);
-    
     public StocksUnit addUnit(int quantity, Date mdd);
-    
     public StocksUnit addUnit(int quantity, String commentSUnit);
-    
-    public StocksUnit addUnit(int quantity, Date mdd, String commentSUnit);
-
     public StocksUnit addUnit(Date mdd);
-    
     public StocksUnit addUnit(Date mdd, String commentSUnit);
-    
     public StocksUnit addUnit(String commentSUnit);
-    
+    */
     //fragt sich ob man das so will.../notwendig (Abfrage == null?) -->Ausprobieren
     
-    public StocksUnit changeUnit(int quantity);
     
-    public StocksUnit changeUnit(int quantity, Date mdd);
+    //??? int quantity nur über plus/minus-Buttons!
+    public StocksUnit changeStocksUnit(StocksUnit stocksUnit, Date mdd, String commentSUnit, int updateQuantity);
     
-    public StocksUnit changeUnit(int quantity, String commentSUnit);
-    
-    public StocksUnit changeUnit(int quantity, Date mdd, String commentSUnit);
-
+    /*--> kann entfernt werden wenn geklärt!
     public StocksUnit changeUnit(Date mdd);
-    
     public StocksUnit changeUnit(Date mdd, String commentSUnit);
-    
     public StocksUnit changeUnit(String commentSUnit);
+    public StocksUnit changeUnit(int quantity);
+    public StocksUnit changeUnit(int quantity, Date mdd);
+    public StocksUnit changeUnit(int quantity, String commentSUnit);
+    */
     
+    public boolean removeStocksUnit(StocksUnit stocksUnit);   
     
-    public StocksUnit removeUnit(StocksUnit stocksUnit);
+    //??? boolean?
     
-    public StocksUnit moveUnit(StocksUnit stocksUnit, Place newPlace);   
+    //Beziehungen
+    public boolean addStocksUnitToStocksArticle(StocksArticle stocksArticle, StocksUnit stocksUnit);
+    
+    public boolean removeStocksUnitFromStocksArticle(StocksArticle stocksArticle, StocksUnit stocksUnit);
+    
+    public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle);
+    
+    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle);
+    
+    public boolean changePlaceFromStocksArticle(Place place, StocksArticle stocksArticle);
     
 
 }

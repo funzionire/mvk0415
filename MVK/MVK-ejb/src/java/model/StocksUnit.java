@@ -33,7 +33,8 @@ public class StocksUnit implements Serializable {
     }
 
     //Konstruktor M D C
-
+    
+    //muss hier nicht noch StocksArticle mit initialisiert werden oder geht das automatisch??
     public StocksUnit(int quantity, Date mdd, String commentSUnit) {
         this.quantity = quantity;
         this.mdd = mdd;
@@ -68,4 +69,11 @@ public class StocksUnit implements Serializable {
         this.commentSUnit = commentSUnit;
     }
 
+    public StocksArticle getStocksArticle() {
+        return stocksArticle;
+    }
+
+    public void setStocksArticle(StocksArticle stocksArticle) {
+        this.stocksArticle = stocksArticle;
+    }
 }

@@ -12,6 +12,7 @@ import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import model.AppUser;
+import model.Household;
 
 /**
  *
@@ -63,7 +64,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         }
     }
 
-    @Override
+    /*@Override
     public AppUser changeUser(AppUser user, String name, String email, String password) {
         em.setFlushMode(FlushModeType.AUTO);
         if (name != null) {
@@ -79,8 +80,17 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         user = em.merge(user);
         em.flush();
         return user;
+    }*/
+
+    @Override
+    public boolean addHouseholdToUser(AppUser user, Household household) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public boolean removeHouseholdToUser(AppUser user, Household household) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     @Override
     public AppUser changeName(AppUser user, String name) {
         em.setFlushMode(FlushModeType.AUTO);

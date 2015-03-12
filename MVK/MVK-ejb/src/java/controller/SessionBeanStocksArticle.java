@@ -25,9 +25,9 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     private EntityManager em;
 
     @Override
-    public StocksArticle createArticle(String nameArt, Place newPlace, String commentArt) {
+    public StocksArticle createStocksArticle(String nameArt, Place place, String commentArt) {
         em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = new StocksArticle(nameArt, newPlace, commentArt);
+        StocksArticle stocksArticle = new StocksArticle(nameArt, place, commentArt);
         em.persist(stocksArticle);
         stocksArticle = em.merge(stocksArticle);
         em.flush();
@@ -35,17 +35,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public StocksArticle createArticle(String nameArt, Place newPlace) {
-        em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = new StocksArticle(nameArt, newPlace);
-        em.persist(stocksArticle);
-        stocksArticle = em.merge(stocksArticle);
-        em.flush();
-        return stocksArticle;
-    }
-
-    @Override
-    public boolean removeArticle(StocksArticle stocksArticle) {
+    public boolean removeStocksArticle(StocksArticle stocksArticle) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             em.remove(stocksArticle);
@@ -58,7 +48,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
 
     //??? soll hier auch Place verändert werden können? --> move gibt es ja bereits schon!
     @Override
-    public StocksArticle changeArticle(StocksArticle stocksArticle, String nameArt, String commentArt) {
+    public StocksArticle changeStocksArticle(StocksArticle stocksArticle, String nameArt, String commentArt) {
         em.setFlushMode(FlushModeType.AUTO);
         if (nameArt != null) {
             stocksArticle.setName(nameArt);
@@ -73,121 +63,139 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public StocksArticle changeArticle(StocksArticle stocksArticle, String nameArt) {
-        em.setFlushMode(FlushModeType.AUTO);
-        stocksArticle.setName(nameArt);
-        em.persist(stocksArticle);
-        stocksArticle = em.merge(stocksArticle);
-        em.flush();
-        return stocksArticle;
-    }
-
-    @Override
-    public StocksArticle changeArticleComment(StocksArticle stocksArticle, String commentArt) {
-        em.setFlushMode(FlushModeType.AUTO);
-        stocksArticle.setComment(commentArt);
-        em.persist(stocksArticle);
-        stocksArticle = em.merge(stocksArticle);
-        em.flush();
-        return stocksArticle;
-    }
-
-    @Override
-    public boolean moveArticle(StocksArticle stocksArticle, Place newPlace) {
-        try{
-        em.setFlushMode(FlushModeType.AUTO);
-        stocksArticle.setPlace(newPlace);
-        em.persist(stocksArticle);
-        stocksArticle = em.merge(stocksArticle);
-        em.flush();
-        return true;
-        }
-        catch (Exception e){
+    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            stocksArticle.setPlace(newPlace);
+            em.persist(stocksArticle);
+            stocksArticle = em.merge(stocksArticle);
+            em.flush();
+            return true;
+        } catch (Exception e) {
             return false;
         }
     }
 
     @Override
-    public StocksUnit addUnit(int quantity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public StocksUnit createStocksUnit(int quantity, Date mdd, String commentSUnit) {
+        em.setFlushMode(FlushModeType.AUTO);
+        StocksUnit stocksUnit = new StocksUnit(quantity, mdd, commentSUnit);
+        em.persist(stocksUnit);
+        stocksUnit = em.merge(stocksUnit);
+        em.flush();
+        return stocksUnit;
     }
 
     @Override
-    public StocksUnit addUnit(int quantity, Date mdd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public StocksUnit changeStocksUnit(StocksUnit stocksUnit, Date mdd, String commentSUnit, int updateQuantity) {
+        em.setFlushMode(FlushModeType.AUTO);
+        if (mdd != null) {
+            stocksUnit.setMdd(mdd);
+        }
+        if (commentSUnit != null) {
+            stocksUnit.setCommentSUnit(commentSUnit);
+        }
+        //muss noch ausprobiert werden?? brauchen wir allerdings für moveStocksUnit!!
+        if (updateQuantity == 0) {
+            stocksUnit.setQuantity(updateQuantity);
+        }
+        em.persist(stocksUnit);
+        stocksUnit = em.merge(stocksUnit);
+        em.flush();
+        return stocksUnit;
     }
 
     @Override
-    public StocksUnit addUnit(int quantity, String commentSUnit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean removeStocksUnit(StocksUnit stocksUnit) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            em.remove(stocksUnit);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
-    public StocksUnit addUnit(int quantity, Date mdd, String commentSUnit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addStocksUnitToStocksArticle(StocksArticle stocksArticle, StocksUnit stocksUnit) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            if (stocksUnit != null && stocksArticle != null) {
+                stocksArticle.getStocksUnitList().add(stocksUnit);
+            }
+            em.persist(stocksArticle);
+            stocksArticle = em.merge(stocksArticle);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
-    public StocksUnit addUnit(Date mdd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean removeStocksUnitFromStocksArticle(StocksArticle stocksArticle, StocksUnit stocksUnit) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            if (stocksUnit != null && stocksArticle != null) {
+                stocksArticle.getStocksUnitList().remove(stocksUnit);
+            }
+            em.persist(stocksArticle);
+            stocksArticle = em.merge(stocksArticle);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
-    public StocksUnit addUnit(Date mdd, String commentSUnit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            if (place != null && stocksArticle != null) {
+                place.getStocksArticleList().add(stocksArticle);
+            }
+            em.persist(place);
+            place = em.merge(place);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
-    public StocksUnit addUnit(String commentSUnit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            if (place != null && stocksArticle != null) {
+                place.getStocksArticleList().remove(stocksArticle);
+            }
+            em.persist(place);
+            place = em.merge(place);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
-    public StocksUnit changeUnit(int quantity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean changePlaceFromStocksArticle(Place place, StocksArticle stocksArticle) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            if (place != null && stocksArticle != null) {
+                stocksArticle.setPlace(place);
+                //???falls gewollt???
+                removeStocksArticleFromPlace(place, stocksArticle);
+            }
+            em.persist(place);
+            place = em.merge(place);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
-
-    @Override
-    public StocksUnit changeUnit(int quantity, Date mdd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public StocksUnit changeUnit(int quantity, String commentSUnit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public StocksUnit changeUnit(int quantity, Date mdd, String commentSUnit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public StocksUnit changeUnit(Date mdd) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public StocksUnit changeUnit(Date mdd, String commentSUnit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public StocksUnit changeUnit(String commentSUnit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public StocksUnit removeUnit(StocksUnit stocksUnit) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public StocksUnit moveUnit(StocksUnit stocksUnit, Place newPlace) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
-
-     
 }
