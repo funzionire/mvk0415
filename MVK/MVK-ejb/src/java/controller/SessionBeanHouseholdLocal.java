@@ -18,6 +18,7 @@ import model.StocksArticle;
  */
 @Local
 public interface SessionBeanHouseholdLocal {
+
     //??? braucht es hier einen User in dieser Methode oder wird nicht einfach die UserID innerhalb der Methode rausgezogen?
     //--> so lassen
     
