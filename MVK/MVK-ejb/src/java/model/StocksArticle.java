@@ -5,14 +5,15 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
-
 /**
  *
  * @author Felix
  */
 @Entity
 public class StocksArticle implements Serializable {
+
     //Attribute
+
     private String nameArt;
     private String commentArt;
     private static final String defaultComment = "";
@@ -23,7 +24,7 @@ public class StocksArticle implements Serializable {
     private Place place;
     @OneToMany
     private List<StocksUnit> stocksUnits;
-    
+
     //Konstruktoren
     public StocksArticle() {
         //TODO

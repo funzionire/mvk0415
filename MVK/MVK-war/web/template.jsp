@@ -24,14 +24,8 @@
         <!-- Custom CSS -->
         <link href="css/logo-nav.css" rel="stylesheet">
 
-
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
-
+        
+        <!-- Favicon-->
         <link rel="apple-touch-icon" sizes="57x57" href="/MVK-war/img/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/MVK-war/img/apple-touch-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/MVK-war/img/apple-touch-icon-72x72.png">
@@ -54,9 +48,9 @@
         <meta name="theme-color" content="#008000">
 
     </head>
- 
-    
-    <body id="content">
+
+
+    <body  id="content">
 
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -70,7 +64,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="index.jsp">
-                       <img src="img/mvk-logo.png" alt=""/>
+                        <img src="img/mvk-logo.png" alt=""/>
                     </a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -83,6 +77,9 @@
                             <a href="about.jsp" name="UeberUnsLabel">Über uns</a>
                         </li>
                         <li>
+                            <a href="settings.jsp" name="EinstellungenLabel">Einstellungen</a>
+                        </li>
+                        <li>
                             <a href="/MVK-war/logout.jsp" name="AbmeldenLabel">Abmelden</a>
                         </li>
                     </ul>
@@ -91,9 +88,9 @@
             </div>
             <!-- /.container -->
         </nav>
-        
-        
-        
+
+        <div class="blur"></div>
+
         <!-- page content -->
         <!-- EINBINDEN DER RICHTIGEN JSP -->
 
@@ -104,7 +101,6 @@
 
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
-
     </body>
 
 </html>

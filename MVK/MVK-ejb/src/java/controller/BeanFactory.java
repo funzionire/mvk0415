@@ -14,50 +14,40 @@ import javax.naming.NamingException;
  * @author Felix
  */
 public class BeanFactory {
+
     private static final Logger LOG = Logger.getLogger(BeanFactory.class.getName());
-    public static SessionBeanHouseholdLocal getSessionBeanHousehold()
-    {
+
+    public static SessionBeanHouseholdLocal getSessionBeanHousehold() {
         SessionBeanHouseholdLocal bean = null;
-        try
-        {
+        try {
             InitialContext ctx = new InitialContext();
             bean = (SessionBeanHouseholdLocal) ctx.lookup("java:global/MVK/MVK-ejb/SessionBeanHousehold!controller.SessionBeanHouseholdLocal");
-        }
-        catch (NamingException ex)
-        {
+        } catch (NamingException ex) {
             ex.printStackTrace();
         }
         return bean;
     }
-    
-    public static SessionBeanStocksArticleLocal getSessionBeanStocksArticle()
-    {
+
+    public static SessionBeanStocksArticleLocal getSessionBeanStocksArticle() {
         SessionBeanStocksArticleLocal bean = null;
-        try
-        {
+        try {
             InitialContext ctx = new InitialContext();
             bean = (SessionBeanStocksArticleLocal) ctx.lookup("java:global/MVK/MVK-ejb/SessionBeanArticle!controller.SessionBeanStocksArticleLocal");
-        }
-        catch (NamingException ex)
-        {
+        } catch (NamingException ex) {
             ex.printStackTrace();
         }
         return bean;
     }
-    
-    public static SessionBeanUserLocal getSessionBeanUser()
-    {
+
+    public static SessionBeanUserLocal getSessionBeanUser() {
         SessionBeanUserLocal bean = null;
-        try
-        {
+        try {
             InitialContext ctx = new InitialContext();
             bean = (SessionBeanUserLocal) ctx.lookup("java:global/MVK/MVK-ejb/SessionBeanUser!controller.SessionBeanUserLocal");
-        }
-        catch (NamingException ex)
-        {
+        } catch (NamingException ex) {
             ex.printStackTrace();
         }
         return bean;
     }
-    
+
 }
