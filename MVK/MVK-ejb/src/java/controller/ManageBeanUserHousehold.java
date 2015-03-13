@@ -43,7 +43,7 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
 
     @Override
     public void addPlace(String name, Household household) {
-        Place place = sessionBeanHousehold.createPlace(name);
+        Place place = sessionBeanHousehold.createPlace(name, household);
         sessionBeanHousehold.addPlaceToHousehold(household, place);
     }
     

@@ -45,7 +45,7 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
 
     @Override
     public void removeStocksUnit(StocksUnit stocksUnit) {
-        sessionBeanStocksArticle.removeStocksUnit(stocksUnit);
+        sessionBeanStocksArticle.deleteStocksUnit(stocksUnit);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         sessionBeanStocksArticle.createStocksArticle(stocksUnit.getStocksArticle().getName(), newPlace, stocksUnit.getStocksArticle().getComment());
         sessionBeanStocksArticle.createStocksUnit(newQuantity, stocksUnit.getMdd(), stocksUnit.getCommentSUnit());
         if(stocksUnit.getQuantity()== newQuantity){
-            sessionBeanStocksArticle.removeStocksUnit(stocksUnit);
+            sessionBeanStocksArticle.deleteStocksUnit(stocksUnit);
         }
         if(stocksUnit.getQuantity()> newQuantity){
             int updateQuantity = stocksUnit.getQuantity()-newQuantity;

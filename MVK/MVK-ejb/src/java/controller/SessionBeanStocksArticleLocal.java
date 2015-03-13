@@ -21,7 +21,7 @@ public interface SessionBeanStocksArticleLocal {
     //StocksArticle
     public StocksArticle createStocksArticle(String nameArt, Place place, String commentArt);
     
-    public boolean removeStocksArticle(StocksArticle stocksArticle);
+    public boolean deleteStocksArticle(StocksArticle stocksArticle);
     
     public StocksArticle changeStocksArticle(StocksArticle stocksArticle, String nameArt, String commentArt);
     
@@ -55,7 +55,7 @@ public interface SessionBeanStocksArticleLocal {
     public StocksUnit changeUnit(int quantity, String commentSUnit);
     */
     
-    public boolean removeStocksUnit(StocksUnit stocksUnit);   
+    public boolean deleteStocksUnit(StocksUnit stocksUnit);   
     
     //??? boolean?
     

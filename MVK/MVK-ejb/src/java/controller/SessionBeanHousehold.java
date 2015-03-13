@@ -5,7 +5,6 @@
  */
 package controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -40,10 +39,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     public boolean deleteHousehold(Household household) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            //gemockt--------------------
-            String mockup = "mockup";
-            //household.removePlace(mockup);
-            //----------------------------
             em.remove(household);
             em.flush();
             return true;
@@ -53,10 +48,10 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public Household changeHousehold(Household household, String name) {
+    public Household changeHousehold(Household household, String newName) {
         em.setFlushMode(FlushModeType.AUTO);
-        if (name != null) {
-            household.setName(name);
+        if (newName != null) {
+            household.setName(newName);
         }
         em.persist(household);
         household = em.merge(household);
@@ -65,18 +60,37 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public Place createPlace(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Place createPlace(String name, Household household) {
+        em.setFlushMode(FlushModeType.AUTO);
+        Place place = new Place(name, household);
+        em.persist(place);
+        place = em.merge(place);
+        em.flush();
+        return place;
     }
 
     @Override
-    public Place deletePlace(Place place) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deletePlace(Place place) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            em.remove(place);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public Place changePlace(Place place, String newName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.setFlushMode(FlushModeType.AUTO);
+        if (newName != null) {
+            place.setName(newName);
+        }
+        em.persist(place);
+        place = em.merge(place);
+        em.flush();
+        return place;
     }
 
     @Override

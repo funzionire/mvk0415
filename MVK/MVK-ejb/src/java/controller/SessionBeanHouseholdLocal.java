@@ -31,9 +31,9 @@ public interface SessionBeanHouseholdLocal {
     public Household changeHousehold(Household household, String newName);
     
     //Place
-    public Place createPlace(String name);
+    public Place createPlace(String name, Household household);
     
-    public Place deletePlace(Place place);
+    public boolean deletePlace(Place place);
     
     public Place changePlace(Place place, String newName);
     

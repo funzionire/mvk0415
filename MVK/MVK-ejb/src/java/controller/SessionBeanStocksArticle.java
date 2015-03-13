@@ -35,7 +35,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public boolean removeStocksArticle(StocksArticle stocksArticle) {
+    public boolean deleteStocksArticle(StocksArticle stocksArticle) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             em.remove(stocksArticle);
@@ -106,7 +106,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public boolean removeStocksUnit(StocksUnit stocksUnit) {
+    public boolean deleteStocksUnit(StocksUnit stocksUnit) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             em.remove(stocksUnit);
