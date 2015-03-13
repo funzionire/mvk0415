@@ -25,10 +25,11 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     
     
     @Override
-    public void addHousehold(String name, AppUser user) {
+    public Household addHousehold(String name, AppUser user) {
         Household household = sessionBeanHousehold.createHousehold(name);
         sessionBeanHousehold.addUserToHousehold(household, user);
-        sessionBeanUser.addHouseholdToUser(user, household);     
+        sessionBeanUser.addHouseholdToUser(user, household);
+        return household;
     }
 
     @Override

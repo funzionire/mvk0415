@@ -20,7 +20,7 @@ public interface ManageBeanUserHouseholdLocal {
     
     //Über-Methoden (--> rufen andere Methoden auf)
     
-    public void addHousehold(String name, AppUser user);
+    public Household addHousehold(String name, AppUser user);
     
     public void removeHousehold(Household household, AppUser user);
     
