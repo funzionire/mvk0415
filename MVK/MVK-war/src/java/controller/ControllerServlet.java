@@ -5,9 +5,8 @@
  */
 package controller;
 
-import static controller.BeanFactory.getSessionBeanHousehold;
-import static controller.BeanFactory.getSessionBeanStocksArticle;
-import static controller.BeanFactory.getSessionBeanUser;
+import static controller.BeanFactory.getManageBeanStocks;
+import static controller.BeanFactory.getManageBeanUserHousehold;
 import java.io.IOException;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -49,10 +48,9 @@ public class ControllerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         LOG.info("CustomInfo: SessionBean initialisieren");
-        SessionBeanUserLocal sessionBeanUser = getSessionBeanUser();
-        SessionBeanHouseholdLocal sessionBeanHousehold = getSessionBeanHousehold();
+        ManageBeanUserHouseholdLocal manageBeanUserHousehold = getManageBeanUserHousehold();
         //SessionBeanPlaceLocal sessionBeanPlace = getSessionBeanPlace();
-        SessionBeanStocksArticleLocal sessionBeanStocksArticle = getSessionBeanStocksArticle();
+        ManageBeanStocksLocal manageBeanStocks = getManageBeanStocks();
         String currentStep = request.getParameter("step");
         LOG.info("CustomInfo: Aktueller Schritt:" + currentStep);
         
@@ -60,7 +58,7 @@ public class ControllerServlet extends HttpServlet {
         User
         -------------------------------------------------------------------------------------------*/
         if(currentStep == null || currentStep.equals("login")){
-            AppUser user = sessionBeanUser.login(request.getParameter("email"),
+            AppUser user = manageBeanUserHousehold.login(request.getParameter("email"),
                     request.getParameter("password"));
             if (user != null) {
                 LOG.info("CustomInfo: Email und Passwort korrekt");
@@ -74,7 +72,7 @@ public class ControllerServlet extends HttpServlet {
             }
         }
         else if(currentStep.equals("register")){
-            AppUser user = sessionBeanUser.createUser(request.getParameter("name"),
+            AppUser user = manageBeanUserHousehold.createUser(request.getParameter("name"),
                     request.getParameter("email"),
                     request.getParameter("password"));
             if (user != null) {
@@ -88,7 +86,7 @@ public class ControllerServlet extends HttpServlet {
         }
         else if(currentStep.equals("deleteUser")){
             HttpSession session = request.getSession(true);
-            Boolean isDeleted = sessionBeanUser.deleteUser((AppUser)session.getAttribute("user"));
+            Boolean isDeleted = manageBeanUserHousehold.deleteUser((AppUser)session.getAttribute("user"));
             if(isDeleted == true){
                 LOG.info("CustomInfo: User erfolgreich gelöscht");
                 session.setAttribute("user", null);
@@ -100,20 +98,37 @@ public class ControllerServlet extends HttpServlet {
             } 
         }
         else if(currentStep.equals("changeUser")){
-            HttpSession session = request.getSession(true);
-            AppUser changedUser = sessionBeanUser.changeUser((AppUser)session.getAttribute("user"), 
-                                                            (String)request.getAttribute("name"), 
-                                                            (String)request.getAttribute("email"), 
-                                                            (String)request.getAttribute("password"));
-            if(changedUser != null){
-                LOG.info("CustomInfo: User erfolgreich geändert");
-                session.setAttribute("user", changedUser);
-                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
-            }
-            else{
-                LOG.info("CustomInfo: User ändern fehlgeschlagen");
-                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
-            }
+//            HttpSession session = request.getSession(true);
+//            AppUser currentUser = (AppUser)session.getAttribute("user");
+//            String name;
+//            String email;
+//            String password;
+//            if(request.getAttribute("name") == ""){
+//                name = currentUser.getName();
+//            }else{
+//                name = (String)request.getAttribute("name");
+//            }
+//            if(request.getAttribute("email") == ""){
+//                email = currentUser.getEmail();
+//            }else{
+//                email = (String)request.getAttribute("email");
+//            }
+//            if(request.getAttribute("password") == ""){
+//                password = currentUser.getPassword();
+//            }else{
+//                password = (String)request.getAttribute("password");
+//            }
+//            AppUser changedUser = manageBeanUserHousehold.changeUser(currentUser, name, email, password);
+//
+//            if(changedUser != null){
+//                LOG.info("CustomInfo: User erfolgreich geändert");
+//                session.setAttribute("user", changedUser);
+//                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+//            }
+//            else{
+//                LOG.info("CustomInfo: User ändern fehlgeschlagen");
+//                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+//            }
         }
         
         /*-------------------------------------------------------------------------------------------
@@ -121,8 +136,9 @@ public class ControllerServlet extends HttpServlet {
         -------------------------------------------------------------------------------------------*/
         else if(currentStep.equals("createHousehold")){
             HttpSession session = request.getSession(true);
-            Household household = sessionBeanHousehold.createHousehold(request.getParameter("name"),
-                    (AppUser) session.getAttribute("user"));
+            Household household = null;
+            manageBeanUserHousehold.addHousehold(request.getParameter("name"),
+                                                                    (AppUser) session.getAttribute("user"));
             if (household != null) {
                 LOG.info("CustomInfo: Haushalt erfolgreich angelegt");
                 session.setAttribute("household", household);
@@ -148,6 +164,12 @@ public class ControllerServlet extends HttpServlet {
                 request.setAttribute("user", session.getAttribute("user"));
                 request.setAttribute("household", session.getAttribute("household"));
                 request.getRequestDispatcher("/household.jsp").forward(request, response);
+        }
+        else if(currentStep.equals("toSettings")){
+            HttpSession session = request.getSession(true);
+            LOG.info("CustomInfo: Einstellungen öffnen");
+            request.setAttribute("user", session.getAttribute("user"));
+            request.getRequestDispatcher("/settings.jsp").forward(request, response);
         }
         /*-------------------------------------------------------------------------------------------
         Place
@@ -189,20 +211,21 @@ public class ControllerServlet extends HttpServlet {
         -------------------------------------------------------------------------------------------*/
         else if(currentStep.equals("createStocksArticle")){
             HttpSession session = request.getSession(true);
-//            StocksArticle stocksArticle = sessionBeanStocksArticle.createStocksArticle(request.getParameter("name"),
-//                                                        (StocksArticle) session.getAttribute("stocksArticle"));
-//            if (stocksArticle != null) {
-//                LOG.info("CustomInfo: StocksArticle erfolgreich angelegt");
-//                session.setAttribute("stocksArticle", stocksArticle);
-//                request.setAttribute("user", (AppUser) session.getAttribute("user"));
-//                request.setAttribute("household", (Household) session.getAttribute("household"));
-//                request.setAttribute("place", (Household) session.getAttribute("place"));
-//                request.setAttribute("stocksArticle", stocksArticle);
-//                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
-//            } else {
-//                LOG.info("CustomInfo: StocksArticle anlegen fehlgeschlagen");
-//                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
-//            }
+            StocksArticle stocksArticle = null;
+            manageBeanStocks.addStocksArticle(request.getParameter("name"),
+                                                        (Place) session.getAttribute("place"), "");
+            if (stocksArticle != null) {
+                LOG.info("CustomInfo: StocksArticle erfolgreich angelegt");
+                session.setAttribute("stocksArticle", stocksArticle);
+                request.setAttribute("user", (AppUser) session.getAttribute("user"));
+                request.setAttribute("household", (Household) session.getAttribute("household"));
+                request.setAttribute("place", (Household) session.getAttribute("place"));
+                request.setAttribute("stocksArticle", stocksArticle);
+                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+            } else {
+                LOG.info("CustomInfo: StocksArticle anlegen fehlgeschlagen");
+                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+            }
         }
         else if(currentStep.equals("changeStocksArticle")){
             HttpSession session = request.getSession(true);

@@ -12,8 +12,8 @@
 
 <div class="container">
     <div class="row">
-        <h1>Hallo <jsp:getProperty name="user" property="name" /> </h1>
         <div class="col-md-6">
+            <h1>Hallo <jsp:getProperty name="user" property="name" /> </h1>
             <h1>Deine Haushalte</h1>
             <br />
         </div>
@@ -22,8 +22,8 @@
     <div class ="row">
         <div>
             <%--Methode returnHouseholds wird noch zu getHouseholdsList geändert --%>
-            <c:forEach items="${user.returnHouseholds()}" var="household" >
-                <form method ="post" action ="MKV-war/CrontrollerServlet?step=toHousehold">
+            <c:forEach items="${user.getHouseholdList()}" var="household" >
+                <form method ="post" action ="MKV-war/ControllerServlet?step=toHousehold">
                     <div class="col-md-2">
                        <input type="submit" class="hhhead" value="${household.name}"/>  
                     </div>
