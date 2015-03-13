@@ -21,7 +21,7 @@
     </div>
     <div class ="row">
         <div>
-            <%--Methode returnHouseholds wird noch zu getHouseholdsList geändert --%>
+            <%--Methode returnHouseholds wird noch zu getHouseholdsList geändert  --%>
             <c:forEach items="${user.getHouseholdList()}" var="household" >
                 <form method ="post" action ="MKV-war/ControllerServlet?step=toHousehold">
                     <div class="col-md-2">
