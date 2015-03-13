@@ -99,7 +99,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             if (user != null) {
                 household.getAppUserList().add(user);
             }
-            em.persist(household);
             household = em.merge(household);
             em.flush();
             return true;
@@ -115,7 +114,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             if (user != null) {
                 household.getAppUserList().remove(user);
             }
-            em.persist(household);
             household = em.merge(household);
             em.flush();
             return true;
@@ -132,7 +130,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             if (place != null) {
                 household.getPlaceList().add(place);
             }
-            em.persist(household);
             household = em.merge(household);
             em.flush();
             return true;
@@ -148,7 +145,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             if (place != null) {
                 household.getAppUserList().remove(place);
             }
-            em.persist(household);
             household = em.merge(household);
             em.flush();
             deletePlace(place);
@@ -166,7 +162,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             if (stocksArticle != null) {
                 place.getStocksArticleList().add(stocksArticle);
             }
-            em.persist(place);
             place = em.merge(place);
             em.flush();
             return true;
@@ -182,7 +177,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             if (stocksArticle != null) {
                 place.getStocksArticleList().remove(stocksArticle);
             }
-            em.persist(place);
             place = em.merge(place);
             em.flush();
             deletePlace(place);

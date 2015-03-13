@@ -105,7 +105,6 @@ public class SessionBeanUser implements SessionBeanUserLocal {
             if (household != null) {
                 user.getHouseholdList().remove(household);
             }
-            em.persist(user);
             user = em.merge(user);
             em.flush();
             return true;
