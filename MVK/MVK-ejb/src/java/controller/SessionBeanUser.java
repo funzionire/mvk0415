@@ -118,7 +118,6 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     public AppUser changeName(AppUser user, String name) {
         em.setFlushMode(FlushModeType.AUTO);
         user.setName(name);
-        em.persist(user);
         user = em.merge(user);
         em.flush();
         return user;
@@ -128,7 +127,6 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     public AppUser changePassword(AppUser user, String password) {
         em.setFlushMode(FlushModeType.AUTO);
         user.setPassword(password);
-        em.persist(user);
         user = em.merge(user);
         em.flush();
         return user;
@@ -138,7 +136,6 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     public AppUser changeEmail(AppUser user, String email) {
         em.setFlushMode(FlushModeType.AUTO);
         user.setEmail(email);
-        em.persist(user);
         user = em.merge(user);
         em.flush();
         return user;
