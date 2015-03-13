@@ -35,7 +35,7 @@ public class Household implements Serializable {
 
     public Household(String name) {
         users = new ArrayList();
-        //users.add(user);     AppUser user 
+        //users.add(user);    AppUser user 
         this.name = name;
     }
 

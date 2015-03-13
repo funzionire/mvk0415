@@ -90,8 +90,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
             if (household != null) {
                 user.getHouseholdList().add(household);
             }
-            em.persist(user);
-            user = em.merge(user);
+            em.merge(user);
             em.flush();
             return true;
         } catch (Exception e) {
