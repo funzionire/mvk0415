@@ -65,9 +65,17 @@
                     span.setAttribute('class', 'pointer');
                     span.setAttribute('className', 'pointer');
                     span.setAttribute('onclick', 'overlay(\'none\')');
-                    text = document.createTextNode('Hier klicken zum Schließen');
+                    text = document.createTextNode('Schließen');
                     span.appendChild(text);
                     lightBox.appendChild(span);
+                    
+                    head = document.createElement('h2');
+                    head.setAttribute('class', 'pointer');
+                    head.setAttribute('className', 'pointer');
+                    head.setAttribute('onclick', 'overlay(\'none\')');
+                    text = document.createTextNode('Inhalt');
+                    head.appendChild(text);
+                    lightBox.appendChild(head);
 
                     document.getElementsByTagName("body")[0].appendChild(div);
                     document.getElementsByTagName("body")[0].appendChild(lightBox);
