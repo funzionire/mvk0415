@@ -53,7 +53,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         if (newName != null) {
             household.setName(newName);
         }
-        em.persist(household);
         household = em.merge(household);
         em.flush();
         return household;
@@ -87,7 +86,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         if (newName != null) {
             place.setName(newName);
         }
-        em.persist(place);
         place = em.merge(place);
         em.flush();
         return place;

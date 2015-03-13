@@ -56,7 +56,6 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         if (commentArt != null) {
             stocksArticle.setComment(commentArt);
         }
-        em.persist(stocksArticle);
         stocksArticle = em.merge(stocksArticle);
         em.flush();
         return stocksArticle;
@@ -99,7 +98,6 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         if (updateQuantity == 0) {
             stocksUnit.setQuantity(updateQuantity);
         }
-        em.persist(stocksUnit);
         stocksUnit = em.merge(stocksUnit);
         em.flush();
         return stocksUnit;
@@ -190,7 +188,6 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
                 //???falls gewollt???
                 removeStocksArticleFromPlace(place, stocksArticle);
             }
-            em.persist(place);
             place = em.merge(place);
             em.flush();
             return true;
