@@ -35,7 +35,49 @@
     <div class ="row">
         <div class="col-md-6">
             </br>
-            <p>Neu hier? Dann <a href="register.jsp">registriere</a> dich jetzt!</p>
+            <p> Neu hier? Dann <a href="register.jsp">registriere</a> dich jetzt!</p>
         </div>
     </div>
+
+    <!-- ----------Overlay----------- -->
+
+    <div class ="row">
+        <div class="col-md-6">
+            </br>
+            <strong class="pointer" onclick="overlay('display')">Licht aus, Spot an!</strong>
+        </div>
+    </div>
+
+    <script>
+        function overlay(mode) {
+            if (mode === 'display') {
+                if (document.getElementById("overlay") === null) {
+                    div = document.createElement("div");
+                    div.setAttribute('id', 'overlay');
+                    div.setAttribute('className', 'overlayBG');
+                    div.setAttribute('class', 'overlayBG');
+
+
+                    lightBox = document.createElement('div');
+                    lightBox.setAttribute('id', 'lightBox');
+
+                    span = document.createElement('span');
+                    span.setAttribute('class', 'pointer');
+                    span.setAttribute('className', 'pointer');
+                    span.setAttribute('onclick', 'overlay(\'none\')');
+                    text = document.createTextNode('Hier klicken zum Schließen');
+                    span.appendChild(text);
+                    lightBox.appendChild(span);
+
+                    document.getElementsByTagName("body")[0].appendChild(div);
+                    document.getElementsByTagName("body")[0].appendChild(lightBox);
+                }
+            } else {
+                document.getElementsByTagName("body")[0].removeChild(document.getElementById("overlay"));
+                document.getElementsByTagName("body")[0].removeChild(document.getElementById("lightBox"));
+            }
+        }
+    </script>
+    <!-- Overlay Ende-->
+    
 </div>

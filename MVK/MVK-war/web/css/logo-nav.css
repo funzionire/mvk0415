@@ -75,4 +75,34 @@ td{
         padding: 15px 0;
     }
 
+    #overlay {
+        position: fixed;
+        z-index:199;
+        top: 0px;
+        left: 0px;
+        height:100%;
+        width:100%;
+    }
+
+    .overlayBG {
+        background-color:#000;
+        -ms-filter: "Alpha(Opacity=75)"; /* IE 8 */
+        filter:alpha(opacity=75); /* IE5-7 */
+        -moz-opacity: 0.75; /* Mozilla */
+        opacity: 0.75;
+    }
+
+    #lightBox {
+        position:fixed;
+        top:50%;
+        left:50%;
+        margin-left:-100px;
+        margin-top:-100px;
+        z-index:200;
+        width:200px;
+        height:200px;
+        background-color:#fff;
+        text-align:center;
+    }
+    
 }
