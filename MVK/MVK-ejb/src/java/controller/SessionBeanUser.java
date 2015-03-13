@@ -84,12 +84,35 @@ public class SessionBeanUser implements SessionBeanUserLocal {
 
     @Override
     public boolean addHouseholdToUser(AppUser user, Household household) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            //???weitere Prüfung notwendig
+            if (household != null) {
+                user.getHouseholdList().add(household);
+            }
+            em.persist(user);
+            user = em.merge(user);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean removeHouseholdToUser(AppUser user, Household household) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            if (household != null) {
+                user.getHouseholdList().remove(household);
+            }
+            em.persist(user);
+            user = em.merge(user);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
     @Override
     public AppUser changeName(AppUser user, String name) {
