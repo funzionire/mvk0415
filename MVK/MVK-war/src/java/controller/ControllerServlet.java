@@ -136,8 +136,7 @@ public class ControllerServlet extends HttpServlet {
         -------------------------------------------------------------------------------------------*/
         else if(currentStep.equals("createHousehold")){
             HttpSession session = request.getSession(true);
-            Household household = null;
-            manageBeanUserHousehold.addHousehold(request.getParameter("name"),
+            Household household = manageBeanUserHousehold.addHousehold(request.getParameter("name"),
                                                                     (AppUser) session.getAttribute("user"));
             if (household != null) {
                 LOG.info("CustomInfo: Haushalt erfolgreich angelegt");
