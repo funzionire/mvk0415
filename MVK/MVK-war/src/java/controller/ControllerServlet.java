@@ -98,37 +98,33 @@ public class ControllerServlet extends HttpServlet {
             } 
         }
         else if(currentStep.equals("changeUser")){
-//            HttpSession session = request.getSession(true);
-//            AppUser currentUser = (AppUser)session.getAttribute("user");
-//            String name;
-//            String email;
-//            String password;
-//            if(request.getAttribute("name") == ""){
-//                name = currentUser.getName();
-//            }else{
-//                name = (String)request.getAttribute("name");
-//            }
-//            if(request.getAttribute("email") == ""){
-//                email = currentUser.getEmail();
-//            }else{
-//                email = (String)request.getAttribute("email");
-//            }
-//            if(request.getAttribute("password") == ""){
-//                password = currentUser.getPassword();
-//            }else{
-//                password = (String)request.getAttribute("password");
-//            }
-//            AppUser changedUser = manageBeanUserHousehold.changeUser(currentUser, name, email, password);
-//
-//            if(changedUser != null){
-//                LOG.info("CustomInfo: User erfolgreich geändert");
-//                session.setAttribute("user", changedUser);
-//                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
-//            }
-//            else{
-//                LOG.info("CustomInfo: User ändern fehlgeschlagen");
-//                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
-//            }
+            HttpSession session = request.getSession(true);
+            AppUser currentUser = (AppUser)session.getAttribute("user");
+            String name = (String)request.getParameter("name");
+            LOG.info(name);
+            String email = (String)request.getParameter("email");
+            String password = (String)request.getParameter("password");
+            AppUser changedUser = null;
+            if(!name.equals("")){
+                changedUser = manageBeanUserHousehold.changeName(currentUser, name);
+            }
+            else if(!email.equals("")){
+                changedUser = manageBeanUserHousehold.changeEmail(currentUser, email);
+            }
+            else if(!password.equals("")){
+                changedUser = manageBeanUserHousehold.changePassword(currentUser, password);
+            }
+
+            if(changedUser != null){
+                LOG.info("CustomInfo: User erfolgreich geändert");
+                request.setAttribute("user", changedUser);
+                session.setAttribute("user", changedUser);
+                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+            }
+            else{
+                LOG.info("CustomInfo: User ändern fehlgeschlagen");
+                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+            }
         }
         
         /*-------------------------------------------------------------------------------------------

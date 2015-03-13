@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="user" class="model.AppUser" scope="request"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,7 +78,7 @@
                             <a href="about.jsp" name="UeberUnsLabel">Über uns</a>
                         </li>
                         <li>
-                            <a href="settings.jsp" name="EinstellungenLabel">Einstellungen</a>
+                            <a href="/MVK-war/ControllerServlet?step=toSettings" name="EinstellungenLabel">Einstellungen</a>
                         </li>
                         <li>
                             <a href="/MVK-war/logout.jsp" name="AbmeldenLabel">Abmelden</a>
