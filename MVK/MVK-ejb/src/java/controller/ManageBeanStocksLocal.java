@@ -20,19 +20,24 @@ public interface ManageBeanStocksLocal {
     
     //void oder boolean??
     //StocksArticle
-    public void addStocksArticle(String nameArt, Place place, String commentArt);
+    public boolean addStocksArticle(String nameArt, Place place, String commentArt);
     
-    public void removeStocksArticle(StocksArticle stocksArticle);
+    public boolean removeStocksArticle(StocksArticle stocksArticle);
     
     //StocksUnit
-    public void addStocksUnit(StocksArticle stocksArticle, int quantity, Date mdd, String commentSUnit);
+    public boolean addStocksUnit(StocksArticle stocksArticle, int quantity, Date mdd, String commentSUnit);
     
-    public void removeStocksUnit(StocksUnit stocksUnit);
+    public boolean removeStocksUnit(StocksUnit stocksUnit);
     
     //move-Methoden
-    public void moveStocksUnit(StocksUnit stocksUnit, Place newPlace, int newQuantity);
+    public boolean moveStocksUnit(StocksUnit stocksUnit, Place newPlace, int newQuantity);
     
-    public void movePlace(StocksArticle stocksArticle, Place newPlace);
+    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace);
+    
+    //Veränderungen an der Quantity eines StocksUnit
+    public boolean raiseQuantityOfStocksUnit(StocksUnit stocksUnit);
+    
+    public boolean reduceQuantityOfStoksUnit(StocksUnit stocksUnit);
     
     
     
