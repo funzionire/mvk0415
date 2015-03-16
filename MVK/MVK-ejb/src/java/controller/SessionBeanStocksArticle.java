@@ -26,12 +26,21 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
 
     @Override
     public StocksArticle createStocksArticle(String nameArt, Place place, String commentArt) {
-        em.setFlushMode(FlushModeType.AUTO);
-        StocksArticle stocksArticle = new StocksArticle(nameArt, place, commentArt);
-        em.persist(stocksArticle);
-        stocksArticle = em.merge(stocksArticle);
-        em.flush();
-        return stocksArticle;
+        try {
+            if (place != null) {
+                em.setFlushMode(FlushModeType.AUTO);
+                StocksArticle stocksArticle = new StocksArticle(nameArt, place, commentArt);
+                em.persist(stocksArticle);
+                stocksArticle = em.merge(stocksArticle);
+                em.flush();
+                return stocksArticle;
+            }
+            else{
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
@@ -194,14 +203,13 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
 
     @Override
     public boolean changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change) {
-        try{
+        try {
             //Soll es auch möglich sein eine Vorauswahl zu haben (z.B. 10 für 10 Eier mehr)
-            stocksUnit.setQuantity(stocksUnit.getQuantity()+ change);
+            stocksUnit.setQuantity(stocksUnit.getQuantity() + change);
             return true;
         } catch (Exception e) {
-            return false;   
+            return false;
         }
     }
-    
-    
+
 }
