@@ -225,7 +225,7 @@ public class ControllerServlet extends HttpServlet {
                 request.setAttribute("household", (Household) session.getAttribute("household"));
                 request.setAttribute("place", (Household) session.getAttribute("place"));
                 request.setAttribute("stocksArticle", stocksArticle);
-                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+                request.getRequestDispatcher("/household.jsp").forward(request, response);
             } else {
                 LOG.info("CustomInfo: StocksArticle anlegen fehlgeschlagen");
                 request.getRequestDispatcher("/homepage.jsp").forward(request, response);
@@ -254,8 +254,10 @@ public class ControllerServlet extends HttpServlet {
         else if(currentStep.equals("toHousehold")){
             HttpSession session = request.getSession(true);
             LOG.info("CustomInfo: Haushalt öffnen");
-            //Enumeration<String> = request.getAttributeNames();
-            
+            Enumeration<String> test = request.getAttributeNames();
+            while(test.hasMoreElements()){
+                LOG.info(test.nextElement());
+            }
             request.setAttribute("user", session.getAttribute("user"));
             request.setAttribute("household", session.getAttribute("household"));
             request.getRequestDispatcher("/household.jsp").forward(request, response);
