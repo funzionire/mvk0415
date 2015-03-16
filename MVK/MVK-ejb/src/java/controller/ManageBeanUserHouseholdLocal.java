@@ -31,6 +31,8 @@ public interface ManageBeanUserHouseholdLocal {
         //Household
     public Household changeHousehold(Household household, String name);
     
+    public Household findHousehold(String id);
+    
         //Place   
     public Place changePlace(Place place, String newName);
     

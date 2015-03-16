@@ -30,6 +30,8 @@ public interface SessionBeanHouseholdLocal {
     
     public Household changeHousehold(Household household, String newName);
     
+    public Household findHousehold(long id);
+    
     //Place
     public Place createPlace(String name, Household household);
     

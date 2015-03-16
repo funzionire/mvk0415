@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import model.Household;
 import model.AppUser;
 import model.Place;
@@ -57,6 +58,21 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         em.flush();
         return household;
     }
+
+    @Override
+    public Household findHousehold(long id) {
+        if (id == 0) {
+            return null;
+        }
+        TypedQuery<Household> query = em.createNamedQuery("Household.findByID", Household.class)
+                .setParameter("householdID", id);
+        if (query.getResultList().isEmpty()) {
+            return null;
+        }
+        return query.getSingleResult();
+    }
+    
+    
 
     @Override
     public Place createPlace(String name, Household household) {

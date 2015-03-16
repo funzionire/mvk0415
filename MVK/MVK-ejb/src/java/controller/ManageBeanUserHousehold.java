@@ -54,6 +54,13 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     }
 
     @Override
+    public Household findHousehold(String id) {
+        return null;
+    }
+    
+    
+
+    @Override
     public Place changePlace(Place place, String newName) {
         return sessionBeanHousehold.changePlace(place, newName);
     }
