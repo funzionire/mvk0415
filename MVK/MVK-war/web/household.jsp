@@ -37,7 +37,7 @@
                 </div>
             </c:forEach>
             <form method="post" action="/MVK-war/ControllerServlet?step=creatStocksArticle">
-                <div class="">
+                <div class="row">
                     <input type="text" name="name" placeholder="Artikel..." />
                     <input type="submit" value="Artikel hinzufügen"/>
                 </div>
@@ -69,7 +69,7 @@
                             head = document.createElement('h2');
                             head.setAttribute('class', 'pointer');
                             head.setAttribute('className', 'pointer');
-                            text = document.createTextNode();
+                            text = document.createTextNode('Hallooooo');
                             head.appendChild(text);
                             lightBox.appendChild(head);
 
