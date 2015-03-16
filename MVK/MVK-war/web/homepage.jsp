@@ -28,7 +28,7 @@
                     <c:param name="id" value="${household.householdID}"/>
                 </c:url>
                 
-                <a href="/MVK-war/ControllerServlet?step=toHousehold" name="HouseholdLabel">
+                <a href="${toHousehold}" name="HouseholdLabel">
                     <input type="hidden"
                            value="${household.householdID}"
                            name="id"

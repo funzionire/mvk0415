@@ -55,8 +55,8 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
 
     @Override
     public Household findHousehold(String id) {
-        Long wrapperID = new Long(id);
-        return sessionBeanHousehold.findHousehold(wrapperID);
+        //long wrapperID = Long.parseLong(id);
+        return null;//sessionBeanHousehold.findHousehold(id);
     }
     
     
