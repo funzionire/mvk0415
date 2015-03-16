@@ -21,15 +21,26 @@
                     <form method="post" action="/MVK-war/ControllerServlet?step=changeUser">
                         <table>
                             <tr>
-                                <td>Name: </td><td><input type="text" name="name"/> </td><td><input type="submit" value ="+ Name ändern"/></td>
+                                <td>Name: </td>
+                                <td><input type="text" name="name"/> </td>
+                                <td><input type="submit" value ="+ Name ändern"/></td>
                             </tr>
                             <tr>
-                                <td>Email-Adresse: </td><td><input type ="email" name="email"/></td><td><input type="submit" value ="+ E-Mail ändern"/></td>
+                                <td>Email-Adresse: </td>
+                                <td><input type ="email" name="email"/></td>
+                                <td><input type="submit" value ="+ E-Mail ändern"/></td>
                             </tr>
                             <tr>
-                                <td>Passwort: </td><td><input type="password" name="password"/></td><td><input type="submit" value ="+ Passwort ändern"/></td>
+                                <td>Passwort: </td>
+                                <td><input type="password" name="password"/></td>
+                                <td><input type="submit" value ="+ Passwort ändern"/></td>
                             </tr>
                         </table>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <form method="post" action="/MVK-war/ControllerServlet?step=deleteUser">
+                        <input type="submit" value="User löschen"/>
                     </form>
                 </div>
             </div>

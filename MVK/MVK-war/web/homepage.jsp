@@ -22,10 +22,10 @@
     <div class ="row">
         <div>
             <%--Methode returnHouseholds wird noch zu getHouseholdsList geändert  --%>
-            <c:forEach items="${user.getHouseholdList()}" var="household" >
-                <form method ="post" action ="MKV-war/ControllerServlet?step=toHousehold">
+            <c:forEach items="${user.getHouseholdList()}" var="household">
+                <form method ="post" action ="/MKV-war/ControllerServlet?step=toHousehold">
                     <div class="col-md-2">
-                       <input type="submit" class="hhhead" value="${household.name}"/>  
+                        <input type="submit" class="hhhead" value="${household.name}" name="householdName" <input/>  
                     </div>
                 </form>
             </c:forEach>
