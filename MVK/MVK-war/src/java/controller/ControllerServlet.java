@@ -153,38 +153,25 @@ public class ControllerServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.getAttribute("household");
         }
-        else if(currentStep.equals("toHousehold")){
-                HttpSession session = request.getSession(true);
-                LOG.info("CustomInfo: Haushalt öffnen");
-                request.setAttribute("user", session.getAttribute("user"));
-                request.setAttribute("household", session.getAttribute("household"));
-                request.getRequestDispatcher("/household.jsp").forward(request, response);
-        }
-        else if(currentStep.equals("toSettings")){
-            HttpSession session = request.getSession(true);
-            LOG.info("CustomInfo: Einstellungen öffnen");
-            request.setAttribute("user", session.getAttribute("user"));
-            request.getRequestDispatcher("/settings.jsp").forward(request, response);
-        }
         /*-------------------------------------------------------------------------------------------
         Place
         -------------------------------------------------------------------------------------------*/
-//        else if(currentStep.equals("createPlace")){
-//            HttpSession session = request.getSession(true);
-//            Place place = sessionBeanPlace.createPlace(request.getParameter("name"),
-//                                                        (Household) session.getAttribute("household"));
-//            if (place != null) {
-//                LOG.info("CustomInfo: Lagerort erfolgreich angelegt");
-//                session.setAttribute("place", place);
-//                request.setAttribute("user", (AppUser) session.getAttribute("user"));
-//                request.setAttribute("household", (Household) session.getAttribute("household"));
-//                request.setAttribute("place", place);
-//                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
-//            } else {
-//                LOG.info("CustomInfo: Lagerort anlegen fehlgeschlagen");
-//                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
-//            }
-//        }
+        else if(currentStep.equals("createPlace")){
+            HttpSession session = request.getSession(true);
+            Place place = manageBeanUserHousehold.addPlace(request.getParameter("name"),
+                                                        (Household) session.getAttribute("household"));
+            if (place != null) {
+                LOG.info("CustomInfo: Lagerort erfolgreich angelegt");
+                session.setAttribute("place", place);
+                request.setAttribute("user", (AppUser) session.getAttribute("user"));
+                request.setAttribute("household", (Household) session.getAttribute("household"));
+                request.setAttribute("place", place);
+                request.getRequestDispatcher("/household.jsp").forward(request, response);
+            } else {
+                LOG.info("CustomInfo: Lagerort anlegen fehlgeschlagen");
+                request.getRequestDispatcher("/household.jsp").forward(request, response);
+            }
+        }
 //        else if(currentStep.equals("changePlace")){
 //            HttpSession session = request.getSession(true);
 //            session.getAttribute("place");
@@ -200,7 +187,7 @@ public class ControllerServlet extends HttpServlet {
 //                request.setAttribute("household", session.getAttribute("household"));
 //                request.setAttribute("place", session.getAttribute("place"));
 //                request.getRequestDispatcher("/household.jsp").forward(request, response);
-//        }
+//      }  
         /*-------------------------------------------------------------------------------------------
         StocksArticle
         -------------------------------------------------------------------------------------------*/
@@ -239,6 +226,23 @@ public class ControllerServlet extends HttpServlet {
                 request.setAttribute("stocksArticle", session.getAttribute("stocksArticle"));
                 request.getRequestDispatcher("/household.jsp").forward(request, response);
         }
+
+        /*-------------------------------------------------------------------------------------------
+            StocksArticle
+            -------------------------------------------------------------------------------------------*/
+        else if(currentStep.equals("toHousehold")){
+                    HttpSession session = request.getSession(true);
+                    LOG.info("CustomInfo: Haushalt öffnen");
+                    request.setAttribute("user", session.getAttribute("user"));
+                    request.setAttribute("household", session.getAttribute("household"));
+                    request.getRequestDispatcher("/household.jsp").forward(request, response);
+            }
+            else if(currentStep.equals("toSettings")){
+                HttpSession session = request.getSession(true);
+                LOG.info("CustomInfo: Einstellungen öffnen");
+                request.setAttribute("user", session.getAttribute("user"));
+                request.getRequestDispatcher("/settings.jsp").forward(request, response);
+            }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
