@@ -57,7 +57,7 @@
                 head = document.createElement('h2');
                 head.setAttribute('class', 'pointer');
                 head.setAttribute('className', 'pointer');
-                text = document.createTextNode("TEST");
+                text = document.createTextNode();
                 head.appendChild(text);
                 lightBox.appendChild(head);
 
