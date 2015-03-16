@@ -27,21 +27,50 @@
             <c:forEach items="${household.getPlaceList()}" var="place" >
                 <div class="col-md-2">
                     <h2> ${place.name}</h2> 
+
+                    <%-- Artikeltabelle untehalb des Lagerortes--%>
+
+                    <table>
+                        <c:forEach items="${place.getStocksArticleList()}" var="article" >
+                            <tr><td> <strong class="pointer" id ="${article.getName()}" onclick="overlay('${article.getName()}','display')">${article.getName()}</strong> </td></tr>
+                        </c:forEach>
+                        <tr><td>    <%-- Button für neuen Artikel --%>
+
+                                <form method="post" action="/MVK-war/ControllerServlet?step=createStocksArticle">
+                                   
+                                        <input type="text" name="name" placeholder="Artikel..." />
+                                        <input type="submit" value="Artikel hinzufügen"/>
+                                    
+                                </form>
+                            </td></tr>
+                    </table>
+
+
+
                 </div>
+
             </c:forEach>
-            <!-- Artikeltabelle untehalb des Lagerortes-->
-            <br>
-            <c:forEach items="${place.getStocksArticleList()}" var="article" >
-                    <strong class="pointer" onclick="overlay('display')">$(article.nameArt)</strong>
-            </c:forEach>
-            <form method="post" action="/MVK-war/ControllerServlet?step=creatStocksArticle">
-                    <input type="text" name="name" placeholder="Artikel..." />
-                    <input type="submit" value="Artikel hinzufügen"/>              
+            <%--Button für neuen Lagerort --%>
+            <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
+                <div class="col-md-2">
+                    <input type ="text" name="name" placeholder="Lagerort..."/>
+                    <input type="submit"
+                           value ="+ Neuen Lagerort hinzufügen"/>
+                </div>
             </form>
+        </div>
+    </div>
 
 
-            <script>
-                function overlay(mode) {
+
+
+
+
+
+
+
+           <script>
+                function overlay(myId, mode) {
                     if (mode === 'display') {
                         if (document.getElementById("overlay") === null) {
                             div = document.createElement("div");
@@ -63,10 +92,25 @@
 
                             head = document.createElement('h2');
                             head.setAttribute('class', 'pointer');
-                            head.setAttribute('className', 'pointer');
-                            text = document.createTextNode('Hallooooo');
+                            text = document.createTextNode(document.getElementById(myId).innerHTML);
                             head.appendChild(text);
                             lightBox.appendChild(head);
+
+                            form = document.createElement('form');
+                            form.setAttribute('method', 'post');
+                            form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksArticle');
+
+                            textfeld = document.createElement('input');
+                            textfeld.setAttribute('type', 'text');
+                            textfeld.setAttribute('name', 'name');
+
+                            button = document.createElement('input');
+                            button.setAttribute('type', 'submit');
+                            button.setAttribute('value', 'add');
+
+                            form.appendChild(textfeld);
+                            form.appendChild(button);
+                            lightBox.appendChild(form);
 
                             document.getElementsByTagName("body")[0].appendChild(div);
                             document.getElementsByTagName("body")[0].appendChild(lightBox);
@@ -79,16 +123,5 @@
             </script>
 
 
-
-
-            <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
-                <div class="col-md-2">
-                    <p>Name: <input type ="text" name="name"/></p>
-                    <input type="submit"
-                           value ="+ Neuen Lagerort hinzufügen"/>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>
 
