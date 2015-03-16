@@ -21,7 +21,7 @@
     <div class="row">
         <div>
             <%-- ${household.getPlaceList()} muss in Items eingefügt werden --%>
-            <c:forEach items="" var="place" >
+            <c:forEach items="${household.getPlaceList()}" var="place" >
                 <div class="col-md-2">
                     <h2> ${place.name}</h2> 
                 </div>
