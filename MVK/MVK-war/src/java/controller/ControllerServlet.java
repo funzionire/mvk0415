@@ -254,6 +254,7 @@ public class ControllerServlet extends HttpServlet {
         else if(currentStep.equals("toHousehold")){
             HttpSession session = request.getSession(true);
             LOG.info("CustomInfo: Haushalt öffnen");
+            request.getAttribute((String)request.getAttribute("id"));
             
             request.setAttribute("user", session.getAttribute("user"));
             request.setAttribute("household", session.getAttribute("household"));

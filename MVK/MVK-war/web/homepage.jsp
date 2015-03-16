@@ -19,17 +19,38 @@
         </div>
 
     </div>
-    <div class ="row">
-        <div>
+<div class ="row">
             <%--Methode returnHouseholds wird noch zu getHouseholdsList geändert  --%>
             <c:forEach items="${user.getHouseholdList()}" var="household">
-                <form method="post" action="/MKV-war/ControllerServlet?step=toHousehold">
                     <div class="col-md-2">
-                        <input type="submit" class="hhhead" value="${household.name}" id="${household.householdID}" name="householdName" <input/>  
-                    </div>
-                </form>
+                    
+                <c:url var="toHousehold" value="/MKV-war/ControllerServlet?step=toHousehold">
+                    <c:param name="id" value="${household.householdID}"/>
+                </c:url>
+                
+                <a href="/MVK-war/ControllerServlet?step=toHousehold" name="HouseholdLabel">
+                    <input type="hidden"
+                           value="${household.householdID}"
+                           name="id"
+                           />
+                    <input type="submit"
+                        class="hhhead"
+                        value="${household.name}"
+                        name="householdName"
+                    />
+                </a>
+                    
+<!--                    <div class="col-md-2">-->
+<!--                        <input type="submit"
+                               class="hhhead"
+                               value="${household.name}"
+                               name="householdName"
+                        />-->
+<!--                    </div>-->
+    </div>
             </c:forEach>
             
+          
             <form method ="post" action="/MVK-war/ControllerServlet?step=createHousehold">
                 <div class="col-md-2">
                     <p>Name: <input type ="text" name="name"/></p>
@@ -37,6 +58,6 @@
                            value ="+ Neuen Haushalt hinzufügen"/>
                 </div>
             </form>
-        </div>
+        
     </div>
 </div>
