@@ -129,6 +129,7 @@ public class ControllerServlet extends HttpServlet {
         }
         else if(currentStep.equals("logout")){
             HttpSession session = request.getSession(true);
+            //manageBeanUserHousehold.logoutUser((AppUser)session.getAttribute("user"));
             session.removeAttribute("user");
             session.removeAttribute("household");
             session.removeAttribute("place");
@@ -215,15 +216,14 @@ public class ControllerServlet extends HttpServlet {
         -------------------------------------------------------------------------------------------*/
         else if(currentStep.equals("createStocksArticle")){
             HttpSession session = request.getSession(true);
-            StocksArticle stocksArticle = null;
-            stocksArticle = manageBeanStocks.addStocksArticle(request.getParameter("name"),
-                                                        (Place) session.getAttribute("place"), "");
+            StocksArticle stocksArticle = stocksArticle = manageBeanStocks.addStocksArticle(request.getParameter("name"),
+                                            (Place) session.getAttribute("place"), "");
             if (stocksArticle != null) {
                 LOG.info("CustomInfo: StocksArticle erfolgreich angelegt");
                 session.setAttribute("stocksArticle", stocksArticle);
                 request.setAttribute("user", (AppUser) session.getAttribute("user"));
                 request.setAttribute("household", (Household) session.getAttribute("household"));
-                request.setAttribute("place", (Household) session.getAttribute("place"));
+                request.setAttribute("place", (Place) session.getAttribute("place"));
                 request.setAttribute("stocksArticle", stocksArticle);
                 request.getRequestDispatcher("/household.jsp").forward(request, response);
             } else {
@@ -254,10 +254,7 @@ public class ControllerServlet extends HttpServlet {
         else if(currentStep.equals("toHousehold")){
             HttpSession session = request.getSession(true);
             LOG.info("CustomInfo: Haushalt öffnen");
-            Enumeration<String> test = request.getAttributeNames();
-            while(test.hasMoreElements()){
-                LOG.info(test.nextElement());
-            }
+            
             request.setAttribute("user", session.getAttribute("user"));
             request.setAttribute("household", session.getAttribute("household"));
             request.getRequestDispatcher("/household.jsp").forward(request, response);

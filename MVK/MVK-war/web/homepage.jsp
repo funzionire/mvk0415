@@ -23,7 +23,7 @@
         <div>
             <%--Methode returnHouseholds wird noch zu getHouseholdsList geändert  --%>
             <c:forEach items="${user.getHouseholdList()}" var="household">
-                <form method ="post" action ="/MKV-war/ControllerServlet?step=toHousehold">
+                <form method="post" action="/MKV-war/ControllerServlet?step=toHousehold">
                     <div class="col-md-2">
                         <input type="submit" class="hhhead" value="${household.name}" id="${household.householdID}" name="householdName" <input/>  
                     </div>
