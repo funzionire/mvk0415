@@ -24,11 +24,11 @@
             <c:forEach items="${user.getHouseholdList()}" var="household">
                     <div class="col-md-2">
                     
-                <c:url var="toHousehold" value="/MKV-war/ControllerServlet?step=toHousehold">
+                <c:url var="toHousehold" value="/ControllerServlet?step=toHousehold">
                     <c:param name="id" value="${household.householdID}"/>
                 </c:url>
-                
-                <a href="${toHousehold}" name="HouseholdLabel">
+                       <div class="col-md-2">
+                <a href='${toHousehold}' name="HouseholdLabel">
                     <input type="hidden"
                            value="${household.householdID}"
                            name="id"
@@ -39,6 +39,7 @@
                         name="householdName"
                     />
                 </a>
+                        </div>
                     
 <!--                    <div class="col-md-2">-->
 <!--                        <input type="submit"
@@ -51,7 +52,7 @@
             </c:forEach>
             
           
-            <form method ="post" action="/MVK-war/ControllerServlet?step=createHousehold">
+            <form method ="post" action="/ControllerServlet?step=createHousehold">
                 <div class="col-md-2">
                     <p>Name: <input type ="text" name="name"/></p>
                     <input type="submit"
