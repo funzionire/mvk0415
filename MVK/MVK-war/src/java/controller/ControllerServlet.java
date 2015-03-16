@@ -126,6 +126,15 @@ public class ControllerServlet extends HttpServlet {
                 request.getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
         }
+        else if(currentStep.equals("logout")){
+            HttpSession session = request.getSession(true);
+            session.removeAttribute("user");
+            session.removeAttribute("household");
+            session.removeAttribute("place");
+            session.removeAttribute("StocksArticle");
+            LOG.info("CustomInfo: Ausloggen erfolgreich");
+            request.getRequestDispatcher("/logout.jsp").forward(request, response);
+        }
         
         /*-------------------------------------------------------------------------------------------
         Household

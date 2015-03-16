@@ -81,7 +81,7 @@
                             <a href="/MVK-war/ControllerServlet?step=toSettings" name="EinstellungenLabel">Einstellungen</a>
                         </li>
                         <li>
-                            <a href="/MVK-war/logout.jsp" name="AbmeldenLabel">Abmelden</a>
+                            <a href="/MVK-war/ControllerServlet?step=logout" name="AbmeldenLabel">Abmelden</a>
                         </li>
                     </ul>
                 </div>
