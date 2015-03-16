@@ -91,7 +91,7 @@
         </nav>
 
         <div class="blur"></div>
-
+        
         <!-- page content -->
         <!-- EINBINDEN DER RICHTIGEN JSP -->
 
