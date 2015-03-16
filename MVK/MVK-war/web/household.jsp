@@ -32,16 +32,11 @@
             <!-- Artikeltabelle untehalb des Lagerortes-->
             <br>
             <c:forEach items="${place.getStocksArticleList()}" var="article" >
-                <div class="">
                     <strong class="pointer" onclick="overlay('display')">$(article.nameArt)</strong>
-                </div>
             </c:forEach>
             <form method="post" action="/MVK-war/ControllerServlet?step=creatStocksArticle">
-                <div class="row">
                     <input type="text" name="name" placeholder="Artikel..." />
-                    <input type="submit" value="Artikel hinzufügen"/>
-                </div>
-                
+                    <input type="submit" value="Artikel hinzufügen"/>              
             </form>
 
 
