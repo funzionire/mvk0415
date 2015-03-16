@@ -32,7 +32,7 @@
 
                     <table>
                         <c:forEach items="${place.getStocksArticleList()}" var="article" >
-                            <tr><td> <strong class="pointer" onclick="overlay(${article.getName()},'display')">${article.getName()}</strong> </td></tr>
+                            <tr><td> <strong class="pointer" id ="${article.getName()}" onclick="overlay('${article.getName()}','display')">${article.getName()}</strong> </td></tr>
                         </c:forEach>
                         <tr><td>    <%-- Button für neuen Artikel --%>
 
