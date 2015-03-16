@@ -20,7 +20,7 @@ public interface ManageBeanStocksLocal {
     
     //void oder boolean??
     //StocksArticle
-    public boolean addStocksArticle(String nameArt, Place place, String commentArt);
+    public StocksArticle addStocksArticle(String nameArt, Place place, String commentArt);
     
     public boolean removeStocksArticle(StocksArticle stocksArticle);
     

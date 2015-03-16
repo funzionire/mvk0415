@@ -25,14 +25,14 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
     SessionBeanHouseholdLocal sessionBeanHousehold = getSessionBeanHousehold();
 
     @Override
-    public boolean addStocksArticle(String nameArt, Place place, String commentArt) {
+    public StocksArticle addStocksArticle(String nameArt, Place place, String commentArt) {
         //muss noch überprüft werden--> Kommentar(ob das so funzelt)
         try {
             StocksArticle stocksArticle = sessionBeanStocksArticle.createStocksArticle(nameArt, place, commentArt);
             sessionBeanHousehold.addStocksArticleToPlace(place, stocksArticle);
-            return true;
+            return stocksArticle;
         } catch (Exception e) {
-            return false;
+            return null;
         }
     }
 

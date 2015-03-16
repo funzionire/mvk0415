@@ -8,6 +8,7 @@ package controller;
 import static controller.BeanFactory.getManageBeanStocks;
 import static controller.BeanFactory.getManageBeanUserHousehold;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -132,6 +133,7 @@ public class ControllerServlet extends HttpServlet {
             session.removeAttribute("household");
             session.removeAttribute("place");
             session.removeAttribute("StocksArticle");
+            
             LOG.info("CustomInfo: Ausloggen erfolgreich");
             request.getRequestDispatcher("/logout.jsp").forward(request, response);
         }
@@ -214,7 +216,7 @@ public class ControllerServlet extends HttpServlet {
         else if(currentStep.equals("createStocksArticle")){
             HttpSession session = request.getSession(true);
             StocksArticle stocksArticle = null;
-            manageBeanStocks.addStocksArticle(request.getParameter("name"),
+            stocksArticle = manageBeanStocks.addStocksArticle(request.getParameter("name"),
                                                         (Place) session.getAttribute("place"), "");
             if (stocksArticle != null) {
                 LOG.info("CustomInfo: StocksArticle erfolgreich angelegt");
@@ -247,11 +249,13 @@ public class ControllerServlet extends HttpServlet {
             request.getRequestDispatcher("/household.jsp").forward(request, response);
         }
         /*-------------------------------------------------------------------------------------------
-            StocksArticle
-            -------------------------------------------------------------------------------------------*/
+            Navigation
+        -------------------------------------------------------------------------------------------*/
         else if(currentStep.equals("toHousehold")){
             HttpSession session = request.getSession(true);
             LOG.info("CustomInfo: Haushalt öffnen");
+            //Enumeration<String> = request.getAttributeNames();
+            
             request.setAttribute("user", session.getAttribute("user"));
             request.setAttribute("household", session.getAttribute("household"));
             request.getRequestDispatcher("/household.jsp").forward(request, response);
