@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import model.AppUser;
 import model.Household;
 import model.Place;
+import static org.jboss.weld.logging.EventLogger.LOG;
 
 /**
  *
@@ -54,9 +55,9 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     }
 
     @Override
-    public Household findHousehold(String id) {
-        //long wrapperID = Long.parseLong(id);
-        return null;//sessionBeanHousehold.findHousehold(id);
+    public Household findHousehold(long longID) {
+        LOG.info("lalelu" + longID);
+        return sessionBeanHousehold.findHousehold(longID);
     }
     
     

@@ -15,6 +15,7 @@ import model.Household;
 import model.AppUser;
 import model.Place;
 import model.StocksArticle;
+import static org.jboss.weld.logging.EventLogger.LOG;
 
 /**
  *
@@ -60,12 +61,13 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public Household findHousehold(long id) {
-        if (id == 0) {
+    public Household findHousehold(long longID) {
+        LOG.info("lalelu" + longID);
+        if (longID == 0) {
             return null;
         }
         TypedQuery<Household> query = em.createNamedQuery("Household.findByID", Household.class)
-                .setParameter("householdID", id);
+                .setParameter("householdID", longID);
         if (query.getResultList().isEmpty()) {
             return null;
         }
