@@ -254,10 +254,11 @@ public class ControllerServlet extends HttpServlet {
         else if(currentStep.equals("toHousehold")){
             HttpSession session = request.getSession(true);
             LOG.info("CustomInfo: Haushalt öffnen");
-            request.getAttribute((String)request.getAttribute("id"));
+            Household household = manageBeanUserHousehold.findHousehold((String)request.getAttribute("id"));
             
             request.setAttribute("user", session.getAttribute("user"));
-            request.setAttribute("household", session.getAttribute("household"));
+            request.setAttribute("household", household);
+            session.setAttribute("household", household);
             request.getRequestDispatcher("/household.jsp").forward(request, response);
         }
         else if(currentStep.equals("toSettings")){
