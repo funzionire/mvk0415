@@ -32,7 +32,7 @@
 
                     <table>
                         <c:forEach items="${place.getStocksArticleList()}" var="article" >
-                            <tr><td> <strong class="pointer" onclick="overlay('display')">${article.getName()}</strong> </td></tr>
+                            <tr><td> <strong class="pointer" onclick="overlay(${article.getName()},'display')">${article.getName()}</strong> </td></tr>
                         </c:forEach>
                         <tr><td>    <%-- Button für neuen Artikel --%>
 
@@ -69,43 +69,58 @@
 
 
 
-    <script>
-        function overlay(mode) {
-            if (mode === 'display') {
-                if (document.getElementById("overlay") === null) {
-                    div = document.createElement("div");
-                    div.setAttribute('id', 'overlay');
-                    div.setAttribute('className', 'overlayBG');
-                    div.setAttribute('class', 'overlayBG');
+           <script>
+                function overlay(myId, mode) {
+                    if (mode === 'display') {
+                        if (document.getElementById("overlay") === null) {
+                            div = document.createElement("div");
+                            div.setAttribute('id', 'overlay');
+                            div.setAttribute('className', 'overlayBG');
+                            div.setAttribute('class', 'overlayBG');
 
 
-                    lightBox = document.createElement('div');
-                    lightBox.setAttribute('id', 'lightBox');
+                            lightBox = document.createElement('div');
+                            lightBox.setAttribute('id', 'lightBox');
 
-                    span = document.createElement('span');
-                    span.setAttribute('class', 'pointer');
-                    span.setAttribute('className', 'pointer');
-                    span.setAttribute('onclick', 'overlay(\'none\')');
-                    text = document.createTextNode('Schließen');
-                    span.appendChild(text);
-                    lightBox.appendChild(span);
+                            span = document.createElement('span');
+                            span.setAttribute('class', 'pointer');
+                            span.setAttribute('className', 'pointer');
+                            span.setAttribute('onclick', 'overlay(\'none\')');
+                            text = document.createTextNode('Schließen');
+                            span.appendChild(text);
+                            lightBox.appendChild(span);
 
-                    head = document.createElement('h2');
-                    head.setAttribute('class', 'pointer');
-                    head.setAttribute('className', 'pointer');
-                    text = document.createTextNode('Hallooooo');
-                    head.appendChild(text);
-                    lightBox.appendChild(head);
+                            head = document.createElement('h2');
+                            head.setAttribute('class', 'pointer');
+                            text = document.createTextNode(document.getElementById(myId).innerHTML);
+                            head.appendChild(text);
+                            lightBox.appendChild(head);
 
-                    document.getElementsByTagName("body")[0].appendChild(div);
-                    document.getElementsByTagName("body")[0].appendChild(lightBox);
+                            form = document.createElement('form');
+                            form.setAttribute('method', 'post');
+                            form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksArticle');
+
+                            textfeld = document.createElement('input');
+                            textfeld.setAttribute('type', 'text');
+                            textfeld.setAttribute('name', 'name');
+
+                            button = document.createElement('input');
+                            button.setAttribute('type', 'submit');
+                            button.setAttribute('value', 'add');
+
+                            form.appendChild(textfeld);
+                            form.appendChild(button);
+                            lightBox.appendChild(form);
+
+                            document.getElementsByTagName("body")[0].appendChild(div);
+                            document.getElementsByTagName("body")[0].appendChild(lightBox);
+                        }
+                    } else {
+                        document.getElementsByTagName("body")[0].removeChild(document.getElementById("overlay"));
+                        document.getElementsByTagName("body")[0].removeChild(document.getElementById("lightBox"));
+                    }
                 }
-            } else {
-                document.getElementsByTagName("body")[0].removeChild(document.getElementById("overlay"));
-                document.getElementsByTagName("body")[0].removeChild(document.getElementById("lightBox"));
-            }
-        }
-    </script>
+            </script>
 
 
 </div>
