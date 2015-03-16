@@ -44,7 +44,7 @@
     <div class ="row">
         <div class="col-md-6">
             </br>
-            <strong class="pointer" onclick="overlay('display')">Licht aus, Spot an!</strong>
+            <strong class="pointer" id="zzz" onclick="overlay('display')">Licht aus, Spot an!</strong>
         </div>
     </div>
 
@@ -68,14 +68,28 @@
                     text = document.createTextNode('Schließen');
                     span.appendChild(text);
                     lightBox.appendChild(span);
-                    
+
                     head = document.createElement('h2');
                     head.setAttribute('class', 'pointer');
-                    head.setAttribute('className', 'pointer');
-                    head.setAttribute('onclick', 'overlay(\'none\')');
-                    text = document.createTextNode('Inhalt');
+                    text = document.createTextNode(document.getElementById('zzz').innerHTML);
                     head.appendChild(text);
                     lightBox.appendChild(head);
+                    
+                    form = document.createElement('form');
+                    form.setAttribute('method', 'post');
+                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksArticle');
+                    
+                    textfeld = document.createElement('input');
+                    textfeld.setAttribute('type', 'text');
+                    textfeld.setAttribute('name', 'name');
+
+                    button = document.createElement('input');
+                    button.setAttribute('type', 'submit');
+                    button.setAttribute('value', 'add');
+                    
+                    form.appendChild(textfeld);
+                    form.appendChild(button);
+                    lightBox.appendChild(form);
 
                     document.getElementsByTagName("body")[0].appendChild(div);
                     document.getElementsByTagName("body")[0].appendChild(lightBox);
@@ -87,5 +101,5 @@
         }
     </script>
     <!-- Overlay Ende-->
-    
+
 </div>
