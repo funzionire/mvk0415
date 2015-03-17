@@ -66,6 +66,12 @@ td{
     padding: 0.5em;
 }
 
+#bgbox{
+  background-color: rgba(255,255,255,.5);
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
 @media(min-width:768px) {
     body {
         padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
