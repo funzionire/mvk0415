@@ -32,24 +32,24 @@
 
                     <table>
                         <c:forEach items="${place.getStocksArticleList()}" var="article" >
-                            <tr><td> <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}','display')">${article.getName()}</strong> </td></tr>
+                            <tr>
+                                <td>
+                                    <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}','display')">${article.getName()}</strong> 
+                                </td>
+                            </tr>
                         </c:forEach>
-                        <tr><td>    <%-- Button für neuen Artikel --%>
-
-                                <form method="post" action="/MVK-war/ControllerServlet?step=createStocksArticle">
-                                   
+                            <tr>
+                                <td>    <%-- Button für neuen Artikel --%>
+                                    <form method="post" action="/MVK-war/ControllerServlet?step=createStocksArticle">
                                         <input type="text" name="name" placeholder="Artikel..." />
                                         <input type="submit" value="Artikel hinzufügen"/>
-                                    
-                                </form>
-                            </td></tr>
+                                    </form>
+                                </td>
+                            </tr>
                     </table>
-
-
-
                 </div>
-
             </c:forEach>
+            
             <%--Button für neuen Lagerort --%>
             <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
                 <div class="col-md-2">
@@ -61,14 +61,6 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-
            <script>
                 function overlay(myId, mode) {
                     if (mode === 'display') {
@@ -77,7 +69,6 @@
                             div.setAttribute('id', 'overlay');
                             div.setAttribute('className', 'overlayBG');
                             div.setAttribute('class', 'overlayBG');
-
 
                             lightBox = document.createElement('div');
                             lightBox.setAttribute('id', 'lightBox');
@@ -121,7 +112,5 @@
                     }
                 }
             </script>
-
-
 </div>
 
