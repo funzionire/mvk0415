@@ -39,6 +39,8 @@ public interface SessionBeanHouseholdLocal {
     
     public Place changePlace(Place place, String newName);
     
+    public Place findPlace(long longID);
+    
     //Verknüpfung User_Household
     public boolean addUserToHousehold(Household household, AppUser user);
     

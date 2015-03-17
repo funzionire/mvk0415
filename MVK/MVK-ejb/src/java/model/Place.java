@@ -14,6 +14,10 @@ import javax.persistence.*;
  * @author baader
  */
 @Entity
+@NamedQueries(
+        {
+            @NamedQuery(name = "Place.findById", query = "SELECT place FROM Place place WHERE place.placeID = :placeID")
+        })
 public class Place implements Serializable {
 
     //Attribute

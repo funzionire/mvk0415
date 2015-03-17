@@ -61,9 +61,13 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
         LOG.info("lalelu" + longID);
         return sessionBeanHousehold.findHousehold(longID);
     }
-    
-    
 
+    @Override
+    public Place findPlace(long longID) {
+        LOG.info("lalelu" + longID);
+        return sessionBeanHousehold.findPlace(longID);
+    }
+    
     @Override
     public Place changePlace(Place place, String newName) {
         return sessionBeanHousehold.changePlace(place, newName);

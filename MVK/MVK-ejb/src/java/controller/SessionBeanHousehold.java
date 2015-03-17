@@ -113,6 +113,23 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
+    public Place findPlace(long longID) {
+        LOG.info("lalelu" + longID);
+        if (longID == 0) {
+            return null;
+        }
+        TypedQuery<Place> query = em.createNamedQuery("Place.findById", Place.class)
+                .setParameter("placeID", longID);
+        if (query.getResultList().isEmpty()) {
+            return null;
+        }
+        LOG.info(query.getSingleResult().getName());
+        return query.getSingleResult();
+    }
+    
+    
+
+    @Override
     public boolean addUserToHousehold(Household household, AppUser user) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
