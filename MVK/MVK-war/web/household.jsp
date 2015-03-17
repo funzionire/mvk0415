@@ -25,7 +25,7 @@
         <div>
             <%-- Lagerplätze nebeneinander --%>
             <c:forEach items="${household.getPlaceList()}" var="place" >
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <h2 class="hbox"> ${place.name}</h2> 
                     
                     <c:url var="idFromPlace" value="/ControllerServlet?step=createStocksArticle">
@@ -34,7 +34,7 @@
 
                     <%-- Artikeltabelle untehalb des Lagerortes--%>
 
-                    <table>
+                    <table class="bgbox">
                         <c:forEach items="${place.getStocksArticleList()}" var="article" >
                             <tr>
                                 <td>
