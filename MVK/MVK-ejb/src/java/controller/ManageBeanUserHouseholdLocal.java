@@ -35,6 +35,8 @@ public interface ManageBeanUserHouseholdLocal {
     
     public Place findPlace(long longID);
     
+    public AppUser findUser(long longID);
+    
         //Place   
     public Place changePlace(Place place, String newName);
     

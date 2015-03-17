@@ -23,6 +23,8 @@ public interface SessionBeanUserLocal {
     
     public boolean deleteUser (AppUser user);
     
+    public AppUser findUser(long longID);
+    
     
     //Beziehungen
     public boolean addHouseholdToUser(AppUser user, Household household);

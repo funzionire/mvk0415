@@ -4,6 +4,7 @@
     Author     : ANABEL
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="user" class="model.AppUser" scope="request"/>
 <!DOCTYPE html>
@@ -25,7 +26,7 @@
         <!-- Custom CSS -->
         <link href="css/logo-nav.css" rel="stylesheet">
 
-        
+
         <!-- Favicon-->
         <link rel="apple-touch-icon" sizes="57x57" href="/MVK-war/img/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/MVK-war/img/apple-touch-icon-60x60.png">
@@ -64,25 +65,49 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.jsp">
-                        <img src="img/mvk-logo.png" alt=""/>
-                    </a>
+
+                    <c:choose>
+                        <c:when test="${sessionScope.user == null}">
+                            <a class="navbar-brand" href="index.jsp">
+                                <img src="img/mvk-logo.png" alt=""/>
+                            </a>
+                        </c:when>
+                        <c:when test="${sessionScope.user != null}">  
+                            <c:url var="toHomepage" value="/ControllerServlet?step=toHomepage">
+                                <c:param name="id" value="${user.userID}"/>
+                            </c:url>
+                            <a class="navbar-brand" href="${toHomepage}">
+                                <img src="img/mvk-logo.png" alt=""/>
+                                <input type="hidden"
+                                       value="${user.userID}"
+                                       name="id"
+                                       />
+                            </a>
+                        </c:when>
+                    </c:choose>
+
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="/MVK-war/register.jsp" name="RegistrierenLabel">Registrieren</a>
-                        </li>
+                        <c:if test="${sessionScope.user == null}" >
+                            <li>
+                                <a href="/MVK-war/register.jsp" name="RegistrierenLabel">Registrieren</a>
+                            </li>
+                        </c:if>
                         <li>
                             <a href="about.jsp" name="UeberUnsLabel">Über uns</a>
                         </li>
-                        <li>
-                            <a href="/MVK-war/ControllerServlet?step=toSettings" name="EinstellungenLabel">Einstellungen</a>
-                        </li>
-                        <li>
-                            <a href="/MVK-war/ControllerServlet?step=logout" name="AbmeldenLabel">Abmelden</a>
-                        </li>
+                        <c:if test="${sessionScope.user != null}">
+                            <li>
+                                <a href="/MVK-war/ControllerServlet?step=toSettings" name="EinstellungenLabel">Einstellungen</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${sessionScope.user != null}">
+                            <li>
+                                <a href="/MVK-war/ControllerServlet?step=logout" name="AbmeldenLabel">Abmelden</a>
+                            </li>
+                        </c:if>
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -91,7 +116,7 @@
         </nav>
 
         <div class="blur"></div>
-        
+
         <!-- page content -->
         <!-- EINBINDEN DER RICHTIGEN JSP -->
 

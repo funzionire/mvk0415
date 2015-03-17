@@ -138,4 +138,18 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         em.flush();
         return user;
     }
+    @Override
+    public AppUser findUser(long longID) {
+        LOG.info("lalelu" + longID);
+        if (longID == 0) {
+            return null;
+        }
+        TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findById", AppUser.class)
+                .setParameter("userID", longID);
+        if (query.getResultList().isEmpty()) {
+            return null;
+        }
+        LOG.info(query.getSingleResult().getName());
+        return query.getSingleResult();
+    }
 }

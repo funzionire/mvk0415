@@ -282,6 +282,12 @@ public class ControllerServlet extends HttpServlet {
             LOG.info("CustomInfo: UeberUns öffnen");
             request.getRequestDispatcher("/about.jsp").forward(request, response);
         }
+        else if(currentStep.equals("toHomepage")){
+            HttpSession session = request.getSession(true);
+            LOG.info("CustomInfo: Einstellungen öffnen");
+            request.setAttribute("user", session.getAttribute("user"));
+            request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+        }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
