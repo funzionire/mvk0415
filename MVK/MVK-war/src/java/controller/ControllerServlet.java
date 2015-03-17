@@ -216,11 +216,18 @@ public class ControllerServlet extends HttpServlet {
         -------------------------------------------------------------------------------------------*/
         else if(currentStep.equals("createStocksArticle")){
             HttpSession session = request.getSession(true);
+            LOG.info("CustomInfo: ID vom Platz holen");
+            String id = (String)request.getParameter("id");
+            long longID = Long.parseLong(id);
+            LOG.info("lalo" + longID);
+            Place place = manageBeanUserHousehold.findPlace(longID);
+            session.setAttribute("place", place);
             StocksArticle stocksArticle = stocksArticle = manageBeanStocks.addStocksArticle(request.getParameter("name"),
                                             (Place) session.getAttribute("place"), "");
             if (stocksArticle != null) {
                 LOG.info("CustomInfo: StocksArticle erfolgreich angelegt");
                 session.setAttribute("stocksArticle", stocksArticle);
+                session.setAttribute("place", (Place) session.getAttribute("place"));
                 request.setAttribute("user", (AppUser) session.getAttribute("user"));
                 request.setAttribute("household", (Household) session.getAttribute("household"));
                 request.setAttribute("place", (Place) session.getAttribute("place"));
@@ -264,6 +271,7 @@ public class ControllerServlet extends HttpServlet {
             session.setAttribute("household", household);
             request.getRequestDispatcher("/household.jsp").forward(request, response);
         }
+        
         else if(currentStep.equals("toSettings")){
             HttpSession session = request.getSession(true);
             LOG.info("CustomInfo: Einstellungen öffnen");
