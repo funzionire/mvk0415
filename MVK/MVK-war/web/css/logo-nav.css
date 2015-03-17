@@ -78,7 +78,7 @@ td{
   padding: 5px 10px;  
 }
 
-pointer:hover{
+.pointer:hover{
     cursor: pointer;
 }
 @media(min-width:768px) {
