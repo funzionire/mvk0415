@@ -52,7 +52,7 @@
             </c:forEach>
             
           
-            <form method ="post" action="/ControllerServlet?step=createHousehold">
+            <form method ="post" action="ControllerServlet?step=createHousehold">
                 <div class="col-md-2">
                     <p>Name: <input type ="text" name="name"/></p>
                     <input type="submit"
