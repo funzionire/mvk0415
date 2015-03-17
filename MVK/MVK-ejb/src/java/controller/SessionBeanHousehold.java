@@ -6,6 +6,7 @@
 package controller;
 
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
@@ -15,7 +16,6 @@ import model.Household;
 import model.AppUser;
 import model.Place;
 import model.StocksArticle;
-import static org.jboss.weld.logging.EventLogger.LOG;
 
 /**
  *
@@ -24,9 +24,11 @@ import static org.jboss.weld.logging.EventLogger.LOG;
 @Stateless
 public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
 
+    private static final Logger LOG = Logger.getLogger(SessionBeanHousehold.class.getName());
+    
     @PersistenceContext
     private EntityManager em;
-
+    
     @Override
     public Household createHousehold(String name) {
         em.setFlushMode(FlushModeType.AUTO);
@@ -66,11 +68,12 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         if (longID == 0) {
             return null;
         }
-        TypedQuery<Household> query = em.createNamedQuery("Household.findByID", Household.class)
+        TypedQuery<Household> query = em.createNamedQuery("Household.findById", Household.class)
                 .setParameter("householdID", longID);
         if (query.getResultList().isEmpty()) {
             return null;
         }
+        LOG.info(query.getSingleResult().getName());
         return query.getSingleResult();
     }
     

@@ -7,11 +7,11 @@ package controller;
 
 import static controller.BeanFactory.getSessionBeanHousehold;
 import static controller.BeanFactory.getSessionBeanUser;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import model.AppUser;
 import model.Household;
 import model.Place;
-import static org.jboss.weld.logging.EventLogger.LOG;
 
 /**
  *
@@ -19,7 +19,9 @@ import static org.jboss.weld.logging.EventLogger.LOG;
  */
 @Stateless
 public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
-
+    
+    private static final Logger LOG = Logger.getLogger(ManageBeanUserHousehold.class.getName());
+    
     SessionBeanHouseholdLocal   sessionBeanHousehold = getSessionBeanHousehold();
     SessionBeanUserLocal   sessionBeanUser = getSessionBeanUser();
 
