@@ -25,8 +25,8 @@
         <div>
             <%-- Lagerplätze nebeneinander --%>
             <c:forEach items="${household.getPlaceList()}" var="place" >
-                <div class="col-md-2" id="bgbox">
-                    <h2> ${place.name}</h2> 
+                <div class="col-md-2">
+                    <h2 class="hbox"> ${place.name}</h2> 
                     
                     <c:url var="idFromPlace" value="/ControllerServlet?step=createStocksArticle">
                     <c:param name="id" value="${place.placeID}"/>
