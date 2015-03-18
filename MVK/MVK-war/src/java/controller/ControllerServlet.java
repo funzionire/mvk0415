@@ -176,13 +176,17 @@ public class ControllerServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.getAttribute("household");
         }
-        //else if(currentStep.equals("shareHousehold")){
-           // HttpSession session = request.getSession(true);
-           // LOG.info("CustomInfo: Haushalt teilen");
-           // String email = (String)request.getParameter("email");
-           //manageBeanUserHousehold.shareHousehold((Household) session.getAttribute("household"), email);
+        else if(currentStep.equals("shareHousehold")){
+            HttpSession session = request.getSession(true);
+            LOG.info("CustomInfo: Haushalt teilen");
+            String email = (String)request.getParameter("email");
+            manageBeanUserHousehold.shareHousehold((Household) session.getAttribute("household"), email);
             
-        //}
+            request.setAttribute("user", session.getAttribute("user"));
+            request.setAttribute("household", session.getAttribute("household"));
+            request.getRequestDispatcher("/household.jsp").forward(request, response);
+            
+        }
         /*-------------------------------------------------------------------------------------------
         Place
         -------------------------------------------------------------------------------------------*/
