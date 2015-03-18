@@ -221,7 +221,7 @@
                             button.setAttribute('type', 'submit');
                             button.setAttribute('value', 'hinzufügen');
                             td.appendChild(button);
-                            form.appendChild(td);
+                            tr.appendChild(td);
                             
                             form.appendChild(tr);
 
