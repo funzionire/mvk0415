@@ -179,6 +179,8 @@ public class ControllerServlet extends HttpServlet {
         //else if(currentStep.equals("shareHousehold")){
            // HttpSession session = request.getSession(true);
            // LOG.info("CustomInfo: Haushalt teilen");
+           // String email = (String)request.getParameter("email");
+           //manageBeanUserHousehold.shareHousehold((Household) session.getAttribute("household"), email);
             
         //}
         /*-------------------------------------------------------------------------------------------
