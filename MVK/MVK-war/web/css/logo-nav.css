@@ -83,9 +83,10 @@ td{
 }
 
 .hhcontainer{
-    background-color: rgba(0,128,0,.25);
-    height: 100%;
-    width: 100%;
+    background-color: rgba(128,51,0,.25);
+    border-radius: 10px;
+    height: auto;
+    width: auto;
     position: absolute;       
 }
 
