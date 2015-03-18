@@ -145,7 +145,6 @@
                     //tabelle
                     
                     table = document.createElement('table');
-                    table.setAttribute("style", "border: 1px solid black");
                     
                     //Überschriftszeile
                         tr = document.createElement('tr');
@@ -222,16 +221,6 @@
                             button.setAttribute('type', 'submit');
                             button.setAttribute('value', 'hinzufügen');
                             td.appendChild(button);
-                            tr.appendChild(td);
-                            
-                            td = document.createElement('td');
-                            empty1= document.createTextNode("");
-                            td.appendChild(empty2);
-                            tr.appendChild(td);
-                            
-                            td = document.createElement('td');
-                            empty2= document.createTextNode("");
-                            td.appendChild(empty2);
                             tr.appendChild(td);
                             
                             form.appendChild(tr);
