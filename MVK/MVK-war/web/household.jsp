@@ -22,104 +22,102 @@
         </div>
     </div>
     <div class="row">
-        <div>
-            <%-- Lagerplätze nebeneinander --%>
-            <c:forEach items="${household.getPlaceList()}" var="place" >
-                <div class="col-md-3">
-                    <h2 class="hbox"> ${place.name}</h2> 
-                    
-                    <c:url var="idFromPlace" value="/ControllerServlet?step=createStocksArticle">
+        <%-- Lagerplätze nebeneinander --%>
+        <c:forEach items="${household.getPlaceList()}" var="place" >
+            <div class="col-md-3">
+                <h2 class="hbox"> ${place.name}</h2> 
+
+                <c:url var="idFromPlace" value="/ControllerServlet?step=createStocksArticle">
                     <c:param name="id" value="${place.placeID}"/>
-                    </c:url>
+                </c:url>
 
-                    <%-- Artikeltabelle untehalb des Lagerortes--%>
+                <%-- Artikeltabelle untehalb des Lagerortes--%>
 
-                    <table class="bgbox">
-                        <c:forEach items="${place.getStocksArticleList()}" var="article" >
-                            <tr>
-                                <td>
-                                    <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}','display')">${article.getName()}</strong> 
-                                </td>
-                            </tr>
-                        </c:forEach>
-                            <tr>
-                                <td>    <%-- Button für neuen Artikel --%>
-                                    
-                                    <form method="post" action="ControllerServlet?step=createStocksArticle">
-                                        <input type="text" name="name" placeholder="Artikel..." />
-                                        <input type="hidden"
-                                               value="${place.placeID}"
-                                               name="id"
-                                        />
-                                        <input type="submit" value="Artikel hinzufügen"/>
-                                    </form>
-                                </td>
-                            </tr>
-                    </table>
-                </div>
-            </c:forEach>
-            
-            <%--Button für neuen Lagerort --%>
-            <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
-                <div class="col-md-2">
-                    <input type ="text" name="name" placeholder="Lagerort..."/>
-                    <input type="submit"
-                           value ="+ Neuen Lagerort hinzufügen"/>
-                </div>
-            </form>
-        </div>
+                <table class="bgbox">
+                    <c:forEach items="${place.getStocksArticleList()}" var="article" >
+                        <tr>
+                            <td>
+                                <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    <tr>
+                        <td>    <%-- Button für neuen Artikel --%>
+
+                            <form method="post" action="ControllerServlet?step=createStocksArticle">
+                                <input type="text" name="name" placeholder="Artikel..." />
+                                <input type="hidden"
+                                       value="${place.placeID}"
+                                       name="id"
+                                       />
+                                <input type="submit" value="Artikel hinzufügen"/>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </c:forEach>
+
+        <%--Button für neuen Lagerort --%>
+        <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
+            <div class="col-md-2">
+                <input type ="text" name="name" placeholder="Lagerort..."/>
+                <input type="submit"
+                       value ="+ Neuen Lagerort hinzufügen"/>
+            </div>
+        </form>
     </div>
 
-           <script>
-                function overlay(myId, mode) {
-                    if (mode === 'display') {
-                        if (document.getElementById("overlay") === null) {
-                            div = document.createElement("div");
-                            div.setAttribute('id', 'overlay');
-                            div.setAttribute('className', 'overlayBG');
-                            div.setAttribute('class', 'overlayBG');
+    <script>
+        function overlay(myId, mode) {
+            if (mode === 'display') {
+                if (document.getElementById("overlay") === null) {
+                    div = document.createElement("div");
+                    div.setAttribute('id', 'overlay');
+                    div.setAttribute('className', 'overlayBG');
+                    div.setAttribute('class', 'overlayBG');
 
-                            lightBox = document.createElement('div');
-                            lightBox.setAttribute('id', 'lightBox');
+                    lightBox = document.createElement('div');
+                    lightBox.setAttribute('id', 'lightBox');
 
-                            span = document.createElement('span');
-                            span.setAttribute('class', 'pointer');
-                            span.setAttribute('className', 'pointer');
-                            span.setAttribute('onclick', 'overlay(\'none\')');
-                            text = document.createTextNode('Schließen');
-                            span.appendChild(text);
-                            lightBox.appendChild(span);
+                    span = document.createElement('span');
+                    span.setAttribute('class', 'pointer');
+                    span.setAttribute('className', 'pointer');
+                    span.setAttribute('onclick', 'overlay(\'none\')');
+                    text = document.createTextNode('Schließen');
+                    span.appendChild(text);
+                    lightBox.appendChild(span);
 
-                            head = document.createElement('h2');
-                            head.setAttribute('class', 'pointer');
-                            text = document.createTextNode(document.getElementById(myId).innerHTML);
-                            head.appendChild(text);
-                            lightBox.appendChild(head);
+                    head = document.createElement('h2');
+                    head.setAttribute('class', 'pointer');
+                    text = document.createTextNode(document.getElementById(myId).innerHTML);
+                    head.appendChild(text);
+                    lightBox.appendChild(head);
 
-                            form = document.createElement('form');
-                            form.setAttribute('method', 'post');
-                            form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksArticle');
+                    form = document.createElement('form');
+                    form.setAttribute('method', 'post');
+                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksArticle');
 
-                            textfeld = document.createElement('input');
-                            textfeld.setAttribute('type', 'text');
-                            textfeld.setAttribute('name', 'name');
+                    textfeld = document.createElement('input');
+                    textfeld.setAttribute('type', 'text');
+                    textfeld.setAttribute('name', 'name');
 
-                            button = document.createElement('input');
-                            button.setAttribute('type', 'submit');
-                            button.setAttribute('value', 'add');
+                    button = document.createElement('input');
+                    button.setAttribute('type', 'submit');
+                    button.setAttribute('value', 'add');
 
-                            form.appendChild(textfeld);
-                            form.appendChild(button);
-                            lightBox.appendChild(form);
+                    form.appendChild(textfeld);
+                    form.appendChild(button);
+                    lightBox.appendChild(form);
 
-                            document.getElementsByTagName("body")[0].appendChild(div);
-                            document.getElementsByTagName("body")[0].appendChild(lightBox);
-                        }
-                    } else {
-                        document.getElementsByTagName("body")[0].removeChild(document.getElementById("overlay"));
-                        document.getElementsByTagName("body")[0].removeChild(document.getElementById("lightBox"));
-                    }
+                    document.getElementsByTagName("body")[0].appendChild(div);
+                    document.getElementsByTagName("body")[0].appendChild(lightBox);
                 }
-            </script>
+            } else {
+                document.getElementsByTagName("body")[0].removeChild(document.getElementById("overlay"));
+                document.getElementsByTagName("body")[0].removeChild(document.getElementById("lightBox"));
+            }
+        }
+    </script>
 </div>
 
