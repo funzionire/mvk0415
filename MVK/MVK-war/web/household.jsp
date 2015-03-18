@@ -197,6 +197,7 @@
                     
                     form = document.createElement('form');
                     form.setAttribute('method', 'post');
+                    form.setAttribute('StocksArticleID',myId );
                     form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit');
                     
                             td = document.createElement('td');
