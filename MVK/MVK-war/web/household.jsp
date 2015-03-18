@@ -197,8 +197,8 @@
                     
                     form = document.createElement('form');
                     form.setAttribute('method', 'post');
-                    form.setAttribute('StocksArticleID',myId );
-                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit');
+                    form.setAttribute('StocksArticleID', myId);
+                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit&StocksArticleID='+myId+'');
                     
                             td = document.createElement('td');
                             textfeldm = document.createElement('input');
