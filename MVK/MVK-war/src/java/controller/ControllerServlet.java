@@ -234,6 +234,38 @@ public class ControllerServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.getAttribute("stocksArticle");
         }
+        /*-------------------------------------------------------------------------------------------
+        StocksUnit
+        -------------------------------------------------------------------------------------------*/
+        else if(currentStep.equals("createStocksUnit")){
+            HttpSession session = request.getSession(true);
+            LOG.info("CustomInfo: ID vom StocksArticle holen");
+            String id = (String)request.getParameter("id");
+            long longID = Long.parseLong(id);
+            StocksArticle stocksArticle = manageBeanStocks.findStocksArticle(longID);
+            session.setAttribute("place", place);
+            StocksUnit stocksUnit = manageBeanStocks.addStocksUnit(stocksArticle, request.getAttribute("Menge"),
+                                            request.getAttribute("Datum"), request.getAttribute("Kommentar");
+            if (stocksArticle != null) {
+                LOG.info("CustomInfo: StocksUnit erfolgreich angelegt");
+                session.setAttribute("stocksUnit", stocksUnit);
+                request.setAttribute("user", (AppUser) session.getAttribute("user"));
+                request.setAttribute("household", (Household) session.getAttribute("household"));
+                request.setAttribute("place", (Place) session.getAttribute("place"));
+                request.setAttribute("stocksArticle", (StocksArticle) session.getAttribute("stocksArticle"));
+                request.setAttribute("stocksUnit", stocksUnit);
+//                request.setAttribute("id", session.getAttribute("id"));
+                response.sendRedirect("/MVK-war/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id"));
+//                request.getRequestDispatcher("/household.jsp").forward(request, response);
+            } else {
+                LOG.info("CustomInfo: StocksArticle anlegen fehlgeschlagen");
+                request.getRequestDispatcher("/household.jsp").forward(request, response);
+            }
+        }
+        else if(currentStep.equals("changeStocksArticle")){
+            HttpSession session = request.getSession(true);
+            session.getAttribute("stocksArticle");
+        }
         
         /*-------------------------------------------------------------------------------------------
             Navigation

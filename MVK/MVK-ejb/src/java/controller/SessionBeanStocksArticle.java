@@ -10,6 +10,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import model.Household;
 import model.Place;
 import model.StocksArticle;
 import model.StocksUnit;
@@ -34,8 +36,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
                 stocksArticle = em.merge(stocksArticle);
                 em.flush();
                 return stocksArticle;
-            }
-            else{
+            } else {
                 return null;
             }
         } catch (Exception e) {
@@ -82,6 +83,19 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @Override
+    public StocksArticle findStocksArticle(long longID) {
+        if (longID == 0) {
+            return null;
+        }
+        TypedQuery<StocksArticle> query = em.createNamedQuery("StocksArticle.findById", StocksArticle.class)
+                .setParameter("stocksArticleID", longID);
+        if (query.getResultList().isEmpty()) {
+            return null;
+        }
+        return query.getSingleResult();
     }
 
     @Override

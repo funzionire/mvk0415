@@ -10,6 +10,10 @@ import javax.persistence.*;
  * @author Felix
  */
 @Entity
+@NamedQueries(
+        {
+            @NamedQuery(name = "StocksArticle.findById", query = "SELECT StocksArticle FROM StocksArticle stocksArticle WHERE stocksArticle.stocksArticleID = :stocksArticleID")
+        })
 public class StocksArticle implements Serializable {
 
     //Attribute

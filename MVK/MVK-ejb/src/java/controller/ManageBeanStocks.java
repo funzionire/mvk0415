@@ -48,6 +48,13 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
     }
 
     @Override
+    public StocksArticle findStocksArticle(long longID) {
+        return sessionBeanStocksArticle.findStocksArticle(longID);
+    }
+    
+    
+
+    @Override
     public boolean addStocksUnit(StocksArticle stocksArticle, int quantity, Date mdd, String commentSUnit) {
         try {
             //fliegt er so schon raus in den catch also wenn quantity >0?

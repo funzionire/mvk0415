@@ -27,6 +27,8 @@ public interface SessionBeanStocksArticleLocal {
     
     public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace);
     
+    public StocksArticle findStocksArticle(long longID);
+    
 //-->TODO (in dieser bean?) addUnit, removeUnit, changeUnit, moveUnit,
     
     //StocksUnit
