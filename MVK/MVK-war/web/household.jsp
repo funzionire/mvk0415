@@ -182,9 +182,13 @@
                     
                     //Tabellen-Inhalt
                     
-                    //Schleife ...{}
+                    //Schleife ...
+                    /*
                     for (var eintrag in list){
                         tr = document.createElement(tr);
+                        
+                        ajax = new XMLHttpRequest();
+                        
                             td = document.createElement(td);
                             menge = eintrag.getQuantity();
                             td.appendChild(menge);
@@ -220,7 +224,8 @@
                     }
                     
                     lightBox.appendChild(table);
-                    
+                    */
+                    //
                     
                     //Untere Zeile
                     table2 = document.createElement('table');
