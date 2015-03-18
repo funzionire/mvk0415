@@ -104,7 +104,7 @@
 
             <%--Button für neuen Lagerort --%>
             <div class="hhdiv">
-                <h2 class="hbox">Neuer Lagerort</h2> 
+                <h2 class="hbox" style="width: 250px">Neuer Lagerort</h2> 
                 <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
                     <div class="hhdiv">
                         <input type ="text" name="name" placeholder="Lagerort..."/>
@@ -150,11 +150,14 @@
                     
                     td = document.createElement('td');
                     input1= document.createTextNode("test1");
-                    input2= document.createTextNode("test2");
                     td.appendChild(input1);
                     tr.appendChild(td);
+                    
+                    td = document.createElement('td');
+                    input2= document.createTextNode("test2");
                     td.appendChild(input2);
                     tr.appendChild(td);
+                    
                     table.appendChild(tr);
                     
                     //tabelle
