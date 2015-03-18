@@ -83,6 +83,7 @@ td{
 }
 
 .hhcontainer{
+    background-color: rgba(0,128,0,.25);
     height: 100%;
     width: 100%;
     position: absolute;
