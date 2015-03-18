@@ -13,28 +13,58 @@
 <jsp:useBean id="article" class="model.StocksArticle" scope="request"/>
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12">
+    <div class="row" >
+        <div class="col-md-12">
             <h1>Hallo <jsp:getProperty name="user" property="name"/> </h1>
             <h3>Haushalt: <jsp:getProperty name="household" property="name"/> </h3>
             <p>Hier wird dein Haushalt verwaltet und die einzelnen Lagerorte angezeigt.</p>
             <br>
-            
+        </div>
+    </div>
+    <div class="row" >
+        <div class="col-md-4">
             <%-- Formular, um Household zu teilen--%>
             <form method ="post" action="/MVK-war/ControllerServlet?step=shareHousehold">
                 <table>
                     <tr>
-                        <td>Teile deinen Haushalt mit anderen! Einfach Email eines anderen registrierten User angeben!</td>
+                        <td>Teile deinen Haushalt mit anderen!</td>
                     </tr>
                     <tr>
-                        <td><input type ="email" name="email" placeholde="Email"/></td>
+                        <td><input type ="email" name="email" placeholder="Email"/></td>
                     </tr>
                     <tr><td><input type="submit" value ="Haushalt teilen"/></td></tr>
                 </table>
             </form>
             
         </div>
+        <div class="col-md-4">
+             <%-- Formular, um Namen des Haushalts ändern--%>
+            <form method ="post" action="/MVK-war/ControllerServlet?step=changeHousehold">
+                <table>
+                    <tr>
+                        <td>Ändere den Namen deines Haushalts</td>
+                    </tr>
+                    <tr>
+                        <td><input type ="text" name="name" placeholder="Name"/></td>
+                    </tr>
+                    <tr><td><input type="submit" value ="Name ändern"/></td></tr>
+                </table>
+            </form>   
+        </div>    
+         <div class="col-md-4">
+             <%-- Formular, um Haushalt zu löschen--%>
+            <form method ="post" action="/MVK-war/ControllerServlet?step=deleteHousehold">
+                <table>
+                    <tr>
+                        <td>Lösche deinen Haushalt endgültig!</td>
+                    </tr>
+                    <tr><td><input type="submit" value ="Haushalt löschen"/></td></tr>
+                </table>
+            </form>   
+        </div>    
     </div>
+            
+    <div class="row">       
     <div class="hhcontainer">
         <%-- Lagerplätze nebeneinander --%>
         <c:forEach items="${household.getPlaceList()}" var="place" >
@@ -80,6 +110,7 @@
                        value ="+ Neuen Lagerort hinzufügen"/>
             </div>
         </form>
+    </div>
     </div>
 
     <script>
