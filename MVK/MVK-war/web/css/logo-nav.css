@@ -81,6 +81,19 @@ td{
 .pointer:hover{
     cursor: pointer;
 }
+
+.hhcontainer{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow-x: scroll;        
+}
+
+.hhdiv{
+    width: 165px;
+    overflow-y: auto;
+}
+
 @media(min-width:768px) {
     body {
         padding-top: 100px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */

@@ -21,10 +21,10 @@
             </br>
         </div>
     </div>
-    <div class="row">
+    <div class="hhcontainer">
         <%-- Lagerplätze nebeneinander --%>
         <c:forEach items="${household.getPlaceList()}" var="place" >
-            <div class="col-md-3">
+            <div class="hhdiv">
                 <h2 class="hbox"> ${place.name}</h2> 
 
                 <c:url var="idFromPlace" value="/ControllerServlet?step=createStocksArticle">
@@ -60,7 +60,7 @@
 
         <%--Button für neuen Lagerort --%>
         <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
-            <div class="col-md-2">
+            <div class="hhdiv">
                 <input type ="text" name="name" placeholder="Lagerort..."/>
                 <input type="submit"
                        value ="+ Neuen Lagerort hinzufügen"/>
