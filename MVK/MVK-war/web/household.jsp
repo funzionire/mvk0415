@@ -35,10 +35,10 @@
                     <tr><td><input type="submit" value ="Haushalt teilen"/></td></tr>
                 </table>
             </form>
-            
+
         </div>
         <div class="col-md-4">
-             <%-- Formular, um Namen des Haushalts ändern--%>
+            <%-- Formular, um Namen des Haushalts ändern--%>
             <form method ="post" action="/MVK-war/ControllerServlet?step=changeHousehold">
                 <table>
                     <tr>
@@ -51,8 +51,8 @@
                 </table>
             </form>   
         </div>    
-         <div class="col-md-4">
-             <%-- Formular, um Haushalt zu löschen--%>
+        <div class="col-md-4">
+            <%-- Formular, um Haushalt zu löschen--%>
             <form method ="post" action="/MVK-war/ControllerServlet?step=deleteHousehold">
                 <table>
                     <tr>
@@ -63,54 +63,57 @@
             </form>   
         </div>    
     </div>
-            
+
     <div class="row">       
-    <div class="hhcontainer">
-        <%-- Lagerplätze nebeneinander --%>
-        <c:forEach items="${household.getPlaceList()}" var="place" >
-            <div class="hhdiv">
-                <h2 class="hbox"> ${place.name}</h2> 
+        <div class="hhcontainer">
+            <%-- Lagerplätze nebeneinander --%>
+            <c:forEach items="${household.getPlaceList()}" var="place" >
+                <div class="hhdiv">
+                    <h2 class="hbox"> ${place.name}</h2> 
 
-                <c:url var="idFromPlace" value="/ControllerServlet?step=createStocksArticle">
-                    <c:param name="id" value="${place.placeID}"/>
-                </c:url>
+                    <c:url var="idFromPlace" value="/ControllerServlet?step=createStocksArticle">
+                        <c:param name="id" value="${place.placeID}"/>
+                    </c:url>
 
-                <%-- Artikeltabelle untehalb des Lagerortes--%>
+                    <%-- Artikeltabelle untehalb des Lagerortes--%>
 
-                <table class="bgbox">
-                    <c:forEach items="${place.getStocksArticleList()}" var="article" >
+                    <table class="bgbox">
+                        <c:forEach items="${place.getStocksArticleList()}" var="article" >
+                            <tr>
+                                <td>
+                                    <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                                </td>
+                            </tr>
+                        </c:forEach>
                         <tr>
-                            <td>
-                                <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                            <td>    <%-- Button für neuen Artikel --%>
+
+                                <form method="post" action="ControllerServlet?step=createStocksArticle">
+                                    <input type="text" name="name" placeholder="Artikel..." />
+                                    <input type="hidden"
+                                           value="${place.placeID}"
+                                           name="id"
+                                           />
+                                    <input type="submit" value="Artikel hinzufügen"/>
+                                </form>
                             </td>
                         </tr>
-                    </c:forEach>
-                    <tr>
-                        <td>    <%-- Button für neuen Artikel --%>
+                    </table>
+                </div>
+            </c:forEach>
 
-                            <form method="post" action="ControllerServlet?step=createStocksArticle">
-                                <input type="text" name="name" placeholder="Artikel..." />
-                                <input type="hidden"
-                                       value="${place.placeID}"
-                                       name="id"
-                                       />
-                                <input type="submit" value="Artikel hinzufügen"/>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </c:forEach>
-
-        <%--Button für neuen Lagerort --%>
-        <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
+            <%--Button für neuen Lagerort --%>
             <div class="hhdiv">
-                <input type ="text" name="name" placeholder="Lagerort..."/>
-                <input type="submit"
-                       value ="+ Neuen Lagerort hinzufügen"/>
+                <h2 class="hbox" style="width: auto">Neuer Lagerort</h2> 
+                <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
+                    <div class="hhdiv">
+                        <input type ="text" name="name" placeholder="Lagerort..."/>
+                        <input type="submit"
+                               value ="+ Neuen Lagerort hinzufügen"/>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
     </div>
 
     <script>
@@ -138,22 +141,93 @@
                     text = document.createTextNode(document.getElementById(myId).innerHTML);
                     head.appendChild(text);
                     lightBox.appendChild(head);
+                    
+                    //tabelle
+                    
+                    table = document.createElement('table');
+                    
+                    //Überschriftszeile
+                        tr = document.createElement('tr');
+                            td = document.createElement('td');
+                            menge= document.createTextNode("Menge");
+                            td.appendChild(menge);
+                            tr.appendChild(td);
 
+                            td = document.createElement('td');
+                            datum= document.createTextNode("Datum");
+                            td.appendChild(datum);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            kommentar= document.createTextNode("Kommentar");
+                            td.appendChild(kommentar);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            plus= document.createTextNode("+");
+                            td.appendChild(plus);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            minus= document.createTextNode("-");
+                            td.appendChild(minus);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            verschieben= document.createTextNode("->");
+                            td.appendChild(verschieben);
+                            tr.appendChild(td);
+
+                        table.appendChild(tr);
+                    
+                    //Tabellen-Inhalt
+                    
+                    //Schleife
+                    
+                    
+                    //Untere Zeile
+                    tr = document.createElement('tr');
+                    
                     form = document.createElement('form');
                     form.setAttribute('method', 'post');
-                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksArticle');
+                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit');
+                    
+                            td = document.createElement('td');
+                            textfeldm = document.createElement('input');
+                            textfeldm.setAttribute('type', 'text');
+                            textfeldm.setAttribute('name', 'Menge');
+                            textfeldm.setAttribute('placeholder', 'Menge...');
+                            td.appendChild(textfeldm);
+                            tr.appendChild(td);
 
-                    textfeld = document.createElement('input');
-                    textfeld.setAttribute('type', 'text');
-                    textfeld.setAttribute('name', 'name');
+                            td = document.createElement('td');
+                            textfeldd = document.createElement('input');
+                            textfeldd.setAttribute('type', 'date');
+                            textfeldd.setAttribute('name', 'Datum');
+                            textfeldd.setAttribute('placeholder', 'MHD...');
+                            td.appendChild(textfeldd);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            textfeldc = document.createElement('input');
+                            textfeldc.setAttribute('type', 'text');
+                            textfeldc.setAttribute('name', 'Kommentar');
+                            textfeldc.setAttribute('placeholder', 'Kommentar...');
+                            td.appendChild(textfeldc);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            button = document.createElement('input');
+                            button.setAttribute('type', 'submit');
+                            button.setAttribute('value', 'hinzufügen');
+                            td.appendChild(button);
+                            form.appendChild(td);
+                            
+                            form.appendChild(tr);
 
-                    button = document.createElement('input');
-                    button.setAttribute('type', 'submit');
-                    button.setAttribute('value', 'add');
-
-                    form.appendChild(textfeld);
-                    form.appendChild(button);
-                    lightBox.appendChild(form);
+                        table.appendChild(form);
+                    
+                    lightBox.appendChild(table);
 
                     document.getElementsByTagName("body")[0].appendChild(div);
                     document.getElementsByTagName("body")[0].appendChild(lightBox);
