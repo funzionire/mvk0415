@@ -127,12 +127,13 @@ td{
     #lightBox {
         position:fixed;
         top:50%;
-        left:40%;
+        left:15%;
+        right:15%;
         margin-left:-100px;
         margin-top:-100px;
         z-index:200;
-        width:500px;
-        height:300px;
+        width:auto;
+        height:auto;
         background-color:#fff;
         text-align:center;
     }

@@ -188,9 +188,9 @@
                     //Untere Zeile
                     tr = document.createElement('tr');
                     
-                    form = document.createElement('form');
-                    form.setAttribute('method', 'post');
-                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit');
+                    //form = document.createElement('form');
+                    //form.setAttribute('method', 'post');
+                    //form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit');
                     
                             td = document.createElement('td');
                             textfeldm = document.createElement('input');
@@ -223,9 +223,19 @@
                             td.appendChild(button);
                             tr.appendChild(td);
                             
-                            form.appendChild(tr);
+                            td = document.createElement('td');
+                            empty1= document.createTextNode("");
+                            td.appendChild(empty1);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            empty2= document.createTextNode("");
+                            td.appendChild(empty2);
+                            tr.appendChild(td);
+                            
+                           // form.appendChild(tr);
 
-                        table.appendChild(form);
+                        table.appendChild(tr);
                     
                     lightBox.appendChild(table);
 
