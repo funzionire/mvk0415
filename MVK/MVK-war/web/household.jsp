@@ -182,19 +182,26 @@
                     
                     //Tabellen-Inhalt
                     
-                    //Schleife
+                    //Schleife ...{}
+                    
+                    
+                    table.appendChild(tr);
+                    
+                    lightBox.appendChild(table);
                     
                     
                     //Untere Zeile
+                    table2 = document.createElement('table');
+                    
                     tr = document.createElement('tr');
                     
-                    //form = document.createElement('form');
-                    //form.setAttribute('method', 'post');
-                    //form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit');
+                    form = document.createElement('form');
+                    form.setAttribute('method', 'post');
+                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit');
                     
                             td = document.createElement('td');
                             textfeldm = document.createElement('input');
-                            textfeldm.setAttribute('type', 'text');
+                            textfeldm.setAttribute('type', 'number');
                             textfeldm.setAttribute('name', 'Menge');
                             textfeldm.setAttribute('placeholder', 'Menge...');
                             td.appendChild(textfeldm);
@@ -222,22 +229,11 @@
                             button.setAttribute('value', 'hinzufügen');
                             td.appendChild(button);
                             tr.appendChild(td);
-                            
-                            td = document.createElement('td');
-                            empty1= document.createTextNode("");
-                            td.appendChild(empty1);
-                            tr.appendChild(td);
-                            
-                            td = document.createElement('td');
-                            empty2= document.createTextNode("");
-                            td.appendChild(empty2);
-                            tr.appendChild(td);
-                            
-                           // form.appendChild(tr);
-
-                        table.appendChild(tr);
-                    
-                    lightBox.appendChild(table);
+                                                        
+                           form.appendChild(tr);
+                           
+                           table2.appendChild(form);
+                           lightBox.appendChild(table2);
 
                     document.getElementsByTagName("body")[0].appendChild(div);
                     document.getElementsByTagName("body")[0].appendChild(lightBox);
