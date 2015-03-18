@@ -225,7 +225,7 @@ public class ControllerServlet extends HttpServlet {
             long longID = Long.parseLong(id);
             Place place = manageBeanUserHousehold.findPlace(longID);
             session.setAttribute("place", place);
-            StocksArticle stocksArticle = stocksArticle = manageBeanStocks.addStocksArticle(request.getParameter("name"),
+            StocksArticle stocksArticle = manageBeanStocks.addStocksArticle(request.getParameter("name"),
                                             place, "");
             if (stocksArticle != null) {
                 LOG.info("CustomInfo: StocksArticle erfolgreich angelegt");
