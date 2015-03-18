@@ -204,25 +204,17 @@ public class ControllerServlet extends HttpServlet {
                 LOG.info("CustomInfo: Lagerort erfolgreich geändert");
                 request.setAttribute("place", changedPlace);
                 session.setAttribute("plcae", changedPlace);
-                request.getRequestDispatcher("/place.jsp").forward(request, response);
+                request.getRequestDispatcher("/household.jsp").forward(request, response);
             }
             else{
                 LOG.info("CustomInfo: Lagerort ändern fehlgeschlagen");
-                request.getRequestDispatcher("/place.jsp").forward(request, response);
+                request.getRequestDispatcher("/household.jsp").forward(request, response);
             }
         }
 //        else if(currentStep.equals("deletePlace")){
 //            HttpSession session = request.getSession(true);
 //            session.getAttribute("place");
 //        }
-//        else if(currentStep.equals("toPlace")){
-//                HttpSession session = request.getSession(true);
-//                LOG.info("CustomInfo: Lagerort öffnen");
-//                request.setAttribute("user", session.getAttribute("user"));
-//                request.setAttribute("household", session.getAttribute("household"));
-//                request.setAttribute("place", session.getAttribute("place"));
-//                request.getRequestDispatcher("/household.jsp").forward(request, response);
-//      }  
         /*-------------------------------------------------------------------------------------------
         StocksArticle
         -------------------------------------------------------------------------------------------*/
@@ -231,23 +223,23 @@ public class ControllerServlet extends HttpServlet {
             LOG.info("CustomInfo: ID vom Platz holen");
             String id = (String)request.getParameter("id");
             long longID = Long.parseLong(id);
-            LOG.info("lalo" + longID);
             Place place = manageBeanUserHousehold.findPlace(longID);
             session.setAttribute("place", place);
             StocksArticle stocksArticle = stocksArticle = manageBeanStocks.addStocksArticle(request.getParameter("name"),
-                                            (Place) session.getAttribute("place"), "");
+                                            place, "");
             if (stocksArticle != null) {
                 LOG.info("CustomInfo: StocksArticle erfolgreich angelegt");
                 session.setAttribute("stocksArticle", stocksArticle);
-                session.setAttribute("place", (Place) session.getAttribute("place"));
                 request.setAttribute("user", (AppUser) session.getAttribute("user"));
                 request.setAttribute("household", (Household) session.getAttribute("household"));
                 request.setAttribute("place", (Place) session.getAttribute("place"));
                 request.setAttribute("stocksArticle", stocksArticle);
-                request.getRequestDispatcher("/household.jsp").forward(request, response);
+//                request.setAttribute("id", session.getAttribute("id"));
+                response.sendRedirect("/MVK-war/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id"));
+//                request.getRequestDispatcher("/household.jsp").forward(request, response);
             } else {
                 LOG.info("CustomInfo: StocksArticle anlegen fehlgeschlagen");
-                request.getRequestDispatcher("/homepage.jsp").forward(request, response);
+                request.getRequestDispatcher("/household.jsp").forward(request, response);
             }
         }
         else if(currentStep.equals("changeStocksArticle")){
@@ -258,15 +250,7 @@ public class ControllerServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.getAttribute("stocksArticle");
         }
-        else if(currentStep.equals("toStocksArticle")){
-            HttpSession session = request.getSession(true);
-            LOG.info("CustomInfo: StocksArticle öffnen");
-            request.setAttribute("user", session.getAttribute("user"));
-            request.setAttribute("household", session.getAttribute("household"));
-            request.setAttribute("place", session.getAttribute("place"));
-            request.setAttribute("stocksArticle", session.getAttribute("stocksArticle"));
-            request.getRequestDispatcher("/household.jsp").forward(request, response);
-        }
+        
         /*-------------------------------------------------------------------------------------------
             Navigation
         -------------------------------------------------------------------------------------------*/
@@ -279,22 +263,32 @@ public class ControllerServlet extends HttpServlet {
             
             request.setAttribute("user", session.getAttribute("user"));
             request.setAttribute("household", household);
+            session.setAttribute("id", longID);
             session.setAttribute("household", household);
             request.getRequestDispatcher("/household.jsp").forward(request, response);
         }
-        else if(currentStep.equals("toPlace")){
-            HttpSession session = request.getSession(true);
-            LOG.info("CustomInfo: Platz öffnen");
-            String id = (String)request.getParameter("id");
-            long longID = Long.parseLong(id);
-            Place place = manageBeanUserHousehold.findPlace(longID);
-            
-            request.setAttribute("user", session.getAttribute("user"));
-            request.setAttribute("household", session.getAttribute("household"));
-            request.setAttribute("place", place);
-            session.setAttribute("place", place);
-            request.getRequestDispatcher("/place.jsp").forward(request, response);
-        }
+//        else if(currentStep.equals("toPlace")){
+//            HttpSession session = request.getSession(true);
+//            LOG.info("CustomInfo: Platz öffnen");
+//            String id = (String)request.getParameter("id");
+//            long longID = Long.parseLong(id);
+//            Place place = manageBeanUserHousehold.findPlace(longID);
+//            
+//            request.setAttribute("user", session.getAttribute("user"));
+//            request.setAttribute("household", session.getAttribute("household"));
+//            request.setAttribute("place", place);
+//            session.setAttribute("place", place);
+//            request.getRequestDispatcher("/place.jsp").forward(request, response);
+//        }
+//        else if(currentStep.equals("toStocksArticle")){
+//            HttpSession session = request.getSession(true);
+//            LOG.info("CustomInfo: StocksArticle öffnen");
+//            request.setAttribute("user", session.getAttribute("user"));
+//            request.setAttribute("household", session.getAttribute("household"));
+//            request.setAttribute("place", session.getAttribute("place"));
+//            request.setAttribute("stocksArticle", session.getAttribute("stocksArticle"));
+//            request.getRequestDispatcher("/household.jsp").forward(request, response);
+//        }
         else if(currentStep.equals("toSettings")){
             HttpSession session = request.getSession(true);
             LOG.info("CustomInfo: Einstellungen öffnen");

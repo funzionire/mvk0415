@@ -64,7 +64,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
 
     @Override
     public Household findHousehold(long longID) {
-        LOG.info("lalelu" + longID);
         if (longID == 0) {
             return null;
         }
@@ -114,7 +113,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
 
     @Override
     public Place findPlace(long longID) {
-        LOG.info("lalelu" + longID);
         if (longID == 0) {
             return null;
         }
@@ -123,8 +121,10 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         if (query.getResultList().isEmpty()) {
             return null;
         }
+        Place place = query.getSingleResult();
+        em.refresh(place);
         LOG.info(query.getSingleResult().getName());
-        return query.getSingleResult();
+        return place;
     }
     
     
