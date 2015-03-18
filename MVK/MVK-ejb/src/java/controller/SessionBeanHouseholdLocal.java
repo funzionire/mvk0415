@@ -26,7 +26,7 @@ public interface SessionBeanHouseholdLocal {
     //Household
     public Household createHousehold(String name);
         
-    public boolean deleteHousehold(Household household);
+    public void deleteHousehold(Household household);
     
     public Household changeHousehold(Household household, String newName);
     

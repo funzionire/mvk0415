@@ -50,7 +50,8 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     }
 
     @Override
-    public void deleteHousehold(Household household) {
+    public void deleteHousehold(AppUser user, Household household) {
+        sessionBeanUser.removeHouseholdFromUser(user, household);
         sessionBeanHousehold.deleteHousehold(household);
     }
     

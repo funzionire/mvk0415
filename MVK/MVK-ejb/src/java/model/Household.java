@@ -27,7 +27,7 @@ public class Household implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long householdID;
-    @OneToMany(cascade=CascadeType.REMOVE)
+    @OneToMany(cascade=CascadeType.ALL)
     private List<Place> places;
     @ManyToMany
     private List<AppUser> users;

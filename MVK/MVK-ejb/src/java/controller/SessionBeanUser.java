@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.xml.registry.infomodel.User;
 import model.AppUser;
 import model.Household;
 
@@ -103,10 +104,13 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (household != null) {
+                user = em.find(AppUser.class, user.getUserID());
                 user.getHouseholdList().remove(household);
+                em.flush();
+                em.persist(user);
             }
-            user = em.merge(user);
-            em.flush();
+//            em.merge(user);
+//            em.flush();
             return true;
         } catch (Exception e) {
             return false;

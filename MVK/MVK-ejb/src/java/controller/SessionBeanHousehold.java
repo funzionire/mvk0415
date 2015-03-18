@@ -9,7 +9,10 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import model.Household;
@@ -40,14 +43,24 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public boolean deleteHousehold(Household household) {
+    public void deleteHousehold(Household household) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            em.remove(household);
-            em.flush();
-            return true;
+            System.out.println(household.getHouseholdID());
+            Household foundHousehold = em.find(Household.class, household.getHouseholdID());
+            if(foundHousehold != null){
+                System.out.println("success");
+//                foundHousehold = em.merge(foundHousehold);
+                
+                em.remove(foundHousehold);
+                em.getTransaction().commit();
+                em.flush();
+            }else{
+                System.out.println("error");
+            }
+//            return true;
         } catch (Exception e) {
-            return false;
+//            return false;
         }
     }
 

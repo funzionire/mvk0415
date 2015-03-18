@@ -26,7 +26,7 @@ public interface ManageBeanUserHouseholdLocal {
     
     public Place addPlace(String name, Household household);
     
-    public void deleteHousehold(Household household);
+    public void deleteHousehold(AppUser user, Household household);
       
     //wrapper-Methoden
     

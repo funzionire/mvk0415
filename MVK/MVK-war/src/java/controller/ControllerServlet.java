@@ -169,8 +169,9 @@ public class ControllerServlet extends HttpServlet {
         }
         else if(currentStep.equals("deleteHousehold")){
             HttpSession session = request.getSession(true);
-            manageBeanUserHousehold.deleteHousehold((Household)session.getAttribute("household"));
-            request.getRequestDispatcher("homepage.jsp");
+            manageBeanUserHousehold.deleteHousehold((AppUser)session.getAttribute("user"),(Household)session.getAttribute("household"));
+            request.setAttribute("user", session.getAttribute("user"));
+            request.getRequestDispatcher("homepage.jsp").forward(request, response);
         }
         else if(currentStep.equals("shareHousehold")){
             HttpSession session = request.getSession(true);
