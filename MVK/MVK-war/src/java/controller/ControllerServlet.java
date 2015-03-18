@@ -198,6 +198,18 @@ public class ControllerServlet extends HttpServlet {
         else if(currentStep.equals("changePlace")){
             HttpSession session = request.getSession(true);
             session.getAttribute("place");
+            Place changedPlace = manageBeanUserHousehold.changePlace((Place)session.getAttribute("place"),
+                                                                     (String)request.getAttribute("name"));
+            if(changedPlace != null){
+                LOG.info("CustomInfo: Lagerort erfolgreich geändert");
+                request.setAttribute("place", changedPlace);
+                session.setAttribute("plcae", changedPlace);
+                request.getRequestDispatcher("/place.jsp").forward(request, response);
+            }
+            else{
+                LOG.info("CustomInfo: Lagerort ändern fehlgeschlagen");
+                request.getRequestDispatcher("/place.jsp").forward(request, response);
+            }
         }
 //        else if(currentStep.equals("deletePlace")){
 //            HttpSession session = request.getSession(true);
@@ -263,7 +275,6 @@ public class ControllerServlet extends HttpServlet {
             LOG.info("CustomInfo: Haushalt öffnen");
             String id = (String)request.getParameter("id");
             long longID = Long.parseLong(id);
-            LOG.info("lalo" + longID);
             Household household = manageBeanUserHousehold.findHousehold(longID);
             
             request.setAttribute("user", session.getAttribute("user"));
@@ -271,7 +282,19 @@ public class ControllerServlet extends HttpServlet {
             session.setAttribute("household", household);
             request.getRequestDispatcher("/household.jsp").forward(request, response);
         }
-        
+        else if(currentStep.equals("toPlace")){
+            HttpSession session = request.getSession(true);
+            LOG.info("CustomInfo: Platz öffnen");
+            String id = (String)request.getParameter("id");
+            long longID = Long.parseLong(id);
+            Place place = manageBeanUserHousehold.findPlace(longID);
+            
+            request.setAttribute("user", session.getAttribute("user"));
+            request.setAttribute("household", session.getAttribute("household"));
+            request.setAttribute("place", place);
+            session.setAttribute("place", place);
+            request.getRequestDispatcher("/place.jsp").forward(request, response);
+        }
         else if(currentStep.equals("toSettings")){
             HttpSession session = request.getSession(true);
             LOG.info("CustomInfo: Einstellungen öffnen");
