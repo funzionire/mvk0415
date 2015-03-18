@@ -145,6 +145,7 @@
                     //tabelle
                     
                     table = document.createElement('table');
+                    
                     //Überschriftszeile
                         tr = document.createElement('tr');
                             td = document.createElement('td');
@@ -179,59 +180,52 @@
 
                         table.appendChild(tr);
                     
-                    //tabelle
+                    //Tabellen-Inhalt
                     
+                    //Schleife
+                    
+                    
+                    //Untere Zeile
                     tr = document.createElement('tr');
-
-                            //schleife 2 (innen)
-                            
-                            td = document.createElement('td');
-                            menge= document.createTextNode("Menge");
-                            td.appendChild(menge);
-                            tr.appendChild(td);
-
-                            td = document.createElement('td');
-                            datum= document.createTextNode("Datum");
-                            td.appendChild(datum);
-                            tr.appendChild(td);
-                            
-                            td = document.createElement('td');
-                            kommentar= document.createTextNode("Kommentar");
-                            td.appendChild(kommentar);
-                            tr.appendChild(td);
-                            
-                            td = document.createElement('td');
-                            plus= document.createTextNode("+");
-                            td.appendChild(plus);
-                            tr.appendChild(td);
-                            
-                            td = document.createElement('td');
-                            minus= document.createTextNode("-");
-                            td.appendChild(minus);
-                            tr.appendChild(td);
-                            
-                            td = document.createElement('td');
-                            verschieben= document.createTextNode("->");
-                            td.appendChild(verschieben);
-                            tr.appendChild(td);
-
-                        table.appendChild(tr);
                     
                     form = document.createElement('form');
                     form.setAttribute('method', 'post');
-                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksArticle');
+                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit');
+                    
+                            td = document.createElement('td');
+                            textfeldm = document.createElement('input');
+                            textfeldm.setAttribute('type', 'text');
+                            textfeldm.setAttribute('name', 'Menge');
+                            textfeldm.setAttribute('placeholder', 'Menge...');
+                            td.appendChild(textfeldm);
+                            form.appendChild(td);
 
-                    textfeld = document.createElement('input');
-                    textfeld.setAttribute('type', 'text');
-                    textfeld.setAttribute('name', 'name');
+                            td = document.createElement('td');
+                            textfeldd = document.createElement('input');
+                            textfeldd.setAttribute('type', 'date');
+                            textfeldd.setAttribute('name', 'Datum');
+                            textfeldd.setAttribute('placeholder', 'MHD...');
+                            td.appendChild(textfeldd);
+                            form.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            textfeldc = document.createElement('input');
+                            textfeldc.setAttribute('type', 'text');
+                            textfeldc.setAttribute('name', 'Kommentar');
+                            textfeldc.setAttribute('placeholder', 'Kommentar...');
+                            td.appendChild(textfeldc);
+                            form.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            button = document.createElement('input');
+                            button.setAttribute('type', 'submit');
+                            button.setAttribute('value', 'hinzufügen');
+                            td.appendChild(button);
+                            form.appendChild(td);
+                            
+                            tr.appendChild(form);
 
-                    button = document.createElement('input');
-                    button.setAttribute('type', 'submit');
-                    button.setAttribute('value', 'add');
-
-                    form.appendChild(textfeld);
-                    form.appendChild(button);
-                    lightBox.appendChild(form);
+                        table.appendChild(tr);
                     
                     lightBox.appendChild(table);
 
