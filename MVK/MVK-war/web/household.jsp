@@ -104,7 +104,7 @@
 
             <%--Button für neuen Lagerort --%>
             <div class="hhdiv">
-                <h2 class="hbox" style="width: 250px">Neuer Lagerort</h2> 
+                <h2 class="hbox" style="width: auto">Neuer Lagerort</h2> 
                 <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
                     <div class="hhdiv">
                         <input type ="text" name="name" placeholder="Lagerort..."/>
@@ -145,22 +145,77 @@
                     //tabelle
                     
                     table = document.createElement('table');
-                    
-                    tr = document.createElement('tr');
-                    
-                    td = document.createElement('td');
-                    input1= document.createTextNode("test1");
-                    td.appendChild(input1);
-                    tr.appendChild(td);
-                    
-                    td = document.createElement('td');
-                    input2= document.createTextNode("test2");
-                    td.appendChild(input2);
-                    tr.appendChild(td);
-                    
-                    table.appendChild(tr);
+                    //Überschriftszeile
+                        tr = document.createElement('tr');
+                            td = document.createElement('td');
+                            menge= document.createTextNode("Menge");
+                            td.appendChild(menge);
+                            tr.appendChild(td);
+
+                            td = document.createElement('td');
+                            datum= document.createTextNode("Datum");
+                            td.appendChild(datum);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            kommentar= document.createTextNode("Kommentar");
+                            td.appendChild(kommentar);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            plus= document.createTextNode("+");
+                            td.appendChild(plus);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            minus= document.createTextNode("-");
+                            td.appendChild(minus);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            verschieben= document.createTextNode("->");
+                            td.appendChild(verschieben);
+                            tr.appendChild(td);
+
+                        table.appendChild(tr);
                     
                     //tabelle
+                    
+                    tr = document.createElement('tr');
+
+                            //schleife 2 (innen)
+                            
+                            td = document.createElement('td');
+                            menge= document.createTextNode("Menge");
+                            td.appendChild(menge);
+                            tr.appendChild(td);
+
+                            td = document.createElement('td');
+                            datum= document.createTextNode("Datum");
+                            td.appendChild(datum);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            kommentar= document.createTextNode("Kommentar");
+                            td.appendChild(kommentar);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            plus= document.createTextNode("+");
+                            td.appendChild(plus);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            minus= document.createTextNode("-");
+                            td.appendChild(minus);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement('td');
+                            verschieben= document.createTextNode("->");
+                            td.appendChild(verschieben);
+                            tr.appendChild(td);
+
+                        table.appendChild(tr);
                     
                     form = document.createElement('form');
                     form.setAttribute('method', 'post');
