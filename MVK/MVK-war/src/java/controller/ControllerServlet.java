@@ -8,6 +8,7 @@ package controller;
 import static controller.BeanFactory.getManageBeanStocks;
 import static controller.BeanFactory.getManageBeanUserHousehold;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -241,12 +242,20 @@ public class ControllerServlet extends HttpServlet {
         else if(currentStep.equals("createStocksUnit")){
             HttpSession session = request.getSession(true);
             LOG.info("CustomInfo: ID vom StocksArticle holen");
-            String id = (String)request.getParameter("id");
+            String id = (String)request.getParameter("StocksArticleID");
             long longID = Long.parseLong(id);
             StocksArticle stocksArticle = manageBeanStocks.findStocksArticle(longID);
             session.setAttribute("stocksArticle", stocksArticle);
-            StocksUnit stocksUnit = manageBeanStocks.addStocksUnit(stocksArticle,(int) request.getAttribute("Menge"),
-                                            (Date) request.getAttribute("Datum"), (String) request.getAttribute("Kommentar"));
+            int amount = Integer.parseInt(request.getParameter("Menge"));
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = null;
+            try{    
+                 date = sdf.parse(request.getParameter("Datum"));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            StocksUnit stocksUnit = manageBeanStocks.addStocksUnit(stocksArticle,amount,
+                                            date, request.getParameter("Kommentar"));
             if (stocksArticle != null) {
                 LOG.info("CustomInfo: StocksUnit erfolgreich angelegt");
                 session.setAttribute("stocksUnit", stocksUnit);
