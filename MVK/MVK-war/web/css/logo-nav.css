@@ -92,6 +92,9 @@ td{
 .hhdiv{
     width: 165px;
     overflow-y: auto;
+    margin-left: -15px;
+    margin-right: -15px;
+    position: relative;
 }
 
 @media(min-width:768px) {
