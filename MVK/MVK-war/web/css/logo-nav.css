@@ -94,6 +94,7 @@ td{
     margin-left: 20px;
     margin-right: 20px;
     position: relative;
+    float:left;
 }
 
 @media(min-width:768px) {
