@@ -90,10 +90,9 @@ td{
 }
 
 .hhdiv{
-    width: 165px;
-    overflow-y: auto;
-    margin-left: -15px;
-    margin-right: -15px;
+    width: 220px;
+    margin-left: 20px;
+    margin-right: 20px;
     position: relative;
 }
 
