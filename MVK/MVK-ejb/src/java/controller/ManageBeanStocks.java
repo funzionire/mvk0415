@@ -55,16 +55,17 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
     
 
     @Override
-    public boolean addStocksUnit(StocksArticle stocksArticle, int quantity, Date mdd, String commentSUnit) {
+    public StocksUnit addStocksUnit(StocksArticle stocksArticle, int quantity, Date mdd, String commentSUnit) {
         try {
             //fliegt er so schon raus in den catch also wenn quantity >0?
             if(quantity > 0){
             StocksUnit stocksUnit = sessionBeanStocksArticle.createStocksUnit(quantity, mdd, commentSUnit);
             sessionBeanStocksArticle.addStocksUnitToStocksArticle(stocksArticle, stocksUnit);
+            return stocksUnit;
             }
-            return true;
+            return null;
         } catch (Exception e) {
-            return false;
+            return null;
         }
     }
 

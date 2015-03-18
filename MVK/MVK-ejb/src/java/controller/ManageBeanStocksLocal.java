@@ -27,7 +27,7 @@ public interface ManageBeanStocksLocal {
     public StocksArticle findStocksArticle(long longID);
     
     //StocksUnit
-    public boolean addStocksUnit(StocksArticle stocksArticle, int quantity, Date mdd, String commentSUnit);
+    public StocksUnit addStocksUnit(StocksArticle stocksArticle, int quantity, Date mdd, String commentSUnit);
     
     public boolean removeStocksUnit(StocksUnit stocksUnit);
     

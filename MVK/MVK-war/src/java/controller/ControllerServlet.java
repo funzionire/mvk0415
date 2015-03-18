@@ -8,7 +8,7 @@ package controller;
 import static controller.BeanFactory.getManageBeanStocks;
 import static controller.BeanFactory.getManageBeanUserHousehold;
 import java.io.IOException;
-import java.util.Enumeration;
+import java.util.Date;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +20,7 @@ import model.AppUser;
 import model.Household;
 import model.Place;
 import model.StocksArticle;
+import model.StocksUnit;
 
 /**
  *
@@ -243,9 +244,9 @@ public class ControllerServlet extends HttpServlet {
             String id = (String)request.getParameter("id");
             long longID = Long.parseLong(id);
             StocksArticle stocksArticle = manageBeanStocks.findStocksArticle(longID);
-            session.setAttribute("place", place);
-            StocksUnit stocksUnit = manageBeanStocks.addStocksUnit(stocksArticle, request.getAttribute("Menge"),
-                                            request.getAttribute("Datum"), request.getAttribute("Kommentar");
+            session.setAttribute("stocksArticle", stocksArticle);
+            StocksUnit stocksUnit = manageBeanStocks.addStocksUnit(stocksArticle,(int) request.getAttribute("Menge"),
+                                            (Date) request.getAttribute("Datum"), (String) request.getAttribute("Kommentar"));
             if (stocksArticle != null) {
                 LOG.info("CustomInfo: StocksUnit erfolgreich angelegt");
                 session.setAttribute("stocksUnit", stocksUnit);
