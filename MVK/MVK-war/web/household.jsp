@@ -223,10 +223,10 @@
                         table.appendChild(tr);
                     }
                     
-                    lightBox.appendChild(table);
+                    
                     */
                     //
-                    
+                     lightBox.appendChild(table);
                     //Untere Zeile
                     table2 = document.createElement('table');
                     
