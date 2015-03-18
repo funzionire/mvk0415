@@ -81,7 +81,7 @@
                         <c:forEach items="${place.getStocksArticleList()}" var="article" >
                             <tr>
                                 <td>
-                                    <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                                    <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display','${article.getStocksUnitList()}')">${article.getName()}</strong> 
                                 </td>
                             </tr>
                         </c:forEach>
@@ -117,7 +117,7 @@
     </div>
 
     <script>
-        function overlay(myId, mode) {
+        function overlay(myId, mode, list) {
             if (mode === 'display') {
                 if (document.getElementById("overlay") === null) {
                     div = document.createElement("div");
@@ -148,44 +148,76 @@
                     
                     //Überschriftszeile
                         tr = document.createElement('tr');
-                            td = document.createElement('td');
+                            th = document.createElement('th');
                             menge= document.createTextNode("Menge");
-                            td.appendChild(menge);
-                            tr.appendChild(td);
+                            th.appendChild(menge);
+                            tr.appendChild(th);
 
-                            td = document.createElement('td');
+                            th = document.createElement('th');
                             datum= document.createTextNode("Datum");
-                            td.appendChild(datum);
-                            tr.appendChild(td);
+                            th.appendChild(datum);
+                            tr.appendChild(th);
                             
-                            td = document.createElement('td');
+                            th = document.createElement('th');
                             kommentar= document.createTextNode("Kommentar");
-                            td.appendChild(kommentar);
-                            tr.appendChild(td);
+                            th.appendChild(kommentar);
+                            tr.appendChild(th);
                             
-                            td = document.createElement('td');
+                            th = document.createElement('th');
                             plus= document.createTextNode("+");
-                            td.appendChild(plus);
-                            tr.appendChild(td);
+                            th.appendChild(plus);
+                            tr.appendChild(th);
                             
-                            td = document.createElement('td');
+                            th = document.createElement('th');
                             minus= document.createTextNode("-");
-                            td.appendChild(minus);
-                            tr.appendChild(td);
+                            th.appendChild(minus);
+                            tr.appendChild(th);
                             
-                            td = document.createElement('td');
+                            th = document.createElement('th');
                             verschieben= document.createTextNode("->");
-                            td.appendChild(verschieben);
-                            tr.appendChild(td);
+                            th.appendChild(verschieben);
+                            tr.appendChild(th);
 
                         table.appendChild(tr);
                     
                     //Tabellen-Inhalt
                     
                     //Schleife ...{}
-                    
-                    
-                    table.appendChild(tr);
+                    for (var eintrag in list){
+                        tr = document.createElement(tr);
+                            td = document.createElement(td);
+                            menge = eintrag.getQuantity();
+                            td.appendChild(menge);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement(td);
+                            datum = eintrag.getMdd();
+                            td.appendChild(datum);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement(td);
+                            kommentar = eintrag.getCommentSUnit();
+                            td.appendChild(kommentar);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement(td);
+                            leer = document.createTextNode('+++');
+                            td.appendChild(leer);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement(td);
+                            leer2 = document.createTextNode('---');
+                            td.appendChild(leer2);
+                            tr.appendChild(td);
+                            
+                            td = document.createElement(td);
+                            leer3 = document.createTextNode('-->');
+                            td.appendChild(leer3);
+                            tr.appendChild(td);
+                            
+                        
+                        table.appendChild(tr);
+                    }
                     
                     lightBox.appendChild(table);
                     
@@ -197,8 +229,8 @@
                     
                     form = document.createElement('form');
                     form.setAttribute('method', 'post');
-                    form.setAttribute('StocksArticleID', myId);
-                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit&StocksArticleID='+myId+'');
+
+                    form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksUnit&StocksArticleID='+myId);
                     
                             td = document.createElement('td');
                             textfeldm = document.createElement('input');
