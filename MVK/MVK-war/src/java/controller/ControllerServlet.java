@@ -176,6 +176,11 @@ public class ControllerServlet extends HttpServlet {
             HttpSession session = request.getSession(true);
             session.getAttribute("household");
         }
+        //else if(currentStep.equals("shareHousehold")){
+           // HttpSession session = request.getSession(true);
+           // LOG.info("CustomInfo: Haushalt teilen");
+            
+        //}
         /*-------------------------------------------------------------------------------------------
         Place
         -------------------------------------------------------------------------------------------*/

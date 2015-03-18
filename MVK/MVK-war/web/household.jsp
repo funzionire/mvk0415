@@ -18,7 +18,21 @@
             <h1>Hallo <jsp:getProperty name="user" property="name"/> </h1>
             <h3>Haushalt: <jsp:getProperty name="household" property="name"/> </h3>
             <p>Hier wird dein Haushalt verwaltet und die einzelnen Lagerorte angezeigt.</p>
-            </br>
+            <br>
+            
+            <%-- Formular, um Household zu teilen--%>
+            <form method ="post" action="/MVK-war/ControllerServlet?step=shareHousehold">
+                <table>
+                    <tr>
+                        <td>Teile deinen Haushalt mit anderen! Einfach Email eines anderen registrierten User angeben!</td>
+                    </tr>
+                    <tr>
+                        <td><input type ="email" name="email" placeholde="Email"/></td>
+                    </tr>
+                    <tr><td><input type="submit" value ="Haushalt teilen"/></td></tr>
+                </table>
+            </form>
+            
         </div>
     </div>
     <div class="hhcontainer">
