@@ -152,4 +152,19 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         LOG.info(query.getSingleResult().getName());
         return query.getSingleResult();
     }
+    
+    @Override
+    public AppUser findUser(String email) {
+        LOG.info("lalelu" + email);
+        if (email == null) {
+            return null;
+        }
+        TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findByEmail", AppUser.class)
+                .setParameter("email", email);
+        if (query.getResultList().isEmpty()) {
+            return null;
+        }
+        LOG.info(query.getSingleResult().getName());
+        return query.getSingleResult();
+    }
 }

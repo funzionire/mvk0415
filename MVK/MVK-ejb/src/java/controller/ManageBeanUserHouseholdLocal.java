@@ -35,7 +35,8 @@ public interface ManageBeanUserHouseholdLocal {
     
     public Place findPlace(long longID);
     
-    public AppUser findUser(long longID);
+    public void shareHousehold(Household household, String email);
+    
     
         //Place   
     public Place changePlace(Place place, String newName);
@@ -55,4 +56,8 @@ public interface ManageBeanUserHouseholdLocal {
     public AppUser changeEmail (AppUser user, String email);
     
     //public AppUser changeUser (AppUser user, String name, String email, String password);
+    
+    public AppUser findUser(long longID);
+    
+    public AppUser findUser(String email);
 }

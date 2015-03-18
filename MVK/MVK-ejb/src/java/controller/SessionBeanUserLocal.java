@@ -25,6 +25,8 @@ public interface SessionBeanUserLocal {
     
     public AppUser findUser(long longID);
     
+    public AppUser findUser(String email);
+    
     
     //Beziehungen
     public boolean addHouseholdToUser(AppUser user, Household household);

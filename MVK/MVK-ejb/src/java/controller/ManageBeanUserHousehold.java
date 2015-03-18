@@ -67,12 +67,16 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
         LOG.info("lalelu" + longID);
         return sessionBeanHousehold.findPlace(longID);
     }
-    
+
     @Override
-    public AppUser findUser(long longID) {
-        LOG.info("lalelu" + longID);
-        return sessionBeanUser.findUser(longID);
+    public void shareHousehold(Household household, String email) {
+       if(household != null & email != null){
+            AppUser user = sessionBeanUser.findUser(email);
+            sessionBeanHousehold.addUserToHousehold(household, user);
+            sessionBeanUser.addHouseholdToUser(user, household);
+            }
     }
+    
     
     @Override
     public Place changePlace(Place place, String newName) {
@@ -113,4 +117,17 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     public AppUser changeUser(AppUser user, String name, String email, String password) {
         return sessionBeanUser.changeUser(user, name, email, password);
     }*/
+    
+    @Override
+    public AppUser findUser(long longID) {
+        LOG.info("lalelu" + longID);
+        return sessionBeanUser.findUser(longID);
+    }
+
+    @Override
+    public AppUser findUser(String email) {
+        LOG.info("lalelu" + email);
+        return sessionBeanUser.findUser(email);
+    }  
+    
 }
