@@ -99,7 +99,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
 
     @Override
-    public boolean removeHouseholdToUser(AppUser user, Household household) {
+    public boolean removeHouseholdFromUser(AppUser user, Household household) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (household != null) {

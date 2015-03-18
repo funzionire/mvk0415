@@ -31,7 +31,7 @@ public interface SessionBeanUserLocal {
     //Beziehungen
     public boolean addHouseholdToUser(AppUser user, Household household);
     
-    public boolean removeHouseholdToUser(AppUser user, Household household);
+    public boolean removeHouseholdFromUser(AppUser user, Household household);
     
     
     //Change-Methoden

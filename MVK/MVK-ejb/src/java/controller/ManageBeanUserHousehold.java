@@ -20,8 +20,6 @@ import model.Place;
 @Stateless
 public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     
-    private static final Logger LOG = Logger.getLogger(ManageBeanUserHousehold.class.getName());
-    
     SessionBeanHouseholdLocal   sessionBeanHousehold = getSessionBeanHousehold();
     SessionBeanUserLocal   sessionBeanUser = getSessionBeanUser();
 
@@ -38,7 +36,7 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     @Override
     public void removeHousehold(Household household, AppUser user) {
         sessionBeanHousehold.removeUserFromHousehold(household, user);
-        sessionBeanUser.removeHouseholdToUser(user, household);
+        sessionBeanUser.removeHouseholdFromUser(user, household);
         if(household.getAppUserList()== null){
             sessionBeanHousehold.deleteHousehold(household);
         } 
@@ -50,6 +48,11 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
         sessionBeanHousehold.addPlaceToHousehold(household, place);
         return place;
     }
+
+    @Override
+    public void deleteHousehold(Household household) {
+        sessionBeanHousehold.deleteHousehold(household);
+    }
     
     @Override
     public Household changeHousehold(Household household, String name) {
@@ -58,13 +61,11 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
 
     @Override
     public Household findHousehold(long longID) {
-        LOG.info("lalelu" + longID);
         return sessionBeanHousehold.findHousehold(longID);
     }
 
     @Override
     public Place findPlace(long longID) {
-        LOG.info("lalelu" + longID);
         return sessionBeanHousehold.findPlace(longID);
     }
 
@@ -120,13 +121,11 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     
     @Override
     public AppUser findUser(long longID) {
-        LOG.info("lalelu" + longID);
         return sessionBeanUser.findUser(longID);
     }
 
     @Override
     public AppUser findUser(String email) {
-        LOG.info("lalelu" + email);
         return sessionBeanUser.findUser(email);
     }  
     

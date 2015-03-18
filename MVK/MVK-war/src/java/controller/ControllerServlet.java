@@ -129,12 +129,7 @@ public class ControllerServlet extends HttpServlet {
         }
         else if(currentStep.equals("logout")){
             HttpSession session = request.getSession(true);
-            //manageBeanUserHousehold.logoutUser((AppUser)session.getAttribute("user"));
-            session.removeAttribute("user");
-            session.removeAttribute("household");
-            session.removeAttribute("place");
-            session.removeAttribute("StocksArticle");
-            
+            session.invalidate();
             LOG.info("CustomInfo: Ausloggen erfolgreich");
             request.getRequestDispatcher("/logout.jsp").forward(request, response);
         }
@@ -174,7 +169,8 @@ public class ControllerServlet extends HttpServlet {
         }
         else if(currentStep.equals("deleteHousehold")){
             HttpSession session = request.getSession(true);
-            session.getAttribute("household");
+            manageBeanUserHousehold.deleteHousehold((Household)session.getAttribute("household"));
+            request.getRequestDispatcher("homepage.jsp");
         }
         else if(currentStep.equals("shareHousehold")){
             HttpSession session = request.getSession(true);
@@ -206,26 +202,6 @@ public class ControllerServlet extends HttpServlet {
                 request.getRequestDispatcher("/household.jsp").forward(request, response);
             }
         }
-        else if(currentStep.equals("changePlace")){
-            HttpSession session = request.getSession(true);
-            session.getAttribute("place");
-            Place changedPlace = manageBeanUserHousehold.changePlace((Place)session.getAttribute("place"),
-                                                                     (String)request.getAttribute("name"));
-            if(changedPlace != null){
-                LOG.info("CustomInfo: Lagerort erfolgreich geändert");
-                request.setAttribute("place", changedPlace);
-                session.setAttribute("plcae", changedPlace);
-                request.getRequestDispatcher("/household.jsp").forward(request, response);
-            }
-            else{
-                LOG.info("CustomInfo: Lagerort ändern fehlgeschlagen");
-                request.getRequestDispatcher("/household.jsp").forward(request, response);
-            }
-        }
-//        else if(currentStep.equals("deletePlace")){
-//            HttpSession session = request.getSession(true);
-//            session.getAttribute("place");
-//        }
         /*-------------------------------------------------------------------------------------------
         StocksArticle
         -------------------------------------------------------------------------------------------*/
@@ -254,10 +230,6 @@ public class ControllerServlet extends HttpServlet {
             }
         }
         else if(currentStep.equals("changeStocksArticle")){
-            HttpSession session = request.getSession(true);
-            session.getAttribute("stocksArticle");
-        }
-        else if(currentStep.equals("deleteStocksArticle")){
             HttpSession session = request.getSession(true);
             session.getAttribute("stocksArticle");
         }

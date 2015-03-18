@@ -28,7 +28,7 @@ public class Place implements Serializable {
     private long placeID;
     @ManyToOne
     private Household household;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.REMOVE)
     private List<StocksArticle> stocksArticles;
 
     //Konstruktoren

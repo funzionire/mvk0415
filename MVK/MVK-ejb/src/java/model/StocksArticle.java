@@ -22,7 +22,7 @@ public class StocksArticle implements Serializable {
     private long stocksArticleID;
     @ManyToOne
     private Place place;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.REMOVE)
     private List<StocksUnit> stocksUnits;
 
     //Konstruktoren
