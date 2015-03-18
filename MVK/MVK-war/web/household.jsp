@@ -203,6 +203,7 @@
                             td = document.createElement('td');
                             textfeldm = document.createElement('input');
                             textfeldm.setAttribute('type', 'number');
+                            textfeldm.setAttribute('min', '1');
                             textfeldm.setAttribute('name', 'Menge');
                             textfeldm.setAttribute('placeholder', 'Menge...');
                             td.appendChild(textfeldm);
