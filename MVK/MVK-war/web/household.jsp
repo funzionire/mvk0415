@@ -35,7 +35,6 @@
             
         </div>
     </div>
-            
     <div class="hhcontainer">
         <%-- Lagerplätze nebeneinander --%>
         <c:forEach items="${household.getPlaceList()}" var="place" >
