@@ -35,10 +35,10 @@
                     <tr><td><input type="submit" value ="Haushalt teilen"/></td></tr>
                 </table>
             </form>
-            
+
         </div>
         <div class="col-md-4">
-             <%-- Formular, um Namen des Haushalts ändern--%>
+            <%-- Formular, um Namen des Haushalts ändern--%>
             <form method ="post" action="/MVK-war/ControllerServlet?step=changeHousehold">
                 <table>
                     <tr>
@@ -51,8 +51,8 @@
                 </table>
             </form>   
         </div>    
-         <div class="col-md-4">
-             <%-- Formular, um Haushalt zu löschen--%>
+        <div class="col-md-4">
+            <%-- Formular, um Haushalt zu löschen--%>
             <form method ="post" action="/MVK-war/ControllerServlet?step=deleteHousehold">
                 <table>
                     <tr>
@@ -63,54 +63,57 @@
             </form>   
         </div>    
     </div>
-            
+
     <div class="row">       
-    <div class="hhcontainer">
-        <%-- Lagerplätze nebeneinander --%>
-        <c:forEach items="${household.getPlaceList()}" var="place" >
-            <div class="hhdiv">
-                <h2 class="hbox"> ${place.name}</h2> 
+        <div class="hhcontainer">
+            <%-- Lagerplätze nebeneinander --%>
+            <c:forEach items="${household.getPlaceList()}" var="place" >
+                <div class="hhdiv">
+                    <h2 class="hbox"> ${place.name}</h2> 
 
-                <c:url var="idFromPlace" value="/ControllerServlet?step=createStocksArticle">
-                    <c:param name="id" value="${place.placeID}"/>
-                </c:url>
+                    <c:url var="idFromPlace" value="/ControllerServlet?step=createStocksArticle">
+                        <c:param name="id" value="${place.placeID}"/>
+                    </c:url>
 
-                <%-- Artikeltabelle untehalb des Lagerortes--%>
+                    <%-- Artikeltabelle untehalb des Lagerortes--%>
 
-                <table class="bgbox">
-                    <c:forEach items="${place.getStocksArticleList()}" var="article" >
+                    <table class="bgbox">
+                        <c:forEach items="${place.getStocksArticleList()}" var="article" >
+                            <tr>
+                                <td>
+                                    <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                                </td>
+                            </tr>
+                        </c:forEach>
                         <tr>
-                            <td>
-                                <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                            <td>    <%-- Button für neuen Artikel --%>
+
+                                <form method="post" action="ControllerServlet?step=createStocksArticle">
+                                    <input type="text" name="name" placeholder="Artikel..." />
+                                    <input type="hidden"
+                                           value="${place.placeID}"
+                                           name="id"
+                                           />
+                                    <input type="submit" value="Artikel hinzufügen"/>
+                                </form>
                             </td>
                         </tr>
-                    </c:forEach>
-                    <tr>
-                        <td>    <%-- Button für neuen Artikel --%>
+                    </table>
+                </div>
+            </c:forEach>
 
-                            <form method="post" action="ControllerServlet?step=createStocksArticle">
-                                <input type="text" name="name" placeholder="Artikel..." />
-                                <input type="hidden"
-                                       value="${place.placeID}"
-                                       name="id"
-                                       />
-                                <input type="submit" value="Artikel hinzufügen"/>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </c:forEach>
-
-        <%--Button für neuen Lagerort --%>
-        <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
+            <%--Button für neuen Lagerort --%>
             <div class="hhdiv">
-                <input type ="text" name="name" placeholder="Lagerort..."/>
-                <input type="submit"
-                       value ="+ Neuen Lagerort hinzufügen"/>
+                <h2 class="hbox">Neuer Lagerort</h2> 
+                <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
+                    <div class="hhdiv">
+                        <input type ="text" name="name" placeholder="Lagerort..."/>
+                        <input type="submit"
+                               value ="+ Neuen Lagerort hinzufügen"/>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
+        </div>
     </div>
 
     <script>
@@ -138,7 +141,24 @@
                     text = document.createTextNode(document.getElementById(myId).innerHTML);
                     head.appendChild(text);
                     lightBox.appendChild(head);
-
+                    
+                    //tabelle
+                    
+                    table = document.createElement('table');
+                    
+                    tr = document.createElement('tr');
+                    
+                    td = document.createElement('td');
+                    input1= document.createTextNode("test1");
+                    input2= document.createTextNode("test2");
+                    td.appendChild(input1);
+                    tr.appendChild(td);
+                    td.appendChild(input2);
+                    tr.appendChild(td);
+                    table.appendChild(tr);
+                    
+                    //tabelle
+                    
                     form = document.createElement('form');
                     form.setAttribute('method', 'post');
                     form.setAttribute('action', '/MVK-war/ControllerServlet?step=createStocksArticle');
@@ -154,6 +174,8 @@
                     form.appendChild(textfeld);
                     form.appendChild(button);
                     lightBox.appendChild(form);
+                    
+                    lightBox.appendChild(table);
 
                     document.getElementsByTagName("body")[0].appendChild(div);
                     document.getElementsByTagName("body")[0].appendChild(lightBox);
