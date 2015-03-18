@@ -144,7 +144,7 @@
                     
                     //tabelle
                     
-                    table = document.createElement('table');
+                    table = document.createElement('table-responsive');
                     
                     //Überschriftszeile
                         tr = document.createElement('tr');
