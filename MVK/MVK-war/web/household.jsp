@@ -198,7 +198,7 @@
                             textfeldm.setAttribute('name', 'Menge');
                             textfeldm.setAttribute('placeholder', 'Menge...');
                             td.appendChild(textfeldm);
-                            form.appendChild(td);
+                            tr.appendChild(td);
 
                             td = document.createElement('td');
                             textfeldd = document.createElement('input');
@@ -206,7 +206,7 @@
                             textfeldd.setAttribute('name', 'Datum');
                             textfeldd.setAttribute('placeholder', 'MHD...');
                             td.appendChild(textfeldd);
-                            form.appendChild(td);
+                            tr.appendChild(td);
                             
                             td = document.createElement('td');
                             textfeldc = document.createElement('input');
@@ -214,7 +214,7 @@
                             textfeldc.setAttribute('name', 'Kommentar');
                             textfeldc.setAttribute('placeholder', 'Kommentar...');
                             td.appendChild(textfeldc);
-                            form.appendChild(td);
+                            tr.appendChild(td);
                             
                             td = document.createElement('td');
                             button = document.createElement('input');
@@ -223,9 +223,9 @@
                             td.appendChild(button);
                             form.appendChild(td);
                             
-                            tr.appendChild(form);
+                            form.appendChild(tr);
 
-                        table.appendChild(tr);
+                        table.appendChild(form);
                     
                     lightBox.appendChild(table);
 
