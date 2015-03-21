@@ -105,7 +105,11 @@ public class ControllerServlet extends HttpServlet {
             }
             else if(currentStep.equals("deleteUser")){
                 HttpSession session = request.getSession(true);
-                Boolean isDeleted = manageBeanUserHousehold.deleteUser((AppUser)session.getAttribute("user"));
+                
+                //hier muss es noch angepasst werden --> zwecks void oder boolean!!
+                Boolean isDeleted = true;
+                
+                manageBeanUserHousehold.deleteUser((AppUser)session.getAttribute("user"));
                 if(isDeleted == true){
                     LOG.info("CustomInfo: User erfolgreich gelöscht");
                     session.setAttribute("user", null);
@@ -185,9 +189,10 @@ public class ControllerServlet extends HttpServlet {
                     request.getRequestDispatcher("/household.jsp").forward(request, response);
                 }
             }
-            else if(currentStep.equals("deleteHousehold")){
+            //muss noch auf removeHousehold geändert werden
+            else if(currentStep.equals("removeHousehold")){
                 HttpSession session = request.getSession(true);
-                manageBeanUserHousehold.deleteHousehold((AppUser)session.getAttribute("user"),(Household)session.getAttribute("household"));
+                manageBeanUserHousehold.removeHousehold((Household)session.getAttribute("household"),(AppUser)session.getAttribute("user"));
                 request.setAttribute("user", session.getAttribute("user"));
                 request.getRequestDispatcher("homepage.jsp").forward(request, response);
             }

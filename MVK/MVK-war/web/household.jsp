@@ -53,7 +53,7 @@
         </div>    
         <div class="col-md-4">
             <%-- Formular, um Haushalt zu löschen--%>
-            <form method ="post" action="/MVK-war/ControllerServlet?step=deleteHousehold">
+            <form method ="post" action="/MVK-war/ControllerServlet?step=removeHousehold">
                 <table>
                     <tr>
                         <td>Lösche deinen Haushalt endgültig!</td>

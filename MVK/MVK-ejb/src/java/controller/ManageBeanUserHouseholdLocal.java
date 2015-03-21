@@ -26,8 +26,6 @@ public interface ManageBeanUserHouseholdLocal {
     public void removeHousehold(Household household, AppUser user);
     
     public Place addPlace(String name, Household household);
-    
-    public void deleteHousehold(AppUser user, Household household);
             
     public void shareHousehold(Household household, String email);
     
@@ -51,7 +49,7 @@ public interface ManageBeanUserHouseholdLocal {
     
     public AppUser login(String email, String password);
     
-    public boolean deleteUser (AppUser user);
+    public void deleteUser (AppUser user);
     
     public AppUser changeName (AppUser user, String name);
     

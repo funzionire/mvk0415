@@ -23,7 +23,7 @@ public interface SessionBeanStocksArticleLocal {
 //------------------------------------------------------------------------------
     public StocksArticle createStocksArticle(String nameArt, Place place, String commentArt);
     
-    public boolean deleteStocksArticle(StocksArticle stocksArticle);
+    public void deleteStocksArticle(StocksArticle stocksArticle);
     
     public StocksArticle changeStocksArticle(StocksArticle stocksArticle, String nameArt, String commentArt);
     
@@ -61,7 +61,7 @@ public interface SessionBeanStocksArticleLocal {
     public StocksUnit changeUnit(int quantity, String commentSUnit);
     */
     
-    public boolean deleteStocksUnit(StocksUnit stocksUnit);   
+    public void deleteStocksUnit(StocksUnit stocksUnit);   
 
 //------------------------------------------------------------------------------
     //Beziehungen

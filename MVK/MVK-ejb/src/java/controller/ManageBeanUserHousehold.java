@@ -38,7 +38,7 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     public void removeHousehold(Household household, AppUser user) {
         sessionBeanHousehold.removeUserFromHousehold(household, user);
         sessionBeanUser.removeHouseholdFromUser(user, household);
-        if(household.getAppUserList()== null){
+        if(household.getAppUserList().isEmpty()){
             sessionBeanHousehold.deleteHousehold(household);
         } 
     }
@@ -48,12 +48,6 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
         Place place = sessionBeanHousehold.createPlace(name, household);
         sessionBeanHousehold.addPlaceToHousehold(household, place);
         return place;
-    }
-
-    @Override
-    public void deleteHousehold(AppUser user, Household household) {
-        sessionBeanUser.removeHouseholdFromUser(user, household);
-        sessionBeanHousehold.deleteHousehold(household);
     }
     
     @Override
@@ -108,8 +102,8 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     }
 
     @Override
-    public boolean deleteUser(AppUser user) {
-        return sessionBeanUser.deleteUser(user);
+    public void deleteUser(AppUser user) {
+        sessionBeanUser.deleteUser(user);
     }
 
     @Override

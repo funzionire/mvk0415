@@ -49,14 +49,24 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public boolean deleteStocksArticle(StocksArticle stocksArticle) {
+    public void deleteStocksArticle(StocksArticle stocksArticle) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            em.remove(stocksArticle);
-            em.flush();
-            return true;
+            System.out.println(stocksArticle.getStocksArticleID());
+            Household foundStocksArticle = em.find(Household.class, stocksArticle.getStocksArticleID());
+            if(foundStocksArticle != null){
+                System.out.println("success");
+//                foundHousehold = em.merge(foundHousehold);
+                
+                em.remove(foundStocksArticle);
+                em.getTransaction().commit();
+                em.flush();
+            }else{
+                System.out.println("error");
+            }
+//            return true;
         } catch (Exception e) {
-            return false;
+//            return false;
         }
     }
 
@@ -135,14 +145,24 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public boolean deleteStocksUnit(StocksUnit stocksUnit) {
+    public void deleteStocksUnit(StocksUnit stocksUnit) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            em.remove(stocksUnit);
-            em.flush();
-            return true;
+            System.out.println(stocksUnit.getStocksUnitID());
+            Household foundStocksUnit = em.find(Household.class, stocksUnit.getStocksUnitID());
+            if(foundStocksUnit != null){
+                System.out.println("success");
+//                foundHousehold = em.merge(foundHousehold);
+                
+                em.remove(foundStocksUnit);
+                em.getTransaction().commit();
+                em.flush();
+            }else{
+                System.out.println("error");
+            }
+//            return true;
         } catch (Exception e) {
-            return false;
+//            return false;
         }
     }
     

@@ -23,7 +23,7 @@ public interface SessionBeanUserLocal {
     
     public AppUser login(String email, String password);
     
-    public boolean deleteUser (AppUser user);
+    public void deleteUser (AppUser user);
     
     public AppUser findUser(long longID);
     

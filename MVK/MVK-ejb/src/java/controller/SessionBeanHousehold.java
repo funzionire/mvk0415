@@ -106,14 +106,24 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public boolean deletePlace(Place place) {
+    public void deletePlace(Place place) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            em.remove(place);
-            em.flush();
-            return true;
+            System.out.println(place.getPlaceID());
+            Household foundPlace = em.find(Household.class, place.getPlaceID());
+            if(foundPlace != null){
+                System.out.println("success");
+//                foundHousehold = em.merge(foundHousehold);
+                
+                em.remove(foundPlace);
+                em.getTransaction().commit();
+                em.flush();
+            }else{
+                System.out.println("error");
+            }
+//            return true;
         } catch (Exception e) {
-            return false;
+//            return false;
         }
     }
 
