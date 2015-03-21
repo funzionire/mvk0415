@@ -23,8 +23,9 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     SessionBeanHouseholdLocal   sessionBeanHousehold = getSessionBeanHousehold();
     SessionBeanUserLocal   sessionBeanUser = getSessionBeanUser();
 
-    
-    
+//------------------------------------------------------------------------------    
+    //Grundlegende Methoden zur Verwaltung eines Haushaltes
+//------------------------------------------------------------------------------   
     @Override
     public Household addHousehold(String name, AppUser user) {
         Household household = sessionBeanHousehold.createHousehold(name);
@@ -56,6 +57,19 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     }
     
     @Override
+    public void shareHousehold(Household household, String email) {
+       if(household != null & email != null){
+            AppUser user = sessionBeanUser.findUser(email);
+            sessionBeanHousehold.addUserToHousehold(household, user);
+            sessionBeanUser.addHouseholdToUser(user, household);
+            }
+    }
+//------------------------------------------------------------------------------    
+    //"Wrapper-Methoden" (mit eventuellen Datentyp-Umwandlungen)
+//------------------------------------------------------------------------------    
+        //-->Household
+    
+    @Override
     public Household changeHousehold(Household household, String name) {
         return sessionBeanHousehold.changeHousehold(household, name);
     }
@@ -66,28 +80,22 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
         long longID = Long.parseLong(stringID);
         return sessionBeanHousehold.findHousehold(longID);
     }
-
+//------------------------------------------------------------------------------
+        //-->Place   
+    
+    @Override
+    public Place changePlace(Place place, String newName) {
+        return sessionBeanHousehold.changePlace(place, newName);
+    }
+    
     @Override
     public Place findPlace(String stringID) {
         //Datentyp-Umwandlung
         long longID = Long.parseLong(stringID);
         return sessionBeanHousehold.findPlace(longID);
     }
-
-    @Override
-    public void shareHousehold(Household household, String email) {
-       if(household != null & email != null){
-            AppUser user = sessionBeanUser.findUser(email);
-            sessionBeanHousehold.addUserToHousehold(household, user);
-            sessionBeanUser.addHouseholdToUser(user, household);
-            }
-    }
-    
-    
-    @Override
-    public Place changePlace(Place place, String newName) {
-        return sessionBeanHousehold.changePlace(place, newName);
-    }
+//------------------------------------------------------------------------------    
+        //-->User-Administration 
 
     @Override
     public AppUser createUser(String name, String email, String password) {

@@ -17,8 +17,9 @@ import model.StocksArticle;
  */
 @Local
 public interface ManageBeanUserHouseholdLocal {
-    
-    //Über-Methoden (--> rufen andere Methoden auf)
+//------------------------------------------------------------------------------    
+    //Grundlegende Methoden zur Verwaltung eines Haushaltes
+//------------------------------------------------------------------------------   
     
     public Household addHousehold(String name, AppUser user);
     
@@ -27,24 +28,25 @@ public interface ManageBeanUserHouseholdLocal {
     public Place addPlace(String name, Household household);
     
     public void deleteHousehold(AppUser user, Household household);
-      
-    //wrapper-Methoden
+            
+    public void shareHousehold(Household household, String email);
     
-        //Household
+//------------------------------------------------------------------------------      
+    //"Wrapper-Methoden" (mit eventuellen Datentyp-Umwandlungen)
+//------------------------------------------------------------------------------    
+        //-->Household
     public Household changeHousehold(Household household, String name);
     
     public Household findHousehold(String stringID);
     
-    public Place findPlace(String stringID);
-    
-    public void shareHousehold(Household household, String email);
-    
-    
-        //Place   
+//------------------------------------------------------------------------------    
+        //-->Place   
     public Place changePlace(Place place, String newName);
     
-
-        //User-Administration    
+    public Place findPlace(String stringID);
+    
+//------------------------------------------------------------------------------
+        //-->User-Administration    
     public AppUser createUser(String name, String email, String password);
     
     public AppUser login(String email, String password);

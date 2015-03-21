@@ -27,6 +27,9 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     @PersistenceContext
     private EntityManager em;
 
+//------------------------------------------------------------------------------
+    //User -->Grundlegende Methoden
+//------------------------------------------------------------------------------
     @Override
     public AppUser createUser(String name, String email, String password) {
         LOG.info("CustomInfo: SessionBean aufgerufen: User anlegen");
@@ -64,25 +67,41 @@ public class SessionBeanUser implements SessionBeanUserLocal {
             return false;
         }
     }
+    
+        @Override
+    public AppUser findUser(long longID) {
+        LOG.info("lalelu" + longID);
+        if (longID == 0) {
+            return null;
+        }
+        TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findById", AppUser.class)
+                .setParameter("userID", longID);
+        if (query.getResultList().isEmpty()) {
+            return null;
+        }
+        LOG.info(query.getSingleResult().getName());
+        return query.getSingleResult();
+    }
+    
+    @Override
+    public AppUser findUser(String email) {
+        LOG.info("lalelu" + email);
+        if (email == null) {
+            return null;
+        }
+        TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findByEmail", AppUser.class)
+                .setParameter("email", email);
+        if (query.getResultList().isEmpty()) {
+            return null;
+        }
+        LOG.info(query.getSingleResult().getName());
+        return query.getSingleResult();
+    }
 
-    /*@Override
-    public AppUser changeUser(AppUser user, String name, String email, String password) {
-        em.setFlushMode(FlushModeType.AUTO);
-        if (name != null) {
-            user.setName(name);
-        }
-        if (email != null) {
-            user.setEmail(email);
-        }
-        if (password != null) {
-            user.setPassword(password);
-        }
-        em.persist(user);
-        user = em.merge(user);
-        em.flush();
-        return user;
-    }*/
-
+    
+//------------------------------------------------------------------------------
+    //Beziehungen
+//------------------------------------------------------------------------------
     @Override
     public boolean addHouseholdToUser(AppUser user, Household household) {
         try {
@@ -116,6 +135,10 @@ public class SessionBeanUser implements SessionBeanUserLocal {
             return false;
         }
     }
+    
+//------------------------------------------------------------------------------
+    //Change-Methoden
+//------------------------------------------------------------------------------
     @Override
     public AppUser changeName(AppUser user, String name) {
         em.setFlushMode(FlushModeType.AUTO);
@@ -142,33 +165,23 @@ public class SessionBeanUser implements SessionBeanUserLocal {
         em.flush();
         return user;
     }
-    @Override
-    public AppUser findUser(long longID) {
-        LOG.info("lalelu" + longID);
-        if (longID == 0) {
-            return null;
+
+    /*@Override
+    public AppUser changeUser(AppUser user, String name, String email, String password) {
+        em.setFlushMode(FlushModeType.AUTO);
+        if (name != null) {
+            user.setName(name);
         }
-        TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findById", AppUser.class)
-                .setParameter("userID", longID);
-        if (query.getResultList().isEmpty()) {
-            return null;
+        if (email != null) {
+            user.setEmail(email);
         }
-        LOG.info(query.getSingleResult().getName());
-        return query.getSingleResult();
-    }
+        if (password != null) {
+            user.setPassword(password);
+        }
+        em.persist(user);
+        user = em.merge(user);
+        em.flush();
+        return user;
+    }*/
     
-    @Override
-    public AppUser findUser(String email) {
-        LOG.info("lalelu" + email);
-        if (email == null) {
-            return null;
-        }
-        TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findByEmail", AppUser.class)
-                .setParameter("email", email);
-        if (query.getResultList().isEmpty()) {
-            return null;
-        }
-        LOG.info(query.getSingleResult().getName());
-        return query.getSingleResult();
-    }
 }

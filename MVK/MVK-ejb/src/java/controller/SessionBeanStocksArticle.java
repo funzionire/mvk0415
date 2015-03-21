@@ -26,6 +26,10 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     @PersistenceContext
     private EntityManager em;
 
+//------------------------------------------------------------------------------
+    //-->StocksArticle
+//------------------------------------------------------------------------------
+    
     @Override
     public StocksArticle createStocksArticle(String nameArt, Place place, String commentArt) {
         try {
@@ -97,7 +101,11 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         }
         return query.getSingleResult();
     }
-
+    
+//------------------------------------------------------------------------------
+    //-->StocksUnit
+//------------------------------------------------------------------------------
+    
     @Override
     public StocksUnit createStocksUnit(int quantity, Date mdd, String commentSUnit) {
         em.setFlushMode(FlushModeType.AUTO);
@@ -137,6 +145,10 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
             return false;
         }
     }
+    
+//------------------------------------------------------------------------------
+    //-->Beziehungen
+//------------------------------------------------------------------------------
 
     @Override
     public boolean addStocksUnitToStocksArticle(StocksArticle stocksArticle, StocksUnit stocksUnit) {

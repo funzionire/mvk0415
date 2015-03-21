@@ -15,8 +15,10 @@ import model.Household;
  */
 @Local
 public interface SessionBeanUserLocal {
-    
+
+//------------------------------------------------------------------------------
     //User -->Grundlegende Methoden
+//------------------------------------------------------------------------------
     public AppUser createUser(String name, String email, String password);
     
     public AppUser login(String email, String password);
@@ -27,14 +29,16 @@ public interface SessionBeanUserLocal {
     
     public AppUser findUser(String email);
     
-    
+//------------------------------------------------------------------------------
     //Beziehungen
+//------------------------------------------------------------------------------
     public boolean addHouseholdToUser(AppUser user, Household household);
     
     public boolean removeHouseholdFromUser(AppUser user, Household household);
     
-    
+//------------------------------------------------------------------------------
     //Change-Methoden
+//------------------------------------------------------------------------------
     public AppUser changeName (AppUser user, String name);
     
     public AppUser changePassword (AppUser user, String password);

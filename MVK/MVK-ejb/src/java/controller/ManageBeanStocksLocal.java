@@ -18,25 +18,27 @@ import model.StocksUnit;
 @Local
 public interface ManageBeanStocksLocal {
     
-    //void oder boolean??
-    //StocksArticle
+    //???void oder boolean??
+//------------------------------------------------------------------------------
+    //-->StocksArticle
+//------------------------------------------------------------------------------
     public StocksArticle addStocksArticle(String nameArt, Place place, String commentArt);
     
     public boolean removeStocksArticle(StocksArticle stocksArticle);
     
     public StocksArticle findStocksArticle(String stringID);
     
-    //StocksUnit
+    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace);
+//------------------------------------------------------------------------------    
+    //-->StocksUnit
+//------------------------------------------------------------------------------
     public StocksUnit addStocksUnit(StocksArticle stocksArticle, String quantity, String mdd, String commentSUnit);
     
     public boolean removeStocksUnit(StocksUnit stocksUnit);
     
-    //move-Methoden
     public boolean moveStocksUnit(StocksUnit stocksUnit, Place newPlace, int newQuantity);
-    
-    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace);
-    
-    //Veränderungen an der Quantity eines StocksUnit
+  
+        //-->Veränderungen an der Quantity eines StocksUnit
     public boolean raiseQuantityOfStocksUnit(StocksUnit stocksUnit);
     
     public boolean reduceQuantityOfStoksUnit(StocksUnit stocksUnit);

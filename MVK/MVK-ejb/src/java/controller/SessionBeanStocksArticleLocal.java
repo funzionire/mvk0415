@@ -18,7 +18,9 @@ import model.StocksUnit;
 @Local
 public interface SessionBeanStocksArticleLocal {
 
+//------------------------------------------------------------------------------
     //StocksArticle
+//------------------------------------------------------------------------------
     public StocksArticle createStocksArticle(String nameArt, Place place, String commentArt);
     
     public boolean deleteStocksArticle(StocksArticle stocksArticle);
@@ -30,8 +32,10 @@ public interface SessionBeanStocksArticleLocal {
     public StocksArticle findStocksArticle(long longID);
     
 //-->TODO (in dieser bean?) addUnit, removeUnit, changeUnit, moveUnit,
-    
+
+//------------------------------------------------------------------------------
     //StocksUnit
+//------------------------------------------------------------------------------
     public StocksUnit createStocksUnit(int quantity, Date mdd, String commentSUnit);
     
     /*--> kann entfernt werden wenn geklärt!
@@ -58,10 +62,11 @@ public interface SessionBeanStocksArticleLocal {
     */
     
     public boolean deleteStocksUnit(StocksUnit stocksUnit);   
-    
-    //??? boolean?
-    
+
+//------------------------------------------------------------------------------
     //Beziehungen
+//------------------------------------------------------------------------------
+        //??? boolean?
     public boolean addStocksUnitToStocksArticle(StocksArticle stocksArticle, StocksUnit stocksUnit);
     
     public boolean removeStocksUnitFromStocksArticle(StocksArticle stocksArticle, StocksUnit stocksUnit);

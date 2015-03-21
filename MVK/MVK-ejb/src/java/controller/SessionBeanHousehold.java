@@ -31,6 +31,9 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     
     @PersistenceContext
     private EntityManager em;
+
+//------------------------------------------------------------------------------
+    //Household
     
     @Override
     public Household createHousehold(String name) {
@@ -89,7 +92,8 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         return query.getSingleResult();
     }
     
-    
+//------------------------------------------------------------------------------
+    //Place    
 
     @Override
     public Place createPlace(String name, Household household) {
@@ -140,7 +144,8 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         return place;
     }
     
-    
+//------------------------------------------------------------------------------
+    //Verknüpfung User_Household   
 
     @Override
     public boolean addUserToHousehold(Household household, AppUser user) {
@@ -173,6 +178,9 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         }
     }
 
+//------------------------------------------------------------------------------
+    //Verknüpfung Household_Place
+
     @Override
     public boolean addPlaceToHousehold(Household household, Place place) {
         try {
@@ -204,6 +212,9 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             return false;
         }
     }
+    
+//------------------------------------------------------------------------------
+    //Verknüpfung Place_StocksArticle
 
     @Override
     public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle) {

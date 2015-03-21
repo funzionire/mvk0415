@@ -21,10 +21,12 @@ import model.StocksUnit;
 @Stateless
 public class ManageBeanStocks implements ManageBeanStocksLocal {
 
-    //Kommentare?? jeweils ähnlich wie in StocksLocal? für die grobe Gliederung..
     SessionBeanStocksArticleLocal sessionBeanStocksArticle = getSessionBeanStocksArticle();
     SessionBeanHouseholdLocal sessionBeanHousehold = getSessionBeanHousehold();
 
+//------------------------------------------------------------------------------
+    //-->StocksArticle
+//------------------------------------------------------------------------------ 
     @Override
     public StocksArticle addStocksArticle(String nameArt, Place place, String commentArt) {
         //muss noch überprüft werden--> Kommentar(ob das so funzelt)
@@ -55,8 +57,35 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         return sessionBeanStocksArticle.findStocksArticle(longID);
     }
     
-    
+        @Override
+    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace) {
+        try {
+            boolean haveToCreateNewStocksArticle = true;
+            StocksArticle holdStocksArticle = null;
 
+            for (StocksArticle stocksArticle1 : newPlace.getStocksArticleList()) {
+                if (stocksArticle1.getName().equals(stocksArticle.getName())) {
+                    haveToCreateNewStocksArticle = false;
+                    holdStocksArticle = stocksArticle1;
+                    break;
+                }
+            }
+            if (haveToCreateNewStocksArticle) {
+                stocksArticle.setPlace(newPlace);
+            } else {
+                for (StocksUnit stocksUnit : stocksArticle.getStocksUnitList()) {
+                    sessionBeanStocksArticle.addStocksUnitToStocksArticle(holdStocksArticle, stocksUnit);
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+//------------------------------------------------------------------------------    
+    //-->StocksUnit   
+//------------------------------------------------------------------------------
     @Override
     public StocksUnit addStocksUnit(StocksArticle stocksArticle, String quantity, String mdd, String commentSUnit) {
         try {
@@ -126,33 +155,9 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
             return false;
         }
     }
-
-    @Override
-    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace) {
-        try {
-            boolean haveToCreateNewStocksArticle = true;
-            StocksArticle holdStocksArticle = null;
-
-            for (StocksArticle stocksArticle1 : newPlace.getStocksArticleList()) {
-                if (stocksArticle1.getName().equals(stocksArticle.getName())) {
-                    haveToCreateNewStocksArticle = false;
-                    holdStocksArticle = stocksArticle1;
-                    break;
-                }
-            }
-            if (haveToCreateNewStocksArticle) {
-                stocksArticle.setPlace(newPlace);
-            } else {
-                for (StocksUnit stocksUnit : stocksArticle.getStocksUnitList()) {
-                    sessionBeanStocksArticle.addStocksUnitToStocksArticle(holdStocksArticle, stocksUnit);
-                }
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
+    
+        //-->Veränderungen an der Quantity eines StocksUnit
+    
     @Override
     public boolean raiseQuantityOfStocksUnit(StocksUnit stocksUnit) {
         try{
