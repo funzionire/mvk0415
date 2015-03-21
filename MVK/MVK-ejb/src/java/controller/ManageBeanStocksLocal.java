@@ -24,10 +24,10 @@ public interface ManageBeanStocksLocal {
     
     public boolean removeStocksArticle(StocksArticle stocksArticle);
     
-    public StocksArticle findStocksArticle(long longID);
+    public StocksArticle findStocksArticle(String stringID);
     
     //StocksUnit
-    public StocksUnit addStocksUnit(StocksArticle stocksArticle, int quantity, Date mdd, String commentSUnit);
+    public StocksUnit addStocksUnit(StocksArticle stocksArticle, String quantity, String mdd, String commentSUnit);
     
     public boolean removeStocksUnit(StocksUnit stocksUnit);
     

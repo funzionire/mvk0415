@@ -7,6 +7,7 @@ package controller;
 
 import static controller.BeanFactory.getSessionBeanHousehold;
 import static controller.BeanFactory.getSessionBeanStocksArticle;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.Stateless;
 import model.Place;
@@ -48,18 +49,29 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
     }
 
     @Override
-    public StocksArticle findStocksArticle(long longID) {
+    public StocksArticle findStocksArticle(String stringID) {
+        //Datentyp-Umwandlung
+        long longID = Long.parseLong(stringID);
         return sessionBeanStocksArticle.findStocksArticle(longID);
     }
     
     
 
     @Override
-    public StocksUnit addStocksUnit(StocksArticle stocksArticle, int quantity, Date mdd, String commentSUnit) {
+    public StocksUnit addStocksUnit(StocksArticle stocksArticle, String quantity, String mdd, String commentSUnit) {
         try {
+            //Datentyp-Umwandlungen
+            int intQuantity = Integer.parseInt(quantity);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                Date dateMDD = null;
+                try{    
+                     dateMDD = sdf.parse(mdd);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             //fliegt er so schon raus in den catch also wenn quantity >0?
-            if(quantity > 0){
-            StocksUnit stocksUnit = sessionBeanStocksArticle.createStocksUnit(quantity, mdd, commentSUnit);
+            if(intQuantity > 0){
+            StocksUnit stocksUnit = sessionBeanStocksArticle.createStocksUnit(intQuantity, dateMDD, commentSUnit);
             sessionBeanStocksArticle.addStocksUnitToStocksArticle(stocksArticle, stocksUnit);
             return stocksUnit;
             }

@@ -33,9 +33,9 @@ public interface ManageBeanUserHouseholdLocal {
         //Household
     public Household changeHousehold(Household household, String name);
     
-    public Household findHousehold(long longID);
+    public Household findHousehold(String stringID);
     
-    public Place findPlace(long longID);
+    public Place findPlace(String stringID);
     
     public void shareHousehold(Household household, String email);
     

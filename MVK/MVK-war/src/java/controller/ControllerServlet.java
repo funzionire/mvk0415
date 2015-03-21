@@ -227,9 +227,7 @@ public class ControllerServlet extends HttpServlet {
             else if(currentStep.equals("createStocksArticle")){
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: ID vom Platz holen");
-                String id = (String)request.getParameter("id");
-                long longID = Long.parseLong(id);
-                Place place = manageBeanUserHousehold.findPlace(longID);
+                Place place = manageBeanUserHousehold.findPlace((String)request.getParameter("id"));
                 session.setAttribute("place", place);
                 StocksArticle stocksArticle = manageBeanStocks.addStocksArticle(request.getParameter("name"),
                                                 place, "");
@@ -257,21 +255,12 @@ public class ControllerServlet extends HttpServlet {
             -------------------------------------------------------------------------------------------*/
             else if(currentStep.equals("createStocksUnit")){
                 HttpSession session = request.getSession(true);
-                LOG.info("CustomInfo: ID vom StocksArticle holen");
-                String id = (String)request.getParameter("StocksArticleID");
-                long longID = Long.parseLong(id);
-                StocksArticle stocksArticle = manageBeanStocks.findStocksArticle(longID);
+                LOG.info("CustomInfo: ID vom StocksArticle holen");              
+                StocksArticle stocksArticle = manageBeanStocks.findStocksArticle((String)request.getParameter("StocksArticleID"));
                 session.setAttribute("stocksArticle", stocksArticle);
-                int amount = Integer.parseInt(request.getParameter("Menge"));
-                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-                Date date = null;
-                try{    
-                     date = sdf.parse(request.getParameter("Datum"));
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-                StocksUnit stocksUnit = manageBeanStocks.addStocksUnit(stocksArticle,amount,
-                                                date, request.getParameter("Kommentar"));
+                
+                StocksUnit stocksUnit = manageBeanStocks.addStocksUnit(stocksArticle, request.getParameter("Menge"),
+                                                request.getParameter("Datum"), request.getParameter("Kommentar"));
                 if (stocksArticle != null) {
                     LOG.info("CustomInfo: StocksUnit erfolgreich angelegt");
                     session.setAttribute("stocksUnit", stocksUnit);
@@ -299,13 +288,11 @@ public class ControllerServlet extends HttpServlet {
             else if(currentStep.equals("toHousehold")){
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: Haushalt öffnen");
-                String id = (String)request.getParameter("id");
-                long longID = Long.parseLong(id);
-                Household household = manageBeanUserHousehold.findHousehold(longID);
+                Household household = manageBeanUserHousehold.findHousehold((String)request.getParameter("id"));
 
                 request.setAttribute("user", session.getAttribute("user"));
                 request.setAttribute("household", household);
-                session.setAttribute("id", longID);
+                session.setAttribute("id", household.getHouseholdID()); //hier war vorher longID ?? passt so auch oder?
                 session.setAttribute("household", household);
                 request.getRequestDispatcher("/household.jsp").forward(request, response);
             }

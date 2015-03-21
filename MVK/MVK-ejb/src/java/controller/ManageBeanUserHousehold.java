@@ -61,12 +61,16 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     }
 
     @Override
-    public Household findHousehold(long longID) {
+    public Household findHousehold(String stringID) {
+        //Datentyp-Umwandlung
+        long longID = Long.parseLong(stringID);
         return sessionBeanHousehold.findHousehold(longID);
     }
 
     @Override
-    public Place findPlace(long longID) {
+    public Place findPlace(String stringID) {
+        //Datentyp-Umwandlung
+        long longID = Long.parseLong(stringID);
         return sessionBeanHousehold.findPlace(longID);
     }
 
