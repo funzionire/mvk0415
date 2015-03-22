@@ -24,6 +24,7 @@ public interface SessionBeanHouseholdLocal {
     
 //------------------------------------------------------------------------------
     //Household
+//------------------------------------------------------------------------------
     public Household createHousehold(String name);
         
     public void deleteHousehold(Household household);
@@ -34,6 +35,7 @@ public interface SessionBeanHouseholdLocal {
 
 //------------------------------------------------------------------------------
     //Place
+//------------------------------------------------------------------------------
     public Place createPlace(String name, Household household);
     
     public void deletePlace(Place place);
@@ -44,18 +46,21 @@ public interface SessionBeanHouseholdLocal {
 
 //------------------------------------------------------------------------------
     //Verknüpfung User_Household
+//------------------------------------------------------------------------------
     public boolean addUserToHousehold(Household household, AppUser user);
     
     public boolean removeUserFromHousehold(Household household, AppUser user);
 
 //------------------------------------------------------------------------------
     //Verknüpfung Household_Place
+//------------------------------------------------------------------------------
     public boolean addPlaceToHousehold(Household household, Place place);
     
     public boolean removePlaceFromHousehold(Household household, Place place);
 
 //------------------------------------------------------------------------------
     //Verknüpfung Place_StocksArticle
+//------------------------------------------------------------------------------
     public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle);
     
     public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle);

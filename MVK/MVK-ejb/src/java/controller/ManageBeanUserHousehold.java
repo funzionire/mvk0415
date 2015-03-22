@@ -7,11 +7,11 @@ package controller;
 
 import static controller.BeanFactory.getSessionBeanHousehold;
 import static controller.BeanFactory.getSessionBeanUser;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import model.AppUser;
 import model.Household;
 import model.Place;
+import static org.jboss.weld.logging.EventLogger.LOG;
 
 /**
  *
@@ -39,6 +39,7 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
         sessionBeanHousehold.removeUserFromHousehold(household, user);
         sessionBeanUser.removeHouseholdFromUser(user, household);
         if(household.getAppUserList().isEmpty()){
+            LOG.info("1");
             sessionBeanHousehold.deleteHousehold(household);
         } 
     }

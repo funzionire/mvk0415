@@ -156,7 +156,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     
 //------------------------------------------------------------------------------
     //Verknüpfung User_Household   
-
+//------------------------------------------------------------------------------
     @Override
     public boolean addUserToHousehold(Household household, AppUser user) {
         try {
@@ -180,17 +180,24 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             if (user != null) {
                 household.getAppUserList().remove(user);
             }
-            household = em.merge(household);
             em.flush();
             return true;
         } catch (Exception e) {
             return false;
         }
     }
+    
+     /*em.setFlushMode(FlushModeType.AUTO);
+            if (user != null) {
+                household = em.find(Household.class, household.getHouseholdID());
+                household.getAppUserList().remove(user);
+                em.flush();
+                em.persist(user);
+            }*/
 
 //------------------------------------------------------------------------------
     //Verknüpfung Household_Place
-
+//------------------------------------------------------------------------------
     @Override
     public boolean addPlaceToHousehold(Household household, Place place) {
         try {
@@ -225,7 +232,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     
 //------------------------------------------------------------------------------
     //Verknüpfung Place_StocksArticle
-
+//------------------------------------------------------------------------------
     @Override
     public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle) {
         try {
