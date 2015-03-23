@@ -24,9 +24,12 @@
 
 <table>
     <tr>
-        <td>Menge</td>
-        <td>Datum</td>
-        <td>Kommentar</td>
+        <th>Menge</th>
+        <th>Datum</th>
+        <th>Kommentar</th>
+        <th>+</th>
+        <th>-</th>
+        <th>--></th>
     </tr>
 
 
@@ -40,6 +43,18 @@ StocksArticle a = manageBeanStocks.findStocksArticle(request.getParameter("Stock
         <td>${zeile.quantity}</td>
         <td>${zeile.mdd}</td>
         <td>${zeile.commentSUnit}</td>
+        <td>
+            <input type="submit" value="+" action="/MVK-war/ControllerServlet?step=raiseQuantity"/>
+        </td>
+        <td>
+            <input type="submit" value="-" action="/MVK-war/ControllerServlet?step=reduceQuantity"/>
+        </td>
+        <td>
+            <button class="btn" type="submit" action="/MVK-war/ControllerServlet?step=moveUnit">
+                <i class="icon-arrow-right"></i>
+            </button>
+                
+        </td>
     </tr>
 </c:forEach>
         
