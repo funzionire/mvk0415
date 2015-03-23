@@ -117,6 +117,32 @@
     </div>
 
     <script>
+        
+        var xmlHttpObject = false;
+
+        if (typeof XMLHttpRequest !== 'undefined') {
+            xmlHttpObject = new XMLHttpRequest();
+        }
+        if (!xmlHttpObject){
+            try{
+                xmlHttpObject = new ActiveXObject("Msxml2.XMLHTTP");
+                }
+            catch(e){
+                try{
+                    xmlHttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                catch(e){
+                    xmlHttpObject = null;
+                    }
+            }
+        }
+        
+        function handleContent(){
+            if (xmlHttpObject.readyState === 4){
+                document.getElementById('myContent').innerHTML = xmlHttpObject.responseText;
+            }
+        }
+        
         function overlay(myId, mode, list) {
             if (mode === 'display') {
                 if (document.getElementById("overlay") === null) {
@@ -144,7 +170,7 @@
                     
                     //tabelle
                     
-                    table = document.createElement('table-responsive');
+                    table = document.createElement('table');
                     
                     //Überschriftszeile
                         tr = document.createElement('tr');
@@ -179,10 +205,19 @@
                             tr.appendChild(th);
 
                         table.appendChild(tr);
+                        lightBox.appendChild(table);
                     
-                    //Tabellen-Inhalt
+                    //Tabellen-Inhalt (hoffentlich)
                     
-                    //Schleife ...
+                     xmlHttpObject.open('get','article.jsp');
+                     xmlHttpObject.onreadystatechange = handleContent;
+                     xmlHttpObject.send(null);
+                     return false;
+                     
+                     tableContent = document.createElement('div');
+                     tableContent.setAttribute('id', 'myContent');
+                     lightBox.appendChild(tableContent);
+                    
                     /*
                     for (var eintrag in list){
                         tr = document.createElement(tr);
@@ -222,11 +257,8 @@
                         
                         table.appendChild(tr);
                     }
-                    
-                    
                     */
-                    //
-                     lightBox.appendChild(table);
+                     
                     //Untere Zeile
                     table2 = document.createElement('table');
                     

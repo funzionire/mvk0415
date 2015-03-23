@@ -5,8 +5,6 @@
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="user" class="model.AppUser" scope="request"/>
@@ -14,20 +12,11 @@
 <jsp:useBean id="place" class="model.Place" scope="request"/>
 <jsp:useBean id="article" class="model.StocksArticle" scope="request"/>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">rticleList()}" var="article" >
-    <div class="col-md-2">
-            <h1>Hallo ... </h1>
-            <p>Das ist die Artikel-Detailseite zu deinen einzelnen Vorräten</p>
-            </br>
-        </div>
-    </div>
-</div>
-
-
-<c:forEach items="${place.getStocksArticleList()}" var="article" >
-    <div class="col-md-2">
-        <strong class="pointer" onclick="overlay('display')">$(article.nameArt)</strong>
-    </div>
-</c:forEach>
+<table>
+    <tr>
+        <td>11111</td>
+        <td>22222</td>
+        <td>33333</td>
+        <td>44444</td>
+    </tr>
+</table>
