@@ -283,6 +283,27 @@ public class ControllerServlet extends HttpServlet {
                     request.getRequestDispatcher("/household.jsp").forward(request, response);
                 }
             }
+            else if(currentStep.equals("raiseQuantity")){
+                HttpSession session = request.getSession(true);
+                LOG.info("CustomInfo: Menge des Units erhöhen"); 
+                
+                //TODO: funktioniert noch nicht. Änderungen an der Methode raiseQuantity durchgeführt, da sich die Menge sonst nicht geändert hatte
+                //      jetzt kann kein unit Objekt zurückgegeben werden -- warum?!
+                StocksUnit changedUnit = manageBeanStocks.raiseQuantityOfStocksUnit((StocksUnit) session.getAttribute("stocksUnit"));
+                if (changedUnit != null){
+                    LOG.info("CustomInfo: Menge des Units wurde erhöht"); 
+                    request.setAttribute("user", (AppUser) session.getAttribute("user"));
+                    request.setAttribute("household", (Household) session.getAttribute("household"));
+                    request.setAttribute("place", (Place) session.getAttribute("place"));
+                    request.setAttribute("stocksArticle", (StocksArticle) session.getAttribute("stocksArticle"));
+                    request.setAttribute("stocksUnit", (StocksUnit) session.getAttribute("stocksUnit"));
+                    request.getRequestDispatcher("/household.jsp").forward(request, response);
+                }
+                else{
+                     LOG.info("CustomInfo: StocksUnit erhöhen fehlgeschlagen");
+                     request.getRequestDispatcher("/household.jsp").forward(request, response);
+                }
+            }
             else if(currentStep.equals("changeStocksArticle")){
                 HttpSession session = request.getSession(true);
                 session.getAttribute("stocksArticle");

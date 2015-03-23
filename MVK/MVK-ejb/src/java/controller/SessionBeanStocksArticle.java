@@ -248,13 +248,13 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public boolean changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change) {
+    public StocksUnit changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change) {
         try {
             //Soll es auch möglich sein eine Vorauswahl zu haben (z.B. 10 für 10 Eier mehr)
             stocksUnit.setQuantity(stocksUnit.getQuantity() + change);
-            return true;
+            return stocksUnit;
         } catch (Exception e) {
-            return false;
+            return null;
         }
     }
 

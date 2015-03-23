@@ -44,16 +44,21 @@ StocksArticle a = manageBeanStocks.findStocksArticle(request.getParameter("Stock
         <td>${zeile.mdd}</td>
         <td>${zeile.commentSUnit}</td>
         <td>
-            <input type="submit" value="+" action="/MVK-war/ControllerServlet?step=raiseQuantity"/>
+            <form method="post" action="/MVK-war/ControllerServlet?step=raiseQuantity">
+                <input type="submit" value="+" />
+            </form>
         </td>
         <td>
-            <input type="submit" value="-" action="/MVK-war/ControllerServlet?step=reduceQuantity"/>
+            <form method="post" action="/MVK-war/ControllerServlet?step=reduceQuantity">
+                <input type="submit" value="-" />
+            </form>
         </td>
         <td>
-            <button class="btn" type="submit" action="/MVK-war/ControllerServlet?step=moveUnit">
-                <i class="icon-arrow-right"></i>
-            </button>
-                
+            <form method ="post" action="/MVK-war/ControllerServlet?step=moveUnit">
+                <button class="btn" type="submit" >
+                    <i class="icon-arrow-right"></i>
+                </button>
+            </form>    
         </td>
     </tr>
 </c:forEach>
