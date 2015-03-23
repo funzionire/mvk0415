@@ -74,6 +74,7 @@ td{
 
 .hbox{
   background-color: rgba(0,128,0,.5);
+  font-size: 100%;
   border-radius: 10px;
   padding: 5px 10px;  
 }
@@ -83,7 +84,7 @@ td{
 }
 
 .hhcontainer{
-    background-color: rgba(128,51,0,.25);
+    background-color: rgba(255,255,255,.25);
     border-radius: 10px;
     height: auto;
     width: auto;
