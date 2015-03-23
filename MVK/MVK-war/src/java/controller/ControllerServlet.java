@@ -61,10 +61,10 @@ public class ControllerServlet extends HttpServlet {
             -------------------------------------------------------------------------------------------*/
             if(currentStep == null || currentStep.equals("login")){
                 if(request.getParameter("email").equals("")){
-                    throw new Exception("Bitte geben Sie eine Email an.");
+                    throw new MVKException("Bitte geben Sie eine Email an.");
                 }
                 if(request.getParameter("password").equals("")){
-                    throw new Exception("Bitte geben Sie eine Passwort an.");
+                    throw new MVKException("Bitte geben Sie eine Passwort an.");
                 }
                 AppUser user = manageBeanUserHousehold.login(request.getParameter("email"),
                         request.getParameter("password"));
@@ -81,13 +81,13 @@ public class ControllerServlet extends HttpServlet {
             }
             else if(currentStep.equals("register")){
                 if(request.getParameter("name") == null){
-                    throw new Exception("Bitte geben Sie einen Namen an.");
+                    throw new MVKException("Bitte geben Sie einen Namen an.");
                 }
                 if(request.getParameter("email") == null){
-                    throw new Exception("Bitte geben Sie eine Email an.");
+                    throw new MVKException("Bitte geben Sie eine Email an.");
                 }
                 if(request.getParameter("password") == null){
-                    throw new Exception("Bitte geben Sie eine Passwort an.");
+                    throw new MVKException("Bitte geben Sie eine Passwort an.");
                 }
                 AppUser user = manageBeanUserHousehold.createUser(request.getParameter("name"),
                         request.getParameter("email"),
@@ -343,9 +343,8 @@ public class ControllerServlet extends HttpServlet {
         } catch (MVKException e){
             LOG.info("Exception geworfen");
 //            request.setAttribute("errorText", e.getMessage());
-            PrintWriter pw = response.getWriter();
-            pw.append(e.getMessage());
-            response.sendRedirect("/MVK-war/error.jsp");
+            response.sendError(100, e.getMessage());
+            //response.sendRedirect("/MVK-war/error.jsp?");
 //            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }

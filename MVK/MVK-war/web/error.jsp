@@ -5,7 +5,7 @@
 --%>
 
 <jsp:include page="template.jsp"></jsp:include>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page isErrorPage="true" import="java.io.*" contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,6 +19,12 @@
                     <h1>Ups..das sollte nicht passieren! Es ist ein Fehler aufgetreten!</h1>
                     </br>
                     <h1>Bitte versuchen Sie es erneut!</h1>
+                    </br>
+                    <br>
+                    Message:
+                    <script>
+                        <%=exception.getMessage()%>
+                    </script>
                     </br>
                 </div>
                 <div>

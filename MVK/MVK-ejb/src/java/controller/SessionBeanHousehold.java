@@ -178,9 +178,12 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (user != null) {
+                household = em.find(Household.class, household.getHouseholdID());
                 household.getAppUserList().remove(user);
+                em.flush();
+                em.persist(household);
             }
-            em.flush();
+            
             return true;
         } catch (Exception e) {
             return false;
@@ -189,11 +192,10 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     
      /*em.setFlushMode(FlushModeType.AUTO);
             if (user != null) {
-                household = em.find(Household.class, household.getHouseholdID());
+                
                 household.getAppUserList().remove(user);
-                em.flush();
-                em.persist(user);
-            }*/
+            }
+            em.flush();*/
 
 //------------------------------------------------------------------------------
     //Verknüpfung Household_Place
