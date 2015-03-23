@@ -251,7 +251,10 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     public StocksUnit changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change) {
         try {
             //Soll es auch möglich sein eine Vorauswahl zu haben (z.B. 10 für 10 Eier mehr)
+            em.setFlushMode(FlushModeType.AUTO);
             stocksUnit.setQuantity(stocksUnit.getQuantity() + change);
+            stocksUnit = em.merge(stocksUnit);
+            em.flush();
             return stocksUnit;
         } catch (Exception e) {
             return null;
