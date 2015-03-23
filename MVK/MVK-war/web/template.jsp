@@ -19,7 +19,9 @@
         <meta name="author" content="">
 
         <title>Meine Vorratskammer</title>
-
+        
+        <!-- Skript Overlay-->
+        <script language="javascript" type="text/javascript" src="js/overlay.js" > </script>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">

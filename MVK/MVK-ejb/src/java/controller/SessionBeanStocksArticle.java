@@ -177,7 +177,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
             if (stocksUnit != null && stocksArticle != null) {
                 stocksArticle.getStocksUnitList().add(stocksUnit);
             }
-            stocksArticle = em.merge(stocksArticle);
+            em.merge(stocksArticle);
             em.flush();
             return true;
         } catch (Exception e) {

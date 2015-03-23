@@ -267,7 +267,7 @@ public class ControllerServlet extends HttpServlet {
                 
                 StocksUnit stocksUnit = manageBeanStocks.addStocksUnit(stocksArticle, request.getParameter("Menge"),
                                                 request.getParameter("Datum"), request.getParameter("Kommentar"));
-                if (stocksArticle != null) {
+                if (stocksUnit != null) {
                     LOG.info("CustomInfo: StocksUnit erfolgreich angelegt");
                     session.setAttribute("stocksUnit", stocksUnit);
                     request.setAttribute("user", (AppUser) session.getAttribute("user"));
