@@ -39,7 +39,7 @@ public interface ManageBeanStocksLocal {
     public boolean moveStocksUnit(StocksUnit stocksUnit, Place newPlace, int newQuantity);
   
         //-->Veränderungen an der Quantity eines StocksUnit
-    public StocksUnit raiseQuantityOfStocksUnit(StocksUnit stocksUnit);
+    public boolean raiseQuantityOfStocksUnit(StocksUnit stocksUnit);
     
     public boolean reduceQuantityOfStoksUnit(StocksUnit stocksUnit);
     

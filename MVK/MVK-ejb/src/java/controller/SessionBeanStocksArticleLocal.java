@@ -77,6 +77,6 @@ public interface SessionBeanStocksArticleLocal {
     
     public boolean changePlaceFromStocksArticle(Place place, StocksArticle stocksArticle);
     
-    public StocksUnit changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change);       
+    public boolean changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change);       
     
 }

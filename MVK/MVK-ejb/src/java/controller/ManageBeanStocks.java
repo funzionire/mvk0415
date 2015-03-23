@@ -159,13 +159,13 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         //-->Veränderungen an der Quantity eines StocksUnit
     
     @Override
-    public StocksUnit raiseQuantityOfStocksUnit(StocksUnit stocksUnit) {
+    public boolean raiseQuantityOfStocksUnit(StocksUnit stocksUnit) {
         try{
             //Soll es auch möglich sein eine Vorauswahl zu haben (z.B. 10 für 10 Eier mehr)
-            StocksUnit changedUnit = sessionBeanStocksArticle.changeQuantityOfStocksUnit(stocksUnit, 1);
-            return changedUnit;
+            sessionBeanStocksArticle.changeQuantityOfStocksUnit(stocksUnit, 1);
+            return true;
         } catch (Exception e) {
-            return null;   
+            return false;   
         }
     }
 
