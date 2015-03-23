@@ -9,13 +9,13 @@ package controller;
  *
  * @author Felix
  */
-public class MKV_Exception extends Exception{
+public class MVKException extends Exception{
 
-    public MKV_Exception() {
+    public MVKException() {
         super("Ein Fehler ist aufgetreten.");
     }
 
-    public MKV_Exception(String message) {
+    public MVKException(String message) {
         super(message);
     }
     

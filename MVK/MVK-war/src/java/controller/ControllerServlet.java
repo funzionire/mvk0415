@@ -9,8 +9,6 @@ import static controller.BeanFactory.getManageBeanStocks;
 import static controller.BeanFactory.getManageBeanUserHousehold;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -342,7 +340,7 @@ public class ControllerServlet extends HttpServlet {
                 request.setAttribute("user", session.getAttribute("user"));
                 request.getRequestDispatcher("/homepage.jsp").forward(request, response);
             }
-        } catch (Exception e){
+        } catch (MVKException e){
             LOG.info("Exception geworfen");
 //            request.setAttribute("errorText", e.getMessage());
             PrintWriter pw = response.getWriter();
