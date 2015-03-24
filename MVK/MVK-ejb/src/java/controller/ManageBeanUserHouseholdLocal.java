@@ -23,7 +23,7 @@ public interface ManageBeanUserHouseholdLocal {
     
     public Household addHousehold(String name, AppUser user);
     
-    public void removeHousehold(Household household, AppUser user);
+    public AppUser removeHousehold(Household household, AppUser user);
     
     public Place addPlace(String name, Household household);
             

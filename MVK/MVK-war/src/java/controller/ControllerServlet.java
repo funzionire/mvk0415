@@ -187,17 +187,18 @@ public class ControllerServlet extends HttpServlet {
                 else{
                     LOG.info("CustomInfo: Haushalt ändern fehlgeschlagen");
                     request.getRequestDispatcher("/household.jsp").forward(request, response);
-                }
+                }       
             }
             //muss noch auf removeHousehold geändert werden
             else if(currentStep.equals("removeHousehold")){
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: Haushalt entfernen (ControllerServlet)");
-                manageBeanUserHousehold.removeHousehold((Household)session.getAttribute("household"),(AppUser)session.getAttribute("user"));
-                request.setAttribute("user", session.getAttribute("user"));
-                request.setAttribute("household", session.getAttribute("household"));
-                response.sendRedirect("/MVK-war/ControllerServlet?step=toHomepage");
-                //request.getRequestDispatcher("homepage.jsp").forward(request, response);
+                AppUser user = manageBeanUserHousehold.removeHousehold((Household)session.getAttribute("household"),(AppUser)session.getAttribute("user"));
+                request.setAttribute("user", user);
+//                request.setAttribute("user", session.getAttribute("user"));
+//                request.setAttribute("household", session.getAttribute("household"));
+//                response.sendRedirect("/MVK-war/ControllerServlet?step=toHomepage");
+                request.getRequestDispatcher("homepage.jsp").forward(request, response);
             }
             else if(currentStep.equals("shareHousehold")){
                 HttpSession session = request.getSession(true);

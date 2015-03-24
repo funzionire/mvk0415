@@ -34,12 +34,14 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     }
 
     @Override
-    public void removeHousehold(Household household, AppUser user) {
+    public AppUser removeHousehold(Household household, AppUser user) {
         household = sessionBeanHousehold.removeUserFromHousehold(household, user);
         user = sessionBeanUser.removeHouseholdFromUser(user, household);
         if(household.getAppUserList().isEmpty()){
             sessionBeanHousehold.deleteHousehold(household);
         } 
+
+        return user;
     }
 
     @Override

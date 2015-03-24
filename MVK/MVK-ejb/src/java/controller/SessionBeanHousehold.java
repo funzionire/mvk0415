@@ -183,11 +183,13 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
                 System.out.println("household 1");
                 household = em.find(Household.class, household.getHouseholdID());
                 System.out.println("household gefunden");
-                household.getAppUserList().remove(user);
+                boolean b = household.getAppUserList().remove(user);
+                System.out.println(b);
                 System.out.println("household entfernt");
                 em.flush();
                 System.out.println("household flush");
-                em.persist(household);
+                
+//                em.persist(household);
             }
             
             return household;

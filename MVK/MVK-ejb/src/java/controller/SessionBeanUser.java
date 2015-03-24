@@ -136,11 +136,12 @@ public class SessionBeanUser implements SessionBeanUserLocal {
                 System.out.println("user 1");
                 user = em.find(AppUser.class, user.getUserID());
                 System.out.println("user gefunden");
-                user.getHouseholdList().remove(household);
+                Boolean b = user.getHouseholdList().remove(household);
+                System.out.println(b);
                 System.out.println("user entfernt");
                 em.flush();
                 System.out.println("user flush");
-                em.persist(user);
+//                em.persist(user);
             }
 //            em.merge(user);
 //            em.flush();
