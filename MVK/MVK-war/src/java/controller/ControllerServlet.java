@@ -384,10 +384,12 @@ public class ControllerServlet extends HttpServlet {
             }
         } catch (MVKException e){
             LOG.info("Exception geworfen");
-//            request.setAttribute("errorText", e.getMessage());
-            response.sendError(100, e.getMessage());
+            request.setAttribute("errorText", e.getMessage());
+            request.setAttribute("currentPage", request.getContextPath());
+            
+            //response.sendError(100, e.getMessage());
             //response.sendRedirect("/MVK-war/error.jsp?");
-//            request.getRequestDispatcher("/error.jsp").forward(request, response);
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -5,7 +5,7 @@
 --%>
 
 <jsp:include page="template.jsp"></jsp:include>
-<%@page isErrorPage="true" import="java.io.*" contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.io.*" contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,18 +22,18 @@
                     </br>
                     <br>
                     Message:
-                    <script>
-                        <%=exception.getMessage()%>
-                    </script>
+                    
+                        ${requestScope.errorText}
+                    
                     </br>
                 </div>
                 <div>
                     
                 </div>
-                <form method ="post" action="/MVK-war/ControllerServlet?step=login">
+                <form method ="post" action="${requestScope.currentPage}">
                 <div class="col-md-2">
                     <input type="submit"
-                           value ="Zurück zu ???"/>
+                           value ="Zurück"/>
                 </div>
                 </form>
             </div>
