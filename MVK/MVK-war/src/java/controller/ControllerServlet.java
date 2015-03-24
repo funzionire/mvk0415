@@ -296,7 +296,8 @@ public class ControllerServlet extends HttpServlet {
                     request.setAttribute("household", (Household) session.getAttribute("household"));
                     request.setAttribute("place", (Place) session.getAttribute("place"));
                     request.setAttribute("stocksArticle", (StocksArticle) session.getAttribute("stocksArticle"));
-                    request.setAttribute("stocksUnit", (StocksUnit) session.getAttribute("stocksUnit"));
+                    request.setAttribute("stocksUnit", changedUnit);
+                    session.setAttribute("stocksUnit", changedUnit);
                     request.getRequestDispatcher("/household.jsp").forward(request, response);
                 }
                 else{
