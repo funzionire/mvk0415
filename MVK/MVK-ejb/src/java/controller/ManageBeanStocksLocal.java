@@ -41,7 +41,7 @@ public interface ManageBeanStocksLocal {
         //-->Veränderungen an der Quantity eines StocksUnit
     public StocksUnit raiseQuantityOfStocksUnit(StocksUnit stocksUnit);
     
-    public boolean reduceQuantityOfStoksUnit(StocksUnit stocksUnit);
+    public StocksUnit reduceQuantityOfStocksUnit(StocksUnit stocksUnit);
     
     
     

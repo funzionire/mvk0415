@@ -169,18 +169,18 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
     }
 
     @Override
-    public boolean reduceQuantityOfStoksUnit(StocksUnit stocksUnit) {
+    public StocksUnit reduceQuantityOfStocksUnit(StocksUnit stocksUnit) {
         try{
             if(stocksUnit.getQuantity() > 1){
-                sessionBeanStocksArticle.changeQuantityOfStocksUnit(stocksUnit, -1);
+               return sessionBeanStocksArticle.changeQuantityOfStocksUnit(stocksUnit, -1);
             }
             if(stocksUnit.getQuantity() == 1){
                 //???Frage stellen: wirklich löschen??
-                sessionBeanStocksArticle.deleteStocksUnit(stocksUnit);
+               sessionBeanStocksArticle.deleteStocksUnit(stocksUnit);
             }
-            return true;
+            return null;
         } catch (Exception e) {
-            return false;   
+            return null;   
         }
     }
     
