@@ -94,6 +94,8 @@ public class ControllerServlet extends HttpServlet {
                         request.getParameter("password"));
                 if (user != null) {
                     LOG.info("CustomInfo: Registrierung erfolgreich");
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("user", user);
                     request.setAttribute("user", user);
                     request.getRequestDispatcher("/homepage.jsp").forward(request, response);
                 } else {
