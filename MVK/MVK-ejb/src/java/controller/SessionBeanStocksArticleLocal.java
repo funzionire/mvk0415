@@ -38,6 +38,8 @@ public interface SessionBeanStocksArticleLocal {
 //------------------------------------------------------------------------------
     public StocksUnit createStocksUnit(int quantity, Date mdd, String commentSUnit);
     
+    public StocksUnit findStocksUnit(long longID);
+    
     /*--> kann entfernt werden wenn geklärt!
     public StocksUnit addUnit(int quantity);
     public StocksUnit addUnit(int quantity, Date mdd);

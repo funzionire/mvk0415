@@ -127,6 +127,21 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
+    public StocksUnit findStocksUnit(long longID) {
+        if (longID == 0) {
+            return null;
+        }
+        TypedQuery<StocksUnit> query = em.createNamedQuery("StocksUnit.findById", StocksUnit.class)
+                .setParameter("stocksUnitID", longID);
+        if (query.getResultList().isEmpty()) {
+            return null;
+        }
+        return query.getSingleResult();
+    }
+    
+    
+
+    @Override
     public StocksUnit changeStocksUnit(StocksUnit stocksUnit, Date mdd, String commentSUnit, int updateQuantity) {
         em.setFlushMode(FlushModeType.AUTO);
         if (mdd != null) {

@@ -287,6 +287,7 @@ public class ControllerServlet extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: Menge des Units erhöhen"); 
                 
+                
                 //TODO: funktioniert noch nicht. Änderungen an der Methode raiseQuantity durchgeführt, da sich die Menge sonst nicht geändert hatte
                 //      jetzt kann kein unit Objekt zurückgegeben werden -- warum?!
                 StocksUnit changedUnit = manageBeanStocks.raiseQuantityOfStocksUnit((StocksUnit) session.getAttribute("stocksUnit"));
@@ -298,31 +299,38 @@ public class ControllerServlet extends HttpServlet {
                     request.setAttribute("stocksArticle", (StocksArticle) session.getAttribute("stocksArticle"));
                     request.setAttribute("stocksUnit", changedUnit);
                     session.setAttribute("stocksUnit", changedUnit);
-                    request.getRequestDispatcher("/household.jsp").forward(request, response);
+                    request.getRequestDispatcher("/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id")).forward(request, response);
                 }
                 else{
                      LOG.info("CustomInfo: StocksUnit erhöhen fehlgeschlagen");
-                     request.getRequestDispatcher("/household.jsp").forward(request, response);
+                     request.getRequestDispatcher("/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id")).forward(request, response);
+
                 }
             }
             else if(currentStep.equals("reduceQuantity")){
                 HttpSession session = request.getSession(true);
+                LOG.info("CustomInfo: ID vom StocksArticle holen");              
+                StocksUnit stocksUnit = manageBeanStocks.findStocksUnit((String)request.getParameter("StocksUnitID"));
+                session.setAttribute("stocksUnit", stocksUnit);
                 LOG.info("CustomInfo: Menge des Units reduzieren"); 
                 
-                StocksUnit changedUnit = manageBeanStocks.reduceQuantityOfStocksUnit((StocksUnit) session.getAttribute("stocksUnit"));
+                StocksUnit changedUnit = manageBeanStocks.reduceQuantityOfStocksUnit(stocksUnit);
                 if (changedUnit != null){
-                    LOG.info("CustomInfo: Menge des Units wurde erhöht"); 
+                    LOG.info("CustomInfo: Menge des Units wurde vermindert"); 
                     request.setAttribute("user", (AppUser) session.getAttribute("user"));
                     request.setAttribute("household", (Household) session.getAttribute("household"));
                     request.setAttribute("place", (Place) session.getAttribute("place"));
                     request.setAttribute("stocksArticle", (StocksArticle) session.getAttribute("stocksArticle"));
                     request.setAttribute("stocksUnit", changedUnit);
                     session.setAttribute("stocksUnit", changedUnit);
-                    request.getRequestDispatcher("/household.jsp").forward(request, response);
+                    request.getRequestDispatcher("/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id")).forward(request, response);
+//                    response.sendRedirect("/MVK-war/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id"));
+ //                   request.getRequestDispatcher("/household.jsp").forward(request, response);
                 }
                 else{
                      LOG.info("CustomInfo: StocksUnit erhöhen fehlgeschlagen");
-                     request.getRequestDispatcher("/household.jsp").forward(request, response);
+                     
+                     request.getRequestDispatcher("/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id")).forward(request, response);
                 }
             }
             else if(currentStep.equals("changeStocksArticle")){

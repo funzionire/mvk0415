@@ -56,6 +56,14 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         long longID = Long.parseLong(stringID);
         return sessionBeanStocksArticle.findStocksArticle(longID);
     }
+
+    @Override
+    public StocksUnit findStocksUnit(String stringID) {
+        long longID = Long.parseLong(stringID);
+        return sessionBeanStocksArticle.findStocksUnit(longID);
+    }
+    
+    
     
         @Override
     public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace) {

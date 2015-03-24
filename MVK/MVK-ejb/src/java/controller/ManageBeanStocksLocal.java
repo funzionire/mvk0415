@@ -37,6 +37,8 @@ public interface ManageBeanStocksLocal {
     public boolean removeStocksUnit(StocksUnit stocksUnit);
     
     public boolean moveStocksUnit(StocksUnit stocksUnit, Place newPlace, int newQuantity);
+    
+    public StocksUnit findStocksUnit(String stringID);
   
         //-->Veränderungen an der Quantity eines StocksUnit
     public StocksUnit raiseQuantityOfStocksUnit(StocksUnit stocksUnit);
