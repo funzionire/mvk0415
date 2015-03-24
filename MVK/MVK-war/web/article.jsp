@@ -24,11 +24,11 @@
 
 <table>
     <tr>
-        <th>Menge</th>
-        <th>Datum</th>
-        <th>Kommentar</th>
-        <th>hinzufügen</th>
-        <th>löschen</th>
+        <th>  Menge  </th>
+        <th>  Datum  </th>
+        <th>  Kommentar  </th>
+        <th>  <i class="fa fa-plus-circle"></i>  </th>
+        <th>  <i class="fa fa-minus-circle"></i>  </th>
     </tr>
 
 
