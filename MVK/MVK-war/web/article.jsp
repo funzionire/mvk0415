@@ -57,7 +57,7 @@ StocksArticle a = manageBeanStocks.findStocksArticle(request.getParameter("Stock
             <form method ="post" action="/MVK-war/ControllerServlet?step=moveUnit" class="dropdown">
                 <button class="btn btn-default dropdown-toggle" type="submit" id="menu1" data-toggle="dropdown">verschieben nach<span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">hierhin</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/MVK-war/ControllerServlet?step=moveUnit"></c:url>">hierhin</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">dahin</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">dorthin</a></li>
                     <li role="presentation"><a role="menuitem" tabindex="-1" href="#">woanders hin</a></li>
