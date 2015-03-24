@@ -59,13 +59,3 @@ String myID =request.getParameter("StocksArticleID");
  
 </table>
 
-<form action="'/MVK-war/ControllerServlet?step=createStocksUnit&StocksArticleID=<%=myID%>">
-    <table>
-        <tr>
-            <td><input type="number" min="1" name="Menge" placeholder="Menge..."/></td>
-            <td><input type="date" name="Datum" placeholder="MHD"/></td>
-            <td colspan="2"><input type="text" name="Kommentar" placeholder="Kommentar"/></td>
-            <td><input type="submit" value='hinzu'/></td>
-        </tr>
-    </table>
-</form>
