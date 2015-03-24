@@ -49,7 +49,7 @@ public interface SessionBeanHouseholdLocal {
 //------------------------------------------------------------------------------
     public boolean addUserToHousehold(Household household, AppUser user);
     
-    public boolean removeUserFromHousehold(Household household, AppUser user);
+    public Household removeUserFromHousehold(Household household, AppUser user);
 
 //------------------------------------------------------------------------------
     //Verknüpfung Household_Place

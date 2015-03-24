@@ -129,20 +129,25 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
 
     @Override
-    public boolean removeHouseholdFromUser(AppUser user, Household household) {
+    public AppUser removeHouseholdFromUser(AppUser user, Household household) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (household != null) {
+                System.out.println("user 1");
                 user = em.find(AppUser.class, user.getUserID());
+                System.out.println("user gefunden");
                 user.getHouseholdList().remove(household);
+                System.out.println("user entfernt");
                 em.flush();
+                System.out.println("user flush");
                 em.persist(user);
             }
 //            em.merge(user);
 //            em.flush();
-            return true;
+            return user;
         } catch (Exception e) {
-            return false;
+//            e.printStackTrace();
+            throw e;
         }
     }
     

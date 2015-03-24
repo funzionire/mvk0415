@@ -123,6 +123,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             }
 //            return true;
         } catch (Exception e) {
+                throw e;
 //            return false;
         }
     }
@@ -174,19 +175,26 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     }
 
     @Override
-    public boolean removeUserFromHousehold(Household household, AppUser user) {
+    public Household removeUserFromHousehold(Household household, AppUser user) {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (user != null) {
+                //user = em.find(AppUser.class, user.getUserID());
+                System.out.println("household 1");
                 household = em.find(Household.class, household.getHouseholdID());
+                System.out.println("household gefunden");
                 household.getAppUserList().remove(user);
+                System.out.println("household entfernt");
                 em.flush();
+                System.out.println("household flush");
                 em.persist(household);
             }
             
-            return true;
+            return household;
         } catch (Exception e) {
-            return false;
+//            e.printStackTrace();
+//            return false;
+            throw e;
         }
     }
     
