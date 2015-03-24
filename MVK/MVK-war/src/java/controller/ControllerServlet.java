@@ -287,17 +287,15 @@ public class ControllerServlet extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: Menge des Units erhöhen"); 
                 
-                boolean result = manageBeanStocks.raiseQuantityOfStocksUnit((StocksUnit) session.getAttribute("stocksUnit"));
-                if (result == true){
+                //TODO: funktioniert noch nicht. Änderungen an der Methode raiseQuantity durchgeführt, da sich die Menge sonst nicht geändert hatte
+                //      jetzt kann kein unit Objekt zurückgegeben werden -- warum?!
+                StocksUnit changedUnit = manageBeanStocks.raiseQuantityOfStocksUnit((StocksUnit) session.getAttribute("stocksUnit"));
+                if (changedUnit != null){
                     LOG.info("CustomInfo: Menge des Units wurde erhöht"); 
-                    //TODO: diesse Bedingung wird erreicht, aber Menge verändert sich nicht
-                    //      wird vielleicht das Attribut falsch gesetzt?!
                     request.setAttribute("user", (AppUser) session.getAttribute("user"));
                     request.setAttribute("household", (Household) session.getAttribute("household"));
                     request.setAttribute("place", (Place) session.getAttribute("place"));
                     request.setAttribute("stocksArticle", (StocksArticle) session.getAttribute("stocksArticle"));
-                    
-                    //TODO 
                     request.setAttribute("stocksUnit", (StocksUnit) session.getAttribute("stocksUnit"));
                     request.getRequestDispatcher("/household.jsp").forward(request, response);
                 }
