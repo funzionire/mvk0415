@@ -27,9 +27,8 @@
         <th>Menge</th>
         <th>Datum</th>
         <th>Kommentar</th>
-        <th>+</th>
-        <th>-</th>
-        <th>--></th>
+        <th>hinzufügen</th>
+        <th>löschen</th>
     </tr>
 
 
@@ -37,6 +36,7 @@
 ManageBeanStocksLocal manageBeanStocks = BeanFactory.getManageBeanStocks();
 
 StocksArticle a = manageBeanStocks.findStocksArticle(request.getParameter("StocksArticleID"));
+String myID =request.getParameter("StocksArticleID");
 %>   
 <c:forEach items="<%= a.getStocksUnitList() %>" var="zeile">
     <tr>
@@ -53,21 +53,19 @@ StocksArticle a = manageBeanStocks.findStocksArticle(request.getParameter("Stock
                 <input type="submit" value="-" />
             </form>
         </td>
-        <td>            
-            <form method ="post" action="/MVK-war/ControllerServlet?step=moveUnit" class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="submit" id="menu1" data-toggle="dropdown">verschieben nach<span class="caret"></span></button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="<c:url value="/MVK-war/ControllerServlet?step=moveUnit"></c:url>">hierhin</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">dahin</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">dorthin</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">woanders hin</a></li>
-                </ul>
-            </form>
-        </td>
     </tr>
 </c:forEach>
-        
+    
  
 </table>
-           
 
+<form action="'/MVK-war/ControllerServlet?step=createStocksUnit&StocksArticleID=<%=myID%>">
+    <table>
+        <tr>
+            <td><input type="number" min="1" name="Menge" placeholder="Menge..."/></td>
+            <td><input type="date" name="Datum" placeholder="MHD"/></td>
+            <td colspan="2"><input type="text" name="Kommentar" placeholder="Kommentar"/></td>
+            <td><input type="submit" name="Kommentar" placeholder="Kommentar"/></td>
+        </tr>
+    </table>
+</form>
