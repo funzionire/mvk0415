@@ -25,7 +25,7 @@
 </head>
 <body>
 
-<table style="text-align:left" align="center" valign="middle">
+<table style="text-align:center" align="center" valign="middle">
     <colgroup width="100" span="5"></colgroup>
     <tr>
         <th>  Menge  </th>
