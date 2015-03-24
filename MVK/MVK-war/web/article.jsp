@@ -23,6 +23,7 @@
 <body>
 
 <table>
+    <colgroup width="100" span="5"></colgroup>
     <tr>
         <th>  Menge  </th>
         <th>  Datum  </th>
