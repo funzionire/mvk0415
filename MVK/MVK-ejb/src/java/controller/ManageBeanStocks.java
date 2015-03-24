@@ -91,7 +91,7 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         try {
             //Datentyp-Umwandlungen
             int intQuantity = Integer.parseInt(quantity);
-                SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date dateMDD = null;
                 try{    
                      dateMDD = sdf.parse(mdd);

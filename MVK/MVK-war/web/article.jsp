@@ -8,7 +8,10 @@
 <%@page import="controller.ManageBeanStocksLocal"%>
 <%@page import="controller.ManageBeanStocks"%>
 <%@page import="model.StocksArticle"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -36,11 +39,12 @@
 <% 
 ManageBeanStocksLocal manageBeanStocks = BeanFactory.getManageBeanStocks();
 StocksArticle a = manageBeanStocks.findStocksArticle(request.getParameter("StocksArticleID"));
+SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 %>   
 <c:forEach items="<%= a.getStocksUnitList() %>" var="zeile">
     <tr>
         <td>${zeile.quantity}</td>
-        <td>${zeile.mdd}</td>
+        <td> <fmt:formatDate value="${zeile.mdd}" pattern ="dd.MM.yyyy" /> </td>
         <td>${zeile.commentSUnit}</td>
         <td>
             <form method="post" action="/MVK-war/ControllerServlet?step=raiseQuantity">
