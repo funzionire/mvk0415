@@ -22,7 +22,7 @@
 </head>
 <body>
 
-<table>
+<table style="text-align:left" align="center" valign="middle">
     <colgroup width="100" span="5"></colgroup>
     <tr>
         <th>  Menge  </th>
@@ -35,9 +35,7 @@
 
 <% 
 ManageBeanStocksLocal manageBeanStocks = BeanFactory.getManageBeanStocks();
-
 StocksArticle a = manageBeanStocks.findStocksArticle(request.getParameter("StocksArticleID"));
-String myID =request.getParameter("StocksArticleID");
 %>   
 <c:forEach items="<%= a.getStocksUnitList() %>" var="zeile">
     <tr>
@@ -56,7 +54,6 @@ String myID =request.getParameter("StocksArticleID");
         </td>
     </tr>
 </c:forEach>
-    
- 
+  
 </table>
 

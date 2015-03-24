@@ -57,6 +57,24 @@
                 
                     //Untere Zeile
                     table2 = document.createElement('table');
+                    table2.setAttribute('align','center');
+                    table2.setAttribute('valign','middle');
+                    
+                    
+                    //breite setzen
+                    breite = document.createElement('colgroup');
+                    zelle = document.createElement('col');
+                    zelle.setAttribute('width','100');
+                    breite.appendChild(zelle);
+                    breite.appendChild(zelle);
+                    zelle.setAttribute('width','200');
+                    breite.appendChild(zelle);
+                    zelle.setAttribute('width','100');
+                    breite.appendChild(zelle);
+                    
+                    table2.appendChild(breite);
+                    
+                    //Elemente setzen
                     
                     tr = document.createElement('tr');
                     
