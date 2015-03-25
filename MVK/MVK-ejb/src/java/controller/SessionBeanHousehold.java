@@ -40,8 +40,10 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         em.setFlushMode(FlushModeType.AUTO);
         Household household = new Household(name);
         em.persist(household);
-        household = em.merge(household);
+        //household = em.merge(household);
+        
         em.flush();
+        
         return household;
     }
 
@@ -163,11 +165,14 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         try {
             em.setFlushMode(FlushModeType.AUTO);
             //???weitere Prüfung notwendig
+            em.flush();
             if (user != null) {
                 household.getAppUserList().add(user);
             }
-            household = em.merge(household);
+            em.merge(household);
+            em.merge(user);
             em.flush();
+            
             return true;
         } catch (Exception e) {
             return false;
@@ -180,12 +185,17 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             em.setFlushMode(FlushModeType.AUTO);
             if (user != null) {
                 //user = em.find(AppUser.class, user.getUserID());
-                System.out.println("household 1");
+                
+                System.out.println("household flush");
+                System.out.println("household 1" + household);
+                em.flush();
                 household = em.find(Household.class, household.getHouseholdID());
                 System.out.println("household gefunden");
                 boolean b = household.getAppUserList().remove(user);
                 System.out.println(b);
                 System.out.println("household entfernt");
+                em.merge(household);
+                em.merge(user);
                 em.flush();
                 System.out.println("household flush");
                 

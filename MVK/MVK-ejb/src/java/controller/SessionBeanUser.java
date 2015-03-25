@@ -65,7 +65,6 @@ public class SessionBeanUser implements SessionBeanUserLocal {
             if(foundPlace != null){
                 System.out.println("success");
 //                foundHousehold = em.merge(foundHousehold);
-                
                 em.remove(foundPlace);
                 em.getTransaction().commit();
                 em.flush();
@@ -121,6 +120,7 @@ public class SessionBeanUser implements SessionBeanUserLocal {
                 user.getHouseholdList().add(household);
             }
             em.merge(user);
+            
             em.flush();
             return true;
         } catch (Exception e) {
@@ -136,9 +136,11 @@ public class SessionBeanUser implements SessionBeanUserLocal {
                 System.out.println("user 1");
                 user = em.find(AppUser.class, user.getUserID());
                 System.out.println("user gefunden");
-                Boolean b = user.getHouseholdList().remove(household);
+                boolean b = user.getHouseholdList().remove(household);
                 System.out.println(b);
                 System.out.println("user entfernt");
+                em.merge(user);
+                
                 em.flush();
                 System.out.println("user flush");
 //                em.persist(user);
