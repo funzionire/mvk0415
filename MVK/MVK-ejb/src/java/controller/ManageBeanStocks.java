@@ -90,6 +90,16 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
             return false;
         }
     }
+
+    @Override
+    public boolean proofeMdd(StocksArticle stocksArticle) {
+        if (stocksArticle.getStocksUnitList() == null){
+            return false;
+        }
+        return sessionBeanStocksArticle.compareMddWithCurrentDate(stocksArticle);
+    }
+    
+    
     
 //------------------------------------------------------------------------------    
     //-->StocksUnit   

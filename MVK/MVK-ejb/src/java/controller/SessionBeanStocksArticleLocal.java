@@ -81,4 +81,6 @@ public interface SessionBeanStocksArticleLocal {
     
     public StocksUnit changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change);       
     
+    public boolean compareMddWithCurrentDate(StocksArticle stocksArticle);
+    
 }

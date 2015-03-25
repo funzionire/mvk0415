@@ -7,6 +7,10 @@
 
 <jsp:include page="template.jsp"></jsp:include>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="controller.BeanFactory"%>
+<%@page import="controller.ManageBeanStocksLocal"%>
+<%@page import="controller.ManageBeanStocks"%>
+
 <jsp:useBean id="user" class="model.AppUser" scope="request"/>
 <jsp:useBean id="household" class="model.Household" scope="request"/>
 <jsp:useBean id="place" class="model.Place" scope="request"/>
@@ -79,11 +83,20 @@
 
                     <table class="bgbox">
                         <c:forEach items="${place.getStocksArticleList()}" var="article" >
+                            <% ManageBeanStocksLocal manageBeanStocks = BeanFactory.getManageBeanStocks();%>
+                            <% if (manageBeanStocks.proofeMdd(article)) { %>
                             <tr>
                                 <td>
-                                    <strong class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                                    <strong style ="color: red;" class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
                                 </td>
                             </tr>
+                            <% }else{ %>
+                            <tr>
+                                <td>
+                                    <strong  class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                                </td>
+                            </tr>
+                            <% } %>
                         </c:forEach>
                         <tr>
                             <td>    <%-- Button für neuen Artikel --%>

@@ -29,6 +29,8 @@ public interface ManageBeanStocksLocal {
     public StocksArticle findStocksArticle(String stringID);
     
     public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace);
+    
+    public boolean proofeMdd (StocksArticle stocksArticle);
 //------------------------------------------------------------------------------    
     //-->StocksUnit
 //------------------------------------------------------------------------------
