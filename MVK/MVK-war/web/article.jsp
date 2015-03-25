@@ -43,16 +43,23 @@ SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 %>   
 <c:forEach items="<%= a.getStocksUnitList() %>" var="zeile">
     <tr>
+        
+        <c:url var="raiseQuantity" value="/ControllerServlet?step=raiseQuantity">
+            <c:param name="id" value="${zeile.stocksUnitID}"/>
+        </c:url>
+        <c:url var="reduceQuantity" value="/ControllerServlet?step=reduceQuantity">
+            <c:param name="id" value="${zeile.stocksUnitID}"/>
+        </c:url>
         <td>${zeile.quantity}</td>
         <td> <fmt:formatDate value="${zeile.mdd}" pattern ="dd.MM.yyyy" /> </td>
         <td>${zeile.commentSUnit}</td>
         <td>
-            <form method="post" action="/MVK-war/ControllerServlet?step=raiseQuantity">
+            <form method="post" action="${raiseQuantity}">
                 <input type="submit" value="+" />
             </form>
         </td>
         <td>
-            <form method="post" action="/MVK-war/ControllerServlet?step=reduceQuantity">
+            <form method="post" action="${reduceQuantity}">
                 <input type="submit" value="-" />
             </form>
         </td>

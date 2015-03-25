@@ -183,7 +183,8 @@ public class ControllerServlet extends HttpServlet {
                     request.setAttribute("user", session.getAttribute("user"));
                     request.setAttribute("household", changedHousehold);
                     session.setAttribute("household", changedHousehold);
-                    request.getRequestDispatcher("/household.jsp").forward(request, response);
+                    response.sendRedirect("/MVK-war/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id"));
+//                    request.getRequestDispatcher("/household.jsp").forward(request, response);
                 }
                 else{
                     LOG.info("CustomInfo: Haushalt ändern fehlgeschlagen");
@@ -287,8 +288,8 @@ public class ControllerServlet extends HttpServlet {
             else if(currentStep.equals("raiseQuantity")){
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: Menge des Units erhöhen"); 
-                
-                
+                StocksUnit stocksUnit = manageBeanStocks.findStocksUnit((String)request.getParameter("id"));
+                session.setAttribute("stocksUnit", stocksUnit);
                 //TODO: funktioniert noch nicht. Änderungen an der Methode raiseQuantity durchgeführt, da sich die Menge sonst nicht geändert hatte
                 //      jetzt kann kein unit Objekt zurückgegeben werden -- warum?!
                 StocksUnit changedUnit = manageBeanStocks.raiseQuantityOfStocksUnit((StocksUnit) session.getAttribute("stocksUnit"));
@@ -310,8 +311,8 @@ public class ControllerServlet extends HttpServlet {
             }
             else if(currentStep.equals("reduceQuantity")){
                 HttpSession session = request.getSession(true);
-                LOG.info("CustomInfo: ID vom StocksArticle holen");              
-                StocksUnit stocksUnit = manageBeanStocks.findStocksUnit((String)request.getParameter("StocksUnitID"));
+                LOG.info("CustomInfo: ID vom StocksArticle holen");       
+                StocksUnit stocksUnit = manageBeanStocks.findStocksUnit((String)request.getParameter("id"));
                 session.setAttribute("stocksUnit", stocksUnit);
                 LOG.info("CustomInfo: Menge des Units reduzieren"); 
                 
