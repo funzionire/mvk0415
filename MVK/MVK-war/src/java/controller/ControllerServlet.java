@@ -180,6 +180,7 @@ public class ControllerServlet extends HttpServlet {
                                                                                      (String)request.getAttribute("name"));
                 if(changedHousehold != null){
                     LOG.info("CustomInfo: Haushalt erfolgreich geändert");
+                    request.setAttribute("user", session.getAttribute("user"));
                     request.setAttribute("household", changedHousehold);
                     session.setAttribute("household", changedHousehold);
                     request.getRequestDispatcher("/household.jsp").forward(request, response);
