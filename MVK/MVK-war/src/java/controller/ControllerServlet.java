@@ -176,8 +176,9 @@ public class ControllerServlet extends HttpServlet {
             }
             else if(currentStep.equals("changeHousehold")){
                 HttpSession session = request.getSession(true);
+                String name = (String) request.getParameter("name");
                 Household changedHousehold = manageBeanUserHousehold.changeHousehold((Household)session.getAttribute("household"),
-                                                                                     (String)request.getAttribute("name"));
+                                                                                     name);
                 if(changedHousehold != null){
                     LOG.info("CustomInfo: Haushalt erfolgreich geändert");
                     request.setAttribute("user", session.getAttribute("user"));
