@@ -96,7 +96,16 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         if (stocksArticle.getStocksUnitList() == null){
             return false;
         }
-        return sessionBeanStocksArticle.compareMddWithCurrentDate(stocksArticle);
+        int difference; 
+        for (StocksUnit unit : stocksArticle.getStocksUnitList()){
+            if (unit.getMdd() != null){
+                difference = sessionBeanStocksArticle.compareMddWithCurrentDate(unit);
+                if (difference >= -3){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
     
@@ -109,7 +118,7 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         try {
             //Datentyp-Umwandlungen
             int intQuantity = Integer.parseInt(quantity);
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 Date dateMDD = null;
                 try{    
                      dateMDD = sdf.parse(mdd);

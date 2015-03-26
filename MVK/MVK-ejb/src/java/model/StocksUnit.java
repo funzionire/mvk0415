@@ -19,9 +19,7 @@ public class StocksUnit implements Serializable {
 
     private int quantity;
     private String commentSUnit;
-    private static final String defaultComment = "";
-    private static final int defaultQuantity = 1;
-    private static final Date defaultDate = null;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long stocksUnitID;
@@ -33,9 +31,7 @@ public class StocksUnit implements Serializable {
     //Konstruktoren in Reihenfolge quantity, mdd, commentSUnit
     //Konstruktor alles default
     public StocksUnit() {
-        this.quantity = defaultQuantity;
-        this.mdd = defaultDate;
-        this.commentSUnit = defaultComment;
+
     }
 
     //Konstruktor M D C

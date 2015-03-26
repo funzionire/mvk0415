@@ -277,25 +277,10 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public boolean compareMddWithCurrentDate(StocksArticle stocksArticle) {
-        boolean reachMdd = false;
+    public int compareMddWithCurrentDate(StocksUnit stocksUnit) {
         Date currentDate = new Date();
-        Date mdd; 
-        for (StocksUnit unit : stocksArticle.getStocksUnitList()){
-            mdd = unit.getMdd();
-//            if (mdd.compareTo(currentDate) == 0){
-//                reachMdd = true;
-//                return reachMdd;
-//            }
-//            else 
-              if (currentDate.compareTo(mdd) >= -3  ){
-                reachMdd = true;
-                return reachMdd;
-            }
-            
-            
-        }
-        return reachMdd;
+        Date mdd = stocksUnit.getMdd();
+        return mdd.compareTo(currentDate);
     }
     
     
