@@ -37,7 +37,12 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     public AppUser removeHousehold(Household household, AppUser user) {
         household = sessionBeanHousehold.removeUserFromHousehold(household, user);
         user = sessionBeanUser.removeHouseholdFromUser(user, household);
+        System.out.println("isEmpty" + household.getAppUserList().isEmpty());
+        for(AppUser user1 : household.getAppUserList()){
+            System.out.println("isEmpty " + user1.getName());
+        }
         if(household.getAppUserList().isEmpty()){
+            System.out.println("isEmpty");
             sessionBeanHousehold.deleteHousehold(household);
         } 
 

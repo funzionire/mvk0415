@@ -54,11 +54,9 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             System.out.println(household.getHouseholdID());
             Household foundHousehold = em.find(Household.class, household.getHouseholdID());
             if(foundHousehold != null){
-                System.out.println("success");
-//                foundHousehold = em.merge(foundHousehold);
-                
+                System.out.println("success" + foundHousehold);
                 em.remove(foundHousehold);
-                em.getTransaction().commit();
+                System.out.println("success");
                 em.flush();
             }else{
                 System.out.println("error");
@@ -93,6 +91,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
         LOG.info(query.getSingleResult().getName());
         return query.getSingleResult();
     }
+    
     
 //------------------------------------------------------------------------------
     //Place    
@@ -182,24 +181,18 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     @Override
     public Household removeUserFromHousehold(Household household, AppUser user) {
         try {
+            em.getEntityManagerFactory().getCache().evictAll();
             em.setFlushMode(FlushModeType.AUTO);
             if (user != null) {
-                //user = em.find(AppUser.class, user.getUserID());
-                
                 System.out.println("household flush");
-                System.out.println("household 1" + household);
                 em.flush();
                 household = em.find(Household.class, household.getHouseholdID());
                 System.out.println("household gefunden");
                 boolean b = household.getAppUserList().remove(user);
                 System.out.println(b);
                 System.out.println("household entfernt");
-                em.merge(household);
-                em.merge(user);
                 em.flush();
-                System.out.println("household flush");
-                
-//                em.persist(household);
+                System.out.println("household flush");       
             }
             
             return household;

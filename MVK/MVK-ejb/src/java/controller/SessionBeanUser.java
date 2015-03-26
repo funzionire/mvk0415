@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.xml.registry.infomodel.User;
@@ -139,14 +140,11 @@ public class SessionBeanUser implements SessionBeanUserLocal {
                 boolean b = user.getHouseholdList().remove(household);
                 System.out.println(b);
                 System.out.println("user entfernt");
-                em.merge(user);
-                
                 em.flush();
                 System.out.println("user flush");
-//                em.persist(user);
+                
+                em.getEntityManagerFactory().getCache().evictAll();
             }
-//            em.merge(user);
-//            em.flush();
             return user;
         } catch (Exception e) {
 //            e.printStackTrace();
