@@ -5,7 +5,8 @@
  */
 package controller;
 
-import java.util.Date;
+import static com.sun.xml.ws.dump.LoggingDumpTube.Position.After;
+import static com.sun.xml.ws.dump.LoggingDumpTube.Position.Before;
 import javax.ejb.embeddable.EJBContainer;
 import model.StocksArticle;
 import org.junit.After;
@@ -34,15 +35,12 @@ public class ManageBeanStocksTest {
     public void testProofeMdd() throws Exception {
         System.out.println("proofeMdd");
         ManageBeanStocksLocal manageBeanStocks = BeanFactory.getManageBeanStocks();
-        StocksArticle article = manageBeanStocks.addStocksArticle("Milch", null, "");
+        StocksArticle article = new StocksArticle("milch", null , "");
         manageBeanStocks.addStocksUnit(article, "5" , "27-03-2015" , "");
-        
-        EJBContainer container = javax.ejb.embeddable.EJBContainer.createEJBContainer();
-        ManageBeanStocksLocal instance = (ManageBeanStocksLocal)container.getContext().lookup("java:global/classes/ManageBeanStocks");
+      
         boolean expResult = true;
-        boolean result = instance.proofeMdd(article);
+        boolean result = manageBeanStocks.proofeMdd(article);
         assertEquals(expResult, result);
-        container.close();
 
     }
     
