@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -280,7 +281,21 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     public int compareMddWithCurrentDate(StocksUnit stocksUnit) {
         Date currentDate = new Date();
         Date mdd = stocksUnit.getMdd();
-        return mdd.compareTo(currentDate);
+        
+        long dreiTage = 259200000 ;
+        long difference = mdd.getTime() - currentDate.getTime();
+        
+        //nicht haltbar
+        if ( difference < 0 ){
+            return -1 ;
+        }
+        //läuft bald ab
+        else if ( difference < dreiTage){
+            return 0;
+        }
+        //haltbar
+        else return 1;
+        
     }
     
     

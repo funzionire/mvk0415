@@ -92,20 +92,20 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
     }
 
     @Override
-    public boolean proofeMdd(StocksArticle stocksArticle) {
+    public int proofeMdd(StocksArticle stocksArticle) {
+        System.out.println("Hilfe" + stocksArticle.getName());
         if (stocksArticle.getStocksUnitList() == null){
-            return false;
+            return 1;
         }
-        int difference; 
+        int result;
         for (StocksUnit unit : stocksArticle.getStocksUnitList()){
             if (unit.getMdd() != null){
-                difference = sessionBeanStocksArticle.compareMddWithCurrentDate(unit);
-                if (difference >= -3){
-                    return true;
-                }
+                result = sessionBeanStocksArticle.compareMddWithCurrentDate(unit);
+                if (result == -1 || result == 0)
+                    return result;
             }
         }
-        return false;
+        return 1;
     }
     
     

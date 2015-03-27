@@ -84,9 +84,10 @@
                     <table class="bgbox">
                         <c:forEach items="${place.getStocksArticleList()}" var="article" >
                             <% ManageBeanStocksLocal manageBeanStocks = BeanFactory.getManageBeanStocks();%>
-                            <% if (manageBeanStocks.proofeMdd(article)) { %>
+                            <% if (manageBeanStocks.proofeMdd(article) == -1) { %>
                             <tr>
                                 <td>
+                                    <p> test </p>
                                     <strong style ="color: red;" class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
                                 </td>
                             </tr>
