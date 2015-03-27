@@ -7,12 +7,16 @@ package controller;
 
 import static com.sun.xml.ws.dump.LoggingDumpTube.Position.After;
 import static com.sun.xml.ws.dump.LoggingDumpTube.Position.Before;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.ejb.embeddable.EJBContainer;
 import model.StocksArticle;
+import model.StocksUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -20,13 +24,13 @@ import static org.junit.Assert.*;
  */
 public class ManageBeanStocksTest {
     
-    public ManageBeanStocksTest() {
-    }
+  static ManageBeanStocksLocal manageBeanStocks;
+   
     
-    
-    @Before
-    public void setUp() {
-         
+    @BeforeClass
+    public static void setUpClass() throws Exception{
+        
+        manageBeanStocks = new ManageBeanStocks();
     }
     
     
@@ -34,12 +38,20 @@ public class ManageBeanStocksTest {
     @Test
     public void testProofeMdd() throws Exception {
         System.out.println("proofeMdd");
-        ManageBeanStocksLocal manageBeanStocks = BeanFactory.getManageBeanStocks();
+        
         StocksArticle article = new StocksArticle("milch", null , "");
-        manageBeanStocks.addStocksUnit(article, "5" , "27-03-2015" , "");
+        
+        String date = "30-03-2015";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date mdd = sdf.parse(date);
+        StocksUnit unit = new StocksUnit(5 , mdd, "abgelaufen");
+        
+        article.getStocksUnitList().add(unit);
+        
+        
       
-        boolean expResult = true;
-        boolean result = manageBeanStocks.proofeMdd(article);
+        int expResult = -1 ;
+        int result = manageBeanStocks.proofeMdd(article);
         assertEquals(expResult, result);
 
     }

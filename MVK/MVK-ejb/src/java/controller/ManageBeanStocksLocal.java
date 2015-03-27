@@ -30,7 +30,7 @@ public interface ManageBeanStocksLocal {
     
     public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace);
     
-    public boolean proofeMdd (StocksArticle stocksArticle);
+    public int proofeMdd (StocksArticle stocksArticle);
 //------------------------------------------------------------------------------    
     //-->StocksUnit
 //------------------------------------------------------------------------------
