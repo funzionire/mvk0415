@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import static controller.BeanFactory.getManageBeanStocks;
 import static controller.BeanFactory.getManageBeanUserHousehold;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,28 +16,10 @@ import model.Place;
 import model.StocksArticle;
 import model.StocksUnit;
 
-/**
- *
- * @author baader
- */
-/*In der Homepage.jsp gibt es einen Button, der zum Erzeugen eines neuen Haushaltes genutzt werden soll
- Dafür musste ein neuer Step eingefügt werden (kann man auch gern noch umbenennen)
- bei dem muss dann die Methode createHoushold aufgerufen werden
- */
 @WebServlet(name = "ControllerServlet", urlPatterns = {"/ControllerServlet"})
 public class ControllerServlet extends HttpServlet {
 
     private static final Logger LOG = Logger.getLogger(ControllerServlet.class.getName());
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -303,8 +279,6 @@ public class ControllerServlet extends HttpServlet {
                 
                 StocksUnit stocksUnit = manageBeanStocks.findStocksUnit((String)request.getParameter("id"));
                 session.setAttribute("stocksUnit", stocksUnit);
-                //TODO: funktioniert noch nicht. Änderungen an der Methode raiseQuantity durchgeführt, da sich die Menge sonst nicht geändert hatte
-                //      jetzt kann kein unit Objekt zurückgegeben werden -- warum?!
                 StocksUnit changedUnit = manageBeanStocks.raiseQuantityOfStocksUnit((StocksUnit) session.getAttribute("stocksUnit"));
                 if (changedUnit != null){
                     LOG.info("CustomInfo: Menge des Units wurde erhöht"); 
@@ -344,8 +318,6 @@ public class ControllerServlet extends HttpServlet {
                     request.setAttribute("stocksUnit", changedUnit);
                     session.setAttribute("stocksUnit", changedUnit);
                     request.getRequestDispatcher("/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id")).forward(request, response);
-//                    response.sendRedirect("/MVK-war/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id"));
- //                   request.getRequestDispatcher("/household.jsp").forward(request, response);
                 }
                 else{
                      LOG.info("CustomInfo: StocksUnit erhöhen fehlgeschlagen");
@@ -372,28 +344,6 @@ public class ControllerServlet extends HttpServlet {
                 session.setAttribute("household", household);
                 request.getRequestDispatcher("/household.jsp").forward(request, response);
             }
-    //        else if(currentStep.equals("toPlace")){
-    //            HttpSession session = request.getSession(true);
-    //            LOG.info("CustomInfo: Platz öffnen");
-    //            String id = (String)request.getParameter("id");
-    //            long longID = Long.parseLong(id);
-    //            Place place = manageBeanUserHousehold.findPlace(longID);
-    //            
-    //            request.setAttribute("user", session.getAttribute("user"));
-    //            request.setAttribute("household", session.getAttribute("household"));
-    //            request.setAttribute("place", place);
-    //            session.setAttribute("place", place);
-    //            request.getRequestDispatcher("/place.jsp").forward(request, response);
-    //        }
-    //        else if(currentStep.equals("toStocksArticle")){
-    //            HttpSession session = request.getSession(true);
-    //            LOG.info("CustomInfo: StocksArticle öffnen");
-    //            request.setAttribute("user", session.getAttribute("user"));
-    //            request.setAttribute("household", session.getAttribute("household"));
-    //            request.setAttribute("place", session.getAttribute("place"));
-    //            request.setAttribute("stocksArticle", session.getAttribute("stocksArticle"));
-    //            request.getRequestDispatcher("/household.jsp").forward(request, response);
-    //        }
             else if(currentStep.equals("toSettings")){
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: Einstellungen öffnen");
