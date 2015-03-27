@@ -97,13 +97,19 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         if (stocksArticle.getStocksUnitList() == null){
             return 1;
         }
-        int result;
+        int result = 1;
         for (StocksUnit unit : stocksArticle.getStocksUnitList()){
             if (unit.getMdd() != null){
-                result = sessionBeanStocksArticle.compareMddWithCurrentDate(unit);
-                if (result == -1 || result == 0)
-                    return result;
+                if (sessionBeanStocksArticle.compareMddWithCurrentDate(unit) == -1){
+                    return -1;
+                }
+                if (sessionBeanStocksArticle.compareMddWithCurrentDate(unit) == 0 ){
+                    result = 0;
+                }
             }
+        }
+        if (result == 0){
+            return 0;
         }
         return 1;
     }
@@ -118,7 +124,7 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         try {
             //Datentyp-Umwandlungen
             int intQuantity = Integer.parseInt(quantity);
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date dateMDD = null;
                 try{    
                      dateMDD = sdf.parse(mdd);

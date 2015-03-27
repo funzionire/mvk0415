@@ -34,7 +34,7 @@ public class SessionBeanStocksArticleTest {
         System.out.println("compareMddWithCurrentDate");
         
         
-        String date = "30-03-2015";
+        String date = "29-03-2015";
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date mdd = sdf.parse(date);
         StocksUnit unit = new StocksUnit(5 , mdd, "abgelaufen");

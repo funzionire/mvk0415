@@ -15,6 +15,7 @@
 <jsp:useBean id="household" class="model.Household" scope="request"/>
 <jsp:useBean id="place" class="model.Place" scope="request"/>
 <jsp:useBean id="article" class="model.StocksArticle" scope="request"/>
+<jsp:useBean id="manageBeanStocks" class="controller.ManageBeanStocks" scope ="request"/>
 
 <div class="container">
     <div class="row" >
@@ -83,21 +84,29 @@
 
                     <table class="bgbox">
                         <c:forEach items="${place.getStocksArticleList()}" var="article" >
-                            <% ManageBeanStocksLocal manageBeanStocks = BeanFactory.getManageBeanStocks();%>
-                            <% if (manageBeanStocks.proofeMdd(article) == -1) { %>
-                            <tr>
-                                <td>
-                                    <p> test </p>
-                                    <strong style ="color: red;" class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
-                                </td>
-                            </tr>
-                            <% }else{ %>
-                            <tr>
-                                <td>
-                                    <strong  class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
-                                </td>
-                            </tr>
-                            <% } %>
+                            <c:choose>
+                                <c:when test="${manageBeanStocks.proofeMdd(article) == -1}">    
+                                    <tr>
+                                        <td>
+                                            <strong style ="color: red;" class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                                        </td>
+                                    </tr>
+                                </c:when>
+                                <c:when test="${manageBeanStocks.proofeMdd(article) == 0}">
+                                    <tr>
+                                        <td>
+                                            <strong style ="color: orange;" class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                                        </td>
+                                    </tr>
+                                </c:when>
+                                <c:otherwise>
+                                    <tr>
+                                        <td>
+                                            <strong  class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                                        </td>
+                                    </tr>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                         <tr>
                             <td>    <%-- Button für neuen Artikel --%>
@@ -130,6 +139,6 @@
         </div>
     </div>
 
-        
+
 </div>
 
