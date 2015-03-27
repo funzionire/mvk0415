@@ -16,15 +16,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Ups..das sollte nicht passieren! Es ist ein Fehler aufgetreten!</h1>
+                    <h3>Ups..das sollte nicht passieren! Es ist ein Fehler aufgetreten!</h3>
                     </br>
-                    <h1>Bitte versuchen Sie es erneut!</h1>
-                    </br>
-                    <br>
-                    Message:
-                    
+                    <h2>
                         ${requestScope.errorText}
-                    
+                    </h2>
                     </br>
                 </div>
                 <div>

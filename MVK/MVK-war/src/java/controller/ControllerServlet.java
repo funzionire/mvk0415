@@ -61,10 +61,10 @@ public class ControllerServlet extends HttpServlet {
             -------------------------------------------------------------------------------------------*/
             if(currentStep == null || currentStep.equals("login")){
                 if(request.getParameter("email").equals("")){
-                    throw new MVKException("Bitte geben Sie eine Email an.");
+                    throw new MVKException("Fehler beim Login: Keine Email angegeben.");
                 }
                 if(request.getParameter("password").equals("")){
-                    throw new MVKException("Bitte geben Sie eine Passwort an.");
+                    throw new MVKException("Fehler beim Login: Kein Passwort angegeben.");
                 }
                 AppUser user = manageBeanUserHousehold.login(request.getParameter("email"),
                         request.getParameter("password"));
@@ -80,14 +80,14 @@ public class ControllerServlet extends HttpServlet {
                 }
             }
             else if(currentStep.equals("register")){
-                if(request.getParameter("name") == null){
-                    throw new MVKException("Bitte geben Sie einen Namen an.");
+                if(request.getParameter("name").equals("")){
+                    throw new MVKException("Fehler bei der Registrierung: Kein Name angegeben.");
                 }
-                if(request.getParameter("email") == null){
-                    throw new MVKException("Bitte geben Sie eine Email an.");
+                if(request.getParameter("email").equals("")){
+                    throw new MVKException("Fehler bei der Registrierung: Keine Email angegeben.");
                 }
-                if(request.getParameter("password") == null){
-                    throw new MVKException("Bitte geben Sie eine Passwort an.");
+                if(request.getParameter("password").equals("")){
+                    throw new MVKException("Fehler bei der Registrierung: Kein Passwort angegeben.");
                 }
                 AppUser user = manageBeanUserHousehold.createUser(request.getParameter("name"),
                         request.getParameter("email"),
@@ -124,7 +124,6 @@ public class ControllerServlet extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 AppUser currentUser = (AppUser)session.getAttribute("user");
                 String name = (String)request.getParameter("name");
-                LOG.info(name);
                 String email = (String)request.getParameter("email");
                 String password = (String)request.getParameter("password");
                 AppUser changedUser = null;
@@ -136,6 +135,8 @@ public class ControllerServlet extends HttpServlet {
                 }
                 else if(!password.equals("")){
                     changedUser = manageBeanUserHousehold.changePassword(currentUser, password);
+                }else{
+                    throw new MVKException("Fehler beim Ändern des Users: Kein neuer Wert angegeben.");
                 }
 
                 if(changedUser != null){
@@ -161,6 +162,9 @@ public class ControllerServlet extends HttpServlet {
             -------------------------------------------------------------------------------------------*/
             else if(currentStep.equals("createHousehold")){
                 HttpSession session = request.getSession(true);
+                if(request.getParameter("name").equals("")){
+                    throw new MVKException("Fehler beim Anlegen des Haushalts: Kein Name angegeben.");
+                }
                 Household household = manageBeanUserHousehold.addHousehold(request.getParameter("name"),
                                                                         (AppUser) session.getAttribute("user"));
                 if (household != null) {
@@ -177,6 +181,9 @@ public class ControllerServlet extends HttpServlet {
             else if(currentStep.equals("changeHousehold")){
                 HttpSession session = request.getSession(true);
                 String name = (String) request.getParameter("name");
+                if(name.equals("")){
+                    throw new MVKException("Fehler beim Ändern des Haushalts: Kein Name angegeben.");
+                }
                 Household changedHousehold = manageBeanUserHousehold.changeHousehold((Household)session.getAttribute("household"),
                                                                                      name);
                 if(changedHousehold != null){
@@ -185,7 +192,6 @@ public class ControllerServlet extends HttpServlet {
                     request.setAttribute("household", changedHousehold);
                     session.setAttribute("household", changedHousehold);
                     response.sendRedirect("/MVK-war/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id"));
-//                    request.getRequestDispatcher("/household.jsp").forward(request, response);
                 }
                 else{
                     LOG.info("CustomInfo: Haushalt ändern fehlgeschlagen");
@@ -204,6 +210,9 @@ public class ControllerServlet extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: Haushalt teilen");
                 String email = (String)request.getParameter("email");
+                if(email.equals("")){
+                    throw new MVKException("Fehler beim Teilen des Haushalts: Keine Email angegeben.");
+                }
                 manageBeanUserHousehold.shareHousehold((Household) session.getAttribute("household"), email);
 
                 request.setAttribute("user", session.getAttribute("user"));
@@ -216,11 +225,13 @@ public class ControllerServlet extends HttpServlet {
             -------------------------------------------------------------------------------------------*/
             else if(currentStep.equals("createPlace")){
                 HttpSession session = request.getSession(true);
+                if(request.getParameter("name").equals("")){
+                    throw new MVKException("Fehler beim Anlegen des Lagerortes: Kein Name angegeben.");
+                }
                 Place place = manageBeanUserHousehold.addPlace(request.getParameter("name"),
                                                             (Household) session.getAttribute("household"));
                 if (place != null) {
                     LOG.info("CustomInfo: Lagerort erfolgreich angelegt");
-                    session.setAttribute("place", place);
                     request.setAttribute("user", (AppUser) session.getAttribute("user"));
                     request.setAttribute("household", (Household) session.getAttribute("household"));
                     request.setAttribute("place", place);
@@ -235,6 +246,9 @@ public class ControllerServlet extends HttpServlet {
             -------------------------------------------------------------------------------------------*/
             else if(currentStep.equals("createStocksArticle")){
                 HttpSession session = request.getSession(true);
+                if(request.getParameter("name").equals("")){
+                    throw new MVKException("Fehler beim Anlegen des Vorratsartikels: Kein Name angegeben.");
+                }
                 LOG.info("CustomInfo: ID vom Platz holen");
                 Place place = manageBeanUserHousehold.findPlace((String)request.getParameter("id"));
                 session.setAttribute("place", place);
@@ -242,14 +256,11 @@ public class ControllerServlet extends HttpServlet {
                                                 place, "");
                 if (stocksArticle != null) {
                     LOG.info("CustomInfo: StocksArticle erfolgreich angelegt");
-                    session.setAttribute("stocksArticle", stocksArticle);
                     request.setAttribute("user", (AppUser) session.getAttribute("user"));
                     request.setAttribute("household", (Household) session.getAttribute("household"));
                     request.setAttribute("place", (Place) session.getAttribute("place"));
                     request.setAttribute("stocksArticle", stocksArticle);
-    //                request.setAttribute("id", session.getAttribute("id"));
                     response.sendRedirect("/MVK-war/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id"));
-    //                request.getRequestDispatcher("/household.jsp").forward(request, response);
                 } else {
                     LOG.info("CustomInfo: StocksArticle anlegen fehlgeschlagen");
                     request.getRequestDispatcher("/household.jsp").forward(request, response);
@@ -264,7 +275,10 @@ public class ControllerServlet extends HttpServlet {
             -------------------------------------------------------------------------------------------*/
             else if(currentStep.equals("createStocksUnit")){
                 HttpSession session = request.getSession(true);
-                LOG.info("CustomInfo: ID vom StocksArticle holen");              
+                LOG.info("CustomInfo: ID vom StocksArticle holen");
+                if(request.getParameter("Menge").equals("")){
+                    throw new MVKException("Fehler beim Anlegen der Vorratseinheit: Keine Menge angegeben.");
+                }
                 StocksArticle stocksArticle = manageBeanStocks.findStocksArticle((String)request.getParameter("StocksArticleID"));
                 session.setAttribute("stocksArticle", stocksArticle);
                 
@@ -272,15 +286,12 @@ public class ControllerServlet extends HttpServlet {
                                                 request.getParameter("Datum"), request.getParameter("Kommentar"));
                 if (stocksUnit != null) {
                     LOG.info("CustomInfo: StocksUnit erfolgreich angelegt");
-                    session.setAttribute("stocksUnit", stocksUnit);
                     request.setAttribute("user", (AppUser) session.getAttribute("user"));
                     request.setAttribute("household", (Household) session.getAttribute("household"));
                     request.setAttribute("place", (Place) session.getAttribute("place"));
                     request.setAttribute("stocksArticle", (StocksArticle) session.getAttribute("stocksArticle"));
                     request.setAttribute("stocksUnit", stocksUnit);
-    //                request.setAttribute("id", session.getAttribute("id"));
                     response.sendRedirect("/MVK-war/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id"));
-    //                request.getRequestDispatcher("/household.jsp").forward(request, response);
                 } else {
                     LOG.info("CustomInfo: StocksArticle anlegen fehlgeschlagen");
                     request.getRequestDispatcher("/household.jsp").forward(request, response);
@@ -289,6 +300,7 @@ public class ControllerServlet extends HttpServlet {
             else if(currentStep.equals("raiseQuantity")){
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: Menge des Units erhöhen"); 
+                
                 StocksUnit stocksUnit = manageBeanStocks.findStocksUnit((String)request.getParameter("id"));
                 session.setAttribute("stocksUnit", stocksUnit);
                 //TODO: funktioniert noch nicht. Änderungen an der Methode raiseQuantity durchgeführt, da sich die Menge sonst nicht geändert hatte
@@ -314,6 +326,11 @@ public class ControllerServlet extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 LOG.info("CustomInfo: ID vom StocksArticle holen");       
                 StocksUnit stocksUnit = manageBeanStocks.findStocksUnit((String)request.getParameter("id"));
+                
+                if(stocksUnit.getQuantity() == 0){
+                    throw new MVKException("Fehler beim Reduzieren der Menge: Menge kleiner 0.");
+                }
+                
                 session.setAttribute("stocksUnit", stocksUnit);
                 LOG.info("CustomInfo: Menge des Units reduzieren"); 
                 
@@ -397,9 +414,7 @@ public class ControllerServlet extends HttpServlet {
             LOG.info("Exception geworfen");
             request.setAttribute("errorText", e.getMessage());
             request.setAttribute("currentPage", request.getContextPath());
-            
-            //response.sendError(100, e.getMessage());
-            //response.sendRedirect("/MVK-war/error.jsp?");
+
             request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
