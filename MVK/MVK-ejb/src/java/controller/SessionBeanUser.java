@@ -1,203 +1,178 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
-import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.xml.registry.infomodel.User;
 import model.AppUser;
 import model.Household;
 
-/**
- *
- * @author Felix
- */
 @Stateless(name = "SessionBeanUser")
 public class SessionBeanUser implements SessionBeanUserLocal {
-
-    private static final Logger LOG = Logger.getLogger(SessionBeanUser.class.getName());
 
     @PersistenceContext
     private EntityManager em;
 
 //------------------------------------------------------------------------------
-    //User -->Grundlegende Methoden
+// User -->Grundlegende Methoden
 //------------------------------------------------------------------------------
     @Override
-    public AppUser createUser(String name, String email, String password) {
-        LOG.info("CustomInfo: SessionBean aufgerufen: User anlegen");
-        em.setFlushMode(FlushModeType.AUTO);
-        AppUser user = new AppUser(name, email, password);
-        em.persist(user);
-        user = em.merge(user);
-        em.flush();
-        return user;
-
+    public AppUser createUser(String name, String email, String password) throws MVKException{
+        try{
+            em.setFlushMode(FlushModeType.AUTO);
+            AppUser user = new AppUser(name, email, password);
+            em.persist(user);
+            user = em.merge(user);
+            em.flush();
+            return user;
+        }catch(Exception e){
+            throw new MVKException("Fehler beim Anlegen des Users.");
+        }
     }
 
     @Override
-    public AppUser login(String email, String password) {
-        if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
-            return null;
+    public AppUser login(String email, String password) throws MVKException{
+        try{
+            if (email == null || password == null || email.isEmpty() || password.isEmpty()) {
+                return null;
+            }
+            TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findByEmailPassword", AppUser.class)
+                    .setParameter("email", email)
+                    .setParameter("password", password);
+            if (query.getResultList().isEmpty()) {
+                return null;
+            }
+            return query.getSingleResult();
+        }catch(Exception e){
+            throw new MVKException("Fehler beim Einloggen.");
         }
-        TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findByEmailPassword", AppUser.class)
-                .setParameter("email", email)
-                .setParameter("password", password);
-        if (query.getResultList().isEmpty()) {
-            return null;
-        }
-        return query.getSingleResult();
     }
 
     @Override
-    public void deleteUser(AppUser user) {
+    public void deleteUser(AppUser user) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            System.out.println(user.getUserID());
             Household foundPlace = em.find(Household.class, user.getUserID());
             if(foundPlace != null){
-                System.out.println("success");
-//                foundHousehold = em.merge(foundHousehold);
                 em.remove(foundPlace);
                 em.getTransaction().commit();
                 em.flush();
-            }else{
-                System.out.println("error");
             }
-//            return true;
-        } catch (Exception e) {
-//            return false;
+        }catch(Exception e){
+            throw new MVKException("Fehler beim Löschen des Users.");
         }
     }
     
         @Override
-    public AppUser findUser(long longID) {
-        LOG.info("lalelu" + longID);
-        if (longID == 0) {
-            return null;
+    public AppUser findUser(long longID) throws MVKException{
+        try{
+            if (longID == 0) {
+                return null;
+            }
+            TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findById", AppUser.class)
+                    .setParameter("userID", longID);
+            if (query.getResultList().isEmpty()) {
+                return null;
+            }
+            return query.getSingleResult();
+        }catch(Exception e){
+            throw new MVKException("User nicht gefunden.");
         }
-        TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findById", AppUser.class)
-                .setParameter("userID", longID);
-        if (query.getResultList().isEmpty()) {
-            return null;
-        }
-        LOG.info(query.getSingleResult().getName());
-        return query.getSingleResult();
     }
     
     @Override
-    public AppUser findUser(String email) {
-        LOG.info("lalelu" + email);
-        if (email == null) {
-            return null;
+    public AppUser findUser(String email) throws MVKException{
+        try{
+            if (email == null) {
+                return null;
+            }
+            TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findByEmail", AppUser.class)
+                    .setParameter("email", email);
+            if (query.getResultList().isEmpty()) {
+                return null;
+            }
+            return query.getSingleResult();
+        }catch(Exception e){
+            throw new MVKException("User nicht gefunden.");
         }
-        TypedQuery<AppUser> query = em.createNamedQuery("AppUser.findByEmail", AppUser.class)
-                .setParameter("email", email);
-        if (query.getResultList().isEmpty()) {
-            return null;
-        }
-        LOG.info(query.getSingleResult().getName());
-        return query.getSingleResult();
     }
 
     
 //------------------------------------------------------------------------------
-    //Beziehungen
+// Beziehungen
 //------------------------------------------------------------------------------
     @Override
-    public boolean addHouseholdToUser(AppUser user, Household household) {
+    public boolean addHouseholdToUser(AppUser user, Household household) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            //???weitere Prüfung notwendig
             if (household != null) {
                 user.getHouseholdList().add(household);
             }
             em.merge(user);
-            
             em.flush();
             return true;
-        } catch (Exception e) {
-            return false;
+        }catch(Exception e){
+            throw new MVKException("Fehler beim Hinzufügen eines Haushalts zum User.");
         }
     }
 
     @Override
-    public AppUser removeHouseholdFromUser(AppUser user, Household household) {
+    public AppUser removeHouseholdFromUser(AppUser user, Household household) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (household != null) {
-                System.out.println("user 1");
                 user = em.find(AppUser.class, user.getUserID());
-                System.out.println("user gefunden");
-                boolean b = user.getHouseholdList().remove(household);
-                System.out.println(b);
-                System.out.println("user entfernt");
+                user.getHouseholdList().remove(household);
                 em.flush();
-                System.out.println("user flush");
-                
                 em.getEntityManagerFactory().getCache().evictAll();
             }
             return user;
-        } catch (Exception e) {
-//            e.printStackTrace();
-            throw e;
+        }catch(Exception e){
+            throw new MVKException("Fehler beim Entfernen des Haushalts von einem User.");
         }
     }
     
 //------------------------------------------------------------------------------
-    //Change-Methoden
+// Change-Methoden
 //------------------------------------------------------------------------------
     @Override
-    public AppUser changeName(AppUser user, String name) {
-        em.setFlushMode(FlushModeType.AUTO);
-        user.setName(name);
-        user = em.merge(user);
-        em.flush();
-        return user;
-    }
-
-    @Override
-    public AppUser changePassword(AppUser user, String password) {
-        em.setFlushMode(FlushModeType.AUTO);
-        user.setPassword(password);
-        user = em.merge(user);
-        em.flush();
-        return user;
-    }
-
-    @Override
-    public AppUser changeEmail(AppUser user, String email) {
-        em.setFlushMode(FlushModeType.AUTO);
-        user.setEmail(email);
-        user = em.merge(user);
-        em.flush();
-        return user;
-    }
-
-    /*@Override
-    public AppUser changeUser(AppUser user, String name, String email, String password) {
-        em.setFlushMode(FlushModeType.AUTO);
-        if (name != null) {
+    public AppUser changeName(AppUser user, String name) throws MVKException{
+        try{
+            em.setFlushMode(FlushModeType.AUTO);
             user.setName(name);
+            user = em.merge(user);
+            em.flush();
+            return user;
+        }catch(Exception e){
+            throw new MVKException("Fehler beim Ändern des Usernames.");
         }
-        if (email != null) {
-            user.setEmail(email);
-        }
-        if (password != null) {
+    }
+
+    @Override
+    public AppUser changePassword(AppUser user, String password) throws MVKException{
+        try{
+            em.setFlushMode(FlushModeType.AUTO);
             user.setPassword(password);
+            user = em.merge(user);
+            em.flush();
+            return user;
+        }catch(Exception e){
+            throw new MVKException("Fehler beim Ändern des Passworts.");
         }
-        em.persist(user);
-        user = em.merge(user);
-        em.flush();
-        return user;
-    }*/
+    }
+
+    @Override
+    public AppUser changeEmail(AppUser user, String email) throws MVKException{
+        try{
+            em.setFlushMode(FlushModeType.AUTO);
+            user.setEmail(email);
+            user = em.merge(user);
+            em.flush();
+            return user;
+        }catch(Exception e){
+            throw new MVKException("Fehler beim Ändern der Email.");
+        }
+    }
     
 }
