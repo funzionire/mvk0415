@@ -154,15 +154,16 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     @Override
     public void deleteStocksUnit(StocksUnit stocksUnit) {
         try {
+            em.getEntityManagerFactory().getCache().evictAll();
             em.setFlushMode(FlushModeType.AUTO);
             System.out.println(stocksUnit.getStocksUnitID());
-            Household foundStocksUnit = em.find(Household.class, stocksUnit.getStocksUnitID());
+            StocksUnit foundStocksUnit = em.find(StocksUnit.class, stocksUnit.getStocksUnitID());
             if(foundStocksUnit != null){
                 System.out.println("success");
 //                foundHousehold = em.merge(foundHousehold);
                 
                 em.remove(foundStocksUnit);
-                em.getTransaction().commit();
+                //em.getTransaction().commit();
                 em.flush();
             }else{
                 System.out.println("error");
