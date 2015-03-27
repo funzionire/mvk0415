@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import static controller.BeanFactory.getSessionBeanHousehold;
@@ -12,10 +7,6 @@ import model.AppUser;
 import model.Household;
 import model.Place;
 
-/**
- *
- * @author Felix
- */
 @Stateless
 public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     
@@ -23,10 +14,10 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     SessionBeanUserLocal   sessionBeanUser = getSessionBeanUser();
 
 //------------------------------------------------------------------------------    
-    //Grundlegende Methoden zur Verwaltung eines Haushaltes
+// Grundlegende Methoden zur Verwaltung eines Haushaltes
 //------------------------------------------------------------------------------   
     @Override
-    public Household addHousehold(String name, AppUser user) {
+    public Household addHousehold(String name, AppUser user) throws MVKException{
         Household household = sessionBeanHousehold.createHousehold(name);
         sessionBeanHousehold.addUserToHousehold(household, user);
         sessionBeanUser.addHouseholdToUser(user, household);
@@ -34,30 +25,24 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     }
 
     @Override
-    public AppUser removeHousehold(Household household, AppUser user) {
+    public AppUser removeHousehold(Household household, AppUser user) throws MVKException{
         household = sessionBeanHousehold.removeUserFromHousehold(household, user);
         user = sessionBeanUser.removeHouseholdFromUser(user, household);
-        System.out.println("isEmpty" + household.getAppUserList().isEmpty());
-        for(AppUser user1 : household.getAppUserList()){
-            System.out.println("isEmpty " + user1.getName());
-        }
         if(household.getAppUserList().isEmpty()){
-            System.out.println("isEmpty");
             sessionBeanHousehold.deleteHousehold(household);
         } 
-
         return user;
     }
 
     @Override
-    public Place addPlace(String name, Household household) {
+    public Place addPlace(String name, Household household) throws MVKException{
         Place place = sessionBeanHousehold.createPlace(name, household);
         sessionBeanHousehold.addPlaceToHousehold(household, place);
         return place;
     }
     
     @Override
-    public void shareHousehold(Household household, String email) {
+    public void shareHousehold(Household household, String email) throws MVKException{
        if(household != null & email != null){
             AppUser user = sessionBeanUser.findUser(email);
             sessionBeanHousehold.addUserToHousehold(household, user);
@@ -65,80 +50,74 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
             }
     }
 //------------------------------------------------------------------------------    
-    //"Wrapper-Methoden" (mit eventuellen Datentyp-Umwandlungen)
+// Household
 //------------------------------------------------------------------------------    
-        //-->Household
     
     @Override
-    public Household changeHousehold(Household household, String name) {
+    public Household changeHousehold(Household household, String name) throws MVKException{
         return sessionBeanHousehold.changeHousehold(household, name);
     }
 
     @Override
-    public Household findHousehold(String stringID) {
-        //Datentyp-Umwandlung
+    public Household findHousehold(String stringID) throws MVKException{
         long longID = Long.parseLong(stringID);
         return sessionBeanHousehold.findHousehold(longID);
     }
 //------------------------------------------------------------------------------
-        //-->Place   
+// Place   
+//------------------------------------------------------------------------------    
     
     @Override
-    public Place changePlace(Place place, String newName) {
+    public Place changePlace(Place place, String newName) throws MVKException{
         return sessionBeanHousehold.changePlace(place, newName);
     }
     
     @Override
-    public Place findPlace(String stringID) {
-        //Datentyp-Umwandlung
+    public Place findPlace(String stringID) throws MVKException{
         long longID = Long.parseLong(stringID);
         return sessionBeanHousehold.findPlace(longID);
     }
 //------------------------------------------------------------------------------    
-        //-->User-Administration 
+// User-Administration 
+//------------------------------------------------------------------------------    
 
     @Override
-    public AppUser createUser(String name, String email, String password) {
+    public AppUser createUser(String name, String email, String password) throws MVKException{
         return sessionBeanUser.createUser(name, email, password);
     }
 
     @Override
-    public AppUser login(String email, String password) {
+    public AppUser login(String email, String password) throws MVKException{
         return sessionBeanUser.login(email, password);
     }
 
     @Override
-    public void deleteUser(AppUser user) {
+    public void deleteUser(AppUser user) throws MVKException{
         sessionBeanUser.deleteUser(user);
     }
 
     @Override
-    public AppUser changeName(AppUser user, String name) {
+    public AppUser changeName(AppUser user, String name) throws MVKException{
         return sessionBeanUser.changeName(user, name);
     }
 
     @Override
-    public AppUser changePassword(AppUser user, String password) {
+    public AppUser changePassword(AppUser user, String password) throws MVKException{
         return sessionBeanUser.changePassword(user, password);
     }
 
     @Override
-    public AppUser changeEmail(AppUser user, String email) {
+    public AppUser changeEmail(AppUser user, String email) throws MVKException{
         return sessionBeanUser.changeEmail(user, email);
     } 
     
-    /*@Override
-    public AppUser changeUser(AppUser user, String name, String email, String password) {
-        return sessionBeanUser.changeUser(user, name, email, password);
-    }*/
-    
     @Override
-    public AppUser findUser(long longID) {
+    public AppUser findUser(long longID) throws MVKException{
         return sessionBeanUser.findUser(longID);
     }
 
     @Override
-    public AppUser findUser(String email) {
+    public AppUser findUser(String email) throws MVKException{
         return sessionBeanUser.findUser(email);
     }  
     

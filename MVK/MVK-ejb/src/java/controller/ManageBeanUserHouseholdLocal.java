@@ -21,45 +21,45 @@ public interface ManageBeanUserHouseholdLocal {
     //Grundlegende Methoden zur Verwaltung eines Haushaltes
 //------------------------------------------------------------------------------   
     
-    public Household addHousehold(String name, AppUser user);
+    public Household addHousehold(String name, AppUser user) throws MVKException;
     
-    public AppUser removeHousehold(Household household, AppUser user);
+    public AppUser removeHousehold(Household household, AppUser user) throws MVKException;
     
-    public Place addPlace(String name, Household household);
+    public Place addPlace(String name, Household household) throws MVKException;
             
-    public void shareHousehold(Household household, String email);
+    public void shareHousehold(Household household, String email) throws MVKException;
     
 //------------------------------------------------------------------------------      
     //"Wrapper-Methoden" (mit eventuellen Datentyp-Umwandlungen)
 //------------------------------------------------------------------------------    
         //-->Household
-    public Household changeHousehold(Household household, String name);
+    public Household changeHousehold(Household household, String name) throws MVKException;
     
-    public Household findHousehold(String stringID);
+    public Household findHousehold(String stringID) throws MVKException;
     
 //------------------------------------------------------------------------------    
         //-->Place   
-    public Place changePlace(Place place, String newName);
+    public Place changePlace(Place place, String newName) throws MVKException;
     
-    public Place findPlace(String stringID);
+    public Place findPlace(String stringID) throws MVKException;
     
 //------------------------------------------------------------------------------
-        //-->User-Administration    
-    public AppUser createUser(String name, String email, String password);
+// User-Administration    
+    public AppUser createUser(String name, String email, String password) throws MVKException;
     
-    public AppUser login(String email, String password);
+    public AppUser login(String email, String password) throws MVKException;
     
-    public void deleteUser (AppUser user);
+    public void deleteUser (AppUser user) throws MVKException;
     
-    public AppUser changeName (AppUser user, String name);
+    public AppUser changeName (AppUser user, String name) throws MVKException;
     
-    public AppUser changePassword (AppUser user, String password);
+    public AppUser changePassword (AppUser user, String password) throws MVKException;
     
-    public AppUser changeEmail (AppUser user, String email);
+    public AppUser changeEmail (AppUser user, String email) throws MVKException;
     
     //public AppUser changeUser (AppUser user, String name, String email, String password);
     
-    public AppUser findUser(long longID);
+    public AppUser findUser(long longID) throws MVKException;
     
-    public AppUser findUser(String email);
+    public AppUser findUser(String email) throws MVKException;
 }

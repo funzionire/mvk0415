@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.util.List;
-import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.FlushModeType;
@@ -17,20 +11,15 @@ import model.AppUser;
 import model.Place;
 import model.StocksArticle;
 
-/**
- *
- * @author Felix
- */
 @Stateless
 public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
-
-    private static final Logger LOG = Logger.getLogger(SessionBeanHousehold.class.getName());
     
     @PersistenceContext
     private EntityManager em;
 
 //------------------------------------------------------------------------------
-    //Household
+// Household
+//------------------------------------------------------------------------------
     
     @Override
     public Household createHousehold(String name) throws MVKException{
@@ -93,8 +82,9 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
     
     
 //------------------------------------------------------------------------------
-    //Place    
-
+// Place    
+//------------------------------------------------------------------------------
+    
     @Override
     public Place createPlace(String name, Household household) throws MVKException{
         try{
@@ -159,7 +149,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
     }
     
 //------------------------------------------------------------------------------
-    //Verknüpfung User_Household   
+// Verknüpfung User_Household   
 //------------------------------------------------------------------------------
     @Override
     public boolean addUserToHousehold(Household household, AppUser user) throws MVKException{
@@ -197,7 +187,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
     }
     
 //------------------------------------------------------------------------------
-    //Verknüpfung Household_Place
+// Verknüpfung Household_Place
 //------------------------------------------------------------------------------
     @Override
     public boolean addPlaceToHousehold(Household household, Place place) throws MVKException{
@@ -231,7 +221,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
     }
     
 //------------------------------------------------------------------------------
-    //Verknüpfung Place_StocksArticle
+// Verknüpfung Place_StocksArticle
 //------------------------------------------------------------------------------
     @Override
     public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle) throws MVKException{
