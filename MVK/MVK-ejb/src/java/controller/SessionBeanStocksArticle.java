@@ -163,6 +163,7 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     @Override
     public void deleteStocksUnit(StocksUnit stocksUnit) {
         try {
+            em.getEntityManagerFactory().getCache().evictAll();
             em.setFlushMode(FlushModeType.AUTO);
             System.out.println(stocksUnit.getStocksUnitID());
             StocksUnit foundStocksUnit = em.find(StocksUnit.class, stocksUnit.getStocksUnitID());
