@@ -9,10 +9,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.FlushModeType;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import model.Household;
@@ -25,7 +22,7 @@ import model.StocksArticle;
  * @author Felix
  */
 @Stateless
-public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
+public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
 
     private static final Logger LOG = Logger.getLogger(SessionBeanHousehold.class.getName());
     
@@ -36,60 +33,62 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     //Household
     
     @Override
-    public Household createHousehold(String name) {
-        em.setFlushMode(FlushModeType.AUTO);
-        Household household = new Household(name);
-        em.persist(household);
-        //household = em.merge(household);
-        
-        em.flush();
-        
-        return household;
+    public Household createHousehold(String name) throws MVKException{
+        try{
+            em.setFlushMode(FlushModeType.AUTO);
+            Household household = new Household(name);
+            em.persist(household);
+            em.flush();
+            return household;
+        }catch(Exception e){
+             throw new MVKException("Fehler beim Anlegen des Haushalts");
+        }
     }
 
     @Override
-    public void deleteHousehold(Household household) {
+    public void deleteHousehold(Household household) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            System.out.println(household.getHouseholdID());
             Household foundHousehold = em.find(Household.class, household.getHouseholdID());
             if(foundHousehold != null){
-                System.out.println("success" + foundHousehold);
                 em.remove(foundHousehold);
-                System.out.println("success");
                 em.flush();
-            }else{
-                System.out.println("error");
             }
-//            return true;
         } catch (Exception e) {
-//            return false;
+            throw new MVKException("Fehler beim Löschen des Haushalts.");
         }
     }
 
     @Override
-    public Household changeHousehold(Household household, String newName) {
-        em.setFlushMode(FlushModeType.AUTO);
-        if (newName != null) {
-            household.setName(newName);
+    public Household changeHousehold(Household household, String newName) throws MVKException{
+        try{
+            em.setFlushMode(FlushModeType.AUTO);
+            if (newName != null) {
+                household.setName(newName);
+            }
+            household = em.merge(household);
+            em.flush();
+            return household;
+        } catch (Exception e) {
+            throw new MVKException("Fehler beim Ändern des Haushalts.");
         }
-        household = em.merge(household);
-        em.flush();
-        return household;
     }
 
     @Override
-    public Household findHousehold(long longID) {
-        if (longID == 0) {
-            return null;
+    public Household findHousehold(long longID) throws MVKException{
+        try{
+            if (longID == 0) {
+                return null;
+            }
+            TypedQuery<Household> query = em.createNamedQuery("Household.findById", Household.class)
+                    .setParameter("householdID", longID);
+            if (query.getResultList().isEmpty()) {
+                return null;
+            }
+            return query.getSingleResult();
+        } catch (Exception e) {
+            throw new MVKException("Haushalt nicht gefunden.");
         }
-        TypedQuery<Household> query = em.createNamedQuery("Household.findById", Household.class)
-                .setParameter("householdID", longID);
-        if (query.getResultList().isEmpty()) {
-            return null;
-        }
-        LOG.info(query.getSingleResult().getName());
-        return query.getSingleResult();
     }
     
     
@@ -97,73 +96,75 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     //Place    
 
     @Override
-    public Place createPlace(String name, Household household) {
-        em.setFlushMode(FlushModeType.AUTO);
-        Place place = new Place(name, household);
-        em.persist(place);
-        place = em.merge(place);
-        em.flush();
-        return place;
+    public Place createPlace(String name, Household household) throws MVKException{
+        try{
+            em.setFlushMode(FlushModeType.AUTO);
+            Place place = new Place(name, household);
+            em.persist(place);
+            place = em.merge(place);
+            em.flush();
+            return place;
+        } catch (Exception e) {
+            throw new MVKException("Fehler beim Anlegen des Lagerortes.");
+        }
     }
 
     @Override
-    public void deletePlace(Place place) {
+    public void deletePlace(Place place) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            System.out.println(place.getPlaceID());
             Household foundPlace = em.find(Household.class, place.getPlaceID());
             if(foundPlace != null){
-                System.out.println("success");
-//                foundHousehold = em.merge(foundHousehold);
-                
                 em.remove(foundPlace);
                 em.getTransaction().commit();
                 em.flush();
-            }else{
-                System.out.println("error");
             }
-//            return true;
         } catch (Exception e) {
-                throw e;
-//            return false;
+            throw new MVKException("Fehler beim Löschen des Lagerortes.");
         }
     }
 
     @Override
-    public Place changePlace(Place place, String newName) {
-        em.setFlushMode(FlushModeType.AUTO);
-        if (newName != null) {
-            place.setName(newName);
+    public Place changePlace(Place place, String newName) throws MVKException{
+        try{
+            em.setFlushMode(FlushModeType.AUTO);
+            if (newName != null) {
+                place.setName(newName);
+            }
+            place = em.merge(place);
+            em.flush();
+            return place;
+        } catch (Exception e) {
+            throw new MVKException("Fehler beim Ändern des Lagerortes.");
         }
-        place = em.merge(place);
-        em.flush();
-        return place;
     }
 
     @Override
-    public Place findPlace(long longID) {
-        if (longID == 0) {
-            return null;
+    public Place findPlace(long longID) throws MVKException{
+        try{
+            if (longID == 0) {
+                return null;
+            }
+            TypedQuery<Place> query = em.createNamedQuery("Place.findById", Place.class)
+                    .setParameter("placeID", longID);
+            if (query.getResultList().isEmpty()) {
+                return null;
+            }
+            Place place = query.getSingleResult();
+            em.refresh(place);
+            return place;
+        } catch (Exception e) {
+            throw new MVKException("Lagerort nicht gefunden.");
         }
-        TypedQuery<Place> query = em.createNamedQuery("Place.findById", Place.class)
-                .setParameter("placeID", longID);
-        if (query.getResultList().isEmpty()) {
-            return null;
-        }
-        Place place = query.getSingleResult();
-        em.refresh(place);
-        LOG.info(query.getSingleResult().getName());
-        return place;
     }
     
 //------------------------------------------------------------------------------
     //Verknüpfung User_Household   
 //------------------------------------------------------------------------------
     @Override
-    public boolean addUserToHousehold(Household household, AppUser user) {
+    public boolean addUserToHousehold(Household household, AppUser user) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            //???weitere Prüfung notwendig
             em.flush();
             if (user != null) {
                 household.getAppUserList().add(user);
@@ -174,74 +175,58 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
             
             return true;
         } catch (Exception e) {
-            return false;
+            throw new MVKException("Fehler beim Hinzufügen eines Users zum Haushalt.");
         }
     }
 
     @Override
-    public Household removeUserFromHousehold(Household household, AppUser user) {
+    public Household removeUserFromHousehold(Household household, AppUser user) throws MVKException{
         try {
             em.getEntityManagerFactory().getCache().evictAll();
             em.setFlushMode(FlushModeType.AUTO);
             if (user != null) {
-                System.out.println("household flush");
                 em.flush();
                 household = em.find(Household.class, household.getHouseholdID());
-                System.out.println("household gefunden");
-                boolean b = household.getAppUserList().remove(user);
-                System.out.println(b);
-                System.out.println("household entfernt");
+                household.getAppUserList().remove(user);
                 em.flush();
-                System.out.println("household flush");       
             }
-            
             return household;
         } catch (Exception e) {
-//            e.printStackTrace();
-//            return false;
-            throw e;
+            throw new MVKException("Fehler beim Entfernen eines Users vom Haushalt.");
         }
     }
     
-     /*em.setFlushMode(FlushModeType.AUTO);
-            if (user != null) {
-                
-                household.getAppUserList().remove(user);
-            }
-            em.flush();*/
-
 //------------------------------------------------------------------------------
     //Verknüpfung Household_Place
 //------------------------------------------------------------------------------
     @Override
-    public boolean addPlaceToHousehold(Household household, Place place) {
+    public boolean addPlaceToHousehold(Household household, Place place) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            //???weitere Prüfung notwendig
             if (place != null) {
                 household.getPlaceList().add(place);
             }
-            household = em.merge(household);
+            em.merge(household);
             em.flush();
             return true;
         } catch (Exception e) {
-            return false;
+            throw new MVKException("Fehler Anlegen des Lagerortes.");
         }
     }
 
     @Override
-    public boolean removePlaceFromHousehold(Household household, Place place) {
+    public boolean removePlaceFromHousehold(Household household, Place place) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (place != null) {
                 household.getAppUserList().remove(place);
             }
-            household = em.merge(household);
+            em.merge(household);
             em.flush();
             deletePlace(place);
             return true;
         } catch (Exception e) {
-            return false;
+            throw new MVKException("Fehler beim Entfernen des Lagerortes.");
         }
     }
     
@@ -249,49 +234,44 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal {
     //Verknüpfung Place_StocksArticle
 //------------------------------------------------------------------------------
     @Override
-    public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle) {
+    public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            //???weitere Prüfung notwendig
             if (stocksArticle != null) {
                 place.getStocksArticleList().add(stocksArticle);
             }
-            place = em.merge(place);
+            em.merge(place);
             em.flush();
             return true;
         } catch (Exception e) {
-            return false;
+            throw new MVKException("Fehler beim Anlegen des Vorratsartikels.");
         }
     }
 
     @Override
-    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) {
+    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
             if (stocksArticle != null) {
                 place.getStocksArticleList().remove(stocksArticle);
             }
-            place = em.merge(place);
+            em.merge(place);
             em.flush();
             deletePlace(place);
             return true;
         } catch (Exception e) {
-            return false;
+            throw new MVKException("Fehler beim Entfernen des Vorratsartikels.");
         }
     }
 
     
     @Override
-    public List<Household> getHouseholdsForUser(AppUser user) {
-        return em.createNamedQuery("Household.findByUser", Household.class).getResultList();
+    public List<Household> getHouseholdsForUser(AppUser user) throws MVKException{
+        try{
+            return em.createNamedQuery("Household.findByUser", Household.class).getResultList();
+        } catch (Exception e) {
+            throw new MVKException("Fehler beim Suchen der User zum Haushalts.");
+        }
     }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 
-    /*unnötig
-     private Household getHousehold(long householdID) {
-     return em.find(Household.class, householdID);
-     //throw new UnsupportedOperationException("Not supported yet."); 
-     //To change body of generated methods, choose Tools | Templates.
-     }*/
 }

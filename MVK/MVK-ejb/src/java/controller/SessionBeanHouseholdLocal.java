@@ -17,7 +17,7 @@ import model.StocksArticle;
  * @author Felix
  */
 @Local
-public interface SessionBeanHouseholdLocal {
+public interface SessionBeanHouseholdLocal{
 
     //??? braucht es hier einen User in dieser Methode oder wird nicht einfach die UserID innerhalb der Methode rausgezogen?
     //--> so lassen
@@ -25,47 +25,45 @@ public interface SessionBeanHouseholdLocal {
 //------------------------------------------------------------------------------
     //Household
 //------------------------------------------------------------------------------
-    public Household createHousehold(String name);
+    public Household createHousehold(String name) throws MVKException;
         
-    public void deleteHousehold(Household household);
+    public void deleteHousehold(Household household) throws MVKException;
     
-    public Household changeHousehold(Household household, String newName);
+    public Household changeHousehold(Household household, String newName) throws MVKException;
     
-    public Household findHousehold(long longID);
+    public Household findHousehold(long longID) throws MVKException;
 
 //------------------------------------------------------------------------------
     //Place
 //------------------------------------------------------------------------------
-    public Place createPlace(String name, Household household);
+    public Place createPlace(String name, Household household) throws MVKException;
     
-    public void deletePlace(Place place);
+    public void deletePlace(Place place) throws MVKException;
     
-    public Place changePlace(Place place, String newName);
+    public Place changePlace(Place place, String newName) throws MVKException;
     
-    public Place findPlace(long longID);
+    public Place findPlace(long longID) throws MVKException;
 
 //------------------------------------------------------------------------------
     //Verknüpfung User_Household
 //------------------------------------------------------------------------------
-    public boolean addUserToHousehold(Household household, AppUser user);
+    public boolean addUserToHousehold(Household household, AppUser user) throws MVKException;
     
-    public Household removeUserFromHousehold(Household household, AppUser user);
+    public Household removeUserFromHousehold(Household household, AppUser user) throws MVKException;
 
 //------------------------------------------------------------------------------
     //Verknüpfung Household_Place
 //------------------------------------------------------------------------------
-    public boolean addPlaceToHousehold(Household household, Place place);
+    public boolean addPlaceToHousehold(Household household, Place place) throws MVKException;
     
-    public boolean removePlaceFromHousehold(Household household, Place place);
+    public boolean removePlaceFromHousehold(Household household, Place place) throws MVKException;
 
 //------------------------------------------------------------------------------
     //Verknüpfung Place_StocksArticle
 //------------------------------------------------------------------------------
-    public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle);
+    public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle) throws MVKException;
     
-    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle);
+    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) throws MVKException;
     
-    
-    //noch fraglich
-    public List<Household> getHouseholdsForUser(AppUser user);
+    public List<Household> getHouseholdsForUser(AppUser user) throws MVKException;
 }
