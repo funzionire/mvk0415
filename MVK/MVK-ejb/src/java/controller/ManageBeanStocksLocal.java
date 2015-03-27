@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.util.Date;
@@ -11,41 +6,36 @@ import model.Place;
 import model.StocksArticle;
 import model.StocksUnit;
 
-/**
- *
- * @author Felix
- */
 @Local
 public interface ManageBeanStocksLocal {
-    
-    //???void oder boolean??
+
 //------------------------------------------------------------------------------
-    //-->StocksArticle
+// StocksArticle
 //------------------------------------------------------------------------------
-    public StocksArticle addStocksArticle(String nameArt, Place place, String commentArt);
+    public StocksArticle addStocksArticle(String nameArt, Place place, String commentArt) throws MVKException;
     
-    public boolean removeStocksArticle(StocksArticle stocksArticle);
+    public boolean removeStocksArticle(StocksArticle stocksArticle) throws MVKException;
     
-    public StocksArticle findStocksArticle(String stringID);
+    public StocksArticle findStocksArticle(String stringID) throws MVKException;
     
-    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace);
+    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace) throws MVKException;
     
-    public int proofeMdd (StocksArticle stocksArticle);
+    public int proofeMdd (StocksArticle stocksArticle) throws MVKException;
 //------------------------------------------------------------------------------    
     //-->StocksUnit
 //------------------------------------------------------------------------------
-    public StocksUnit addStocksUnit(StocksArticle stocksArticle, String quantity, String mdd, String commentSUnit);
+    public StocksUnit addStocksUnit(StocksArticle stocksArticle, String quantity, String mdd, String commentSUnit) throws MVKException;
     
-    public boolean removeStocksUnit(StocksUnit stocksUnit);
+    public boolean removeStocksUnit(StocksUnit stocksUnit) throws MVKException;
     
-    public boolean moveStocksUnit(StocksUnit stocksUnit, Place newPlace, int newQuantity);
+    public boolean moveStocksUnit(StocksUnit stocksUnit, Place newPlace, int newQuantity) throws MVKException;
     
-    public StocksUnit findStocksUnit(String stringID);
+    public StocksUnit findStocksUnit(String stringID) throws MVKException;
   
         //-->Veränderungen an der Quantity eines StocksUnit
-    public StocksUnit raiseQuantityOfStocksUnit(StocksUnit stocksUnit);
+    public StocksUnit raiseQuantityOfStocksUnit(StocksUnit stocksUnit) throws MVKException;
     
-    public StocksUnit reduceQuantityOfStocksUnit(StocksUnit stocksUnit);
+    public StocksUnit reduceQuantityOfStocksUnit(StocksUnit stocksUnit) throws MVKException;
     
     
     

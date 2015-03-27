@@ -20,6 +20,7 @@
                     </br>
                     <h2>
                         ${requestScope.errorText}
+                        <!=${requestScope.stackTrace}>
                     </h2>
                     </br>
                 </div>

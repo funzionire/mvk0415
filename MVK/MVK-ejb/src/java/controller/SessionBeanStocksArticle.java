@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.text.SimpleDateFormat;
@@ -17,10 +12,6 @@ import model.Place;
 import model.StocksArticle;
 import model.StocksUnit;
 
-/**
- *
- * @author Felix
- */
 @Stateless(name = "SessionBeanArticle")
 public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
 

@@ -363,6 +363,7 @@ public class ControllerServlet extends HttpServlet {
         } catch (MVKException e){
             LOG.info("Exception geworfen");
             request.setAttribute("errorText", e.getMessage());
+            request.setAttribute("stackTrace", e.getStackTrace());
             request.setAttribute("currentPage", request.getContextPath());
 
             request.getRequestDispatcher("/error.jsp").forward(request, response);
