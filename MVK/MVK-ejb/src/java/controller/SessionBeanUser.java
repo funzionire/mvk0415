@@ -50,15 +50,17 @@ public class SessionBeanUser implements SessionBeanUserLocal {
     }
 
     @Override
-    public void deleteUser(AppUser user) throws MVKException{
+    public boolean deleteUser(AppUser user) throws MVKException{
         try {
+            
             em.setFlushMode(FlushModeType.AUTO);
-            Household foundPlace = em.find(Household.class, user.getUserID());
-            if(foundPlace != null){
-                em.remove(foundPlace);
-                em.getTransaction().commit();
+            AppUser findUser = em.find(AppUser.class, user.getUserID());
+            if(findUser != null){
+                em.remove(findUser);
+                System.out.println("remove hat stattgefunden");
                 em.flush();
             }
+            return true;
         }catch(Exception e){
             throw new MVKException("Fehler beim Löschen des Users.");
         }

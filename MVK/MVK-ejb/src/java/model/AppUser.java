@@ -31,7 +31,7 @@ public class AppUser implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userID;
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     private List<Household> households;
 
     //Konstruktoren

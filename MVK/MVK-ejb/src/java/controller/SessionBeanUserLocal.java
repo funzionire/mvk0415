@@ -14,7 +14,7 @@ public interface SessionBeanUserLocal {
     
     public AppUser login(String email, String password) throws MVKException;
     
-    public void deleteUser (AppUser user) throws MVKException;
+    public boolean deleteUser (AppUser user) throws MVKException;
     
     public AppUser findUser(long longID) throws MVKException;
     

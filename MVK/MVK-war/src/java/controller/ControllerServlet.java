@@ -81,15 +81,13 @@ public class ControllerServlet extends HttpServlet {
             }
             else if(currentStep.equals("deleteUser")){
                 HttpSession session = request.getSession(true);
-                
-                //hier muss es noch angepasst werden --> zwecks void oder boolean!!
-                Boolean isDeleted = true;
-                
-                manageBeanUserHousehold.deleteUser((AppUser)session.getAttribute("user"));
-                if(isDeleted == true){
+                //ich habe es jetzt einfach mit boolean gelöst!
+                boolean isDeleted = false;              
+                isDeleted = manageBeanUserHousehold.deleteUser((AppUser)session.getAttribute("user"));
+                if(isDeleted){
                     LOG.info("CustomInfo: User erfolgreich gelöscht");
                     session.setAttribute("user", null);
-                    request.getRequestDispatcher("/index.jsp");
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
                 }
                 else{
                     LOG.info("CustomInfo: User löschen fehlgeschlagen");

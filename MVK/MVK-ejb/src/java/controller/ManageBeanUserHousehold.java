@@ -92,8 +92,8 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
     }
 
     @Override
-    public void deleteUser(AppUser user) throws MVKException{
-        sessionBeanUser.deleteUser(user);
+    public boolean deleteUser(AppUser user) throws MVKException{
+        return sessionBeanUser.deleteUser(user);
     }
 
     @Override
