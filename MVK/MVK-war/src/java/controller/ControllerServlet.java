@@ -244,6 +244,25 @@ public class ControllerServlet extends HttpServlet {
                 HttpSession session = request.getSession(true);
                 session.getAttribute("stocksArticle");
             }
+            else if(currentStep.equals("removeStocksArticle")){
+                HttpSession session = request.getSession(true);
+                StocksArticle findStocksArticle = 
+                        manageBeanStocks.findStocksArticle((String)request.getParameter("stocksArticleID"));
+                
+                
+                boolean isDeleted = true;              
+                isDeleted = manageBeanStocks.removeStocksArticle(findStocksArticle);
+                if(isDeleted){
+                    LOG.info("CustomInfo: StocksArticle erfolgreich gelöscht");
+                    request.setAttribute("user", (AppUser) session.getAttribute("user"));
+                    request.setAttribute("household", (Household) session.getAttribute("household"));
+                    response.sendRedirect("/MVK-war/ControllerServlet?step=toHousehold&id=" + session.getAttribute("id"));
+                }
+                else{
+                    LOG.info("CustomInfo: StocksArticle löschen fehlgeschlagen");
+                    request.getRequestDispatcher("/household.jsp").forward(request, response);
+                } 
+            }
             /*-------------------------------------------------------------------------------------------
             StocksUnit
             -------------------------------------------------------------------------------------------*/

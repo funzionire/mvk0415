@@ -28,8 +28,7 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
     @Override
     public boolean removeStocksArticle(StocksArticle stocksArticle) throws MVKException{
         Place place = stocksArticle.getPlace();
-        sessionBeanHousehold.removeStocksArticleFromPlace(place, stocksArticle);
-        return true;
+        return sessionBeanHousehold.removeStocksArticleFromPlace(place, stocksArticle);
     }
 
     @Override
@@ -68,7 +67,6 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
 
     @Override
     public int proofeMdd(StocksArticle stocksArticle) throws MVKException{
-        System.out.println("Hilfe" + stocksArticle.getName());
         if (stocksArticle.getStocksUnitList() == null){
             return 1;
         }

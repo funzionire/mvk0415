@@ -90,6 +90,14 @@
                                         <td>
                                             <strong style ="color: red;" class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
                                         </td>
+                                        <td>
+                                            <c:url var="removeStocksArticle" value="/ControllerServlet?step=removeStocksArticle">
+                                                <c:param name="stocksArticleID" value="${article.getStocksArticleID()}"/>
+                                            </c:url>
+                                            <form method="post" action="${removeStocksArticle}">
+                                                <input type="submit" value="X" />
+                                            </form> 
+                                        </td>
                                     </tr>
                                 </c:when>
                                 <c:when test="${manageBeanStocks.proofeMdd(article) == 0}">
@@ -97,12 +105,28 @@
                                         <td>
                                             <strong style ="color: orange;" class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
                                         </td>
+                                        <td>
+                                            <c:url var="removeStocksArticle" value="/ControllerServlet?step=removeStocksArticle">
+                                                <c:param name="stocksArticleID" value="${article.getStocksArticleID()}"/>
+                                            </c:url>
+                                            <form method="post" action="${removeStocksArticle}">
+                                                <input type="submit" value="X" />
+                                            </form> 
+                                        </td>                                        
                                     </tr>
                                 </c:when>
                                 <c:otherwise>
                                     <tr>
                                         <td>
                                             <strong  class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
+                                        </td>
+                                        <td>
+                                            <c:url var="removeStocksArticle" value="/ControllerServlet?step=removeStocksArticle">
+                                                <c:param name="stocksArticleID" value="${article.getStocksArticleID()}"/>
+                                            </c:url>
+                                            <form method="post" action="${removeStocksArticle}">
+                                                <input type="submit" value="X" />
+                                            </form> 
                                         </td>
                                     </tr>
                                 </c:otherwise>

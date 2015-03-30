@@ -141,6 +141,7 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
                 return null;
             }
             Place place = query.getSingleResult();
+            //???
             em.refresh(place);
             return place;
         } catch (Exception e) {
@@ -211,9 +212,8 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
             if (place != null) {
                 household.getAppUserList().remove(place);
             }
-            em.merge(household);
             em.flush();
-            deletePlace(place);
+            //deletePlace(place);
             return true;
         } catch (Exception e) {
             throw new MVKException("Fehler beim Entfernen des Lagerortes.");
@@ -242,12 +242,14 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
     public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) throws MVKException{
         try {
             em.setFlushMode(FlushModeType.AUTO);
-            if (stocksArticle != null) {
-                place.getStocksArticleList().remove(stocksArticle);
+            StocksArticle findStocksArticle = em.find(StocksArticle.class, stocksArticle.getStocksArticleID());
+            if (findStocksArticle != null) {
+                Place findPlace = em.find(Place.class, place.getPlaceID());
+                findPlace.getStocksArticleList().remove(findStocksArticle);
+                em.remove(findStocksArticle);
+                em.flush();
             }
-            em.merge(place);
-            em.flush();
-            deletePlace(place);
+            
             return true;
         } catch (Exception e) {
             throw new MVKException("Fehler beim Entfernen des Vorratsartikels.");
