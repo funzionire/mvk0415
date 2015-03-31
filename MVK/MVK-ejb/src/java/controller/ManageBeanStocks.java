@@ -108,7 +108,9 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date dateMDD = null;
         try{    
-            dateMDD = sdf.parse(mdd);
+            if (!mdd.equals("")){
+                dateMDD = sdf.parse(mdd);
+            }
         }catch(Exception e){
             throw new MVKException("Fehler beim Anlegen eines Vorratsartikels.");
         }
