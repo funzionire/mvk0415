@@ -170,12 +170,9 @@
             <%--Button für neuen Lagerort --%>
             <div class="hhdiv">
                 <h2 class="hbox" style="width: auto">Neuer Lagerort</h2> 
-                <form method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
-                    <div class="hhdiv">
+                <form class="bgbox" method ="post" action="/MVK-war/ControllerServlet?step=createPlace">
                         <input type ="text" name="name" placeholder="Lagerort..."/>
-                        <input type="submit"
-                               value ="+ Neuen Lagerort hinzufügen"/>
-                    </div>
+                        <input type="submit" value ="Neuen Lagerort hinzufügen"/>
                 </form>
             </div>
         </div>

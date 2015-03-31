@@ -88,11 +88,12 @@ td{
 }
 
 .hhcontainer{
-    background-color: rgba(255,255,255,.25);
+    /*background-color: rgba(255,255,255,.25);*/
     border-radius: 10px;
     height: auto;
     width: auto;
-    position: absolute;       
+    position: absolute;  
+    page-break-inside: avoid;
 }
 
 .hhdiv{
@@ -101,7 +102,9 @@ td{
     margin-right: 20px;
     position: relative;
     float:left;
+    page-break-after: avoid;
 }
+
 
 @media(min-width:768px) {
     body {
