@@ -273,12 +273,16 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     public int compareMddWithCurrentDate(StocksUnit stocksUnit) {
         Date currentDate = new Date();
         Date mdd = stocksUnit.getMdd();
+        //Ohne Mdd wird der Artikel behandelt als wäre er haltbar
+        if (mdd == null){
+            return 1;
+        }
         
-        long dreiTage = 259200000 ;
+        long dreiTage = 259200000 ; //Millisekunden
         long difference = mdd.getTime() - currentDate.getTime();
         
         //nicht haltbar
-        if ( difference < 0 ){
+        if ( difference <= 0 ){
             return -1 ;
         }
         //läuft bald ab

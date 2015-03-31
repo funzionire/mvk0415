@@ -72,14 +72,12 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         }
         int result = 1;
         for (StocksUnit unit : stocksArticle.getStocksUnitList()){
-            if (unit.getMdd() != null){
                 if (sessionBeanStocksArticle.compareMddWithCurrentDate(unit) == -1){
                     return -1;
                 }
                 if (sessionBeanStocksArticle.compareMddWithCurrentDate(unit) == 0 ){
                     result = 0;
                 }
-            }
         }
         if (result == 0){
             return 0;
