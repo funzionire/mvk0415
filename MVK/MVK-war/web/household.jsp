@@ -84,12 +84,21 @@
 
                     <table class="bgbox">
                         <c:forEach items="${place.getStocksArticleList()}" var="article" >
+                            <%-- Unterscheidung, ob Artikel abgelaufen, in den nächsten 3 Tagen abläuft 
+                                 oder noch haltbar ist --%>
                             <c:choose>
+                                <%-- Artikel abgelaufen --%>
                                 <c:when test="${manageBeanStocks.proofeMdd(article) == -1}">    
                                     <tr>
+                                        <%-- Gesamtmenge des Artikels --%>
+                                        <td style="width: 30px;">
+                                            ${manageBeanStocks.sumUpQuantity(article)}
+                                        </td>
+                                        <%-- Artikel --%>
                                         <td>
                                             <strong style ="color: red;" class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
                                         </td>
+                                        <%-- Button zum Löschen des Artikels --%>
                                         <td>
                                             <c:url var="removeStocksArticle" value="/ControllerServlet?step=removeStocksArticle">
                                                 <c:param name="stocksArticleID" value="${article.getStocksArticleID()}"/>
@@ -100,8 +109,12 @@
                                         </td>
                                     </tr>
                                 </c:when>
+                                <%--Artikel läuft innerhalb der nächsten drei Tagen ab --%>
                                 <c:when test="${manageBeanStocks.proofeMdd(article) == 0}">
                                     <tr>
+                                        <td style="width: 30px;">
+                                            ${manageBeanStocks.sumUpQuantity(article)}
+                                        </td>
                                         <td>
                                             <strong style ="color: orange;" class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
                                         </td>
@@ -115,8 +128,12 @@
                                         </td>                                        
                                     </tr>
                                 </c:when>
+                                <%-- Artikel ist haltbar --%>
                                 <c:otherwise>
                                     <tr>
+                                        <td style="width: 30px;">
+                                            ${manageBeanStocks.sumUpQuantity(article)}
+                                        </td>
                                         <td>
                                             <strong  class="pointer" id ="${article.getStocksArticleID()}" onclick="overlay('${article.getStocksArticleID()}', 'display')">${article.getName()}</strong> 
                                         </td>
@@ -133,7 +150,8 @@
                             </c:choose>
                         </c:forEach>
                         <tr>
-                            <td>    <%-- Button für neuen Artikel --%>
+                            <%-- Button für neuen Artikel --%>
+                            <td colspan ="2">   
 
                                 <form method="post" action="ControllerServlet?step=createStocksArticle">
                                     <input type="text" name="name" placeholder="Artikel..." />

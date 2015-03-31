@@ -86,6 +86,18 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         }
         return 1;
     }
+
+    @Override
+    public int sumUpQuantity(StocksArticle stocksArticle) throws MVKException {
+        if (stocksArticle.getStocksUnitList() == null){
+            return 0;
+        }
+        int result = 0;
+        for (StocksUnit unit : stocksArticle.getStocksUnitList()){
+                result = result + unit.getQuantity();
+        }
+        return result;
+    }
     
     
     
