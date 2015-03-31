@@ -60,6 +60,10 @@ button, input, optgroup, select, textarea {
     border:hidden;
 }
 
+th{
+    text-align:center;
+}
+
 td{
     border: 3px  #000;
     border-spacing: 10px;
