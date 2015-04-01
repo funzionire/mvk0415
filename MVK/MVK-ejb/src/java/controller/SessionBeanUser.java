@@ -1,3 +1,7 @@
+/*
+Komponente zur Verwaltung der Entity-Klasse "AppUser",
+regelt die dafür benötigten Datenbankzugriffe.
+*/
 package controller;
 
 import javax.ejb.Stateless;

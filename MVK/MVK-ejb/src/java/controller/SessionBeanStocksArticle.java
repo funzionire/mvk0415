@@ -1,6 +1,9 @@
+/*
+Komponente zur Verwaltung der Entity-Klassen "StocksArticle" und "StocksUnit",
+regelt die dafür benötigten Datenbankzugriffe
+*/
 package controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -48,21 +51,16 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
             Household foundStocksArticle = em.find(Household.class, stocksArticle.getStocksArticleID());
             if(foundStocksArticle != null){
                 System.out.println("success");
-//                foundHousehold = em.merge(foundHousehold);
-                
                 em.remove(foundStocksArticle);
                 em.getTransaction().commit();
                 em.flush();
             }else{
                 System.out.println("error");
             }
-//            return true;
         } catch (Exception e) {
-//            return false;
         }
     }
 
-    //??? soll hier auch Place verändert werden können? --> move gibt es ja bereits schon!
     @Override
     public StocksArticle changeStocksArticle(StocksArticle stocksArticle, String nameArt, String commentArt) {
         em.setFlushMode(FlushModeType.AUTO);
@@ -142,7 +140,6 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         if (commentSUnit != null) {
             stocksUnit.setCommentSUnit(commentSUnit);
         }
-        //muss noch ausprobiert werden?? brauchen wir allerdings für moveStocksUnit!!
         if (updateQuantity == 0) {
             stocksUnit.setQuantity(updateQuantity);
         }
@@ -160,17 +157,12 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
             StocksUnit foundStocksUnit = em.find(StocksUnit.class, stocksUnit.getStocksUnitID());
             if(foundStocksUnit != null){
                 System.out.println("success");
-//                foundHousehold = em.merge(foundHousehold);
-                
                 em.remove(foundStocksUnit);
-                //em.getTransaction().commit();
                 em.flush();
             }else{
                 System.out.println("error");
             }
-//            return true;
         } catch (Exception e) {
-//            return false;
         }
     }
     
@@ -223,37 +215,37 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         }
     }
 
-    @Override
-    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) {
-        try {
-            em.setFlushMode(FlushModeType.AUTO);
-            if (place != null && stocksArticle != null) {
-                place.getStocksArticleList().remove(stocksArticle);
-            }
-            place = em.merge(place);
-            em.flush();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+//    @Override
+//    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) {
+//        try {
+//            em.setFlushMode(FlushModeType.AUTO);
+//            if (place != null && stocksArticle != null) {
+//                place.getStocksArticleList().remove(stocksArticle);
+//            }
+//            place = em.merge(place);
+//            em.flush();
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+//    }
 
-    @Override
-    public boolean changePlaceFromStocksArticle(Place place, StocksArticle stocksArticle) {
-        try {
-            em.setFlushMode(FlushModeType.AUTO);
-            if (place != null && stocksArticle != null) {
-                stocksArticle.setPlace(place);
-                //???falls gewollt???
-                removeStocksArticleFromPlace(place, stocksArticle);
-            }
-            place = em.merge(place);
-            em.flush();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+//    @Override
+//    public boolean changePlaceFromStocksArticle(Place place, StocksArticle stocksArticle) {
+//        try {
+//            em.setFlushMode(FlushModeType.AUTO);
+//            if (place != null && stocksArticle != null) {
+//                stocksArticle.setPlace(place);
+//                //???falls gewollt???
+//                removeStocksArticleFromPlace(place, stocksArticle);
+//            }
+//            place = em.merge(place);
+//            em.flush();
+//            return true;
+//        } catch (Exception e) {
+//            return false;
+//        }
+//    }
 
     @Override
     public StocksUnit changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change) {
@@ -277,7 +269,6 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         if (mdd == null){
             return 1;
         }
-        
         long dreiTage = 259200000 ; //Millisekunden
         long difference = mdd.getTime() - currentDate.getTime();
         
@@ -291,9 +282,5 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         }
         //haltbar
         else return 1;
-        
     }
-    
-    
-
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.util.List;
@@ -12,15 +7,9 @@ import model.AppUser;
 import model.Place;
 import model.StocksArticle;
 
-/**
- *
- * @author Felix
- */
+
 @Local
 public interface SessionBeanHouseholdLocal{
-
-    //??? braucht es hier einen User in dieser Methode oder wird nicht einfach die UserID innerhalb der Methode rausgezogen?
-    //--> so lassen
     
 //------------------------------------------------------------------------------
     //Household
@@ -56,7 +45,7 @@ public interface SessionBeanHouseholdLocal{
 //------------------------------------------------------------------------------
     public boolean addPlaceToHousehold(Household household, Place place) throws MVKException;
     
-    public boolean removePlaceFromHousehold(Household household, Place place) throws MVKException;
+//    public boolean removePlaceFromHousehold(Household household, Place place) throws MVKException;
 
 //------------------------------------------------------------------------------
     //Verknüpfung Place_StocksArticle

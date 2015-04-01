@@ -1,6 +1,11 @@
 <%--
 Die Template.jsp definiert das Layout der Anwendung und beinhaltet die Navigationsleiste,
 das Logo sowie die CSS - Dateien.
+
+Die JSPs stellen die View Komponente in der MVC Architektur dar. 
+Sie sind gleichzeitig die Präsentationsschicht des 3-Schichten-Modells
+Sie stellen die Ergebnisse der Beans dar. Genutzt wird dafür die JSP Expression Language
+sowie verschiedene Tag-Bibliotheken, um die JSPs weitgehend ohne Java Code zu halten.
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

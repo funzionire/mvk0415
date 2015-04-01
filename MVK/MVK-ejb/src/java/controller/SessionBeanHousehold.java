@@ -1,3 +1,7 @@
+/*
+Komponente zur Verwaltung der Entity-Klasse "Household" und "Place",
+regelt die dafür benötigten Datenbankzugriffe
+*/
 package controller;
 
 import java.util.List;
@@ -141,7 +145,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
                 return null;
             }
             Place place = query.getSingleResult();
-            //???
             em.refresh(place);
             return place;
         } catch (Exception e) {
@@ -205,20 +208,20 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
         }
     }
 
-    @Override
-    public boolean removePlaceFromHousehold(Household household, Place place) throws MVKException{
-        try {
-            em.setFlushMode(FlushModeType.AUTO);
-            if (place != null) {
-                household.getAppUserList().remove(place);
-            }
-            em.flush();
-            //deletePlace(place);
-            return true;
-        } catch (Exception e) {
-            throw new MVKException("Fehler beim Entfernen des Lagerortes.");
-        }
-    }
+//    @Override
+//    public boolean removePlaceFromHousehold(Household household, Place place) throws MVKException{
+//        try {
+//            em.setFlushMode(FlushModeType.AUTO);
+//            if (place != null) {
+//                household.getAppUserList().remove(place);
+//            }
+//            em.flush();
+//            //deletePlace(place);
+//            return true;
+//        } catch (Exception e) {
+//            throw new MVKException("Fehler beim Entfernen des Lagerortes.");
+//        }
+//    }
     
 //------------------------------------------------------------------------------
 // Verknüpfung Place_StocksArticle
