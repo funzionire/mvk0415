@@ -1,13 +1,14 @@
+/*
+Entity-Klasse "StocksUnit" stellt die Entity StocksUnit - Vorratseinheit
+und das damit verbundene StocksUnit Objekt in der Datenbank dar.
+*/
 package model;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-/**
- *
- * @author Felix
- */
+
 @Entity
 @NamedQueries(
         {
@@ -16,7 +17,6 @@ import javax.persistence.*;
 public class StocksUnit implements Serializable {
 
     //Attribute
-
     private int quantity;
     private String commentSUnit;
 
@@ -28,21 +28,18 @@ public class StocksUnit implements Serializable {
     @ManyToOne
     private StocksArticle stocksArticle;
 
-    //Konstruktoren in Reihenfolge quantity, mdd, commentSUnit
-    //Konstruktor alles default
+    //Konstruktoren
     public StocksUnit() {
 
     }
 
-    //Konstruktor M D C
-    
-    //muss hier nicht noch StocksArticle mit initialisiert werden oder geht das automatisch??
     public StocksUnit(int quantity, Date mdd, String commentSUnit) {
         this.quantity = quantity;
         this.mdd = mdd;
         this.commentSUnit = commentSUnit;
     }
 
+    //Getter und Setter
     public Long getStocksUnitID() {
         return stocksUnitID;
     }

@@ -1,18 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+Entity-Klasse "AppUser" stellt die Entity User - Anwender
+und das damit verbundene User Objekt in der Datenbank dar. 
+
+Aus den Entity-Klassen werden die Tabellen der Datenbank erzeugt.
+*/
 package model;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
-/**
- *
- * @author Steffen
- */
+
 @Entity
 @NamedQueries(
         {
@@ -23,7 +21,6 @@ import javax.persistence.*;
 public class AppUser implements Serializable {
 
     //Attribute
-
     private static final long serialVersionUID = 1L;
     private String name;
     private String email;
@@ -36,7 +33,6 @@ public class AppUser implements Serializable {
 
     //Konstruktoren
     public AppUser() {
-        //TODO
     }
 
     public AppUser(String name, String email, String password) {
@@ -44,11 +40,7 @@ public class AppUser implements Serializable {
         this.email = email;
         this.password = password;
     }
-    
-    public List<Household> getHouseholdList(){
-        return households;
-    }
-
+  
     //Getter und Setter
     public long getUserID() {
         return userID;
@@ -77,5 +69,8 @@ public class AppUser implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
+    public List<Household> getHouseholdList(){
+        return households;
+    }
 }

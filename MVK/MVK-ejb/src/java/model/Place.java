@@ -1,18 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+Entity-Klasse "Place" stellt die Entity Place - Lagerort dar 
+und das damit verbundene Place Objekt in der Datenbank.
+*/
 package model;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
-/**
- *
- * @author baader
- */
+
 @Entity
 @NamedQueries(
         {
@@ -21,7 +17,6 @@ import javax.persistence.*;
 public class Place implements Serializable {
 
     //Attribute
-
     private String name;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,10 +28,8 @@ public class Place implements Serializable {
 
     //Konstruktoren
     public Place() {
-        //TODO
     }
 
-    //???wird hier Household bebraucht?
     public Place(String name, Household household) {
         this.name = name;
         this.household = household;

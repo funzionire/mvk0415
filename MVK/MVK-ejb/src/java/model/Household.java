@@ -1,8 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+Entity-Klasse "Household" stellt die Entity Household - Haushalt dar 
+und das damit verbundene Household Objekt in der Datenbank.
+*/
 package model;
 
 import java.io.Serializable;
@@ -10,10 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-/**
- *
- * @author baader
- */
+
 @Entity
 @NamedQueries(
         {
@@ -22,7 +18,6 @@ import javax.persistence.*;
 public class Household implements Serializable {
 
     //Attribute
-
     private String name;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,12 +29,10 @@ public class Household implements Serializable {
 
     //Konstruktoren
     public Household() {
-        //TODO
     }
 
     public Household(String name) {
         users = new ArrayList();
-        //users.add(user);    AppUser user 
         this.name = name;
     }
 

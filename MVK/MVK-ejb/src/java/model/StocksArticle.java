@@ -1,3 +1,7 @@
+/*
+Entity Klasse "StocksArticle" stellt die Entity StocksArticle - Vorratsartikel 
+und das damit verbunden StocksArticle Objekt in der Datenbank dar.
+*/
 package model;
 
 import java.io.Serializable;
@@ -5,10 +9,6 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
-/**
- *
- * @author Felix
- */
 @Entity
 @NamedQueries(
         {
@@ -17,7 +17,6 @@ import javax.persistence.*;
 public class StocksArticle implements Serializable {
 
     //Attribute
-
     private String nameArt;
     private String commentArt;
     private static final String defaultComment = "";
@@ -31,7 +30,6 @@ public class StocksArticle implements Serializable {
 
     //Konstruktoren
     public StocksArticle() {
-        //TODO
     }
 
     public StocksArticle(String nameArt, Place place, String commentArt) {
