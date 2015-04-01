@@ -1,7 +1,5 @@
 <%-- 
-    Document   : register
-    Created on : 24.02.2015, 14:43:25
-    Author     : ANABEL
+JSP mit der Maske zur Registrierung eines neuen Users
 --%>
 
 <jsp:include page="template.jsp"></jsp:include>

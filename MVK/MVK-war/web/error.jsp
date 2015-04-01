@@ -1,7 +1,5 @@
 <%-- 
-    Document   : error
-    Created on : 14.03.2015, 22:09:25
-    Author     : Felix
+Error-Page zur Darstellung von benutzerfreundlichen Fehlermeldungen.
 --%>
 
 <jsp:include page="template.jsp"></jsp:include>

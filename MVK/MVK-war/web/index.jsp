@@ -1,13 +1,12 @@
 <%-- 
-    Document   : login
-    Created on : 24.02.2015, 14:58:04
-    Author     : ANABEL
+Startseite der Webbasierten Datenbankanwendung "meine Vorratskammer".
+Beinhaltet einen Begrüßungstext, das Anmeldeformular und einen Link zur Registrierungs-JSP.
 --%>
 
 <jsp:include page="template.jsp"></jsp:include>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<!-- Page Content -->
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">

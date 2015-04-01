@@ -16,6 +16,16 @@ import model.Place;
 import model.StocksArticle;
 import model.StocksUnit;
 
+/*
+Das ControllerServlet ist die zentrale Steuerungseinheit der webbasierten Datenbankanwendung.
+Es bearbeitet alle HTTP Anfragen. Dabei wird immer die processRequest Methode aufgerufen und ausgeführt.
+Der Programmablauf wird durch den Parameter "Step" gesteuert. Anhand dieses Parameters wird entschieden, 
+welche Methoden der Beans aufgerufen werden müssen und an welche JSP die Ergebnisse weitergeleitet werden. 
+Im Servlet wird auch das Exception Handling umgesetzt. Das heißt es werden Exceptions abgefangen
+und die darin enthaltenen Informationen an eine Error-JSP weitergeleitet. 
+
+Das Servlet stellt die Controller Komponente der Model View Controller - Architektur dar.
+*/
 @WebServlet(name = "ControllerServlet", urlPatterns = {"/ControllerServlet"})
 public class ControllerServlet extends HttpServlet {
 
@@ -357,7 +367,7 @@ public class ControllerServlet extends HttpServlet {
 
                 request.setAttribute("user", session.getAttribute("user"));
                 request.setAttribute("household", household);
-                session.setAttribute("id", household.getHouseholdID()); //hier war vorher longID ?? passt so auch oder?
+                session.setAttribute("id", household.getHouseholdID());
                 session.setAttribute("household", household);
                 request.getRequestDispatcher("/household.jsp").forward(request, response);
             }
@@ -386,43 +396,27 @@ public class ControllerServlet extends HttpServlet {
             request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
+    /*
+    Aufruf der processRequest-Methode bei HTTP-Verben GET und POST
+    */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
+
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : household
-    Created on : 24.02.2015, 15:46:18
-    Author     : ANABEL
+Detailseite eines Haushaltes
+Hier werden die Lagerorte mit den einzelnen Artikeln dargestellt
+sowie die Formulare zum Teilen oder Löschen des Haushaltes und zum Ändern des Namens.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -40,7 +40,6 @@
                     <tr><td><input type="submit" value ="Haushalt teilen"/></td></tr>
                 </table>
             </form>
-
         </div>
         <div class="col-md-4">
             <%-- Formular, um Namen des Haushalts ändern--%>
@@ -177,7 +176,5 @@
             </div>
         </div>
     </div>
-
-
 </div>
 

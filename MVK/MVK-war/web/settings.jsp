@@ -1,7 +1,5 @@
 <%-- 
-    Document   : about
-    Created on : 10.03.2015, 13:56:55
-    Author     : Steffen
+JSP zum Ändern der Benutzereinstellungen Name, Email-Adresse und Passwort
 --%>
 
 <jsp:include page="template.jsp"></jsp:include>
