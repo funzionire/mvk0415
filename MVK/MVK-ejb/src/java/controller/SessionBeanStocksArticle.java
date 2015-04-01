@@ -215,20 +215,20 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         }
     }
 
-//    @Override
-//    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) {
-//        try {
-//            em.setFlushMode(FlushModeType.AUTO);
-//            if (place != null && stocksArticle != null) {
-//                place.getStocksArticleList().remove(stocksArticle);
-//            }
-//            place = em.merge(place);
-//            em.flush();
-//            return true;
-//        } catch (Exception e) {
-//            return false;
-//        }
-//    }
+    @Override
+    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) {
+        try {
+            em.setFlushMode(FlushModeType.AUTO);
+            if (place != null && stocksArticle != null) {
+                place.getStocksArticleList().remove(stocksArticle);
+            }
+            place = em.merge(place);
+            em.flush();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 //    @Override
 //    public boolean changePlaceFromStocksArticle(Place place, StocksArticle stocksArticle) {

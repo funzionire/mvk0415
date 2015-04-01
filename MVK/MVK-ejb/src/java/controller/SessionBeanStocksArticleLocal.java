@@ -46,7 +46,7 @@ public interface SessionBeanStocksArticleLocal {
     //doppelt: gibts auch in SessionBeanHousehold
     public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle);
     
-//    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle);
+    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle);
     
     //public boolean changePlaceFromStocksArticle(Place place, StocksArticle stocksArticle);
     
