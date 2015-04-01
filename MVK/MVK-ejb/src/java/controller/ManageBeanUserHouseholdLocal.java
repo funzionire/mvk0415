@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import javax.ejb.Local;
@@ -11,10 +6,7 @@ import model.Household;
 import model.Place;
 import model.StocksArticle;
 
-/**
- *
- * @author Felix
- */
+
 @Local
 public interface ManageBeanUserHouseholdLocal {
 //------------------------------------------------------------------------------    
@@ -44,7 +36,7 @@ public interface ManageBeanUserHouseholdLocal {
     public Place findPlace(String stringID) throws MVKException;
     
 //------------------------------------------------------------------------------
-// User-Administration    
+        //-->User-Administration    
     public AppUser createUser(String name, String email, String password) throws MVKException;
     
     public AppUser login(String email, String password) throws MVKException;
@@ -56,8 +48,6 @@ public interface ManageBeanUserHouseholdLocal {
     public AppUser changePassword (AppUser user, String password) throws MVKException;
     
     public AppUser changeEmail (AppUser user, String email) throws MVKException;
-    
-    //public AppUser changeUser (AppUser user, String name, String email, String password);
     
     public AppUser findUser(long longID) throws MVKException;
     

@@ -1,3 +1,14 @@
+/*
+Komponente zur Verwaltung der Klassen "SessionBeanUser" und "SessionBeanHousehold"
+Datenbankzugriffe werden abstrahiert und hier nochmals als eigene Methoden dargestellt.
+Das Servlet hat nach unserer definierten Architektur nur Zugriff auf die "ManageBeans".
+
+Vor allem für die Methoden wie addHousehold oder shareHousehold kann ein Abstraktionsgrad erreicht werden,
+wodurch der Code verständlicher wird.
+
+Hier befindet sich die Anwendungslogik des Usermanagements 
+sowie der Verwaltung von Haushalten und Lagerorten. 
+*/
 package controller;
 
 import static controller.BeanFactory.getSessionBeanHousehold;
