@@ -30,9 +30,7 @@ public interface ManageBeanUserHouseholdLocal {
     public Household findHousehold(String stringID) throws MVKException;
     
 //------------------------------------------------------------------------------    
-        //-->Place   
-    public Place changePlace(Place place, String newName) throws MVKException;
-    
+        //-->Place    
     public Place findPlace(String stringID) throws MVKException;
     
 //------------------------------------------------------------------------------

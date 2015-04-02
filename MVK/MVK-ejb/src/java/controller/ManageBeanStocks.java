@@ -49,28 +49,6 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         long longID = Long.parseLong(stringID);
         return sessionBeanStocksArticle.findStocksUnit(longID);
     }
-    
-//    @Override
-//    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace) throws MVKException{
-//        boolean haveToCreateNewStocksArticle = true;
-//        StocksArticle holdStocksArticle = null;
-//
-//        for (StocksArticle stocksArticle1 : newPlace.getStocksArticleList()) {
-//            if (stocksArticle1.getName().equals(stocksArticle.getName())) {
-//                haveToCreateNewStocksArticle = false;
-//                holdStocksArticle = stocksArticle1;
-//                break;
-//            }
-//        }
-//        if (haveToCreateNewStocksArticle) {
-//            stocksArticle.setPlace(newPlace);
-//        } else {
-//            for (StocksUnit stocksUnit : stocksArticle.getStocksUnitList()) {
-//                sessionBeanStocksArticle.addStocksUnitToStocksArticle(holdStocksArticle, stocksUnit);
-//            }
-//        }
-//        return true;
-//    }
 
     @Override
     public int proofeMdd(StocksArticle stocksArticle) throws MVKException{
@@ -134,33 +112,6 @@ public class ManageBeanStocks implements ManageBeanStocksLocal {
         sessionBeanStocksArticle.deleteStocksUnit(stocksUnit);
         return true;
     }
-
-//    @Override
-//    public boolean moveStocksUnit(StocksUnit stocksUnit, Place newPlace, int newQuantity) throws MVKException{
-//        boolean haveToCreateNewStocksArticle = true;
-//
-//        for (StocksArticle stocksArticle : newPlace.getStocksArticleList()) {
-//            if (stocksArticle.getName().equals(stocksUnit.getStocksArticle().getName())) {
-//                haveToCreateNewStocksArticle = false;
-//                break;
-//            }
-//        }
-//        if (haveToCreateNewStocksArticle) {
-//            StocksArticle newStocksArticle = sessionBeanStocksArticle.createStocksArticle(stocksUnit.getStocksArticle().getName(), newPlace, stocksUnit.getStocksArticle().getComment());
-//            sessionBeanStocksArticle.addStocksArticleToPlace(newPlace, newStocksArticle);
-//        }
-//        sessionBeanStocksArticle.createStocksUnit(newQuantity, stocksUnit.getMdd(), stocksUnit.getCommentSUnit());
-//        sessionBeanStocksArticle.addStocksUnitToStocksArticle(stocksUnit.getStocksArticle(), stocksUnit);
-//         
-//        if (stocksUnit.getQuantity() == newQuantity) {
-//            sessionBeanStocksArticle.deleteStocksUnit(stocksUnit);
-//        }
-//        if (stocksUnit.getQuantity() > newQuantity) {
-//            int updateQuantity = stocksUnit.getQuantity() - newQuantity;
-//            sessionBeanStocksArticle.changeStocksUnit(stocksUnit, stocksUnit.getMdd(), stocksUnit.getCommentSUnit(), updateQuantity);
-//        }
-//        return true;
-//    }
     
     @Override
     public StocksUnit raiseQuantityOfStocksUnit(StocksUnit stocksUnit) throws MVKException{

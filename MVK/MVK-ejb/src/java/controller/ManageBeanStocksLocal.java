@@ -18,8 +18,6 @@ public interface ManageBeanStocksLocal {
     
     public StocksArticle findStocksArticle(String stringID) throws MVKException;
     
-//    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace) throws MVKException;
-    
     public int proofeMdd (StocksArticle stocksArticle) throws MVKException;
     
     public int sumUpQuantity (StocksArticle stocksArticle) throws MVKException;
@@ -29,8 +27,6 @@ public interface ManageBeanStocksLocal {
     public StocksUnit addStocksUnit(StocksArticle stocksArticle, String quantity, String mdd, String commentSUnit) throws MVKException;
     
     public boolean removeStocksUnit(StocksUnit stocksUnit) throws MVKException;
-    
-//    public boolean moveStocksUnit(StocksUnit stocksUnit, Place newPlace, int newQuantity) throws MVKException;
     
     public StocksUnit findStocksUnit(String stringID) throws MVKException;
     

@@ -29,8 +29,6 @@ public interface SessionBeanHouseholdLocal{
     
     public void deletePlace(Place place) throws MVKException;
     
-    public Place changePlace(Place place, String newName) throws MVKException;
-    
     public Place findPlace(long longID) throws MVKException;
 
 //------------------------------------------------------------------------------

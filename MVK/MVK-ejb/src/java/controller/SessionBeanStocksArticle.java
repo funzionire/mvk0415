@@ -62,34 +62,6 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public StocksArticle changeStocksArticle(StocksArticle stocksArticle, String nameArt, String commentArt) {
-        em.setFlushMode(FlushModeType.AUTO);
-        if (nameArt != null) {
-            stocksArticle.setName(nameArt);
-        }
-        if (commentArt != null) {
-            stocksArticle.setComment(commentArt);
-        }
-        stocksArticle = em.merge(stocksArticle);
-        em.flush();
-        return stocksArticle;
-    }
-
-    @Override
-    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace) {
-        try {
-            em.setFlushMode(FlushModeType.AUTO);
-            stocksArticle.setPlace(newPlace);
-            em.persist(stocksArticle);
-            stocksArticle = em.merge(stocksArticle);
-            em.flush();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    @Override
     public StocksArticle findStocksArticle(long longID) {
         if (longID == 0) {
             return null;
@@ -117,38 +89,6 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     }
 
     @Override
-    public StocksUnit findStocksUnit(long longID) {
-        if (longID == 0) {
-            return null;
-        }
-        TypedQuery<StocksUnit> query = em.createNamedQuery("StocksUnit.findById", StocksUnit.class)
-                .setParameter("stocksUnitID", longID);
-        if (query.getResultList().isEmpty()) {
-            return null;
-        }
-        return query.getSingleResult();
-    }
-    
-    
-
-    @Override
-    public StocksUnit changeStocksUnit(StocksUnit stocksUnit, Date mdd, String commentSUnit, int updateQuantity) {
-        em.setFlushMode(FlushModeType.AUTO);
-        if (mdd != null) {
-            stocksUnit.setMdd(mdd);
-        }
-        if (commentSUnit != null) {
-            stocksUnit.setCommentSUnit(commentSUnit);
-        }
-        if (updateQuantity == 0) {
-            stocksUnit.setQuantity(updateQuantity);
-        }
-        stocksUnit = em.merge(stocksUnit);
-        em.flush();
-        return stocksUnit;
-    }
-
-    @Override
     public void deleteStocksUnit(StocksUnit stocksUnit) {
         try {
             em.getEntityManagerFactory().getCache().evictAll();
@@ -165,6 +105,20 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
         } catch (Exception e) {
         }
     }
+    
+    @Override
+    public StocksUnit findStocksUnit(long longID) {
+        if (longID == 0) {
+            return null;
+        }
+        TypedQuery<StocksUnit> query = em.createNamedQuery("StocksUnit.findById", StocksUnit.class)
+                .setParameter("stocksUnitID", longID);
+        if (query.getResultList().isEmpty()) {
+            return null;
+        }
+        return query.getSingleResult();
+    }
+
     
 //------------------------------------------------------------------------------
     //-->Beziehungen
@@ -199,53 +153,6 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
             return false;
         }
     }
-
-    @Override
-    public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle) {
-        try {
-            em.setFlushMode(FlushModeType.AUTO);
-            if (place != null && stocksArticle != null) {
-                place.getStocksArticleList().add(stocksArticle);
-            }
-            place = em.merge(place);
-            em.flush();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle) {
-        try {
-            em.setFlushMode(FlushModeType.AUTO);
-            if (place != null && stocksArticle != null) {
-                place.getStocksArticleList().remove(stocksArticle);
-            }
-            place = em.merge(place);
-            em.flush();
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-//    @Override
-//    public boolean changePlaceFromStocksArticle(Place place, StocksArticle stocksArticle) {
-//        try {
-//            em.setFlushMode(FlushModeType.AUTO);
-//            if (place != null && stocksArticle != null) {
-//                stocksArticle.setPlace(place);
-//                //???falls gewollt???
-//                removeStocksArticleFromPlace(place, stocksArticle);
-//            }
-//            place = em.merge(place);
-//            em.flush();
-//            return true;
-//        } catch (Exception e) {
-//            return false;
-//        }
-//    }
 
     @Override
     public StocksUnit changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change) {

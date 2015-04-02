@@ -17,10 +17,6 @@ public interface SessionBeanStocksArticleLocal {
     
     public void deleteStocksArticle(StocksArticle stocksArticle);
     
-    public StocksArticle changeStocksArticle(StocksArticle stocksArticle, String nameArt, String commentArt);
-    
-    public boolean moveStocksArticle(StocksArticle stocksArticle, Place newPlace);
-    
     public StocksArticle findStocksArticle(long longID);
     
 
@@ -28,12 +24,11 @@ public interface SessionBeanStocksArticleLocal {
     //StocksUnit
 //------------------------------------------------------------------------------
     public StocksUnit createStocksUnit(int quantity, Date mdd, String commentSUnit);
+        
+    public void deleteStocksUnit(StocksUnit stocksUnit); 
     
     public StocksUnit findStocksUnit(long longID);
-
-    public StocksUnit changeStocksUnit(StocksUnit stocksUnit, Date mdd, String commentSUnit, int updateQuantity);
-    
-    public void deleteStocksUnit(StocksUnit stocksUnit);   
+  
 
 //------------------------------------------------------------------------------
     //Beziehungen
@@ -42,13 +37,6 @@ public interface SessionBeanStocksArticleLocal {
     public boolean addStocksUnitToStocksArticle(StocksArticle stocksArticle, StocksUnit stocksUnit);
     
     public boolean removeStocksUnitFromStocksArticle(StocksArticle stocksArticle, StocksUnit stocksUnit);
-    
-    //doppelt: gibts auch in SessionBeanHousehold
-    public boolean addStocksArticleToPlace(Place place, StocksArticle stocksArticle);
-    
-    public boolean removeStocksArticleFromPlace(Place place, StocksArticle stocksArticle);
-    
-    //public boolean changePlaceFromStocksArticle(Place place, StocksArticle stocksArticle);
     
     public StocksUnit changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change);       
     

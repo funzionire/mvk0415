@@ -119,21 +119,6 @@ public class SessionBeanHousehold implements SessionBeanHouseholdLocal{
     }
 
     @Override
-    public Place changePlace(Place place, String newName) throws MVKException{
-        try{
-            em.setFlushMode(FlushModeType.AUTO);
-            if (newName != null) {
-                place.setName(newName);
-            }
-            place = em.merge(place);
-            em.flush();
-            return place;
-        } catch (Exception e) {
-            throw new MVKException("Fehler beim Ändern des Lagerortes.");
-        }
-    }
-
-    @Override
     public Place findPlace(long longID) throws MVKException{
         try{
             if (longID == 0) {

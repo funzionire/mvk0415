@@ -79,11 +79,6 @@ public class ManageBeanUserHousehold implements ManageBeanUserHouseholdLocal {
 //------------------------------------------------------------------------------    
     
     @Override
-    public Place changePlace(Place place, String newName) throws MVKException{
-        return sessionBeanHousehold.changePlace(place, newName);
-    }
-    
-    @Override
     public Place findPlace(String stringID) throws MVKException{
         long longID = Long.parseLong(stringID);
         return sessionBeanHousehold.findPlace(longID);
