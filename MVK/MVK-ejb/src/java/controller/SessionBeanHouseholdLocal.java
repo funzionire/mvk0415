@@ -43,8 +43,6 @@ public interface SessionBeanHouseholdLocal{
 //------------------------------------------------------------------------------
     public boolean addPlaceToHousehold(Household household, Place place) throws MVKException;
     
-//    public boolean removePlaceFromHousehold(Household household, Place place) throws MVKException;
-
 //------------------------------------------------------------------------------
     //Verknüpfung Place_StocksArticle
 //------------------------------------------------------------------------------
