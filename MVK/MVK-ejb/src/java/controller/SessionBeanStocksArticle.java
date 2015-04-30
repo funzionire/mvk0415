@@ -157,7 +157,6 @@ public class SessionBeanStocksArticle implements SessionBeanStocksArticleLocal {
     @Override
     public StocksUnit changeQuantityOfStocksUnit(StocksUnit stocksUnit, int change) {
         try {
-            //Soll es auch möglich sein eine Vorauswahl zu haben (z.B. 10 für 10 Eier mehr)
             em.setFlushMode(FlushModeType.AUTO);
             stocksUnit.setQuantity(stocksUnit.getQuantity() + change);
             stocksUnit = em.merge(stocksUnit);

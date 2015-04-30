@@ -5,7 +5,6 @@ und das damit verbunden StocksArticle Objekt in der Datenbank dar.
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 

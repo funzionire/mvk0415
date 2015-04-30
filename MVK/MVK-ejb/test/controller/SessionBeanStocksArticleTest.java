@@ -10,6 +10,10 @@ import org.junit.BeforeClass;
 /*Testklasse zum Test der Methode "CompareMddWithCurrentDate"
   aus der Klasse SessionBeanStocksArticle
   Mehrere Testfälle wurden definiert
+
+  Da die zu testende Methode mit Datumsangaben arbeitet, wurde darauf geachtet, 
+  dass in den Testmehtoden ein Datum immer vom Datum der Testausführung berechnet wird.
+  Dadurch ist der Test jederzeit ausführbar und führt jederzeit zu einem korrekten Ergebnis.
 */
 public class SessionBeanStocksArticleTest {
     static SessionBeanStocksArticleLocal beanArticle;

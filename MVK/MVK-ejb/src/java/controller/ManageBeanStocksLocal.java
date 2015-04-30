@@ -1,6 +1,5 @@
 package controller;
 
-import java.util.Date;
 import javax.ejb.Local;
 import model.Place;
 import model.StocksArticle;
